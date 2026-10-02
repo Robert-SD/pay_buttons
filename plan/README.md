@@ -33,3 +33,11 @@
 | **Step 5** | **Link by Stripe** | 📋 Planned | [`05_stripe_link_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/05_stripe_link_button.md) |
 | **Step 6** | **Afterpay / Clearpay** | 📋 Planned | [`06_afterpay_clearpay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/06_afterpay_clearpay_button.md) |
 | **Step 7** | **European Champions** (TWINT, iDEAL/Wero, BLIK, Bancontact, Bizum) | 📋 Planned | [`07_european_regional_buttons.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/07_european_regional_buttons.md) |
+| **Showcase**| **Interactive Example App for Every Button** | 📋 Planned | [`08_example_app_showcase.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/08_example_app_showcase.md) |
+
+> [!IMPORTANT]
+> **Example App Mandate for Every Button**:
+> As part of the definition of done for each button step, the button must be integrated into `example/lib/main.dart` with:
+> 1. An interactive live playground (toggling color, shape, loading, disabled, full-width).
+> 2. A side-by-side gallery of all brand color variants and shapes.
+> 3. An action feedback SnackBar showing tap interaction.

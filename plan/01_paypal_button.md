@@ -133,3 +133,27 @@ For convenience and direct API clarity, we will provide a specialized `PayPalPay
 3. **Minimum Safe Zone**:
    - Logo height: $0.45 \times \text{button height}$ (e.g. 22dp on a 48dp button).
    - Clear horizontal spacing between logo and supplementary text: minimum 8dp.
+
+---
+
+## 5. Example App Showcase Specification
+
+In `example/lib/pages/paypal_showcase_page.dart`:
+1. **Interactive Demo Area**:
+   - Live rendering of `PayPalButton` or `PayPalPayLaterButton`.
+   - Controls:
+     - Color dropdown: `gold`, `blue`, `black`, `white`, `silver`.
+     - Shape toggle: `pill` vs `rounded`.
+     - Type selector: `checkout`, `pay`, `buyNow`, `payLater`, `logoOnly`.
+     - Switches: `isLoading`, `enabled`, `fullWidth`.
+     - Height slider: `40.0` to `60.0`.
+   - Action: Tapping triggers `ScaffoldMessenger.of(context).showSnackBar(...)` with simulated checkout.
+2. **Complete Variant Grid**:
+   - Visual reference matrix displaying:
+     - Gold Pill & Rounded
+     - Blue Pill & Rounded
+     - Black Pill & Rounded
+     - White Pill & Rounded
+     - Silver Pill & Rounded
+     - Dedicated Pay Later buttons
+

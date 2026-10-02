@@ -24,6 +24,10 @@ The base `PayButton` widget establishes a unified contract for all payment butto
      - `enabled: isInteractive`
      - `label: semanticLabel` (e.g. "Pay with PayPal", "Checkout with Klarna")
 
+4. **Legal Disclosures, Terms & Credit Disclaimers**:
+   - Built-in `PayButtonTerms` integration to comply with EU/UK/US/DACH consumer credit regulations (e.g. Preisangabenverordnung, FCA credit disclosures, TILA).
+   - Allows attaching statutory credit notices, interactive "Terms of Service" / "Privacy Policy" links with clickable tap callbacks, or custom legal widgets beneath the button.
+
 ---
 
 ## 2. Base Class Design
