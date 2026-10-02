@@ -9,6 +9,7 @@ void main() {
     expect(find.text('PayPal & Pay Later'), findsOneWidget);
     expect(find.text('Klarna'), findsOneWidget);
     expect(find.text('Amazon Pay'), findsOneWidget);
+    expect(find.text('Shop Pay'), findsOneWidget);
     expect(find.text('Active Payment Buttons'), findsOneWidget);
   });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/amazon_pay_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
+import 'pages/shop_pay_showcase_page.dart';
 
 void main() {
   runApp(const PayButtonsExampleApp());
@@ -167,6 +168,47 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(height: 12),
+
+          // Step 4: Shop Pay Card
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              leading: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF5A31F4),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'shop',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              ),
+              title: const Text(
+                'Shop Pay',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text('Shopify 1-click checkout, Standard/Buy with, Purple/Black/White'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const ShopPayShowcasePage()),
+                );
+              },
+            ),
+          ),
+
           const SizedBox(height: 28),
           const Text(
             'Upcoming Buttons (Planned)',
@@ -177,12 +219,6 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          _buildUpcomingItem(
-            name: 'Shop Pay',
-            details: 'Shopify accelerated checkout',
-            badgeColor: const Color(0xFF5A31F4),
-            textColor: Colors.white,
-          ),
           _buildUpcomingItem(
             name: 'Stripe Link',
             details: '1-click checkout by Stripe',

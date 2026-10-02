@@ -28,6 +28,13 @@ export 'src/buttons/amazon_pay/amazon_pay_shape.dart';
 export 'src/buttons/amazon_pay/amazon_pay_button_type.dart';
 export 'src/buttons/amazon_pay/amazon_pay_assets.dart';
 
+// Shop Pay
+export 'src/buttons/shop_pay/shop_pay_button.dart';
+export 'src/buttons/shop_pay/shop_pay_color.dart';
+export 'src/buttons/shop_pay/shop_pay_shape.dart';
+export 'src/buttons/shop_pay/shop_pay_button_type.dart';
+export 'src/buttons/shop_pay/shop_pay_assets.dart';
+
 /// Legacy platform version helper from template.
 class PayButtons {
   Future<String?> getPlatformVersion() {
