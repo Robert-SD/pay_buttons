@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/afterpay_showcase_page.dart';
 import 'pages/amazon_pay_showcase_page.dart';
+import 'pages/european_champions_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
 import 'pages/shop_pay_showcase_page.dart';
@@ -293,6 +294,47 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(height: 12),
+
+          // Step 7: European Champions Card
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              leading: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF003399),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'EU',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+              title: const Text(
+                'European Champions',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text('TWINT, iDEAL, BLIK, Bancontact, Bizum'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const EuropeanChampionsShowcasePage()),
+                );
+              },
+            ),
+          ),
+
           const SizedBox(height: 28),
           const Text(
             'Upcoming Buttons (Planned)',
@@ -304,8 +346,14 @@ class CatalogHomePage extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildUpcomingItem(
-            name: 'European Champions',
-            details: 'TWINT, iDEAL/Wero, BLIK, Bancontact, Bizum',
+            name: 'Asian Champions',
+            details: 'Alipay, WeChat Pay, PayNow, PromptPay',
+            badgeColor: const Color(0xFFFF5000),
+            textColor: Colors.white,
+          ),
+          _buildUpcomingItem(
+            name: 'Latin America',
+            details: 'Pix, Boleto Bancário, OXXO',
             badgeColor: const Color(0xFF00A859),
             textColor: Colors.white,
           ),

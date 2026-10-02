@@ -4,7 +4,7 @@ import 'package:pay_buttons_example/main.dart';
 
 void main() {
   testWidgets('CatalogHomePage renders active buttons', (WidgetTester tester) async {
-    tester.view.physicalSize = const Size(800, 2000);
+    tester.view.physicalSize = const Size(800, 2400);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -20,6 +20,7 @@ void main() {
     expect(find.text('Shop Pay'), findsOneWidget);
     expect(find.text('Link by Stripe'), findsOneWidget);
     expect(find.text('Afterpay / Clearpay'), findsOneWidget);
+    expect(find.text('European Champions'), findsOneWidget);
     expect(find.text('Active Payment Buttons'), findsOneWidget);
   });
 }

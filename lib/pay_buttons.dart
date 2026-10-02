@@ -50,6 +50,42 @@ export 'src/buttons/afterpay/afterpay_brand.dart';
 export 'src/buttons/afterpay/afterpay_button_type.dart';
 export 'src/buttons/afterpay/afterpay_assets.dart';
 
+// European Regional Champions
+// TWINT (Switzerland)
+export 'src/buttons/regional/twint/twint_button.dart';
+export 'src/buttons/regional/twint/twint_color.dart';
+export 'src/buttons/regional/twint/twint_shape.dart';
+export 'src/buttons/regional/twint/twint_button_type.dart';
+export 'src/buttons/regional/twint/twint_assets.dart';
+
+// iDEAL (Netherlands)
+export 'src/buttons/regional/ideal/ideal_button.dart';
+export 'src/buttons/regional/ideal/ideal_color.dart';
+export 'src/buttons/regional/ideal/ideal_shape.dart';
+export 'src/buttons/regional/ideal/ideal_button_type.dart';
+export 'src/buttons/regional/ideal/ideal_assets.dart';
+
+// BLIK (Poland)
+export 'src/buttons/regional/blik/blik_button.dart';
+export 'src/buttons/regional/blik/blik_color.dart';
+export 'src/buttons/regional/blik/blik_shape.dart';
+export 'src/buttons/regional/blik/blik_button_type.dart';
+export 'src/buttons/regional/blik/blik_assets.dart';
+
+// Bancontact (Belgium)
+export 'src/buttons/regional/bancontact/bancontact_button.dart';
+export 'src/buttons/regional/bancontact/bancontact_color.dart';
+export 'src/buttons/regional/bancontact/bancontact_shape.dart';
+export 'src/buttons/regional/bancontact/bancontact_button_type.dart';
+export 'src/buttons/regional/bancontact/bancontact_assets.dart';
+
+// Bizum (Spain)
+export 'src/buttons/regional/bizum/bizum_button.dart';
+export 'src/buttons/regional/bizum/bizum_color.dart';
+export 'src/buttons/regional/bizum/bizum_shape.dart';
+export 'src/buttons/regional/bizum/bizum_button_type.dart';
+export 'src/buttons/regional/bizum/bizum_assets.dart';
+
 /// Legacy platform version helper from template.
 class PayButtons {
   Future<String?> getPlatformVersion() {

@@ -11,41 +11,111 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Supported Buttons
 
-* **PayPal Express**: Checkout, Pay with PayPal, Buy Now, Logo Only (`gold`, `blue`, `black`, `white`, `silver`).
-* **PayPal Pay Later**: Dedicated installment button with localized statutory credit disclaimers.
-* *Upcoming*: Klarna, Amazon Pay, Shop Pay, Link by Stripe, Afterpay / Clearpay, TWINT, iDEAL.
+* **PayPal & PayPal Pay Later**: Checkout, Pay with PayPal, Buy Now, Pay Later, Logo Only (`gold`, `blue`, `black`, `white`, `silver`).
+* **Klarna**: Pay Now, Pay Later, Slice It, Custom, Logo Only (`pink`, `black`, `white`).
+* **Amazon Pay**: Pay with Amazon Pay, Express Checkout, Logo Only (`gold`, `lightGray`, `darkGray`).
+* **Shop Pay (Shopify)**: Pay with Shop Pay, Buy with Shop Pay, Logo Only (`purple`, `black`, `white`).
+* **Link by Stripe**: Pay with Link, Fast Checkout, Logo Only (`green`, `navy`, `white`).
+* **Afterpay / Clearpay**: Buy Now Pay Later, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
+* **European Regional Champions**:
+  * **TWINT** (Switzerland 🇨🇭) - `TwintButton` (`black`, `white`)
+  * **iDEAL** (Netherlands 🇳🇱) - `IdealButton` (`white`, `black`)
+  * **BLIK** (Poland 🇵🇱) - `BlikButton` (`black`, `white`)
+  * **Bancontact** (Belgium 🇧🇪) - `BancontactButton` (`white`, `blue`)
+  * **Bizum** (Spain 🇪🇸) - `BizumButton` (`white`, `darkTeal`)
 
 ---
 
-## Usage
+## Quick Start
 
-### PayPal Express Button
-
+### PayPal
 ```dart
-import 'package:flutter/material.dart';
-import 'package:pay_buttons/pay_buttons.dart';
-
 PayPalButton(
-  onPressed: () {
-    // Initiate your PayPal checkout flow (REST API, Braintree, Webview, etc.)
-  },
+  onPressed: () => handlePayPalCheckout(),
   color: PayPalColor.gold,
   shape: PayPalShape.pill,
   type: PayPalButtonType.checkout,
 )
 ```
 
-### PayPal Pay Later with Statutory Credit Notice
-
+### Klarna
 ```dart
-PayPalPayLaterButton(
-  onPressed: () {
-    // Initiate installment checkout
-  },
-  color: PayPalColor.white,
+KlarnaButton(
+  onPressed: () => handleKlarnaCheckout(),
+  color: KlarnaColor.pink,
+  shape: KlarnaShape.rounded,
+  type: KlarnaButtonType.pay,
+)
+```
+
+### Amazon Pay
+```dart
+AmazonPayButton(
+  onPressed: () => handleAmazonPay(),
+  color: AmazonPayColor.gold,
+  shape: AmazonPayShape.pill,
+  type: AmazonPayButtonType.pay,
+)
+```
+
+### Shop Pay
+```dart
+ShopPayButton(
+  onPressed: () => handleShopPay(),
+  color: ShopPayColor.purple,
+  shape: ShopPayShape.rounded,
+)
+```
+
+### Link by Stripe
+```dart
+StripeLinkButton(
+  onPressed: () => handleStripeLink(),
+  color: StripeLinkColor.green,
+  shape: StripeLinkShape.rounded,
+)
+```
+
+### Afterpay / Clearpay
+```dart
+AfterpayButton(
+  onPressed: () => handleAfterpay(),
+  brand: AfterpayBrand.afterpay, // or AfterpayBrand.clearpay
+  color: AfterpayColor.mint,
+  shape: AfterpayShape.rounded,
+)
+```
+
+### European Regional Champions
+```dart
+// Switzerland
+TwintButton(
   locale: const Locale('de'),
-  showCreditNotice: true, // Attaches statutory credit notice
-  onCreditNoticeTapped: () => openTerms(),
+  onPressed: () => handleTwint(),
+)
+
+// Netherlands
+IdealButton(
+  locale: const Locale('nl'),
+  onPressed: () => handleIdeal(),
+)
+
+// Poland
+BlikButton(
+  locale: const Locale('pl'),
+  onPressed: () => handleBlik(),
+)
+
+// Belgium
+BancontactButton(
+  locale: const Locale('nl'),
+  onPressed: () => handleBancontact(),
+)
+
+// Spain
+BizumButton(
+  locale: const Locale('es'),
+  onPressed: () => handleBizum(),
 )
 ```
 
