@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/amazon_pay_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
 
@@ -125,6 +126,47 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(height: 12),
+
+          // Step 3: Amazon Pay Card
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              leading: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFC439),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'a',
+                    style: TextStyle(
+                      color: Color(0xFF111111),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+              title: const Text(
+                'Amazon Pay',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text('Pay, Checkout, Buy Now, Gold/Dark/Light themes'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const AmazonPayShowcasePage()),
+                );
+              },
+            ),
+          ),
+
           const SizedBox(height: 28),
           const Text(
             'Upcoming Buttons (Planned)',
@@ -135,13 +177,6 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-
-          _buildUpcomingItem(
-            name: 'Amazon Pay',
-            details: 'Gold/Orange smile button',
-            badgeColor: const Color(0xFFFF9900),
-            textColor: Colors.black,
-          ),
           _buildUpcomingItem(
             name: 'Shop Pay',
             details: 'Shopify accelerated checkout',

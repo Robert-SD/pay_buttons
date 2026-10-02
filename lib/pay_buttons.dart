@@ -21,6 +21,13 @@ export 'src/buttons/klarna/klarna_shape.dart';
 export 'src/buttons/klarna/klarna_button_type.dart';
 export 'src/buttons/klarna/klarna_assets.dart';
 
+// Amazon Pay
+export 'src/buttons/amazon_pay/amazon_pay_button.dart';
+export 'src/buttons/amazon_pay/amazon_pay_color.dart';
+export 'src/buttons/amazon_pay/amazon_pay_shape.dart';
+export 'src/buttons/amazon_pay/amazon_pay_button_type.dart';
+export 'src/buttons/amazon_pay/amazon_pay_assets.dart';
+
 /// Legacy platform version helper from template.
 class PayButtons {
   Future<String?> getPlatformVersion() {

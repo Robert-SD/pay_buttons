@@ -8,6 +8,7 @@ void main() {
     expect(find.text('Pay Buttons Component Catalog'), findsOneWidget);
     expect(find.text('PayPal & Pay Later'), findsOneWidget);
     expect(find.text('Klarna'), findsOneWidget);
+    expect(find.text('Amazon Pay'), findsOneWidget);
     expect(find.text('Active Payment Buttons'), findsOneWidget);
   });
 }
