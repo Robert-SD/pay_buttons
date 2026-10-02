@@ -14,6 +14,13 @@ export 'src/buttons/paypal/paypal_shape.dart';
 export 'src/buttons/paypal/paypal_button_type.dart';
 export 'src/buttons/paypal/paypal_assets.dart';
 
+// Klarna
+export 'src/buttons/klarna/klarna_button.dart';
+export 'src/buttons/klarna/klarna_color.dart';
+export 'src/buttons/klarna/klarna_shape.dart';
+export 'src/buttons/klarna/klarna_button_type.dart';
+export 'src/buttons/klarna/klarna_assets.dart';
+
 /// Legacy platform version helper from template.
 class PayButtons {
   Future<String?> getPlatformVersion() {

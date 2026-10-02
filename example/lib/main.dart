@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/klarna_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
 
 void main() {
@@ -84,6 +85,46 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(height: 12),
+
+          // Step 2: Klarna Card
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              leading: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFA8CD),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'K.',
+                    style: TextStyle(
+                      color: Color(0xFF0B051D),
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ),
+              title: const Text(
+                'Klarna',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text('Pay Now, Pay in 30 days, Slice It, Rounded/Pill'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const KlarnaShowcasePage()),
+                );
+              },
+            ),
+          ),
+
           const SizedBox(height: 28),
           const Text(
             'Upcoming Buttons (Planned)',
@@ -95,12 +136,6 @@ class CatalogHomePage extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          _buildUpcomingItem(
-            name: 'Klarna',
-            details: 'Pay Now, Pay in 30 days, Slice It',
-            badgeColor: const Color(0xFFFFA8CD),
-            textColor: Colors.black,
-          ),
           _buildUpcomingItem(
             name: 'Amazon Pay',
             details: 'Gold/Orange smile button',
