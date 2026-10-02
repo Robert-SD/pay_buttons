@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'afterpay_color.dart';
+
+/// Vector asset generator for official Afterpay / Clearpay branding.
+class AfterpayAssets {
+  AfterpayAssets._();
+
+  /// Renders the signature Afterpay/Clearpay continuous loop badge.
+  static Widget loopBadge({
+    required AfterpayColor color,
+    double height = 20.0,
+  }) {
+    final String badgeColor;
+
+    switch (color) {
+      case AfterpayColor.mint:
+      case AfterpayColor.white:
+        badgeColor = '#000000';
+        break;
+      case AfterpayColor.black:
+        badgeColor = '#B2FCE4';
+        break;
+    }
+
+    return SvgPicture.string(
+      _loopSvg(badgeColor: badgeColor),
+      height: height,
+      fit: BoxFit.contain,
+    );
+  }
+
+  /// Official continuous loop SVG path.
+  static String _loopSvg({required String badgeColor}) {
+    return '''
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M27.5928 9.22681L19.6872 4.79156C17.3667 3.48968 14.4658 5.11654 14.4658 7.72214V8.17714C14.4658 8.58831 14.692 8.96864 15.0578 9.17314L16.5505 10.0105C16.989 10.2571 17.5357 9.94931 17.5357 9.45814V8.32631C17.5357 7.76048 18.165 7.40679 18.6685 7.68964L25.516 11.5323C26.0195 11.8151 26.0195 12.5225 25.516 12.8036L18.6685 16.6461C18.165 16.9291 17.5357 16.5755 17.5357 16.0095V15.4073C17.5357 12.8016 14.635 11.1728 12.3125 12.4766L4.40692 16.9118C2.08637 18.2138 2.08637 21.4713 4.40692 22.7731L12.3125 27.2085C14.633 28.5103 17.5357 26.8835 17.5357 24.2778V23.8228C17.5357 23.4116 17.3095 23.0331 16.9438 22.8268L15.4512 21.9875C15.0127 21.7408 14.4658 22.0486 14.4658 22.54V23.6716C14.4658 24.2376 13.8367 24.5913 13.3332 24.3083L6.48557 20.4658C5.98213 20.1828 5.98213 19.4755 6.48557 19.1925L13.3332 15.35C13.8367 15.067 14.4658 15.4206 14.4658 15.9866V16.5888C14.4658 19.1945 17.3667 20.8233 19.6872 19.5195L27.5928 15.0843C29.9133 13.7861 29.9133 10.5286 27.5928 9.22681Z" fill="$badgeColor"/>
+</svg>
+''';
+  }
+}

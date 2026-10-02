@@ -42,6 +42,14 @@ export 'src/buttons/stripe_link/stripe_link_shape.dart';
 export 'src/buttons/stripe_link/stripe_link_button_type.dart';
 export 'src/buttons/stripe_link/stripe_link_assets.dart';
 
+// Afterpay / Clearpay
+export 'src/buttons/afterpay/afterpay_button.dart';
+export 'src/buttons/afterpay/afterpay_color.dart';
+export 'src/buttons/afterpay/afterpay_shape.dart';
+export 'src/buttons/afterpay/afterpay_brand.dart';
+export 'src/buttons/afterpay/afterpay_button_type.dart';
+export 'src/buttons/afterpay/afterpay_assets.dart';
+
 /// Legacy platform version helper from template.
 class PayButtons {
   Future<String?> getPlatformVersion() {
