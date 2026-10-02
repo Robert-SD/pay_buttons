@@ -25,15 +25,15 @@
 
 | Step | Topic | Status | Document |
 | :--- | :--- | :--- | :--- |
-| **Step 0** | Generic `PayButton` Foundation & Asset Engine | 📋 Planned | [`00_generic_pay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/00_generic_pay_button.md) |
-| **Step 1** | **PayPal** (Express Checkout & Pay Later) | 📋 Planned | [`01_paypal_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/01_paypal_button.md) |
-| **Step 2** | **Klarna** (Pay Now, Pay Later, Slice It) | 📋 Planned | [`02_klarna_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/02_klarna_button.md) |
-| **Step 3** | **Amazon Pay** | 📋 Planned | [`03_amazon_pay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/03_amazon_pay_button.md) |
-| **Step 4** | **Shop Pay** (Shopify) | 📋 Planned | [`04_shop_pay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/04_shop_pay_button.md) |
-| **Step 5** | **Link by Stripe** | 📋 Planned | [`05_stripe_link_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/05_stripe_link_button.md) |
-| **Step 6** | **Afterpay / Clearpay** | 📋 Planned | [`06_afterpay_clearpay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/06_afterpay_clearpay_button.md) |
-| **Step 7** | **European Champions** (TWINT, iDEAL/Wero, BLIK, Bancontact, Bizum) | 📋 Planned | [`07_european_regional_buttons.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/07_european_regional_buttons.md) |
-| **Showcase**| **Interactive Example App for Every Button** | 📋 Planned | [`08_example_app_showcase.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/08_example_app_showcase.md) |
+| **Step 0** | Generic `PayButton` Foundation & Asset Engine | ✅ Completed | [`00_generic_pay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/00_generic_pay_button.md) |
+| **Step 1** | **PayPal** (Express Checkout & Pay Later) | ✅ Completed | [`01_paypal_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/01_paypal_button.md) |
+| **Step 2** | **Klarna** (Pay Now, Pay Later, Slice It) | ✅ Completed | [`02_klarna_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/02_klarna_button.md) |
+| **Step 3** | **Amazon Pay** | ✅ Completed | [`03_amazon_pay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/03_amazon_pay_button.md) |
+| **Step 4** | **Shop Pay** (Shopify) | ✅ Completed | [`04_shop_pay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/04_shop_pay_button.md) |
+| **Step 5** | **Link by Stripe** | ✅ Completed | [`05_stripe_link_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/05_stripe_link_button.md) |
+| **Step 6** | **Afterpay / Clearpay** | ✅ Completed | [`06_afterpay_clearpay_button.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/06_afterpay_clearpay_button.md) |
+| **Step 7** | **European Champions** (TWINT, iDEAL, BLIK, Bancontact, Bizum) | ✅ Completed | [`07_european_regional_buttons.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/07_european_regional_buttons.md) |
+| **Showcase**| **Interactive Example App for Every Button** | ✅ Completed | [`08_example_app_showcase.md`](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/plan/08_example_app_showcase.md) |
 
 > [!IMPORTANT]
 > **Example App Mandate for Every Button**:
