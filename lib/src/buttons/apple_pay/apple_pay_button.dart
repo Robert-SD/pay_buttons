@@ -28,14 +28,14 @@ class ApplePayButton extends PayButton {
     super.elevation,
     super.semanticLabel,
     this.color = ApplePayColor.black,
-    this.shape = ApplePayShape.rounded,
+    this.shape = ApplePayShape.pill,
     this.logoFirst = false,
   });
 
   /// The brand color palette for the button. Defaults to [ApplePayColor.black].
   final ApplePayColor color;
 
-  /// The contour shape of the button. Defaults to [ApplePayShape.rounded].
+  /// The contour shape of the button. Defaults to [ApplePayShape.pill].
   final ApplePayShape shape;
 
   /// Whether the Apple Pay mark appears before [text]. Defaults to `false`.

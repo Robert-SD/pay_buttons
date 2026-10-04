@@ -4,8 +4,8 @@ import 'package:pay_buttons/pay_buttons.dart';
 enum RegionalChampion {
   wero('Wero', 'Europe 🇪🇺'),
   twint('TWINT', 'Switzerland 🇨🇭'),
-  ideal('iDEAL', 'Netherlands 🇳🇱'),
   blik('BLIK', 'Poland 🇵🇱'),
+  ideal('iDEAL', 'Netherlands 🇳🇱'),
   bancontact('Bancontact', 'Belgium 🇧🇪'),
   bizum('Bizum', 'Spain 🇪🇸');
 
@@ -15,7 +15,12 @@ enum RegionalChampion {
 }
 
 class EuropeanChampionsShowcasePage extends StatefulWidget {
-  const EuropeanChampionsShowcasePage({super.key});
+  const EuropeanChampionsShowcasePage({
+    super.key,
+    this.initialChampion = RegionalChampion.wero,
+  });
+
+  final RegionalChampion initialChampion;
 
   @override
   State<EuropeanChampionsShowcasePage> createState() =>
@@ -24,7 +29,7 @@ class EuropeanChampionsShowcasePage extends StatefulWidget {
 
 class _EuropeanChampionsShowcasePageState
     extends State<EuropeanChampionsShowcasePage> {
-  RegionalChampion _selectedChampion = RegionalChampion.wero;
+  late RegionalChampion _selectedChampion = widget.initialChampion;
 
   // Shared Playground State
   bool _isLoading = false;
@@ -163,13 +168,13 @@ class _EuropeanChampionsShowcasePageState
                   text: 'Bezahlen mit',
                   onPressed: () => _handlePayPress('TWINT'),
                 ),
-                IdealButton(
-                  text: 'Betaal met',
-                  onPressed: () => _handlePayPress('iDEAL'),
-                ),
                 BlikButton(
                   text: 'Zapłać z',
                   onPressed: () => _handlePayPress('BLIK'),
+                ),
+                IdealButton(
+                  text: 'Betaal met',
+                  onPressed: () => _handlePayPress('iDEAL'),
                 ),
                 BancontactButton(
                   text: 'Betaal met',

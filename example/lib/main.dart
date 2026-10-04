@@ -103,12 +103,15 @@ class CatalogHomePage extends StatelessWidget {
                           PayPalButton(
                             onPressed: () => _handlePayPress(context, 'PayPal'),
                           ),
-                          KlarnaButton(
-                            onPressed: () => _handlePayPress(context, 'Klarna'),
-                          ),
                           AmazonPayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Amazon Pay'),
+                          ),
+                          KlarnaButton(
+                            onPressed: () => _handlePayPress(context, 'Klarna'),
+                          ),
+                          WeroButton(
+                            onPressed: () => _handlePayPress(context, 'Wero'),
                           ),
                           ShopPayButton(
                             onPressed: () =>
@@ -118,17 +121,14 @@ class CatalogHomePage extends StatelessWidget {
                             onPressed: () =>
                                 _handlePayPress(context, 'Afterpay'),
                           ),
-                          WeroButton(
-                            onPressed: () => _handlePayPress(context, 'Wero'),
-                          ),
                           TwintButton(
                             onPressed: () => _handlePayPress(context, 'TWINT'),
                           ),
-                          IdealButton(
-                            onPressed: () => _handlePayPress(context, 'iDEAL'),
-                          ),
                           BlikButton(
                             onPressed: () => _handlePayPress(context, 'BLIK'),
+                          ),
+                          IdealButton(
+                            onPressed: () => _handlePayPress(context, 'iDEAL'),
                           ),
                           BancontactButton(
                             onPressed: () =>
@@ -256,7 +256,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // Step 1: PayPal Card
+                  // 3. PayPal Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -306,56 +306,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // Step 2: Klarna Card
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      leading: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFA8CD),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'K.',
-                            style: TextStyle(
-                              color: Color(0xFF0B051D),
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                      ),
-                      title: const Text(
-                        'Klarna',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: const Text(
-                        'Pay Now, Pay in 30 days, Slice It, Rounded/Pill',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => const KlarnaShowcasePage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Step 3: Amazon Pay Card
+                  // 4. Amazon Pay Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -405,7 +356,108 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // Step 4: Shop Pay Card
+                  // 5. Klarna Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFA8CD),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'K.',
+                            style: TextStyle(
+                              color: Color(0xFF0B051D),
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'Klarna',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Pay Now, Pay in 30 days, Slice It, Rounded/Pill',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const KlarnaShowcasePage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 6. Wero (Vero) Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFF48D),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'W',
+                            style: TextStyle(
+                              color: Color(0xFF1D1C1C),
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'Wero',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'European Payments Initiative (EPI), Yellow/Black/White',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const EuropeanChampionsShowcasePage(
+                              initialChampion: RegionalChampion.wero,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 7. Shop Pay Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -455,7 +507,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // Step 6: Afterpay / Clearpay Card
+                  // 8. Afterpay / Clearpay Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -505,7 +557,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // Step 7: European Champions Card
+                  // 9. TWINT (Twins) Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -521,33 +573,243 @@ class CatalogHomePage extends StatelessWidget {
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF003399),
+                          color: const Color(0xFF000000),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Center(
                           child: Text(
-                            'EU',
+                            'T',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Color(0xFF00A859),
                               fontWeight: FontWeight.w900,
-                              fontSize: 16,
+                              fontSize: 20,
                             ),
                           ),
                         ),
                       ),
                       title: const Text(
-                        'European Champions',
+                        'TWINT',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: const Text(
-                        'Wero, TWINT, iDEAL, BLIK, Bancontact, Bizum',
+                        'Switzerland #1 mobile payment method, Black/White',
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) =>
-                                const EuropeanChampionsShowcasePage(),
+                            builder: (_) => const EuropeanChampionsShowcasePage(
+                              initialChampion: RegionalChampion.twint,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 10. BLIK (Blick) Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF000000),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'B',
+                            style: TextStyle(
+                              color: Color(0xFFE30613),
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'BLIK',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Poland mobile banking & e-commerce champion, Black/White',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const EuropeanChampionsShowcasePage(
+                              initialChampion: RegionalChampion.blik,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 11. iDEAL Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'i',
+                            style: TextStyle(
+                              color: Color(0xFFCC0066),
+                              fontWeight: FontWeight.w900,
+                              fontSize: 22,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'iDEAL',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Netherlands online banking standard, White/Black',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const EuropeanChampionsShowcasePage(
+                              initialChampion: RegionalChampion.ideal,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 12. Bancontact (BankContact) Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF00559F),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'BC',
+                            style: TextStyle(
+                              color: Color(0xFFFFD200),
+                              fontWeight: FontWeight.w900,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'Bancontact',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Belgium market leader in card and digital payments',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const EuropeanChampionsShowcasePage(
+                              initialChampion: RegionalChampion.bancontact,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 13. Bizum Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF00B4B6),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Bz',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'Bizum',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Spain instant account-to-account mobile payment system',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const EuropeanChampionsShowcasePage(
+                              initialChampion: RegionalChampion.bizum,
+                            ),
                           ),
                         );
                       },

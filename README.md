@@ -11,24 +11,33 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Supported Buttons
 
+* **Apple Pay**: Default logo-only or custom text prefix (`black`, `white`, `whiteOutline`), pill/rounded/rect shapes.
 * **Google Pay**: Default logo-only or custom text prefix (`black`, `white`, `monochromeBlack`, `monochromeWhite`), pill/rounded/rect shapes.
-* **Apple Pay**: Default logo-only or custom text prefix (`black`, `white`, `whiteOutline`), rounded/pill/rect shapes.
 * **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
-* **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
 * **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
+* **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
+* **Wero**: Europe 🇪🇺 / European Payments Initiative (`yellow`, `black`, `white`).
 * **Shop Pay (Shopify)**: Default logo-only or custom text (`purple`, `black`, `white`).
 * **Afterpay / Clearpay**: Default logo-only or custom text, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
-* **European Regional Champions**:
-  * **Wero** (Europe 🇪🇺 / European Payments Initiative) - `WeroButton` (`yellow`, `black`, `white`)
-  * **TWINT** (Switzerland 🇨🇭) - `TwintButton` (`black`, `white`)
-  * **iDEAL** (Netherlands 🇳🇱) - `IdealButton` (`white`, `black`)
-  * **BLIK** (Poland 🇵🇱) - `BlikButton` (`black`, `white`)
-  * **Bancontact** (Belgium 🇧🇪) - `BancontactButton` (`white`, `blue`)
-  * **Bizum** (Spain 🇪🇸) - `BizumButton` (`white`, `darkTeal`)
+* **TWINT**: Switzerland 🇨🇭 national mobile payment (`black`, `white`).
+* **BLIK**: Poland 🇵🇱 mobile banking champion (`black`, `white`).
+* **iDEAL**: Netherlands 🇳🇱 online banking standard (`white`, `black`).
+* **Bancontact**: Belgium 🇧🇪 market leader (`white`, `blue`).
+* **Bizum**: Spain 🇪🇸 instant account payment (`white`, `darkTeal`).
 
 ---
 
 ## Quick Start
+
+### Apple Pay
+```dart
+ApplePayButton(
+  onPressed: () => handleApplePay(),
+  text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
+  color: ApplePayColor.black,
+  shape: ApplePayShape.pill,
+)
+```
 
 ### Google Pay
 ```dart
@@ -37,16 +46,6 @@ GooglePayButton(
   text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
   color: GooglePayColor.black,
   shape: GooglePayShape.pill,
-)
-```
-
-### Apple Pay
-```dart
-ApplePayButton(
-  onPressed: () => handleApplePay(),
-  text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
-  color: ApplePayColor.black,
-  shape: ApplePayShape.rounded,
 )
 ```
 
@@ -60,6 +59,16 @@ PayPalButton(
 )
 ```
 
+### Amazon Pay
+```dart
+AmazonPayButton(
+  onPressed: () => handleAmazonPay(),
+  text: 'Check out with',
+  color: AmazonPayColor.gold,
+  shape: AmazonPayShape.pill,
+)
+```
+
 ### Klarna
 ```dart
 KlarnaButton(
@@ -70,13 +79,13 @@ KlarnaButton(
 )
 ```
 
-### Amazon Pay
+### Wero
 ```dart
-AmazonPayButton(
-  onPressed: () => handleAmazonPay(),
-  text: 'Check out with',
-  color: AmazonPayColor.gold,
-  shape: AmazonPayShape.pill,
+WeroButton(
+  onPressed: () => handleWero(),
+  text: 'Pay with',
+  color: WeroColor.yellow,
+  shape: WeroShape.rounded,
 )
 ```
 
@@ -101,31 +110,25 @@ AfterpayButton(
 )
 ```
 
-### European Regional Champions
-```dart
-// Europe (European Payments Initiative)
-WeroButton(
-  text: 'Pay with',
-  color: WeroColor.yellow,
-  onPressed: () => handleWero(),
-)
+### Regional Champions
 
+```dart
 // Switzerland
 TwintButton(
   text: 'Bezahlen mit',
   onPressed: () => handleTwint(),
 )
 
-// Netherlands
-IdealButton(
-  text: 'Betaal met',
-  onPressed: () => handleIdeal(),
-)
-
 // Poland
 BlikButton(
   text: 'Zapłać z',
   onPressed: () => handleBlik(),
+)
+
+// Netherlands
+IdealButton(
+  text: 'Betaal met',
+  onPressed: () => handleIdeal(),
 )
 
 // Belgium
@@ -184,19 +187,19 @@ PayPalButton(
 #### 3. Brand Font Stacks Reference
 | Button | Primary Brand Stack (`PayButtonFonts.*`) |
 | :--- | :--- |
-| **Google Pay** | `Google Sans`, `Product Sans`, `Roboto`, system sans |
 | **Apple Pay** | `-apple-system`, `BlinkMacSystemFont`, `SF Pro Text`, `SF Pro Display`, system sans |
+| **Google Pay** | `Google Sans`, `Product Sans`, `Roboto`, system sans |
 | **PayPal** | `PayPal Pro`, `PayPal Open`, `PayPal Sans`, system neo-grotesque |
-| **Klarna** | `Klarna Text`, `Klarna Headline`, system neo-grotesque |
 | **Amazon Pay** | `Amazon Ember`, system neo-grotesque |
+| **Klarna** | `Klarna Text`, `Klarna Headline`, system neo-grotesque |
+| **Wero** | `GT Walsheim`, `GT Walsheim Pro`, `Inter`, `Roboto`, system sans |
 | **Shop Pay** | `Shopify Sans`, system neo-grotesque |
 | **Afterpay** | `Youth`, `Cash Sans Mono`, `Italian Plate No. 2`, system sans |
 | **TWINT** | `Neue Haas Grotesk`, `Helvetica Neue`, `Arial`, system sans |
-| **iDEAL** | `Inter`, `Roboto`, `Helvetica Neue`, system sans |
 | **BLIK** | `Lato`, `Montserrat`, `Roboto`, system sans |
+| **iDEAL** | `Inter`, `Roboto`, `Helvetica Neue`, system sans |
 | **Bancontact** | `Gotham`, `Montserrat`, `Inter`, system sans |
 | **Bizum** | `Omnes`, `Nunito`, `Roboto`, system sans |
-| **Wero** | `GT Walsheim`, `GT Walsheim Pro`, `Inter`, `Roboto`, system sans |
 
 ---
 

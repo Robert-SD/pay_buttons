@@ -11,7 +11,7 @@ class ApplePayShowcasePage extends StatefulWidget {
 class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
   // Playground state
   ApplePayColor _color = ApplePayColor.black;
-  ApplePayShape _shape = ApplePayShape.rounded;
+  ApplePayShape _shape = ApplePayShape.pill;
   String? _text;
   bool _logoFirst = false;
   bool _isLoading = false;
@@ -276,31 +276,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
             alignment: WrapAlignment.center,
             children: [
               _buildGalleryItem(
-                label: 'Black Rounded (HIG Default)',
-                button: ApplePayButton(
-                  color: ApplePayColor.black,
-                  shape: ApplePayShape.rounded,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'White Rounded',
-                button: ApplePayButton(
-                  color: ApplePayColor.white,
-                  shape: ApplePayShape.rounded,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'White Outline Rounded',
-                button: ApplePayButton(
-                  color: ApplePayColor.whiteOutline,
-                  shape: ApplePayShape.rounded,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Black Pill',
+                label: 'Black Pill (Default)',
                 button: ApplePayButton(
                   color: ApplePayColor.black,
                   shape: ApplePayShape.pill,
@@ -320,6 +296,30 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 button: ApplePayButton(
                   color: ApplePayColor.whiteOutline,
                   shape: ApplePayShape.pill,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'Black Rounded',
+                button: ApplePayButton(
+                  color: ApplePayColor.black,
+                  shape: ApplePayShape.rounded,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'White Rounded',
+                button: ApplePayButton(
+                  color: ApplePayColor.white,
+                  shape: ApplePayShape.rounded,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'White Outline Rounded',
+                button: ApplePayButton(
+                  color: ApplePayColor.whiteOutline,
+                  shape: ApplePayShape.rounded,
                   onPressed: _handlePayPress,
                 ),
               ),

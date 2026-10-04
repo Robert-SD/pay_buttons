@@ -5,7 +5,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('ApplePayButton', () {
-    testWidgets('renders black rounded logo-only button by default', (
+    testWidgets('renders black pill logo-only button by default', (
       tester,
     ) async {
       await tester.pumpWidget(
@@ -25,6 +25,8 @@ void main() {
         ),
       );
       expect(material.color, const Color(0xFF000000));
+      final shape = material.shape as RoundedRectangleBorder;
+      expect(shape.borderRadius, BorderRadius.circular(24.0));
     });
 
     testWidgets('renders custom text when provided', (tester) async {
