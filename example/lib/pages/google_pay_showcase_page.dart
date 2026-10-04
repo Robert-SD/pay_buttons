@@ -63,6 +63,10 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
           _buildActionVerbsSection(),
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -309,22 +313,6 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 ),
               ),
               _buildGalleryItem(
-                label: 'Medium (Default)',
-                button: GooglePayButton(
-                  variant: PayButtonVariant.medium,
-                  width: 140,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Short / Compact (Default)',
-                button: GooglePayButton(
-                  variant: PayButtonVariant.compact,
-                  width: 52,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
                 label: 'White Pill',
                 button: GooglePayButton(
                   color: GooglePayColor.white,
@@ -450,6 +438,51 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 text: 'Checkout with',
                 color: GooglePayColor.black,
                 onPressed: _handlePayPress,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact G mark icon and medium size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            alignment: WrapAlignment.center,
+            children: [
+              _buildGalleryItem(
+                label: 'Medium Variant',
+                button: GooglePayButton(
+                  variant: PayButtonVariant.medium,
+                  width: 140,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'Small / Compact Variant',
+                button: GooglePayButton(
+                  variant: PayButtonVariant.compact,
+                  width: 52,
+                  onPressed: _handlePayPress,
+                ),
               ),
             ],
           ),

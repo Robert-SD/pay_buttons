@@ -63,6 +63,10 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
           _buildActionVerbsSection(),
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -309,22 +313,6 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 ),
               ),
               _buildGalleryItem(
-                label: 'Medium (Default)',
-                button: ApplePayButton(
-                  variant: PayButtonVariant.medium,
-                  width: 140,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Short / Compact (Default)',
-                button: ApplePayButton(
-                  variant: PayButtonVariant.compact,
-                  width: 52,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
                 label: 'White Pill',
                 button: ApplePayButton(
                   color: ApplePayColor.white,
@@ -463,6 +451,51 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 text: 'Top Up with',
                 color: ApplePayColor.whiteOutline,
                 onPressed: _handlePayPress,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact Apple mark icon and medium size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            alignment: WrapAlignment.center,
+            children: [
+              _buildGalleryItem(
+                label: 'Medium Variant',
+                button: ApplePayButton(
+                  variant: PayButtonVariant.medium,
+                  width: 140,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'Small / Compact Variant',
+                button: ApplePayButton(
+                  variant: PayButtonVariant.compact,
+                  width: 52,
+                  onPressed: _handlePayPress,
+                ),
               ),
             ],
           ),

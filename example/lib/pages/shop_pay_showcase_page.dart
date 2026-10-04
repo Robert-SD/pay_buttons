@@ -70,6 +70,13 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
 
           // 3. Custom Action Verbs
           _buildLocalizedSection(),
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+
+          // 4. Small & Medium Size Variants
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -293,53 +300,8 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'DEFAULT VARIANTS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Medium (Logo only)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  ShopPayButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.medium,
-                    width: 140,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Short / Compact ([Pay] badge)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  ShopPayButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.compact,
-                    width: 52,
-                  ),
-                ],
-              ),
-            ),
-            ...ShopPayColor.values.map((color) {
-              return Container(
+          children: ShopPayColor.values.map((color) {
+            return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == ShopPayColor.white
@@ -377,11 +339,10 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                 ],
               ),
             );
-          }),
-        ],
-      ),
-    ],
-  );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Widget _buildLocalizedSection() {
@@ -407,6 +368,79 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
             ShopPayButton(onPressed: _handlePayPress, text: 'Kaufen mit'),
             ShopPayButton(onPressed: _handlePayPress, text: 'Acheter avec'),
             ShopPayButton(onPressed: _handlePayPress, text: 'Comprar con'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact badge and medium logo-only size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Medium (Logo only)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  ShopPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Small / Compact ([Pay] badge)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  ShopPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ],

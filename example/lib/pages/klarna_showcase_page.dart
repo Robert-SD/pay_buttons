@@ -77,6 +77,13 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
 
           // 4. Sign in with Klarna (SIWK) & Responsive Breakpoints
           _buildSiwkSection(),
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+
+          // 5. Small & Medium Examples
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -116,9 +123,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                 color:
                     (_color == KlarnaColor.white ||
                         _color == KlarnaColor.offWhite)
-                    ? const Color(
-                        0xFF1E293B,
-                      ) // Dark background for white/offWhite button
+                    ? const Color(0xFF1E293B)
                     : const Color(0xFFF7F9FA),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade300),
@@ -304,53 +309,8 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'DEFAULT VARIANTS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Medium (Wordmark)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  KlarnaButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.medium,
-                    width: 140,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Short / Compact (K. Monogram)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  KlarnaButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.compact,
-                    width: 52,
-                  ),
-                ],
-              ),
-            ),
-            ...KlarnaColor.values.map((color) {
-              return Container(
+          children: KlarnaColor.values.map((color) {
+            return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color:
@@ -401,11 +361,10 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                 ],
               ),
             );
-          }),
-        ],
-      ),
-    ],
-  );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Widget _buildInstallmentsSection() {
@@ -559,6 +518,79 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                     width: 54,
                     color: KlarnaColor.offWhite,
                     shape: KlarnaShape.pill,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact monogram icon and medium wordmark size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Medium (Wordmark)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Small / Compact (K. Monogram)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
                   ),
                 ],
               ),

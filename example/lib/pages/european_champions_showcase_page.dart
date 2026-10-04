@@ -127,6 +127,10 @@ class _EuropeanChampionsShowcasePageState
           const Divider(),
           const SizedBox(height: 24),
           _buildGallerySection(),
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -661,13 +665,12 @@ class _EuropeanChampionsShowcasePageState
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
-        _buildChampionDefaultVariants(),
         _buildChampionGallery(),
       ],
     );
   }
 
-  Widget _buildChampionDefaultVariants() {
+  Widget _buildSmallAndMediumSection() {
     Widget mediumBtn;
     Widget compactBtn;
     switch (_selectedChampion) {
@@ -745,59 +748,72 @@ class _EuropeanChampionsShowcasePageState
         break;
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF8FAFC),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey.shade300),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${_selectedChampion.title.toUpperCase()} DEFAULT VARIANTS',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-                color: Colors.black87,
+        const SizedBox(height: 8),
+        Text(
+          'Compact icon and medium size variations for ${_selectedChampion.title}.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8FAFC),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey.shade300),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${_selectedChampion.title.toUpperCase()} VARIANTS',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: Colors.black87,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 24,
-              runSpacing: 12,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Medium (Wordmark)',
-                      style: TextStyle(fontSize: 11, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 4),
-                    mediumBtn,
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Short / Compact (Icon)',
-                      style: TextStyle(fontSize: 11, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 4),
-                    compactBtn,
-                  ],
-                ),
-              ],
-            ),
-          ],
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 24,
+                runSpacing: 12,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Medium (Wordmark)',
+                        style: TextStyle(fontSize: 11, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 4),
+                      mediumBtn,
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Small / Compact (Icon)',
+                        style: TextStyle(fontSize: 11, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 4),
+                      compactBtn,
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

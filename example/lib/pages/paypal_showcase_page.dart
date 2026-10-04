@@ -70,6 +70,13 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
 
           // 3. Dedicated Pay Later Showcase
           _buildPayLaterSection(),
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+
+          // 4. Small & Medium Examples
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -107,9 +114,7 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
               padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 16),
               decoration: BoxDecoration(
                 color: _color == PayPalColor.white
-                    ? const Color(
-                        0xFF232F3E,
-                      ) // Dark background for white button
+                    ? const Color(0xFF232F3E)
                     : const Color(0xFFF7F9FA),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade300),
@@ -295,53 +300,8 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'DEFAULT VARIANTS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Medium (Logo only)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  PayPalButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.medium,
-                    width: 140,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Short / Compact (Monogram)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  PayPalButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.compact,
-                    width: 52,
-                  ),
-                ],
-              ),
-            ),
-            ...PayPalColor.values.map((color) {
-              return Container(
+          children: PayPalColor.values.map((color) {
+            return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == PayPalColor.white
@@ -381,11 +341,10 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
                 ],
               ),
             );
-          }),
-        ],
-      ),
-    ],
-  );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Widget _buildPayLaterSection() {
@@ -421,6 +380,79 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
               onPressed: _handlePayPress,
               color: PayPalColor.blue,
               text: '4x sans frais',
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact monogram icon and medium logo-only size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Medium (Logo only)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  PayPalButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Small / Compact (Monogram)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  PayPalButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -78,6 +78,13 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
 
           // 4. Custom Action Verbs
           _buildLocalizedSection(),
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+
+          // 5. Small & Medium Size Variants
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -316,53 +323,8 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'DEFAULT VARIANTS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Medium (Badge only)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  AfterpayButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.medium,
-                    width: 140,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Short / Compact (Loop mark)',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 4),
-                  AfterpayButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.compact,
-                    width: 52,
-                  ),
-                ],
-              ),
-            ),
-            ...AfterpayColor.values.map((color) {
-              return Container(
+          children: AfterpayColor.values.map((color) {
+            return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == AfterpayColor.white
@@ -402,11 +364,10 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                 ],
               ),
             );
-          }),
-        ],
-      ),
-    ],
-  );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Widget _buildRegionalSection() {
@@ -478,6 +439,79 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
             ),
             AfterpayButton(onPressed: _handlePayPress, text: 'Payer avec'),
             AfterpayButton(onPressed: _handlePayPress, text: 'Comprar con'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact loop mark and medium badge size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Medium (Badge only)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  AfterpayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Small / Compact (Loop mark)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  AfterpayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ],

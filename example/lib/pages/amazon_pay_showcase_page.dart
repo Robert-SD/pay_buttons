@@ -70,6 +70,13 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
 
           // 3. Custom Text Variations
           _buildLocalizedSection(),
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+
+          // 4. Small & Medium Size Variants
+          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -293,53 +300,8 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'DEFAULT VARIANTS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.white70,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Medium (Logo only)',
-                    style: TextStyle(fontSize: 11, color: Colors.white60),
-                  ),
-                  const SizedBox(height: 4),
-                  AmazonPayButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.medium,
-                    width: 140,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Short / Compact (Smile mark)',
-                    style: TextStyle(fontSize: 11, color: Colors.white60),
-                  ),
-                  const SizedBox(height: 4),
-                  AmazonPayButton(
-                    onPressed: _handlePayPress,
-                    variant: PayButtonVariant.compact,
-                    width: 52,
-                  ),
-                ],
-              ),
-            ),
-            ...AmazonPayColor.values.map((color) {
-              return Container(
+          children: AmazonPayColor.values.map((color) {
+            return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == AmazonPayColor.darkGray
@@ -379,11 +341,10 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
                 ],
               ),
             );
-          }),
-        ],
-      ),
-    ],
-  );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Widget _buildLocalizedSection() {
@@ -409,6 +370,79 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
             AmazonPayButton(onPressed: _handlePayPress, text: 'Bezahlen mit'),
             AmazonPayButton(onPressed: _handlePayPress, text: 'Acheter avec'),
             AmazonPayButton(onPressed: _handlePayPress, text: 'Comprar con'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmallAndMediumSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Small & Medium Size Variants',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Compact smile icon and medium logo-only size variations.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Medium (Logo only)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white),
+                  ),
+                  const SizedBox(height: 8),
+                  AmazonPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Small / Compact (Smile mark)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white),
+                  ),
+                  const SizedBox(height: 8),
+                  AmazonPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ],
