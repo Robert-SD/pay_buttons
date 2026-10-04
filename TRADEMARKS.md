@@ -108,9 +108,30 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * **Guidelines**: [Bizum Brand Guidelines](https://bizum.es/en/brand/)
   * Approved colors: Teal (`#00B4B6`) and Dark Cyan (`#004455`).
 
+### 7. Google Pay
+* **Trademark Owner**: Google LLC / Alphabet Inc.
+* **Registered Trademarks**: "Google", "Google Pay", "GPay", the multi-color Google "G" logo.
+* **Official Brand Guidelines**: [Google Pay Brand Guidelines](https://developers.google.com/pay/api/web/guides/brand-guidelines)
+* **Permitted Customizations**:
+  * Approved colors: Black (`#000000`), White (`#FFFFFF`), Monochrome Black, Monochrome White.
+  * Approved shapes: Pill (`borderRadius: height / 2`, Google standard), Rounded Rectangle (`borderRadius: 4.0`), Rectangle (`borderRadius: 0.0`).
+  * White background buttons must maintain the `#747775` border for contrast.
+
+---
+
+### 8. Apple Pay
+* **Trademark Owner**: Apple Inc.
+* **Registered Trademarks**: "Apple", "Apple Pay", the Apple logo with "Pay" wordmark.
+* **Official Brand Guidelines**: [Apple Pay Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay)
+* **Permitted Customizations**:
+  * Approved colors: Black (`#000000`), White (`#FFFFFF`), White with Outline (`#FFFFFF` with `#000000` 1.0 dp border).
+  * Approved shapes: Rounded Rectangle (`borderRadius: 4.0`, Apple HIG default), Pill (`borderRadius: height / 2`), Rectangle (`borderRadius: 0.0`).
+  * The Apple logo and wordmark must retain their standard proportional relationship and clear-space margins.
+
 ---
 
 ## 3. Summary of Open Source Licenses Used
 
 * **Package Code**: Distributed under the [MIT License](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/LICENSE).
 * **Vector Path Data**: Derived from official open-source repositories licensed under the **Apache License 2.0** (`@paypal/sdk-logos`) and **MIT License** (`braintree_android`).
+

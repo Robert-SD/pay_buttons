@@ -11,6 +11,8 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Supported Buttons
 
+* **Google Pay**: Default logo-only or custom text prefix (`black`, `white`, `monochromeBlack`, `monochromeWhite`), pill/rounded/rect shapes.
+* **Apple Pay**: Default logo-only or custom text prefix (`black`, `white`, `whiteOutline`), rounded/pill/rect shapes.
 * **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
 * **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
 * **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
@@ -27,6 +29,26 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 ---
 
 ## Quick Start
+
+### Google Pay
+```dart
+GooglePayButton(
+  onPressed: () => handleGooglePay(),
+  text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
+  color: GooglePayColor.black,
+  shape: GooglePayShape.pill,
+)
+```
+
+### Apple Pay
+```dart
+ApplePayButton(
+  onPressed: () => handleApplePay(),
+  text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
+  color: ApplePayColor.black,
+  shape: ApplePayShape.rounded,
+)
+```
 
 ### PayPal
 ```dart
@@ -162,6 +184,8 @@ PayPalButton(
 #### 3. Brand Font Stacks Reference
 | Button | Primary Brand Stack (`PayButtonFonts.*`) |
 | :--- | :--- |
+| **Google Pay** | `Google Sans`, `Product Sans`, `Roboto`, system sans |
+| **Apple Pay** | `-apple-system`, `BlinkMacSystemFont`, `SF Pro Text`, `SF Pro Display`, system sans |
 | **PayPal** | `PayPal Pro`, `PayPal Open`, `PayPal Sans`, system neo-grotesque |
 | **Klarna** | `Klarna Text`, `Klarna Headline`, system neo-grotesque |
 | **Amazon Pay** | `Amazon Ember`, system neo-grotesque |

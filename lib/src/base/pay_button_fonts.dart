@@ -155,4 +155,33 @@ abstract final class PayButtonFonts {
     'Arial',
     'sans-serif',
   ];
+
+  /// Font fallback chain for Google Pay buttons.
+  ///
+  /// References Google Sans / Product Sans with ubiquitous Android/system fallbacks.
+  static const List<String> googlePay = [
+    'Google Sans',
+    'Product Sans',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
+
+  /// Font fallback chain for Apple Pay buttons.
+  ///
+  /// References Apple San Francisco typography with clean system fallbacks.
+  static const List<String> applePay = [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'SF Pro Text',
+    'SF Pro Display',
+    'Helvetica Neue',
+    'Helvetica',
+    'Arial',
+    'sans-serif',
+  ];
 }

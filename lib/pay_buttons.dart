@@ -73,3 +73,16 @@ export 'src/buttons/regional/wero/wero_button.dart';
 export 'src/buttons/regional/wero/wero_color.dart';
 export 'src/buttons/regional/wero/wero_shape.dart';
 export 'src/buttons/regional/wero/wero_assets.dart';
+
+// Google Pay
+export 'src/buttons/google_pay/google_pay_button.dart';
+export 'src/buttons/google_pay/google_pay_color.dart';
+export 'src/buttons/google_pay/google_pay_shape.dart';
+export 'src/buttons/google_pay/google_pay_assets.dart';
+
+// Apple Pay
+export 'src/buttons/apple_pay/apple_pay_button.dart';
+export 'src/buttons/apple_pay/apple_pay_color.dart';
+export 'src/buttons/apple_pay/apple_pay_shape.dart';
+export 'src/buttons/apple_pay/apple_pay_assets.dart';
+
