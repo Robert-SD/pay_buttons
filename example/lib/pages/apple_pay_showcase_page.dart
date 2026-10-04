@@ -309,6 +309,22 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 ),
               ),
               _buildGalleryItem(
+                label: 'Medium (Default)',
+                button: ApplePayButton(
+                  variant: PayButtonVariant.medium,
+                  width: 140,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'Short / Compact (Default)',
+                button: ApplePayButton(
+                  variant: PayButtonVariant.compact,
+                  width: 52,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
                 label: 'White Pill',
                 button: ApplePayButton(
                   color: ApplePayColor.white,

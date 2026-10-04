@@ -661,8 +661,143 @@ class _EuropeanChampionsShowcasePageState
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
+        _buildChampionDefaultVariants(),
         _buildChampionGallery(),
       ],
+    );
+  }
+
+  Widget _buildChampionDefaultVariants() {
+    Widget mediumBtn;
+    Widget compactBtn;
+    switch (_selectedChampion) {
+      case RegionalChampion.wero:
+        mediumBtn = WeroButton(
+          onPressed: () => _handlePayPress('Wero Medium'),
+          variant: PayButtonVariant.medium,
+          width: 140,
+        );
+        compactBtn = WeroButton(
+          onPressed: () => _handlePayPress('Wero Compact'),
+          variant: PayButtonVariant.compact,
+          width: 52,
+        );
+        break;
+      case RegionalChampion.twint:
+        mediumBtn = TwintButton(
+          onPressed: () => _handlePayPress('TWINT Medium'),
+          variant: PayButtonVariant.medium,
+          width: 140,
+        );
+        compactBtn = TwintButton(
+          onPressed: () => _handlePayPress('TWINT Compact'),
+          variant: PayButtonVariant.compact,
+          width: 52,
+        );
+        break;
+      case RegionalChampion.ideal:
+        mediumBtn = IdealButton(
+          onPressed: () => _handlePayPress('iDEAL Medium'),
+          variant: PayButtonVariant.medium,
+          width: 140,
+        );
+        compactBtn = IdealButton(
+          onPressed: () => _handlePayPress('iDEAL Compact'),
+          variant: PayButtonVariant.compact,
+          width: 52,
+        );
+        break;
+      case RegionalChampion.blik:
+        mediumBtn = BlikButton(
+          onPressed: () => _handlePayPress('BLIK Medium'),
+          variant: PayButtonVariant.medium,
+          width: 140,
+        );
+        compactBtn = BlikButton(
+          onPressed: () => _handlePayPress('BLIK Compact'),
+          variant: PayButtonVariant.compact,
+          width: 52,
+        );
+        break;
+      case RegionalChampion.bancontact:
+        mediumBtn = BancontactButton(
+          onPressed: () => _handlePayPress('Bancontact Medium'),
+          variant: PayButtonVariant.medium,
+          width: 140,
+        );
+        compactBtn = BancontactButton(
+          onPressed: () => _handlePayPress('Bancontact Compact'),
+          variant: PayButtonVariant.compact,
+          width: 52,
+        );
+        break;
+      case RegionalChampion.bizum:
+        mediumBtn = BizumButton(
+          onPressed: () => _handlePayPress('Bizum Medium'),
+          variant: PayButtonVariant.medium,
+          width: 140,
+        );
+        compactBtn = BizumButton(
+          onPressed: () => _handlePayPress('Bizum Compact'),
+          variant: PayButtonVariant.compact,
+          width: 52,
+        );
+        break;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF8FAFC),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey.shade300),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${_selectedChampion.title.toUpperCase()} DEFAULT VARIANTS',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 24,
+              runSpacing: 12,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Medium (Wordmark)',
+                      style: TextStyle(fontSize: 11, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    mediumBtn,
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Short / Compact (Icon)',
+                      style: TextStyle(fontSize: 11, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    compactBtn,
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 

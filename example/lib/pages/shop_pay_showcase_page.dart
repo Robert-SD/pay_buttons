@@ -293,8 +293,53 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: ShopPayColor.values.map((color) {
-            return Container(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'DEFAULT VARIANTS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Medium (Logo only)',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  ShopPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Short / Compact ([Pay] badge)',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  ShopPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
+            ...ShopPayColor.values.map((color) {
+              return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == ShopPayColor.white
@@ -332,10 +377,11 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                 ],
               ),
             );
-          }).toList(),
-        ),
-      ],
-    );
+          }),
+        ],
+      ),
+    ],
+  );
   }
 
   Widget _buildLocalizedSection() {

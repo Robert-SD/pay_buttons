@@ -309,6 +309,22 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 ),
               ),
               _buildGalleryItem(
+                label: 'Medium (Default)',
+                button: GooglePayButton(
+                  variant: PayButtonVariant.medium,
+                  width: 140,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'Short / Compact (Default)',
+                button: GooglePayButton(
+                  variant: PayButtonVariant.compact,
+                  width: 52,
+                  onPressed: _handlePayPress,
+                ),
+              ),
+              _buildGalleryItem(
                 label: 'White Pill',
                 button: GooglePayButton(
                   color: GooglePayColor.white,

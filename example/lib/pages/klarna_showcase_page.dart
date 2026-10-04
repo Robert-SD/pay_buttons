@@ -304,8 +304,53 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: KlarnaColor.values.map((color) {
-            return Container(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'DEFAULT VARIANTS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Medium (Wordmark)',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Short / Compact (K. Monogram)',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
+            ...KlarnaColor.values.map((color) {
+              return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color:
@@ -356,10 +401,11 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                 ],
               ),
             );
-          }).toList(),
-        ),
-      ],
-    );
+          }),
+        ],
+      ),
+    ],
+  );
   }
 
   Widget _buildInstallmentsSection() {

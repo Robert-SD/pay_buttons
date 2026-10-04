@@ -316,8 +316,53 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: AfterpayColor.values.map((color) {
-            return Container(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'DEFAULT VARIANTS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Medium (Badge only)',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  AfterpayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Short / Compact (Loop mark)',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  AfterpayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
+            ...AfterpayColor.values.map((color) {
+              return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == AfterpayColor.white
@@ -357,10 +402,11 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                 ],
               ),
             );
-          }).toList(),
-        ),
-      ],
-    );
+          }),
+        ],
+      ),
+    ],
+  );
   }
 
   Widget _buildRegionalSection() {

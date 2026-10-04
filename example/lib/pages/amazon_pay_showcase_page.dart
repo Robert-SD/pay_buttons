@@ -293,8 +293,53 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: AmazonPayColor.values.map((color) {
-            return Container(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'DEFAULT VARIANTS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.white70,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Medium (Logo only)',
+                    style: TextStyle(fontSize: 11, color: Colors.white60),
+                  ),
+                  const SizedBox(height: 4),
+                  AmazonPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.medium,
+                    width: 140,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Short / Compact (Smile mark)',
+                    style: TextStyle(fontSize: 11, color: Colors.white60),
+                  ),
+                  const SizedBox(height: 4),
+                  AmazonPayButton(
+                    onPressed: _handlePayPress,
+                    variant: PayButtonVariant.compact,
+                    width: 52,
+                  ),
+                ],
+              ),
+            ),
+            ...AmazonPayColor.values.map((color) {
+              return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: color == AmazonPayColor.darkGray
@@ -334,10 +379,11 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
                 ],
               ),
             );
-          }).toList(),
-        ),
-      ],
-    );
+          }),
+        ],
+      ),
+    ],
+  );
   }
 
   Widget _buildLocalizedSection() {
