@@ -13,6 +13,8 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
   ShopPayColor _color = ShopPayColor.purple;
   ShopPayShape _shape = ShopPayShape.rounded;
   String? _text;
+  PayButtonVariant _variant = PayButtonVariant.responsive;
+  PayButtonTextPosition _textPosition = PayButtonTextPosition.leading;
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
@@ -118,6 +120,8 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                   color: _color,
                   shape: _shape,
                   text: _text,
+                  variant: _variant,
+                  textPosition: _textPosition,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
@@ -157,6 +161,34 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                   }).toList(),
                   onChanged: (val) {
                     if (val != null) setState(() => _shape = val);
+                  },
+                ),
+
+                // Variant Picker
+                DropdownButton<PayButtonVariant>(
+                  value: _variant,
+                  items: PayButtonVariant.values.map((v) {
+                    return DropdownMenuItem(
+                      value: v,
+                      child: Text('Variant: ${v.name}'),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setState(() => _variant = val);
+                  },
+                ),
+
+                // Text Position Picker
+                DropdownButton<PayButtonTextPosition>(
+                  value: _textPosition,
+                  items: PayButtonTextPosition.values.map((p) {
+                    return DropdownMenuItem(
+                      value: p,
+                      child: Text('Text Pos: ${p.name}'),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setState(() => _textPosition = val);
                   },
                 ),
 

@@ -13,7 +13,8 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
   KlarnaColor _color = KlarnaColor.pink;
   KlarnaShape _shape = KlarnaShape.rounded;
   String? _text = 'Pay with';
-  bool _logoFirst = true;
+  PayButtonVariant _variant = PayButtonVariant.responsive;
+  PayButtonTextPosition _textPosition = PayButtonTextPosition.trailing;
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
@@ -130,7 +131,8 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   color: _color,
                   shape: _shape,
                   text: _text,
-                  logoFirst: _logoFirst,
+                  variant: _variant,
+                  textPosition: _textPosition,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
@@ -173,6 +175,34 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   },
                 ),
 
+                // Variant Picker
+                DropdownButton<PayButtonVariant>(
+                  value: _variant,
+                  items: PayButtonVariant.values.map((v) {
+                    return DropdownMenuItem(
+                      value: v,
+                      child: Text('Variant: ${v.name}'),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setState(() => _variant = val);
+                  },
+                ),
+
+                // Text Position Picker
+                DropdownButton<PayButtonTextPosition>(
+                  value: _textPosition,
+                  items: PayButtonTextPosition.values.map((p) {
+                    return DropdownMenuItem(
+                      value: p,
+                      child: Text('Text Pos: ${p.name}'),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setState(() => _textPosition = val);
+                  },
+                ),
+
                 // Custom Text Input
                 SizedBox(
                   width: 200,
@@ -211,13 +241,6 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   label: const Text('Full Width'),
                   selected: _fullWidth,
                   onSelected: (val) => setState(() => _fullWidth = val),
-                ),
-                FilterChip(
-                  label: Text(
-                    _logoFirst ? 'Logo First: On' : 'Logo First: Off',
-                  ),
-                  selected: _logoFirst,
-                  onSelected: (val) => setState(() => _logoFirst = val),
                 ),
               ],
             ),

@@ -32,6 +32,8 @@ class _EuropeanChampionsShowcasePageState
   late RegionalChampion _selectedChampion = widget.initialChampion;
 
   // Shared Playground State
+  PayButtonVariant _variant = PayButtonVariant.responsive;
+  PayButtonTextPosition _textPosition = PayButtonTextPosition.leading;
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
@@ -268,6 +270,20 @@ class _EuropeanChampionsShowcasePageState
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
+            _buildDropdown<PayButtonVariant>(
+              label: 'Variant',
+              value: _variant,
+              items: PayButtonVariant.values,
+              onChanged: (v) => setState(() => _variant = v!),
+            ),
+            const SizedBox(height: 8),
+            _buildDropdown<PayButtonTextPosition>(
+              label: 'Text Pos',
+              value: _textPosition,
+              items: PayButtonTextPosition.values,
+              onChanged: (p) => setState(() => _textPosition = p!),
+            ),
+            const SizedBox(height: 12),
             SwitchListTile(
               title: const Text('Is Loading State'),
               subtitle: const Text('Shows indeterminate progress indicator'),
@@ -354,6 +370,8 @@ class _EuropeanChampionsShowcasePageState
           color: _weroColor,
           shape: _weroShape,
           text: _weroText,
+          variant: _variant,
+          textPosition: _textPosition,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -365,6 +383,8 @@ class _EuropeanChampionsShowcasePageState
           color: _twintColor,
           shape: _twintShape,
           text: _twintText,
+          variant: _variant,
+          textPosition: _textPosition,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -376,6 +396,8 @@ class _EuropeanChampionsShowcasePageState
           color: _idealColor,
           shape: _idealShape,
           text: _idealText,
+          variant: _variant,
+          textPosition: _textPosition,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -387,6 +409,8 @@ class _EuropeanChampionsShowcasePageState
           color: _blikColor,
           shape: _blikShape,
           text: _blikText,
+          variant: _variant,
+          textPosition: _textPosition,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -398,6 +422,8 @@ class _EuropeanChampionsShowcasePageState
           color: _bancontactColor,
           shape: _bancontactShape,
           text: _bancontactText,
+          variant: _variant,
+          textPosition: _textPosition,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -409,6 +435,8 @@ class _EuropeanChampionsShowcasePageState
           color: _bizumColor,
           shape: _bizumShape,
           text: _bizumText,
+          variant: _variant,
+          textPosition: _textPosition,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
