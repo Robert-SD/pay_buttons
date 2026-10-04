@@ -6,6 +6,17 @@ import 'package:web/web.dart' as web;
 final Set<String> _registeredViewTypes = {};
 bool _applePayJsScriptInjected = false;
 
+@JS('window.ApplePaySession')
+external JSObject? get applePaySession;
+
+bool _isApplePayJsAvailable() {
+  try {
+    return applePaySession != null;
+  } catch (_) {
+    return false;
+  }
+}
+
 void _ensureApplePayJsInjected() {
   if (_applePayJsScriptInjected) return;
   _applePayJsScriptInjected = true;
@@ -19,7 +30,8 @@ void _ensureApplePayJsInjected() {
   }
 }
 
-/// Renders the official Apple Pay JS SDK `<apple-pay-button>` custom HTML element on Web.
+/// Renders the official Apple Pay JS SDK `<apple-pay-button>` custom HTML element on Safari Web,
+/// or falls back to pure Flutter vector rendering on non-Safari web browsers (Chrome, Firefox, Edge, etc.).
 Widget buildApplePayJsButton({
   required VoidCallback? onPressed,
   required String style,
@@ -29,6 +41,12 @@ Widget buildApplePayJsButton({
   required Widget fallback,
 }) {
   _ensureApplePayJsInjected();
+
+  // If the browser does not support ApplePaySession (Chrome, Firefox, Edge, Windows, Android),
+  // gracefully fall back to our pure Flutter vector button representation.
+  if (!_isApplePayJsAvailable()) {
+    return fallback;
+  }
 
   final viewType = 'apple-pay-js-button-$style-$type';
 
@@ -41,6 +59,7 @@ Widget buildApplePayJsButton({
       element.style.width = '100%';
       element.style.height = '100%';
       element.style.cursor = 'pointer';
+      element.style.display = 'block';
 
       if (onPressed != null) {
         element.addEventListener('click', (web.Event e) {
