@@ -6,12 +6,11 @@ import 'package:pay_buttons/pay_buttons.dart';
 void main() {
   group('European Regional Champions', () {
     group('TwintButton', () {
-      testWidgets('renders black rounded payWith twint button with regional locale', (tester) async {
+      testWidgets('renders black rounded twint button without text by default', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: TwintButton(
-                locale: const Locale('de'),
                 onPressed: () {},
               ),
             ),
@@ -20,7 +19,7 @@ void main() {
 
         expect(find.byType(TwintButton), findsOneWidget);
         expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.text('Bezahlen mit'), findsOneWidget);
+        expect(find.byType(Text), findsNothing);
 
         final material = tester.widget<Material>(
           find.descendant(
@@ -29,6 +28,21 @@ void main() {
           ),
         );
         expect(material.color, const Color(0xFF000000));
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: TwintButton(
+                text: 'Bezahlen mit',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Bezahlen mit'), findsOneWidget);
       });
 
       testWidgets('renders all TwintColor and TwintShape options', (tester) async {
@@ -49,41 +63,14 @@ void main() {
           }
         }
       });
-
-      testWidgets('localizes Twint label in French and Italian', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: TwintButton(
-                locale: const Locale('fr'),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.text('Payer avec'), findsOneWidget);
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: TwintButton(
-                locale: const Locale('it'),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.text('Paga con'), findsOneWidget);
-      });
     });
 
     group('IdealButton', () {
-      testWidgets('renders white rounded payWith ideal button with regional locale', (tester) async {
+      testWidgets('renders white rounded ideal button without text by default', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: IdealButton(
-                locale: const Locale('nl'),
                 onPressed: () {},
               ),
             ),
@@ -92,6 +79,21 @@ void main() {
 
         expect(find.byType(IdealButton), findsOneWidget);
         expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(Text), findsNothing);
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: IdealButton(
+                text: 'Betaal met',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
         expect(find.text('Betaal met'), findsOneWidget);
       });
 
@@ -116,12 +118,11 @@ void main() {
     });
 
     group('BlikButton', () {
-      testWidgets('renders black rounded payWith blik button with regional locale', (tester) async {
+      testWidgets('renders black rounded blik button without text by default', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: BlikButton(
-                locale: const Locale('pl'),
                 onPressed: () {},
               ),
             ),
@@ -130,6 +131,21 @@ void main() {
 
         expect(find.byType(BlikButton), findsOneWidget);
         expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(Text), findsNothing);
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BlikButton(
+                text: 'Zapłać z',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
         expect(find.text('Zapłać z'), findsOneWidget);
       });
 
@@ -154,12 +170,11 @@ void main() {
     });
 
     group('BancontactButton', () {
-      testWidgets('renders white rounded payWith bancontact button with regional locale', (tester) async {
+      testWidgets('renders white rounded bancontact button without text by default', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: BancontactButton(
-                locale: const Locale('nl'),
                 onPressed: () {},
               ),
             ),
@@ -168,6 +183,21 @@ void main() {
 
         expect(find.byType(BancontactButton), findsOneWidget);
         expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(Text), findsNothing);
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BancontactButton(
+                text: 'Betaal met',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
         expect(find.text('Betaal met'), findsOneWidget);
       });
 
@@ -192,12 +222,11 @@ void main() {
     });
 
     group('BizumButton', () {
-      testWidgets('renders white rounded payWith bizum button with regional locale', (tester) async {
+      testWidgets('renders white rounded bizum button without text by default', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: BizumButton(
-                locale: const Locale('es'),
                 onPressed: () {},
               ),
             ),
@@ -206,6 +235,21 @@ void main() {
 
         expect(find.byType(BizumButton), findsOneWidget);
         expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(Text), findsNothing);
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BizumButton(
+                text: 'Pagar con',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
         expect(find.text('Pagar con'), findsOneWidget);
       });
 
@@ -226,37 +270,6 @@ void main() {
             expect(find.byType(BizumButton), findsOneWidget);
           }
         }
-      });
-
-      testWidgets('renders Bizum logoOnly button without text label', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: BizumButton(
-                type: BizumButtonType.logoOnly,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(BizumButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.text('Pagar con'), findsNothing);
-      });
-
-      testWidgets('renders Pay with Bizum for English locale', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: BizumButton(
-                locale: const Locale('en'),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.text('Pay with'), findsOneWidget);
       });
     });
   });

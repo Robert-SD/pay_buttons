@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import 'bizum_assets.dart';
-import 'bizum_button_type.dart';
 import 'bizum_color.dart';
 import 'bizum_shape.dart';
 
@@ -13,6 +12,7 @@ class BizumButton extends PayButton {
   const BizumButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,8 +23,6 @@ class BizumButton extends PayButton {
     super.semanticLabel,
     this.color = BizumColor.white,
     this.shape = BizumShape.rounded,
-    this.type = BizumButtonType.payWith,
-    this.locale,
     this.textStyle,
   });
 
@@ -33,13 +31,6 @@ class BizumButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [BizumShape.rounded] (6.0 dp).
   final BizumShape shape;
-
-  /// The content/action layout of the button. Defaults to [BizumButtonType.payWith].
-  final BizumButtonType type;
-
-  /// Optional locale used to translate action verbs (es: "Pagar con", en: "Pay with").
-  /// If null, the ambient device locale or Spanish fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -50,7 +41,7 @@ class BizumButton extends PayButton {
 
   @override
   String? get semanticLabel =>
-      super.semanticLabel ?? 'Pagar con Bizum';
+      super.semanticLabel ?? 'Bizum';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -85,14 +76,12 @@ class BizumButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
     final logoWidget = BizumAssets.logo(color: color, height: logoHeight);
 
-    if (type == BizumButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -107,7 +96,7 @@ class BizumButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

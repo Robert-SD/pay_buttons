@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import 'blik_assets.dart';
-import 'blik_button_type.dart';
 import 'blik_color.dart';
 import 'blik_shape.dart';
 
@@ -13,6 +12,7 @@ class BlikButton extends PayButton {
   const BlikButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,8 +23,6 @@ class BlikButton extends PayButton {
     super.semanticLabel,
     this.color = BlikColor.black,
     this.shape = BlikShape.rounded,
-    this.type = BlikButtonType.payWith,
-    this.locale,
     this.textStyle,
   });
 
@@ -33,13 +31,6 @@ class BlikButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [BlikShape.rounded] (6.0 dp).
   final BlikShape shape;
-
-  /// The content/action layout of the button. Defaults to [BlikButtonType.payWith].
-  final BlikButtonType type;
-
-  /// Optional locale used to translate action verbs (pl: "Zapłać z", en: "Pay with").
-  /// If null, the ambient device locale or Polish fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -50,7 +41,7 @@ class BlikButton extends PayButton {
 
   @override
   String? get semanticLabel =>
-      super.semanticLabel ?? 'Zapłać z BLIK';
+      super.semanticLabel ?? 'BLIK';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -85,14 +76,12 @@ class BlikButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
     final logoWidget = BlikAssets.logo(color: color, height: logoHeight);
 
-    if (type == BlikButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -107,7 +96,7 @@ class BlikButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

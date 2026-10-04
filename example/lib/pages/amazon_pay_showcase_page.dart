@@ -12,20 +12,32 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
   // Playground state
   AmazonPayColor _color = AmazonPayColor.gold;
   AmazonPayShape _shape = AmazonPayShape.pill;
-  AmazonPayButtonType _type = AmazonPayButtonType.pay;
+  String? _text = 'Check out with';
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
   double _elevation = 0.0;
-  String _localeCode = 'en';
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _text);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Amazon Pay ${_type.name} triggered (${_color.name}, ${_shape.name})',
+          'Amazon Pay button triggered (${_color.name}, ${_shape.name})',
         ),
         backgroundColor: const Color(0xFF232F3E),
         duration: const Duration(seconds: 2),
@@ -56,7 +68,7 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
 
-          // 3. Localized Action Verbs
+          // 3. Custom Text Variations
           _buildLocalizedSection(),
         ],
       ),
@@ -108,11 +120,10 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
                   enabled: _enabled,
                   color: _color,
                   shape: _shape,
-                  type: _type,
+                  text: _text,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
-                  locale: Locale(_localeCode),
                 ),
               ),
             ),
@@ -152,33 +163,19 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<AmazonPayButtonType>(
-                  value: _type,
-                  items: AmazonPayButtonType.values.map((t) {
-                    return DropdownMenuItem(
-                      value: t,
-                      child: Text('Type: ${t.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _type = val);
-                  },
-                ),
-
-                // Locale Picker
-                DropdownButton<String>(
-                  value: _localeCode,
-                  items: const [
-                    DropdownMenuItem(value: 'en', child: Text('Locale: English (en)')),
-                    DropdownMenuItem(value: 'de', child: Text('Locale: German (de)')),
-                    DropdownMenuItem(value: 'fr', child: Text('Locale: French (fr)')),
-                    DropdownMenuItem(value: 'es', child: Text('Locale: Spanish (es)')),
-                    DropdownMenuItem(value: 'it', child: Text('Locale: Italian (it)')),
-                  ],
-                  onChanged: (val) {
-                    if (val != null) setState(() => _localeCode = val);
-                  },
+                // Custom Text Input
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Custom Text (empty = logo only)',
+                      isDense: true,
+                    ),
+                    controller: _textController,
+                    onChanged: (val) {
+                      setState(() => _text = val.isEmpty ? null : val);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -297,14 +294,14 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: AmazonPayShape.pill,
-                    type: AmazonPayButtonType.pay,
+                    text: 'Check out with',
                   ),
                   const SizedBox(height: 10),
                   AmazonPayButton(
                     onPressed: _handlePayPress,
                     color: color,
                     shape: AmazonPayShape.rounded,
-                    type: AmazonPayButtonType.pay,
+                    text: 'Check out with',
                   ),
                 ],
               ),
@@ -320,14 +317,14 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Localized Checkout & Buy Now Actions',
+          'Custom Action Verbs',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         const SizedBox(height: 8),
         Text(
-          'Full-context verbs in English, German, French, and Spanish.',
+          'Custom phrases in English, German, French, and Spanish.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -337,23 +334,19 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
           children: [
             AmazonPayButton(
               onPressed: _handlePayPress,
-              type: AmazonPayButtonType.checkout,
-              locale: const Locale('en'),
+              text: 'Check out with',
             ),
             AmazonPayButton(
               onPressed: _handlePayPress,
-              type: AmazonPayButtonType.checkout,
-              locale: const Locale('de'),
+              text: 'Bezahlen mit',
             ),
             AmazonPayButton(
               onPressed: _handlePayPress,
-              type: AmazonPayButtonType.buyNow,
-              locale: const Locale('fr'),
+              text: 'Acheter avec',
             ),
             AmazonPayButton(
               onPressed: _handlePayPress,
-              type: AmazonPayButtonType.buyNow,
-              locale: const Locale('es'),
+              text: 'Comprar con',
             ),
           ],
         ),

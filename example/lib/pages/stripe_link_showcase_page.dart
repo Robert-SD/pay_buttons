@@ -12,20 +12,32 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
   // Playground state
   StripeLinkColor _color = StripeLinkColor.green;
   StripeLinkShape _shape = StripeLinkShape.rounded;
-  StripeLinkButtonType _type = StripeLinkButtonType.payWithLink;
+  String? _text = 'Pay with';
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
   double _elevation = 0.0;
-  String _localeCode = 'en';
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _text);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Stripe Link ${_type.name} triggered (${_color.name}, ${_shape.name})',
+          'Stripe Link button triggered (${_color.name}, ${_shape.name})',
         ),
         backgroundColor: const Color(0xFF0A2540),
         duration: const Duration(seconds: 2),
@@ -56,7 +68,7 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
 
-          // 3. Localized Action Verbs
+          // 3. Custom Action Verbs
           _buildLocalizedSection(),
         ],
       ),
@@ -108,11 +120,10 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
                   enabled: _enabled,
                   color: _color,
                   shape: _shape,
-                  type: _type,
+                  text: _text,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
-                  locale: Locale(_localeCode),
                 ),
               ),
             ),
@@ -152,34 +163,19 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<StripeLinkButtonType>(
-                  value: _type,
-                  items: StripeLinkButtonType.values.map((t) {
-                    return DropdownMenuItem(
-                      value: t,
-                      child: Text('Type: ${t.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _type = val);
-                  },
-                ),
-
-                // Locale Picker
-                DropdownButton<String>(
-                  value: _localeCode,
-                  items: const [
-                    DropdownMenuItem(value: 'en', child: Text('Locale: English (en)')),
-                    DropdownMenuItem(value: 'de', child: Text('Locale: German (de)')),
-                    DropdownMenuItem(value: 'fr', child: Text('Locale: French (fr)')),
-                    DropdownMenuItem(value: 'es', child: Text('Locale: Spanish (es)')),
-                    DropdownMenuItem(value: 'it', child: Text('Locale: Italian (it)')),
-                    DropdownMenuItem(value: 'nl', child: Text('Locale: Dutch (nl)')),
-                  ],
-                  onChanged: (val) {
-                    if (val != null) setState(() => _localeCode = val);
-                  },
+                // Custom Text Input
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Custom Text (empty = logo only)',
+                      isDense: true,
+                    ),
+                    controller: _textController,
+                    onChanged: (val) {
+                      setState(() => _text = val.isEmpty ? null : val);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -298,14 +294,14 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: StripeLinkShape.rounded,
-                    type: StripeLinkButtonType.payWithLink,
+                    text: 'Pay with',
                   ),
                   const SizedBox(height: 10),
                   StripeLinkButton(
                     onPressed: _handlePayPress,
                     color: color,
                     shape: StripeLinkShape.pill,
-                    type: StripeLinkButtonType.payWithLink,
+                    text: 'Pay with',
                   ),
                 ],
               ),
@@ -321,7 +317,7 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Localized "Pay with" Actions',
+          'Custom "Pay with" Actions',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -338,23 +334,19 @@ class _StripeLinkShowcasePageState extends State<StripeLinkShowcasePage> {
           children: [
             StripeLinkButton(
               onPressed: _handlePayPress,
-              type: StripeLinkButtonType.payWithLink,
-              locale: const Locale('en'),
+              text: 'Pay with',
             ),
             StripeLinkButton(
               onPressed: _handlePayPress,
-              type: StripeLinkButtonType.payWithLink,
-              locale: const Locale('de'),
+              text: 'Bezahlen mit',
             ),
             StripeLinkButton(
               onPressed: _handlePayPress,
-              type: StripeLinkButtonType.payWithLink,
-              locale: const Locale('fr'),
+              text: 'Payer avec',
             ),
             StripeLinkButton(
               onPressed: _handlePayPress,
-              type: StripeLinkButtonType.payWithLink,
-              locale: const Locale('es'),
+              text: 'Pagar con',
             ),
           ],
         ),

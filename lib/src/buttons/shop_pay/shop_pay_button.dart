@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import 'shop_pay_assets.dart';
-import 'shop_pay_button_type.dart';
 import 'shop_pay_color.dart';
 import 'shop_pay_shape.dart';
 
@@ -14,6 +13,7 @@ class ShopPayButton extends PayButton {
   const ShopPayButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,8 +24,6 @@ class ShopPayButton extends PayButton {
     super.semanticLabel,
     this.color = ShopPayColor.purple,
     this.shape = ShopPayShape.rounded,
-    this.type = ShopPayButtonType.standard,
-    this.locale,
     this.textStyle,
   });
 
@@ -34,13 +32,6 @@ class ShopPayButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [ShopPayShape.rounded] (6.0 dp).
   final ShopPayShape shape;
-
-  /// The content/action layout of the button. Defaults to [ShopPayButtonType.standard].
-  final ShopPayButtonType type;
-
-  /// Optional locale used to translate action verbs (e.g. "Buy with", "Kaufen mit").
-  /// If null, the ambient device locale or English fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -94,14 +85,12 @@ class ShopPayButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.42).clamp(18.0, 24.0);
     final logoWidget = ShopPayAssets.logo(color: color, height: logoHeight);
 
-    if (type == ShopPayButtonType.standard || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -125,7 +114,7 @@ class ShopPayButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import 'ideal_assets.dart';
-import 'ideal_button_type.dart';
 import 'ideal_color.dart';
 import 'ideal_shape.dart';
 
@@ -13,6 +12,7 @@ class IdealButton extends PayButton {
   const IdealButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,8 +23,6 @@ class IdealButton extends PayButton {
     super.semanticLabel,
     this.color = IdealColor.white,
     this.shape = IdealShape.rounded,
-    this.type = IdealButtonType.payWith,
-    this.locale,
     this.textStyle,
   });
 
@@ -33,13 +31,6 @@ class IdealButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [IdealShape.rounded] (6.0 dp).
   final IdealShape shape;
-
-  /// The content/action layout of the button. Defaults to [IdealButtonType.payWith].
-  final IdealButtonType type;
-
-  /// Optional locale used to translate action verbs (nl: "Betaal met", en: "Pay with").
-  /// If null, the ambient device locale or Dutch fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -50,7 +41,7 @@ class IdealButton extends PayButton {
 
   @override
   String? get semanticLabel =>
-      super.semanticLabel ?? 'Betaal met iDEAL';
+      super.semanticLabel ?? 'iDEAL';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -78,13 +69,10 @@ class IdealButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
-
     final logoHeight = (height * 0.52).clamp(20.0, 28.0);
     final logoWidget = IdealAssets.logo(height: logoHeight);
 
-    if (type == IdealButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -99,7 +87,7 @@ class IdealButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

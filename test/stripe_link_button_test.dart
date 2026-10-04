@@ -5,7 +5,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('StripeLinkButton', () {
-    testWidgets('renders green rounded payWithLink button by default', (tester) async {
+    testWidgets('renders green rounded button by default', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -18,7 +18,6 @@ void main() {
 
       expect(find.byType(StripeLinkButton), findsOneWidget);
       expect(find.byType(SvgPicture), findsOneWidget);
-      expect(find.text('Pay with'), findsOneWidget);
 
       final material = tester.widget<Material>(
         find.descendant(
@@ -27,6 +26,21 @@ void main() {
         ),
       );
       expect(material.color, const Color(0xFF00D66F));
+    });
+
+    testWidgets('renders custom text when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: StripeLinkButton(
+              text: 'Pay with',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Pay with'), findsOneWidget);
     });
 
     testWidgets('renders all StripeLinkColor themes without error', (tester) async {
@@ -61,44 +75,12 @@ void main() {
       }
     });
 
-    testWidgets('renders all StripeLinkButtonType variants', (tester) async {
-      for (final type in StripeLinkButtonType.values) {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: StripeLinkButton(
-                type: type,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.byType(StripeLinkButton), findsOneWidget);
-      }
-    });
-
-    testWidgets('localizes payWithLink label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: StripeLinkButton(
-              type: StripeLinkButtonType.payWithLink,
-              locale: const Locale('de'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Bezahlen mit'), findsOneWidget);
-    });
-
     testWidgets('applies custom textStyle when provided', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: StripeLinkButton(
-              type: StripeLinkButtonType.payWithLink,
+              text: 'Pay with',
               onPressed: () {},
               textStyle: const TextStyle(fontWeight: FontWeight.w300),
             ),

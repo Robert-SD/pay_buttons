@@ -34,32 +34,53 @@ class _EuropeanChampionsShowcasePageState
   // TWINT state
   TwintColor _twintColor = TwintColor.black;
   TwintShape _twintShape = TwintShape.rounded;
-  TwintButtonType _twintType = TwintButtonType.payWith;
-  String _twintLocale = 'de';
+  String? _twintText = 'Bezahlen mit';
 
   // iDEAL state
   IdealColor _idealColor = IdealColor.white;
   IdealShape _idealShape = IdealShape.rounded;
-  IdealButtonType _idealType = IdealButtonType.payWith;
-  String _idealLocale = 'nl';
+  String? _idealText = 'Betaal met';
 
   // BLIK state
   BlikColor _blikColor = BlikColor.black;
   BlikShape _blikShape = BlikShape.rounded;
-  BlikButtonType _blikType = BlikButtonType.payWith;
-  String _blikLocale = 'pl';
+  String? _blikText = 'Zapłać z';
 
   // Bancontact state
   BancontactColor _bancontactColor = BancontactColor.white;
   BancontactShape _bancontactShape = BancontactShape.rounded;
-  BancontactButtonType _bancontactType = BancontactButtonType.payWith;
-  String _bancontactLocale = 'nl';
+  String? _bancontactText = 'Betaal met';
 
   // Bizum state
   BizumColor _bizumColor = BizumColor.white;
   BizumShape _bizumShape = BizumShape.rounded;
-  BizumButtonType _bizumType = BizumButtonType.payWith;
-  String _bizumLocale = 'es';
+  String? _bizumText = 'Pagar con';
+
+  late final TextEditingController _twintTextController;
+  late final TextEditingController _idealTextController;
+  late final TextEditingController _blikTextController;
+  late final TextEditingController _bancontactTextController;
+  late final TextEditingController _bizumTextController;
+
+  @override
+  void initState() {
+    super.initState();
+    _twintTextController = TextEditingController(text: _twintText);
+    _idealTextController = TextEditingController(text: _idealText);
+    _blikTextController = TextEditingController(text: _blikText);
+    _bancontactTextController = TextEditingController(text: _bancontactText);
+    _bizumTextController = TextEditingController(text: _bizumText);
+  }
+
+  @override
+  void dispose() {
+    _twintTextController.dispose();
+    _idealTextController.dispose();
+    _blikTextController.dispose();
+    _bancontactTextController.dispose();
+    _bizumTextController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress(String name) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -129,23 +150,23 @@ class _EuropeanChampionsShowcasePageState
               runSpacing: 12,
               children: [
                 TwintButton(
-                  locale: const Locale('de'),
+                  text: 'Bezahlen mit',
                   onPressed: () => _handlePayPress('TWINT'),
                 ),
                 IdealButton(
-                  locale: const Locale('nl'),
+                  text: 'Betaal met',
                   onPressed: () => _handlePayPress('iDEAL'),
                 ),
                 BlikButton(
-                  locale: const Locale('pl'),
+                  text: 'Zapłać z',
                   onPressed: () => _handlePayPress('BLIK'),
                 ),
                 BancontactButton(
-                  locale: const Locale('nl'),
+                  text: 'Betaal met',
                   onPressed: () => _handlePayPress('Bancontact'),
                 ),
                 BizumButton(
-                  locale: const Locale('es'),
+                  text: 'Pagar con',
                   onPressed: () => _handlePayPress('Bizum'),
                 ),
               ],
@@ -312,8 +333,7 @@ class _EuropeanChampionsShowcasePageState
           onPressed: onPressed,
           color: _twintColor,
           shape: _twintShape,
-          type: _twintType,
-          locale: Locale(_twintLocale),
+          text: _twintText,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -324,8 +344,7 @@ class _EuropeanChampionsShowcasePageState
           onPressed: onPressed,
           color: _idealColor,
           shape: _idealShape,
-          type: _idealType,
-          locale: Locale(_idealLocale),
+          text: _idealText,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -336,8 +355,7 @@ class _EuropeanChampionsShowcasePageState
           onPressed: onPressed,
           color: _blikColor,
           shape: _blikShape,
-          type: _blikType,
-          locale: Locale(_blikLocale),
+          text: _blikText,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -348,8 +366,7 @@ class _EuropeanChampionsShowcasePageState
           onPressed: onPressed,
           color: _bancontactColor,
           shape: _bancontactShape,
-          type: _bancontactType,
-          locale: Locale(_bancontactLocale),
+          text: _bancontactText,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -360,8 +377,7 @@ class _EuropeanChampionsShowcasePageState
           onPressed: onPressed,
           color: _bizumColor,
           shape: _bizumShape,
-          type: _bizumType,
-          locale: Locale(_bizumLocale),
+          text: _bizumText,
           isLoading: _isLoading,
           enabled: _enabled,
           width: width,
@@ -388,19 +404,7 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _twintShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildDropdown<TwintButtonType>(
-            label: 'Button Type',
-            value: _twintType,
-            items: TwintButtonType.values,
-            onChanged: (t) => setState(() => _twintType = t!),
-          ),
-          const SizedBox(height: 12),
-          _buildDropdown<String>(
-            label: 'Locale / Language',
-            value: _twintLocale,
-            items: const ['de', 'fr', 'it', 'en'],
-            onChanged: (l) => setState(() => _twintLocale = l!),
-          ),
+          _buildTextInput('Custom Text', _twintTextController, (t) => setState(() => _twintText = t)),
         ];
 
       case RegionalChampion.ideal:
@@ -419,19 +423,7 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _idealShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildDropdown<IdealButtonType>(
-            label: 'Button Type',
-            value: _idealType,
-            items: IdealButtonType.values,
-            onChanged: (t) => setState(() => _idealType = t!),
-          ),
-          const SizedBox(height: 12),
-          _buildDropdown<String>(
-            label: 'Locale / Language',
-            value: _idealLocale,
-            items: const ['nl', 'en', 'de', 'fr'],
-            onChanged: (l) => setState(() => _idealLocale = l!),
-          ),
+          _buildTextInput('Custom Text', _idealTextController, (t) => setState(() => _idealText = t)),
         ];
 
       case RegionalChampion.blik:
@@ -450,19 +442,7 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _blikShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildDropdown<BlikButtonType>(
-            label: 'Button Type',
-            value: _blikType,
-            items: BlikButtonType.values,
-            onChanged: (t) => setState(() => _blikType = t!),
-          ),
-          const SizedBox(height: 12),
-          _buildDropdown<String>(
-            label: 'Locale / Language',
-            value: _blikLocale,
-            items: const ['pl', 'en'],
-            onChanged: (l) => setState(() => _blikLocale = l!),
-          ),
+          _buildTextInput('Custom Text', _blikTextController, (t) => setState(() => _blikText = t)),
         ];
 
       case RegionalChampion.bancontact:
@@ -481,19 +461,7 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _bancontactShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildDropdown<BancontactButtonType>(
-            label: 'Button Type',
-            value: _bancontactType,
-            items: BancontactButtonType.values,
-            onChanged: (t) => setState(() => _bancontactType = t!),
-          ),
-          const SizedBox(height: 12),
-          _buildDropdown<String>(
-            label: 'Locale / Language',
-            value: _bancontactLocale,
-            items: const ['nl', 'fr', 'de', 'en'],
-            onChanged: (l) => setState(() => _bancontactLocale = l!),
-          ),
+          _buildTextInput('Custom Text', _bancontactTextController, (t) => setState(() => _bancontactText = t)),
         ];
 
       case RegionalChampion.bizum:
@@ -512,21 +480,30 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _bizumShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildDropdown<BizumButtonType>(
-            label: 'Button Type',
-            value: _bizumType,
-            items: BizumButtonType.values,
-            onChanged: (t) => setState(() => _bizumType = t!),
-          ),
-          const SizedBox(height: 12),
-          _buildDropdown<String>(
-            label: 'Locale / Language',
-            value: _bizumLocale,
-            items: const ['es', 'en'],
-            onChanged: (l) => setState(() => _bizumLocale = l!),
-          ),
+          _buildTextInput('Custom Text', _bizumTextController, (t) => setState(() => _bizumText = t)),
         ];
     }
+  }
+
+  Widget _buildTextInput(String label, TextEditingController controller, ValueChanged<String?> onChanged) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 140,
+          child: Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+        ),
+        Expanded(
+          child: TextField(
+            decoration: const InputDecoration(
+              hintText: 'Leave empty for logo only',
+              isDense: true,
+            ),
+            controller: controller,
+            onChanged: (val) => onChanged(val.isEmpty ? null : val),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildDropdown<T>({
@@ -605,18 +582,17 @@ class _EuropeanChampionsShowcasePageState
                       TwintButton(
                         color: color,
                         shape: TwintShape.rounded,
-                        locale: const Locale('de'),
+                        text: 'Bezahlen mit',
                         onPressed: () {},
                       ),
                       TwintButton(
                         color: color,
                         shape: TwintShape.pill,
-                        locale: const Locale('de'),
+                        text: 'Bezahlen mit',
                         onPressed: () {},
                       ),
                       TwintButton(
                         color: color,
-                        type: TwintButtonType.logoOnly,
                         onPressed: () {},
                       ),
                     ],
@@ -646,18 +622,17 @@ class _EuropeanChampionsShowcasePageState
                       IdealButton(
                         color: color,
                         shape: IdealShape.rounded,
-                        locale: const Locale('nl'),
+                        text: 'Betaal met',
                         onPressed: () {},
                       ),
                       IdealButton(
                         color: color,
                         shape: IdealShape.pill,
-                        locale: const Locale('nl'),
+                        text: 'Betaal met',
                         onPressed: () {},
                       ),
                       IdealButton(
                         color: color,
-                        type: IdealButtonType.logoOnly,
                         onPressed: () {},
                       ),
                     ],
@@ -689,18 +664,17 @@ class _EuropeanChampionsShowcasePageState
                       BlikButton(
                         color: color,
                         shape: BlikShape.rounded,
-                        locale: const Locale('pl'),
+                        text: 'Zapłać z',
                         onPressed: () {},
                       ),
                       BlikButton(
                         color: color,
                         shape: BlikShape.pill,
-                        locale: const Locale('pl'),
+                        text: 'Zapłać z',
                         onPressed: () {},
                       ),
                       BlikButton(
                         color: color,
-                        type: BlikButtonType.logoOnly,
                         onPressed: () {},
                       ),
                     ],
@@ -732,18 +706,17 @@ class _EuropeanChampionsShowcasePageState
                       BancontactButton(
                         color: color,
                         shape: BancontactShape.rounded,
-                        locale: const Locale('nl'),
+                        text: 'Betaal met',
                         onPressed: () {},
                       ),
                       BancontactButton(
                         color: color,
                         shape: BancontactShape.pill,
-                        locale: const Locale('nl'),
+                        text: 'Betaal met',
                         onPressed: () {},
                       ),
                       BancontactButton(
                         color: color,
-                        type: BancontactButtonType.logoOnly,
                         onPressed: () {},
                       ),
                     ],
@@ -773,18 +746,17 @@ class _EuropeanChampionsShowcasePageState
                       BizumButton(
                         color: color,
                         shape: BizumShape.rounded,
-                        locale: const Locale('es'),
+                        text: 'Pagar con',
                         onPressed: () {},
                       ),
                       BizumButton(
                         color: color,
                         shape: BizumShape.pill,
-                        locale: const Locale('es'),
+                        text: 'Pagar con',
                         onPressed: () {},
                       ),
                       BizumButton(
                         color: color,
-                        type: BizumButtonType.logoOnly,
                         onPressed: () {},
                       ),
                     ],

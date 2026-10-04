@@ -11,12 +11,12 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Supported Buttons
 
-* **PayPal & PayPal Pay Later**: Checkout, Pay with PayPal, Buy Now, Pay Later, Logo Only (`gold`, `blue`, `black`, `white`, `silver`).
-* **Klarna**: Pay Now, Pay Later, Slice It, Custom, Logo Only (`pink`, `black`, `white`).
-* **Amazon Pay**: Pay with Amazon Pay, Express Checkout, Logo Only (`gold`, `lightGray`, `darkGray`).
-* **Shop Pay (Shopify)**: Pay with Shop Pay, Buy with Shop Pay, Logo Only (`purple`, `black`, `white`).
-* **Link by Stripe**: Pay with Link, Fast Checkout, Logo Only (`green`, `navy`, `white`).
-* **Afterpay / Clearpay**: Buy Now Pay Later, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
+* **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
+* **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
+* **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
+* **Shop Pay (Shopify)**: Default logo-only or custom text (`purple`, `black`, `white`).
+* **Link by Stripe**: Default logo-only or custom text (`green`, `navy`, `white`).
+* **Afterpay / Clearpay**: Default logo-only or custom text, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
 * **European Regional Champions**:
   * **TWINT** (Switzerland 🇨🇭) - `TwintButton` (`black`, `white`)
   * **iDEAL** (Netherlands 🇳🇱) - `IdealButton` (`white`, `black`)
@@ -32,9 +32,9 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 ```dart
 PayPalButton(
   onPressed: () => handlePayPalCheckout(),
+  text: 'Checkout', // Optional custom text, defaults to null (logo only)
   color: PayPalColor.gold,
   shape: PayPalShape.pill,
-  type: PayPalButtonType.checkout,
 )
 ```
 
@@ -42,9 +42,9 @@ PayPalButton(
 ```dart
 KlarnaButton(
   onPressed: () => handleKlarnaCheckout(),
+  text: 'Pay with',
   color: KlarnaColor.pink,
   shape: KlarnaShape.rounded,
-  type: KlarnaButtonType.pay,
 )
 ```
 
@@ -52,9 +52,9 @@ KlarnaButton(
 ```dart
 AmazonPayButton(
   onPressed: () => handleAmazonPay(),
+  text: 'Check out with',
   color: AmazonPayColor.gold,
   shape: AmazonPayShape.pill,
-  type: AmazonPayButtonType.pay,
 )
 ```
 
@@ -62,6 +62,7 @@ AmazonPayButton(
 ```dart
 ShopPayButton(
   onPressed: () => handleShopPay(),
+  text: 'Buy with',
   color: ShopPayColor.purple,
   shape: ShopPayShape.rounded,
 )
@@ -71,6 +72,7 @@ ShopPayButton(
 ```dart
 StripeLinkButton(
   onPressed: () => handleStripeLink(),
+  text: 'Pay with',
   color: StripeLinkColor.green,
   shape: StripeLinkShape.rounded,
 )
@@ -80,6 +82,7 @@ StripeLinkButton(
 ```dart
 AfterpayButton(
   onPressed: () => handleAfterpay(),
+  text: 'Buy now with',
   brand: AfterpayBrand.afterpay, // or AfterpayBrand.clearpay
   color: AfterpayColor.mint,
   shape: AfterpayShape.rounded,
@@ -90,31 +93,31 @@ AfterpayButton(
 ```dart
 // Switzerland
 TwintButton(
-  locale: const Locale('de'),
+  text: 'Bezahlen mit',
   onPressed: () => handleTwint(),
 )
 
 // Netherlands
 IdealButton(
-  locale: const Locale('nl'),
+  text: 'Betaal met',
   onPressed: () => handleIdeal(),
 )
 
 // Poland
 BlikButton(
-  locale: const Locale('pl'),
+  text: 'Zapłać z',
   onPressed: () => handleBlik(),
 )
 
 // Belgium
 BancontactButton(
-  locale: const Locale('nl'),
+  text: 'Betaal met',
   onPressed: () => handleBancontact(),
 )
 
 // Spain
 BizumButton(
-  locale: const Locale('es'),
+  text: 'Pagar con',
   onPressed: () => handleBizum(),
 )
 ```

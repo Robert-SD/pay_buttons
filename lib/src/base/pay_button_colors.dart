@@ -25,7 +25,7 @@ class PayButtonColors {
   /// The width of the border outline if [borderColor] is set.
   final double borderWidth;
 
-  /// The color of the loading spinner when [isLoading] is true.
+  /// The color of the loading spinner when the button is in a loading state.
   final Color progressColor;
 
   /// The color of the spinner when the button is disabled.

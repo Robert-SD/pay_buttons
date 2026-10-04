@@ -3,7 +3,6 @@ import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import 'afterpay_assets.dart';
 import 'afterpay_brand.dart';
-import 'afterpay_button_type.dart';
 import 'afterpay_color.dart';
 import 'afterpay_shape.dart';
 
@@ -15,6 +14,7 @@ class AfterpayButton extends PayButton {
   const AfterpayButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -26,8 +26,6 @@ class AfterpayButton extends PayButton {
     this.color = AfterpayColor.mint,
     this.shape = AfterpayShape.rounded,
     this.brand = AfterpayBrand.afterpay,
-    this.type = AfterpayButtonType.buyNow,
-    this.locale,
     this.textStyle,
   });
 
@@ -39,13 +37,6 @@ class AfterpayButton extends PayButton {
 
   /// Regional branding variant (Afterpay vs Clearpay). Defaults to [AfterpayBrand.afterpay].
   final AfterpayBrand brand;
-
-  /// The content/action layout of the button. Defaults to [AfterpayButtonType.buyNow].
-  final AfterpayButtonType type;
-
-  /// Optional locale used to translate action verbs (e.g. "Buy now with", "Jetzt kaufen mit").
-  /// If null, the ambient device locale or English fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -102,8 +93,6 @@ class AfterpayButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final badgeHeight = (height * 0.44).clamp(18.0, 24.0);
@@ -134,7 +123,7 @@ class AfterpayButton extends PayButton {
       ],
     );
 
-    if (type == AfterpayButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return brandLockup;
     }
 
@@ -157,7 +146,7 @@ class AfterpayButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveLabelStyle),
+        Text(text!, style: effectiveLabelStyle),
         const SizedBox(width: 6),
         brandLockup,
       ],

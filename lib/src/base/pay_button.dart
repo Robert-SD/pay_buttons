@@ -10,6 +10,7 @@ abstract class PayButton extends StatelessWidget {
   const PayButton({
     super.key,
     required this.onPressed,
+    this.text,
     this.isLoading = false,
     this.enabled = true,
     this.width,
@@ -24,6 +25,11 @@ abstract class PayButton extends StatelessWidget {
   ///
   /// If null, the button will be treated as non-interactive (disabled).
   final VoidCallback? onPressed;
+
+  /// Optional custom text label displayed alongside the brand logo.
+  ///
+  /// Defaults to `null` which renders the brand logo alone (no text).
+  final String? text;
 
   /// Whether to display a loading indicator in place of the button content.
   ///

@@ -12,20 +12,32 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
   // Playground state
   PayPalColor _color = PayPalColor.gold;
   PayPalShape _shape = PayPalShape.pill;
-  PayPalButtonType _type = PayPalButtonType.checkout;
+  String? _text = 'Checkout';
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
   double _elevation = 0.0;
-  String _localeCode = 'en';
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _text);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'PayPal ${_type.name} triggered (${_color.name}, ${_shape.name})',
+          'PayPal button triggered (${_color.name}, ${_shape.name})',
         ),
         backgroundColor: const Color(0xFF003087),
         duration: const Duration(seconds: 2),
@@ -108,11 +120,10 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
                   enabled: _enabled,
                   color: _color,
                   shape: _shape,
-                  type: _type,
+                  text: _text,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
-                  locale: Locale(_localeCode),
                 ),
               ),
             ),
@@ -152,33 +163,19 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<PayPalButtonType>(
-                  value: _type,
-                  items: PayPalButtonType.values.map((t) {
-                    return DropdownMenuItem(
-                      value: t,
-                      child: Text('Type: ${t.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _type = val);
-                  },
-                ),
-
-                // Locale Picker
-                DropdownButton<String>(
-                  value: _localeCode,
-                  items: const [
-                    DropdownMenuItem(value: 'en', child: Text('Locale: English (en)')),
-                    DropdownMenuItem(value: 'de', child: Text('Locale: German (de)')),
-                    DropdownMenuItem(value: 'fr', child: Text('Locale: French (fr)')),
-                    DropdownMenuItem(value: 'es', child: Text('Locale: Spanish (es)')),
-                    DropdownMenuItem(value: 'it', child: Text('Locale: Italian (it)')),
-                  ],
-                  onChanged: (val) {
-                    if (val != null) setState(() => _localeCode = val);
-                  },
+                // Custom Text Input
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Custom Text (empty = logo only)',
+                      isDense: true,
+                    ),
+                    controller: _textController,
+                    onChanged: (val) {
+                      setState(() => _text = val.isEmpty ? null : val);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -297,14 +294,14 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: PayPalShape.pill,
-                    type: PayPalButtonType.checkout,
+                    text: 'Checkout',
                   ),
                   const SizedBox(height: 10),
                   PayPalButton(
                     onPressed: _handlePayPress,
                     color: color,
                     shape: PayPalShape.rounded,
-                    type: PayPalButtonType.checkout,
+                    text: 'Checkout',
                   ),
                 ],
               ),
@@ -327,7 +324,7 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Dedicated installment checkout button with multi-language support.',
+          'Dedicated installment checkout button with custom text.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -338,17 +335,17 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
             PayPalPayLaterButton(
               onPressed: _handlePayPress,
               color: PayPalColor.white,
-              locale: const Locale('en'),
+              text: 'Pay Later',
             ),
             PayPalPayLaterButton(
               onPressed: _handlePayPress,
               color: PayPalColor.gold,
-              locale: const Locale('de'),
+              text: 'Später bezahlen',
             ),
             PayPalPayLaterButton(
               onPressed: _handlePayPress,
               color: PayPalColor.blue,
-              locale: const Locale('fr'),
+              text: '4x sans frais',
             ),
           ],
         ),

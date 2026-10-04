@@ -5,7 +5,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('ShopPayButton', () {
-    testWidgets('renders purple rounded standard button by default', (tester) async {
+    testWidgets('renders purple rounded button by default', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -26,6 +26,21 @@ void main() {
         ),
       );
       expect(material.color, const Color(0xFF5A31F4));
+    });
+
+    testWidgets('renders custom text when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ShopPayButton(
+              text: 'Buy with',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Buy with'), findsOneWidget);
     });
 
     testWidgets('renders all ShopPayColor themes without error', (tester) async {
@@ -60,44 +75,12 @@ void main() {
       }
     });
 
-    testWidgets('renders all ShopPayButtonType variants', (tester) async {
-      for (final type in ShopPayButtonType.values) {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: ShopPayButton(
-                type: type,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.byType(ShopPayButton), findsOneWidget);
-      }
-    });
-
-    testWidgets('localizes buyWith label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ShopPayButton(
-              type: ShopPayButtonType.buyWith,
-              locale: const Locale('de'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Kaufen mit'), findsOneWidget);
-    });
-
     testWidgets('applies custom textStyle when provided', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ShopPayButton(
-              type: ShopPayButtonType.buyWith,
+              text: 'Buy with',
               onPressed: () {},
               textStyle: const TextStyle(fontWeight: FontWeight.w300),
             ),

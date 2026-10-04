@@ -5,7 +5,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('AfterpayButton', () {
-    testWidgets('renders mint rounded buyNow afterpay button by default', (tester) async {
+    testWidgets('renders mint rounded afterpay button by default', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -18,7 +18,6 @@ void main() {
 
       expect(find.byType(AfterpayButton), findsOneWidget);
       expect(find.byType(SvgPicture), findsOneWidget);
-      expect(find.text('Buy now with'), findsOneWidget);
       expect(find.text('afterpay'), findsOneWidget);
 
       final material = tester.widget<Material>(
@@ -43,6 +42,21 @@ void main() {
       );
 
       expect(find.text('clearpay'), findsOneWidget);
+    });
+
+    testWidgets('renders custom text when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: AfterpayButton(
+              text: 'Buy now with',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Buy now with'), findsOneWidget);
     });
 
     testWidgets('renders all AfterpayColor themes without error', (tester) async {
@@ -77,60 +91,12 @@ void main() {
       }
     });
 
-    testWidgets('renders all AfterpayButtonType variants', (tester) async {
-      for (final type in AfterpayButtonType.values) {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: AfterpayButton(
-                type: type,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.byType(AfterpayButton), findsOneWidget);
-      }
-    });
-
-    testWidgets('localizes buyNow label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: AfterpayButton(
-              type: AfterpayButtonType.buyNow,
-              locale: const Locale('de'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Jetzt kaufen mit'), findsOneWidget);
-    });
-
-    testWidgets('localizes payWith label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: AfterpayButton(
-              type: AfterpayButtonType.payWith,
-              locale: const Locale('fr'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Payer avec'), findsOneWidget);
-    });
-
     testWidgets('applies custom textStyle when provided', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: AfterpayButton(
-              type: AfterpayButtonType.buyNow,
+              text: 'Buy now with',
               onPressed: () {},
               textStyle: const TextStyle(fontWeight: FontWeight.w300),
             ),

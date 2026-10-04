@@ -5,7 +5,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('AmazonPayButton', () {
-    testWidgets('renders gold pill pay button by default', (tester) async {
+    testWidgets('renders gold pill logo-only button by default', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -18,6 +18,7 @@ void main() {
 
       expect(find.byType(AmazonPayButton), findsOneWidget);
       expect(find.byType(SvgPicture), findsOneWidget);
+      expect(find.byType(Text), findsNothing);
 
       final material = tester.widget<Material>(
         find.descendant(
@@ -26,6 +27,21 @@ void main() {
         ),
       );
       expect(material.color, const Color(0xFFFFC439));
+    });
+
+    testWidgets('renders custom text when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: AmazonPayButton(
+              text: 'Check out with',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Check out with'), findsOneWidget);
     });
 
     testWidgets('renders all AmazonPayColor themes without error', (tester) async {
@@ -60,60 +76,12 @@ void main() {
       }
     });
 
-    testWidgets('renders all AmazonPayButtonType variants', (tester) async {
-      for (final type in AmazonPayButtonType.values) {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: AmazonPayButton(
-                type: type,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.byType(AmazonPayButton), findsOneWidget);
-      }
-    });
-
-    testWidgets('localizes checkout label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: AmazonPayButton(
-              type: AmazonPayButtonType.checkout,
-              locale: const Locale('de'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Bezahlen mit'), findsOneWidget);
-    });
-
-    testWidgets('localizes buyNow label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: AmazonPayButton(
-              type: AmazonPayButtonType.buyNow,
-              locale: const Locale('fr'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Acheter avec'), findsOneWidget);
-    });
-
     testWidgets('applies custom textStyle when provided', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: AmazonPayButton(
-              type: AmazonPayButtonType.checkout,
+              text: 'Check out with',
               onPressed: () {},
               textStyle: const TextStyle(fontWeight: FontWeight.w400),
             ),

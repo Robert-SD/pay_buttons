@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import 'stripe_link_assets.dart';
-import 'stripe_link_button_type.dart';
 import 'stripe_link_color.dart';
 import 'stripe_link_shape.dart';
 
@@ -14,6 +13,7 @@ class StripeLinkButton extends PayButton {
   const StripeLinkButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,8 +24,6 @@ class StripeLinkButton extends PayButton {
     super.semanticLabel,
     this.color = StripeLinkColor.green,
     this.shape = StripeLinkShape.rounded,
-    this.type = StripeLinkButtonType.payWithLink,
-    this.locale,
     this.textStyle,
   });
 
@@ -34,13 +32,6 @@ class StripeLinkButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [StripeLinkShape.rounded] (6.0 dp).
   final StripeLinkShape shape;
-
-  /// The content/action layout of the button. Defaults to [StripeLinkButtonType.payWithLink].
-  final StripeLinkButtonType type;
-
-  /// Optional locale used to translate action verbs (e.g. "Pay with", "Bezahlen mit").
-  /// If null, the ambient device locale or English fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -94,14 +85,12 @@ class StripeLinkButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.46).clamp(18.0, 26.0);
     final logoWidget = StripeLinkAssets.logo(color: color, height: logoHeight);
 
-    if (type == StripeLinkButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -123,7 +112,7 @@ class StripeLinkButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

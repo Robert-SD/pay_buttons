@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import 'twint_assets.dart';
-import 'twint_button_type.dart';
 import 'twint_color.dart';
 import 'twint_shape.dart';
 
@@ -13,6 +12,7 @@ class TwintButton extends PayButton {
   const TwintButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,8 +23,6 @@ class TwintButton extends PayButton {
     super.semanticLabel,
     this.color = TwintColor.black,
     this.shape = TwintShape.rounded,
-    this.type = TwintButtonType.payWith,
-    this.locale,
     this.textStyle,
   });
 
@@ -33,13 +31,6 @@ class TwintButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [TwintShape.rounded] (6.0 dp).
   final TwintShape shape;
-
-  /// The content/action layout of the button. Defaults to [TwintButtonType.payWith].
-  final TwintButtonType type;
-
-  /// Optional locale used to translate action verbs (de: "Bezahlen mit", fr: "Payer avec", it: "Paga con").
-  /// If null, the ambient device locale or German fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -50,7 +41,7 @@ class TwintButton extends PayButton {
 
   @override
   String? get semanticLabel =>
-      super.semanticLabel ?? 'Bezahlen mit TWINT';
+      super.semanticLabel ?? 'TWINT';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -85,14 +76,12 @@ class TwintButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
     final logoWidget = TwintAssets.logo(color: color, height: logoHeight);
 
-    if (type == TwintButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -107,7 +96,7 @@ class TwintButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

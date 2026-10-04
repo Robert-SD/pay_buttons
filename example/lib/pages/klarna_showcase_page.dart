@@ -12,20 +12,32 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
   // Playground state
   KlarnaColor _color = KlarnaColor.pink;
   KlarnaShape _shape = KlarnaShape.rounded;
-  KlarnaButtonType _type = KlarnaButtonType.express;
+  String? _text = 'Pay with';
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
   double _elevation = 0.0;
-  String _localeCode = 'en';
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _text);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Klarna ${_type.name} triggered (${_color.name}, ${_shape.name})',
+          'Klarna button triggered (${_color.name}, ${_shape.name})',
         ),
         backgroundColor: const Color(0xFF0B051D),
         duration: const Duration(seconds: 2),
@@ -56,7 +68,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
 
-          // 3. Multilingual Installment Variations
+          // 3. Custom Text Variations
           _buildInstallmentsSection(),
         ],
       ),
@@ -108,11 +120,10 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   enabled: _enabled,
                   color: _color,
                   shape: _shape,
-                  type: _type,
+                  text: _text,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
-                  locale: Locale(_localeCode),
                 ),
               ),
             ),
@@ -152,34 +163,19 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<KlarnaButtonType>(
-                  value: _type,
-                  items: KlarnaButtonType.values.map((t) {
-                    return DropdownMenuItem(
-                      value: t,
-                      child: Text('Type: ${t.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _type = val);
-                  },
-                ),
-
-                // Locale Picker
-                DropdownButton<String>(
-                  value: _localeCode,
-                  items: const [
-                    DropdownMenuItem(value: 'en', child: Text('Locale: English (en)')),
-                    DropdownMenuItem(value: 'de', child: Text('Locale: German (de)')),
-                    DropdownMenuItem(value: 'sv', child: Text('Locale: Swedish (sv)')),
-                    DropdownMenuItem(value: 'fr', child: Text('Locale: French (fr)')),
-                    DropdownMenuItem(value: 'es', child: Text('Locale: Spanish (es)')),
-                    DropdownMenuItem(value: 'it', child: Text('Locale: Italian (it)')),
-                  ],
-                  onChanged: (val) {
-                    if (val != null) setState(() => _localeCode = val);
-                  },
+                // Custom Text Input
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Custom Text (empty = logo only)',
+                      isDense: true,
+                    ),
+                    controller: _textController,
+                    onChanged: (val) {
+                      setState(() => _text = val.isEmpty ? null : val);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -298,14 +294,14 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: KlarnaShape.rounded,
-                    type: KlarnaButtonType.express,
+                    text: 'Pay with',
                   ),
                   const SizedBox(height: 10),
                   KlarnaButton(
                     onPressed: _handlePayPress,
                     color: color,
                     shape: KlarnaShape.pill,
-                    type: KlarnaButtonType.express,
+                    text: 'Pay with',
                   ),
                 ],
               ),
@@ -321,7 +317,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Klarna Pay Later & Installment Actions',
+          'Klarna Custom Text Examples',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -338,23 +334,19 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
           children: [
             KlarnaButton(
               onPressed: _handlePayPress,
-              type: KlarnaButtonType.payLater,
-              locale: const Locale('en'),
+              text: 'Pay in 30 days',
             ),
             KlarnaButton(
               onPressed: _handlePayPress,
-              type: KlarnaButtonType.payLater,
-              locale: const Locale('de'),
+              text: 'In 30 Tagen bezahlen',
             ),
             KlarnaButton(
               onPressed: _handlePayPress,
-              type: KlarnaButtonType.sliceIt,
-              locale: const Locale('sv'),
+              text: 'Pay in 3',
             ),
             KlarnaButton(
               onPressed: _handlePayPress,
-              type: KlarnaButtonType.payNow,
-              locale: const Locale('de'),
+              text: 'Sofort bezahlen',
             ),
           ],
         ),

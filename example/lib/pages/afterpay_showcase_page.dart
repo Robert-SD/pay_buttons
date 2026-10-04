@@ -13,20 +13,32 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
   AfterpayColor _color = AfterpayColor.mint;
   AfterpayShape _shape = AfterpayShape.rounded;
   AfterpayBrand _brand = AfterpayBrand.afterpay;
-  AfterpayButtonType _type = AfterpayButtonType.buyNow;
+  String? _text = 'Buy now with';
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
   double _elevation = 0.0;
-  String _localeCode = 'en';
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _text);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          '${_brand.displayName} ${_type.name} triggered (${_color.name}, ${_shape.name})',
+          '${_brand.displayName} button triggered (${_color.name}, ${_shape.name})',
         ),
         backgroundColor: const Color(0xFF000000),
         duration: const Duration(seconds: 2),
@@ -64,7 +76,7 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
 
-          // 4. Localized Action Verbs
+          // 4. Custom Action Verbs
           _buildLocalizedSection(),
         ],
       ),
@@ -117,11 +129,10 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                   color: _color,
                   shape: _shape,
                   brand: _brand,
-                  type: _type,
+                  text: _text,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
-                  locale: Locale(_localeCode),
                 ),
               ),
             ),
@@ -175,33 +186,19 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<AfterpayButtonType>(
-                  value: _type,
-                  items: AfterpayButtonType.values.map((t) {
-                    return DropdownMenuItem(
-                      value: t,
-                      child: Text('Type: ${t.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _type = val);
-                  },
-                ),
-
-                // Locale Picker
-                DropdownButton<String>(
-                  value: _localeCode,
-                  items: const [
-                    DropdownMenuItem(value: 'en', child: Text('Locale: English (en)')),
-                    DropdownMenuItem(value: 'de', child: Text('Locale: German (de)')),
-                    DropdownMenuItem(value: 'fr', child: Text('Locale: French (fr)')),
-                    DropdownMenuItem(value: 'es', child: Text('Locale: Spanish (es)')),
-                    DropdownMenuItem(value: 'it', child: Text('Locale: Italian (it)')),
-                  ],
-                  onChanged: (val) {
-                    if (val != null) setState(() => _localeCode = val);
-                  },
+                // Custom Text Input
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Custom Text (empty = logo only)',
+                      isDense: true,
+                    ),
+                    controller: _textController,
+                    onChanged: (val) {
+                      setState(() => _text = val.isEmpty ? null : val);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -320,14 +317,14 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: AfterpayShape.rounded,
-                    type: AfterpayButtonType.buyNow,
+                    text: 'Buy now with',
                   ),
                   const SizedBox(height: 10),
                   AfterpayButton(
                     onPressed: _handlePayPress,
                     color: color,
                     shape: AfterpayShape.pill,
-                    type: AfterpayButtonType.buyNow,
+                    text: 'Buy now with',
                   ),
                 ],
               ),
@@ -361,22 +358,20 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
             AfterpayButton(
               onPressed: _handlePayPress,
               brand: AfterpayBrand.afterpay,
-              type: AfterpayButtonType.buyNow,
+              text: 'Buy now with',
             ),
             AfterpayButton(
               onPressed: _handlePayPress,
               brand: AfterpayBrand.clearpay,
-              type: AfterpayButtonType.buyNow,
+              text: 'Buy now with',
             ),
             AfterpayButton(
               onPressed: _handlePayPress,
               brand: AfterpayBrand.afterpay,
-              type: AfterpayButtonType.logoOnly,
             ),
             AfterpayButton(
               onPressed: _handlePayPress,
               brand: AfterpayBrand.clearpay,
-              type: AfterpayButtonType.logoOnly,
             ),
           ],
         ),
@@ -389,14 +384,14 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Localized Action Verbs',
+          'Custom Action Verbs',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         const SizedBox(height: 8),
         Text(
-          'Verbs in English, German, French, and Spanish.',
+          'Phrases in English, German, French, and Spanish.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -406,23 +401,19 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
           children: [
             AfterpayButton(
               onPressed: _handlePayPress,
-              type: AfterpayButtonType.buyNow,
-              locale: const Locale('en'),
+              text: 'Buy now with',
             ),
             AfterpayButton(
               onPressed: _handlePayPress,
-              type: AfterpayButtonType.buyNow,
-              locale: const Locale('de'),
+              text: 'Jetzt kaufen mit',
             ),
             AfterpayButton(
               onPressed: _handlePayPress,
-              type: AfterpayButtonType.payWith,
-              locale: const Locale('fr'),
+              text: 'Payer avec',
             ),
             AfterpayButton(
               onPressed: _handlePayPress,
-              type: AfterpayButtonType.payWith,
-              locale: const Locale('es'),
+              text: 'Comprar con',
             ),
           ],
         ),

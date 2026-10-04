@@ -5,7 +5,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('PayPalButton', () {
-    testWidgets('renders gold pill checkout button by default', (tester) async {
+    testWidgets('renders gold pill logo-only button by default', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -18,7 +18,7 @@ void main() {
 
       expect(find.byType(PayPalButton), findsOneWidget);
       expect(find.byType(SvgPicture), findsNWidgets(2)); // Monogram + Wordmark
-      expect(find.text('Checkout'), findsOneWidget);
+      expect(find.byType(Text), findsNothing); // Default is null so no text
 
       final material = tester.widget<Material>(
         find.descendant(
@@ -27,6 +27,22 @@ void main() {
         ),
       );
       expect(material.color, const Color(0xFFFFC439));
+    });
+
+    testWidgets('renders custom text when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayPalButton(
+              text: 'Checkout',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(PayPalButton), findsOneWidget);
+      expect(find.text('Checkout'), findsOneWidget);
     });
 
     testWidgets('renders all PayPalColor themes without error', (tester) async {
@@ -45,39 +61,7 @@ void main() {
       }
     });
 
-    testWidgets('renders all PayPalButtonType variants', (tester) async {
-      for (final type in PayPalButtonType.values) {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: PayPalButton(
-                type: type,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        );
-        expect(find.byType(PayPalButton), findsOneWidget);
-      }
-    });
-
-    testWidgets('localizes label when locale is specified', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: PayPalButton(
-              type: PayPalButtonType.payLater,
-              locale: const Locale('de'),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Später bezahlen'), findsOneWidget);
-    });
-
-    testWidgets('PayPalPayLaterButton defaults to payLater type', (tester) async {
+    testWidgets('PayPalPayLaterButton defaults to Pay Later text', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -97,6 +81,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: PayPalButton(
+              text: 'Checkout',
               onPressed: () {},
               textStyle: const TextStyle(fontWeight: FontWeight.w900),
             ),

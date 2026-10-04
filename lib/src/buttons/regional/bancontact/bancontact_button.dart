@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import 'bancontact_assets.dart';
-import 'bancontact_button_type.dart';
 import 'bancontact_color.dart';
 import 'bancontact_shape.dart';
 
@@ -13,6 +12,7 @@ class BancontactButton extends PayButton {
   const BancontactButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,8 +23,6 @@ class BancontactButton extends PayButton {
     super.semanticLabel,
     this.color = BancontactColor.white,
     this.shape = BancontactShape.rounded,
-    this.type = BancontactButtonType.payWith,
-    this.locale,
     this.textStyle,
   });
 
@@ -33,13 +31,6 @@ class BancontactButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [BancontactShape.rounded] (6.0 dp).
   final BancontactShape shape;
-
-  /// The content/action layout of the button. Defaults to [BancontactButtonType.payWith].
-  final BancontactButtonType type;
-
-  /// Optional locale used to translate action verbs (nl: "Betaal met", fr: "Payer avec").
-  /// If null, the ambient device locale or Dutch fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -50,7 +41,7 @@ class BancontactButton extends PayButton {
 
   @override
   String? get semanticLabel =>
-      super.semanticLabel ?? 'Betaal met Bancontact';
+      super.semanticLabel ?? 'Bancontact';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -85,14 +76,12 @@ class BancontactButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.52).clamp(20.0, 28.0);
     final logoWidget = BancontactAssets.logo(color: color, height: logoHeight);
 
-    if (type == BancontactButtonType.logoOnly || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -107,7 +96,7 @@ class BancontactButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 8),
         logoWidget,
       ],

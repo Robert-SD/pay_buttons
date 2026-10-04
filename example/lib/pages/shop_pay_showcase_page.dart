@@ -12,20 +12,32 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
   // Playground state
   ShopPayColor _color = ShopPayColor.purple;
   ShopPayShape _shape = ShopPayShape.rounded;
-  ShopPayButtonType _type = ShopPayButtonType.standard;
+  String? _text;
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
   double _elevation = 0.0;
-  String _localeCode = 'en';
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _text);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Shop Pay ${_type.name} triggered (${_color.name}, ${_shape.name})',
+          'Shop Pay button triggered (${_color.name}, ${_shape.name})',
         ),
         backgroundColor: const Color(0xFF5A31F4),
         duration: const Duration(seconds: 2),
@@ -56,7 +68,7 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
 
-          // 3. Localized Action Verbs
+          // 3. Custom Action Verbs
           _buildLocalizedSection(),
         ],
       ),
@@ -108,11 +120,10 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                   enabled: _enabled,
                   color: _color,
                   shape: _shape,
-                  type: _type,
+                  text: _text,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
-                  locale: Locale(_localeCode),
                 ),
               ),
             ),
@@ -152,34 +163,19 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<ShopPayButtonType>(
-                  value: _type,
-                  items: ShopPayButtonType.values.map((t) {
-                    return DropdownMenuItem(
-                      value: t,
-                      child: Text('Type: ${t.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _type = val);
-                  },
-                ),
-
-                // Locale Picker
-                DropdownButton<String>(
-                  value: _localeCode,
-                  items: const [
-                    DropdownMenuItem(value: 'en', child: Text('Locale: English (en)')),
-                    DropdownMenuItem(value: 'de', child: Text('Locale: German (de)')),
-                    DropdownMenuItem(value: 'fr', child: Text('Locale: French (fr)')),
-                    DropdownMenuItem(value: 'es', child: Text('Locale: Spanish (es)')),
-                    DropdownMenuItem(value: 'it', child: Text('Locale: Italian (it)')),
-                    DropdownMenuItem(value: 'nl', child: Text('Locale: Dutch (nl)')),
-                  ],
-                  onChanged: (val) {
-                    if (val != null) setState(() => _localeCode = val);
-                  },
+                // Custom Text Input
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Custom Text (empty = logo only)',
+                      isDense: true,
+                    ),
+                    controller: _textController,
+                    onChanged: (val) {
+                      setState(() => _text = val.isEmpty ? null : val);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -298,14 +294,12 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: ShopPayShape.rounded,
-                    type: ShopPayButtonType.standard,
                   ),
                   const SizedBox(height: 10),
                   ShopPayButton(
                     onPressed: _handlePayPress,
                     color: color,
                     shape: ShopPayShape.pill,
-                    type: ShopPayButtonType.standard,
                   ),
                 ],
               ),
@@ -321,7 +315,7 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Localized "Buy with" Actions',
+          'Custom "Buy with" Actions',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -338,23 +332,19 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
           children: [
             ShopPayButton(
               onPressed: _handlePayPress,
-              type: ShopPayButtonType.buyWith,
-              locale: const Locale('en'),
+              text: 'Buy with',
             ),
             ShopPayButton(
               onPressed: _handlePayPress,
-              type: ShopPayButtonType.buyWith,
-              locale: const Locale('de'),
+              text: 'Kaufen mit',
             ),
             ShopPayButton(
               onPressed: _handlePayPress,
-              type: ShopPayButtonType.buyWith,
-              locale: const Locale('fr'),
+              text: 'Acheter avec',
             ),
             ShopPayButton(
               onPressed: _handlePayPress,
-              type: ShopPayButtonType.buyWith,
-              locale: const Locale('es'),
+              text: 'Comprar con',
             ),
           ],
         ),

@@ -11,35 +11,30 @@ export 'src/buttons/paypal/paypal_button.dart';
 export 'src/buttons/paypal/paypal_pay_later_button.dart';
 export 'src/buttons/paypal/paypal_color.dart';
 export 'src/buttons/paypal/paypal_shape.dart';
-export 'src/buttons/paypal/paypal_button_type.dart';
 export 'src/buttons/paypal/paypal_assets.dart';
 
 // Klarna
 export 'src/buttons/klarna/klarna_button.dart';
 export 'src/buttons/klarna/klarna_color.dart';
 export 'src/buttons/klarna/klarna_shape.dart';
-export 'src/buttons/klarna/klarna_button_type.dart';
 export 'src/buttons/klarna/klarna_assets.dart';
 
 // Amazon Pay
 export 'src/buttons/amazon_pay/amazon_pay_button.dart';
 export 'src/buttons/amazon_pay/amazon_pay_color.dart';
 export 'src/buttons/amazon_pay/amazon_pay_shape.dart';
-export 'src/buttons/amazon_pay/amazon_pay_button_type.dart';
 export 'src/buttons/amazon_pay/amazon_pay_assets.dart';
 
 // Shop Pay
 export 'src/buttons/shop_pay/shop_pay_button.dart';
 export 'src/buttons/shop_pay/shop_pay_color.dart';
 export 'src/buttons/shop_pay/shop_pay_shape.dart';
-export 'src/buttons/shop_pay/shop_pay_button_type.dart';
 export 'src/buttons/shop_pay/shop_pay_assets.dart';
 
 // Stripe Link
 export 'src/buttons/stripe_link/stripe_link_button.dart';
 export 'src/buttons/stripe_link/stripe_link_color.dart';
 export 'src/buttons/stripe_link/stripe_link_shape.dart';
-export 'src/buttons/stripe_link/stripe_link_button_type.dart';
 export 'src/buttons/stripe_link/stripe_link_assets.dart';
 
 // Afterpay / Clearpay
@@ -47,7 +42,6 @@ export 'src/buttons/afterpay/afterpay_button.dart';
 export 'src/buttons/afterpay/afterpay_color.dart';
 export 'src/buttons/afterpay/afterpay_shape.dart';
 export 'src/buttons/afterpay/afterpay_brand.dart';
-export 'src/buttons/afterpay/afterpay_button_type.dart';
 export 'src/buttons/afterpay/afterpay_assets.dart';
 
 // European Regional Champions
@@ -55,35 +49,30 @@ export 'src/buttons/afterpay/afterpay_assets.dart';
 export 'src/buttons/regional/twint/twint_button.dart';
 export 'src/buttons/regional/twint/twint_color.dart';
 export 'src/buttons/regional/twint/twint_shape.dart';
-export 'src/buttons/regional/twint/twint_button_type.dart';
 export 'src/buttons/regional/twint/twint_assets.dart';
 
 // iDEAL (Netherlands)
 export 'src/buttons/regional/ideal/ideal_button.dart';
 export 'src/buttons/regional/ideal/ideal_color.dart';
 export 'src/buttons/regional/ideal/ideal_shape.dart';
-export 'src/buttons/regional/ideal/ideal_button_type.dart';
 export 'src/buttons/regional/ideal/ideal_assets.dart';
 
 // BLIK (Poland)
 export 'src/buttons/regional/blik/blik_button.dart';
 export 'src/buttons/regional/blik/blik_color.dart';
 export 'src/buttons/regional/blik/blik_shape.dart';
-export 'src/buttons/regional/blik/blik_button_type.dart';
 export 'src/buttons/regional/blik/blik_assets.dart';
 
 // Bancontact (Belgium)
 export 'src/buttons/regional/bancontact/bancontact_button.dart';
 export 'src/buttons/regional/bancontact/bancontact_color.dart';
 export 'src/buttons/regional/bancontact/bancontact_shape.dart';
-export 'src/buttons/regional/bancontact/bancontact_button_type.dart';
 export 'src/buttons/regional/bancontact/bancontact_assets.dart';
 
 // Bizum (Spain)
 export 'src/buttons/regional/bizum/bizum_button.dart';
 export 'src/buttons/regional/bizum/bizum_color.dart';
 export 'src/buttons/regional/bizum/bizum_shape.dart';
-export 'src/buttons/regional/bizum/bizum_button_type.dart';
 export 'src/buttons/regional/bizum/bizum_assets.dart';
 
 /// Legacy platform version helper from template.

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import 'amazon_pay_assets.dart';
-import 'amazon_pay_button_type.dart';
 import 'amazon_pay_color.dart';
 import 'amazon_pay_shape.dart';
 
@@ -14,6 +13,7 @@ class AmazonPayButton extends PayButton {
   const AmazonPayButton({
     super.key,
     required super.onPressed,
+    super.text,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,8 +24,6 @@ class AmazonPayButton extends PayButton {
     super.semanticLabel,
     this.color = AmazonPayColor.gold,
     this.shape = AmazonPayShape.pill,
-    this.type = AmazonPayButtonType.pay,
-    this.locale,
     this.textStyle,
   });
 
@@ -34,13 +32,6 @@ class AmazonPayButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [AmazonPayShape.pill].
   final AmazonPayShape shape;
-
-  /// The content/action layout of the button. Defaults to [AmazonPayButtonType.pay].
-  final AmazonPayButtonType type;
-
-  /// Optional locale used to translate action verbs (e.g. "Check out with", "Bezahlen mit").
-  /// If null, the ambient device locale or English fallback is used.
-  final Locale? locale;
 
   /// Optional custom text style override for the label text.
   final TextStyle? textStyle;
@@ -51,10 +42,7 @@ class AmazonPayButton extends PayButton {
 
   @override
   String? get semanticLabel =>
-      super.semanticLabel ??
-      (type == AmazonPayButtonType.checkout
-          ? 'Check out with Amazon Pay'
-          : 'Amazon Pay');
+      super.semanticLabel ?? 'Amazon Pay';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -97,14 +85,12 @@ class AmazonPayButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final effectiveLocale = locale ?? Localizations.maybeLocaleOf(context);
-    final label = type.getLocalizedLabel(effectiveLocale);
     final textColor = _resolveTextColor();
 
     final logoHeight = (height * 0.52).clamp(20.0, 32.0);
     final logoWidget = AmazonPayAssets.logo(color: color, height: logoHeight);
 
-    if (type == AmazonPayButtonType.pay || label.isEmpty) {
+    if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
@@ -126,7 +112,7 @@ class AmazonPayButton extends PayButton {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: effectiveTextStyle),
+        Text(text!, style: effectiveTextStyle),
         const SizedBox(width: 6),
         logoWidget,
       ],
