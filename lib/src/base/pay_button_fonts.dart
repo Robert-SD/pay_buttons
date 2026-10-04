@@ -67,19 +67,6 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 
-  /// Font fallback chain for Stripe Link buttons.
-  ///
-  /// References Stripe's brand typeface (Söhne / sohne-var)
-  /// with fallbacks to high-precision sans-serifs.
-  static const List<String> stripeLink = [
-    'Söhne',
-    'sohne-var',
-    'Inter',
-    'Helvetica Neue',
-    'Helvetica',
-    'Arial',
-    'sans-serif',
-  ];
 
   /// Font fallback chain for Afterpay / Clearpay buttons.
   ///

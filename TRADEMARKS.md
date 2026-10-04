@@ -72,17 +72,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 5. Link by Stripe
-* **Trademark Owner**: Stripe, Inc.
-* **Registered Trademarks**: "Stripe", "Link", the Link infinity/loop symbol.
-* **Official Brand Guidelines**: [Stripe Link Brand Documentation](https://docs.stripe.com/link)
-* **Permitted Customizations**:
-  * Approved colors: Link Emerald (`#00D66F`), Stripe Navy (`#0A2540`), White (`#FFFFFF`).
-  * Approved shapes: Rounded (`borderRadius: 6.0`) and Pill.
-
----
-
-### 6. Afterpay / Clearpay
+### 5. Afterpay / Clearpay
 * **Trademark Owner**: Afterpay Pty Ltd / Block, Inc.
 * **Registered Trademarks**: "Afterpay", "Clearpay", the continuous loop logo.
 * **Official Brand Guidelines**: [Afterpay Brand Guidelines](https://developers.afterpay.com/afterpay-online/docs/brand-guidelines)
@@ -92,7 +82,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 7. European Regional Champions
+### 6. European Regional Champions
 * **TWINT**:
   * **Trademark Owner**: TWINT AG (Switzerland)
   * **Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)

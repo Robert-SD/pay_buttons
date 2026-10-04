@@ -32,11 +32,6 @@ export 'src/buttons/shop_pay/shop_pay_color.dart';
 export 'src/buttons/shop_pay/shop_pay_shape.dart';
 export 'src/buttons/shop_pay/shop_pay_assets.dart';
 
-// Stripe Link
-export 'src/buttons/stripe_link/stripe_link_button.dart';
-export 'src/buttons/stripe_link/stripe_link_color.dart';
-export 'src/buttons/stripe_link/stripe_link_shape.dart';
-export 'src/buttons/stripe_link/stripe_link_assets.dart';
 
 // Afterpay / Clearpay
 export 'src/buttons/afterpay/afterpay_button.dart';

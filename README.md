@@ -15,7 +15,6 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
 * **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
 * **Shop Pay (Shopify)**: Default logo-only or custom text (`purple`, `black`, `white`).
-* **Link by Stripe**: Default logo-only or custom text (`green`, `navy`, `white`).
 * **Afterpay / Clearpay**: Default logo-only or custom text, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
 * **European Regional Champions**:
   * **TWINT** (Switzerland 🇨🇭) - `TwintButton` (`black`, `white`)
@@ -65,16 +64,6 @@ ShopPayButton(
   text: 'Buy with',
   color: ShopPayColor.purple,
   shape: ShopPayShape.rounded,
-)
-```
-
-### Link by Stripe
-```dart
-StripeLinkButton(
-  onPressed: () => handleStripeLink(),
-  text: 'Pay with',
-  color: StripeLinkColor.green,
-  shape: StripeLinkShape.rounded,
 )
 ```
 
@@ -129,7 +118,7 @@ BizumButton(
 All payment buttons support custom typography out of the box while remaining **100% compliant with the MIT open-source license**.
 
 ### MIT License Compliance Strategy
-Proprietary corporate typefaces (such as *PayPal Pro*, *Klarna Text*, *Amazon Ember*, or *Söhne*) cannot legally be redistributed as binary font files (`.ttf`, `.otf`, `.woff`) inside an open-source MIT package. 
+Proprietary corporate typefaces (such as *PayPal Pro*, *Klarna Text*, or *Amazon Ember*) cannot legally be redistributed as binary font files (`.ttf`, `.otf`, `.woff`) inside an open-source MIT package. 
 
 Instead, `pay_buttons` implements a clean, compliant typography strategy:
 1. **Official Brand Fallback Chains (`PayButtonFonts`)**: Built-in nominative fallback chains representing each brand's official font family that fall back gracefully to clean system neo-grotesque typefaces (such as `-apple-system`, `BlinkMacSystemFont`, `Roboto`, `Segoe UI`, `Helvetica Neue`, and `Inter`).
@@ -169,7 +158,6 @@ PayPalButton(
 | **Klarna** | `Klarna Text`, `Klarna Headline`, system neo-grotesque |
 | **Amazon Pay** | `Amazon Ember`, system neo-grotesque |
 | **Shop Pay** | `Shopify Sans`, system neo-grotesque |
-| **Link by Stripe** | `Söhne`, `sohne-var`, system neo-grotesque |
 | **Afterpay** | `Youth`, `Cash Sans Mono`, `Italian Plate No. 2`, system sans |
 | **TWINT** | `Neue Haas Grotesk`, `Helvetica Neue`, `Arial`, system sans |
 | **iDEAL** | `Inter`, `Roboto`, `Helvetica Neue`, system sans |

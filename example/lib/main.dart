@@ -5,7 +5,6 @@ import 'pages/european_champions_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
 import 'pages/shop_pay_showcase_page.dart';
-import 'pages/stripe_link_showcase_page.dart';
 
 void main() {
   runApp(const PayButtonsExampleApp());
@@ -212,46 +211,6 @@ class CatalogHomePage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 12),
-
-          // Step 5: Stripe Link Card
-          Card(
-            clipBehavior: Clip.antiAlias,
-            elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF00D66F),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Center(
-                  child: Text(
-                    'link',
-                    style: TextStyle(
-                      color: Color(0xFF0A2540),
-                      fontWeight: FontWeight.w900,
-                      fontSize: 13,
-                    ),
-                  ),
-                ),
-              ),
-              title: const Text(
-                'Link by Stripe',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: const Text('1-click checkout, Pay with / Logo only, Emerald/Navy/White'),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const StripeLinkShowcasePage()),
-                );
-              },
-            ),
-          ),
 
           const SizedBox(height: 12),
 

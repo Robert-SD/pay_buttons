@@ -18,7 +18,6 @@ void main() {
     expect(find.text('Klarna'), findsOneWidget);
     expect(find.text('Amazon Pay'), findsOneWidget);
     expect(find.text('Shop Pay'), findsOneWidget);
-    expect(find.text('Link by Stripe'), findsOneWidget);
     expect(find.text('Afterpay / Clearpay'), findsOneWidget);
     expect(find.text('European Champions'), findsOneWidget);
     expect(find.text('Active Payment Buttons'), findsOneWidget);

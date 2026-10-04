@@ -39,9 +39,8 @@ Whenever a button is implemented, it **must** be added to the example app with:
 │       ├── 2. Klarna (Pay Now, Pay Later, Slice It)
 │       ├── 3. Amazon Pay
 │       ├── 4. Shop Pay
-│       ├── 5. Stripe Link
-│       ├── 6. Afterpay / Clearpay
-│       └── 7. European Regional (TWINT, iDEAL, BLIK, Bancontact, Bizum)
+│       ├── 5. Afterpay / Clearpay
+│       └── 6. European Regional (TWINT, iDEAL, BLIK, Bancontact, Bizum)
 └── Detail / Playground View (Per Button)
     ├── Live Interactive Preview (with real-time state manipulation)
     ├── Side-by-side Variant Grid (Light vs Dark mode)

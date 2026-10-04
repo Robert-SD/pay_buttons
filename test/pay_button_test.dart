@@ -157,7 +157,6 @@ void main() {
       expect(PayButtonFonts.klarna, contains('Klarna Text'));
       expect(PayButtonFonts.amazonPay, contains('Amazon Ember'));
       expect(PayButtonFonts.shopPay, contains('Shopify Sans'));
-      expect(PayButtonFonts.stripeLink, contains('Söhne'));
       expect(PayButtonFonts.afterpay, contains('Youth'));
       expect(PayButtonFonts.twint, contains('Helvetica Neue'));
       expect(PayButtonFonts.ideal, contains('Inter'));
