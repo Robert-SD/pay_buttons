@@ -8,11 +8,7 @@ void main() {
     testWidgets('renders purple rounded button by default', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: ShopPayButton(
-              onPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: ShopPayButton(onPressed: () {})),
         ),
       );
 
@@ -32,10 +28,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ShopPayButton(
-              text: 'Buy with',
-              onPressed: () {},
-            ),
+            body: ShopPayButton(text: 'Buy with', onPressed: () {}),
           ),
         ),
       );
@@ -43,15 +36,14 @@ void main() {
       expect(find.text('Buy with'), findsOneWidget);
     });
 
-    testWidgets('renders all ShopPayColor themes without error', (tester) async {
+    testWidgets('renders all ShopPayColor themes without error', (
+      tester,
+    ) async {
       for (final color in ShopPayColor.values) {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ShopPayButton(
-                color: color,
-                onPressed: () {},
-              ),
+              body: ShopPayButton(color: color, onPressed: () {}),
             ),
           ),
         );
@@ -64,10 +56,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ShopPayButton(
-                shape: shape,
-                onPressed: () {},
-              ),
+              body: ShopPayButton(shape: shape, onPressed: () {}),
             ),
           ),
         );

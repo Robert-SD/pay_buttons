@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
@@ -40,8 +41,7 @@ class BizumButton extends PayButton {
       shape == BizumShape.pill ? (height / 2) : 6.0;
 
   @override
-  String? get semanticLabel =>
-      super.semanticLabel ?? 'Bizum';
+  String? get semanticLabel => super.semanticLabel ?? 'Bizum';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {

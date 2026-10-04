@@ -5,14 +5,12 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('AfterpayButton', () {
-    testWidgets('renders mint rounded afterpay button by default', (tester) async {
+    testWidgets('renders mint rounded afterpay button by default', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: AfterpayButton(
-              onPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: AfterpayButton(onPressed: () {})),
         ),
       );
 
@@ -48,10 +46,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: AfterpayButton(
-              text: 'Buy now with',
-              onPressed: () {},
-            ),
+            body: AfterpayButton(text: 'Buy now with', onPressed: () {}),
           ),
         ),
       );
@@ -59,15 +54,14 @@ void main() {
       expect(find.text('Buy now with'), findsOneWidget);
     });
 
-    testWidgets('renders all AfterpayColor themes without error', (tester) async {
+    testWidgets('renders all AfterpayColor themes without error', (
+      tester,
+    ) async {
       for (final color in AfterpayColor.values) {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: AfterpayButton(
-                color: color,
-                onPressed: () {},
-              ),
+              body: AfterpayButton(color: color, onPressed: () {}),
             ),
           ),
         );
@@ -80,10 +74,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: AfterpayButton(
-                shape: shape,
-                onPressed: () {},
-              ),
+              body: AfterpayButton(shape: shape, onPressed: () {}),
             ),
           ),
         );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'paypal_color.dart';
 
 /// Vector asset generator for official PayPal branding.
@@ -7,10 +8,7 @@ class PayPalAssets {
   PayPalAssets._();
 
   /// Renders the official PayPal PP monogram vector icon.
-  static Widget monogram({
-    required PayPalColor color,
-    double height = 24.0,
-  }) {
+  static Widget monogram({required PayPalColor color, double height = 24.0}) {
     final String svgString;
 
     switch (color) {
@@ -48,18 +46,11 @@ class PayPalAssets {
         break;
     }
 
-    return SvgPicture.string(
-      svgString,
-      height: height,
-      fit: BoxFit.contain,
-    );
+    return SvgPicture.string(svgString, height: height, fit: BoxFit.contain);
   }
 
   /// Renders the official PayPal "PayPal" wordmark vector.
-  static Widget wordmark({
-    required PayPalColor color,
-    double height = 20.0,
-  }) {
+  static Widget wordmark({required PayPalColor color, double height = 20.0}) {
     final String primary;
     final String secondary;
 

@@ -8,4 +8,7 @@ enum KlarnaColor {
 
   /// Clean white (`#FFFFFF`) with subtle border outline (`#E5E5E5`).
   white,
+
+  /// Friendly Klarna Off-White (`#F9F8F5`) with subtle border outline (`#E5E5E5`).
+  offWhite,
 }

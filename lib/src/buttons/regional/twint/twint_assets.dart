@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'twint_color.dart';
 
 /// Vector asset generator for Swiss TWINT payment branding.
@@ -7,10 +8,7 @@ class TwintAssets {
   TwintAssets._();
 
   /// Renders the official TWINT logo.
-  static Widget logo({
-    required TwintColor color,
-    double height = 24.0,
-  }) {
+  static Widget logo({required TwintColor color, double height = 24.0}) {
     final String textColor = color == TwintColor.black ? '#FFFFFF' : '#000000';
 
     return SvgPicture.string(

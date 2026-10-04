@@ -48,9 +48,7 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PayPal Buttons Showcase'),
-      ),
+      appBar: AppBar(title: const Text('PayPal Buttons Showcase')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -90,9 +88,8 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -108,7 +105,9 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
               padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 16),
               decoration: BoxDecoration(
                 color: _color == PayPalColor.white
-                    ? const Color(0xFF232F3E) // Dark background for white button
+                    ? const Color(
+                        0xFF232F3E,
+                      ) // Dark background for white button
                     : const Color(0xFFF7F9FA),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade300),
@@ -252,9 +251,8 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
       children: [
         Text(
           'Brand Color Variants (Pill & Rounded)',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -318,9 +316,8 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
       children: [
         Text(
           'PayPal Pay Later Specialization',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(

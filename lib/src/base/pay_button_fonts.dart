@@ -67,7 +67,6 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 
-
   /// Font fallback chain for Afterpay / Clearpay buttons.
   ///
   /// References Afterpay's primary brand typefaces (Youth, Cash Sans Mono, Italian Plate No.2)

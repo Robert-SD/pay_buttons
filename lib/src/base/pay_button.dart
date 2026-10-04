@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'pay_button_colors.dart';
 
 /// Abstract base class for all payment buttons in `pay_buttons`.
@@ -117,7 +118,8 @@ abstract class PayButton extends StatelessWidget {
       fontStyle: fontStyle,
       letterSpacing: letterSpacing,
       fontFamily: fontFamily,
-      fontFamilyFallback: fontFamilyFallback ??
+      fontFamilyFallback:
+          fontFamilyFallback ??
           (fontFamily == null ? defaultFontFamilyFallback : null),
     );
     return textStyle != null ? baseStyle.merge(textStyle) : baseStyle;
@@ -126,7 +128,9 @@ abstract class PayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = resolveColors(context);
-    final effectiveRadius = BorderRadius.circular(borderRadius ?? defaultBorderRadius);
+    final effectiveRadius = BorderRadius.circular(
+      borderRadius ?? defaultBorderRadius,
+    );
 
     Widget button = SizedBox(
       height: height,
@@ -139,7 +143,10 @@ abstract class PayButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: effectiveRadius,
           side: colors.borderColor != null
-              ? BorderSide(color: colors.borderColor!, width: colors.borderWidth)
+              ? BorderSide(
+                  color: colors.borderColor!,
+                  width: colors.borderWidth,
+                )
               : BorderSide.none,
         ),
         clipBehavior: Clip.antiAlias,

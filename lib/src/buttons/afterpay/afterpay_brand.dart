@@ -7,5 +7,6 @@ enum AfterpayBrand {
   clearpay;
 
   /// The official lowercase brand name.
-  String get displayName => this == AfterpayBrand.clearpay ? 'clearpay' : 'afterpay';
+  String get displayName =>
+      this == AfterpayBrand.clearpay ? 'clearpay' : 'afterpay';
 }

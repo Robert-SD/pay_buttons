@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import '../../base/pay_button_fonts.dart';
@@ -96,7 +97,10 @@ class AfterpayButton extends PayButton {
     final textColor = _resolveTextColor();
 
     final badgeHeight = (height * 0.44).clamp(18.0, 24.0);
-    final badgeWidget = AfterpayAssets.loopBadge(color: color, height: badgeHeight);
+    final badgeWidget = AfterpayAssets.loopBadge(
+      color: color,
+      height: badgeHeight,
+    );
 
     final brandTextStyle = TextStyle(
       color: textColor,

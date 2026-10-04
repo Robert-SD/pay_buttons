@@ -5,14 +5,12 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('AmazonPayButton', () {
-    testWidgets('renders gold pill logo-only button by default', (tester) async {
+    testWidgets('renders gold pill logo-only button by default', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: AmazonPayButton(
-              onPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: AmazonPayButton(onPressed: () {})),
         ),
       );
 
@@ -33,10 +31,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: AmazonPayButton(
-              text: 'Check out with',
-              onPressed: () {},
-            ),
+            body: AmazonPayButton(text: 'Check out with', onPressed: () {}),
           ),
         ),
       );
@@ -44,15 +39,14 @@ void main() {
       expect(find.text('Check out with'), findsOneWidget);
     });
 
-    testWidgets('renders all AmazonPayColor themes without error', (tester) async {
+    testWidgets('renders all AmazonPayColor themes without error', (
+      tester,
+    ) async {
       for (final color in AmazonPayColor.values) {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: AmazonPayButton(
-                color: color,
-                onPressed: () {},
-              ),
+              body: AmazonPayButton(color: color, onPressed: () {}),
             ),
           ),
         );
@@ -65,10 +59,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: AmazonPayButton(
-                shape: shape,
-                onPressed: () {},
-              ),
+              body: AmazonPayButton(shape: shape, onPressed: () {}),
             ),
           ),
         );

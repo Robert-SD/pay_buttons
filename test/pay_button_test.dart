@@ -44,7 +44,9 @@ class _TestPayButton extends PayButton {
 
 void main() {
   group('PayButton Base Contract', () {
-    testWidgets('renders content and responds to tap when enabled', (tester) async {
+    testWidgets('renders content and responds to tap when enabled', (
+      tester,
+    ) async {
       var tapped = false;
 
       await tester.pumpWidget(
@@ -67,7 +69,9 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('does not respond to tap when enabled is false', (tester) async {
+    testWidgets('does not respond to tap when enabled is false', (
+      tester,
+    ) async {
       var tapped = false;
 
       await tester.pumpWidget(
@@ -87,28 +91,31 @@ void main() {
       expect(tapped, isFalse);
     });
 
-    testWidgets('shows CircularProgressIndicator and disables tap when isLoading is true', (tester) async {
-      var tapped = false;
+    testWidgets(
+      'shows CircularProgressIndicator and disables tap when isLoading is true',
+      (tester) async {
+        var tapped = false;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: _TestPayButton(
-              onPressed: () => tapped = true,
-              isLoading: true,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: _TestPayButton(
+                onPressed: () => tapped = true,
+                isLoading: true,
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(find.text('Test Pay'), findsNothing);
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+        expect(find.text('Test Pay'), findsNothing);
 
-      await tester.tap(find.byType(_TestPayButton));
-      await tester.pump();
+        await tester.tap(find.byType(_TestPayButton));
+        await tester.pump();
 
-      expect(tapped, isFalse);
-    });
+        expect(tapped, isFalse);
+      },
+    );
 
     testWidgets('renders semantics with label', (tester) async {
       await tester.pumpWidget(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'klarna_color.dart';
 
 /// Vector asset generator for official Klarna branding.
@@ -15,11 +16,13 @@ class KlarnaAssets {
     final String fillHex;
 
     if (customColor != null) {
-      fillHex = '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
+      fillHex =
+          '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
     } else {
       switch (color) {
         case KlarnaColor.pink:
         case KlarnaColor.white:
+        case KlarnaColor.offWhite:
           fillHex = '#0B051D';
           break;
         case KlarnaColor.black:
@@ -44,11 +47,13 @@ class KlarnaAssets {
     final String fillHex;
 
     if (customColor != null) {
-      fillHex = '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
+      fillHex =
+          '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
     } else {
       switch (color) {
         case KlarnaColor.pink:
         case KlarnaColor.white:
+        case KlarnaColor.offWhite:
           fillHex = '#0B051D';
           break;
         case KlarnaColor.black:

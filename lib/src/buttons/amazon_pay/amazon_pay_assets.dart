@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'amazon_pay_color.dart';
 
 /// Vector asset generator for official Amazon Pay branding.
@@ -7,10 +8,7 @@ class AmazonPayAssets {
   AmazonPayAssets._();
 
   /// Renders the official Amazon Pay logo (with the iconic curved smile arrow).
-  static Widget logo({
-    required AmazonPayColor color,
-    double height = 26.0,
-  }) {
+  static Widget logo({required AmazonPayColor color, double height = 26.0}) {
     final String textColor;
     final String smileColor;
 

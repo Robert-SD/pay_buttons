@@ -32,7 +32,6 @@ export 'src/buttons/shop_pay/shop_pay_color.dart';
 export 'src/buttons/shop_pay/shop_pay_shape.dart';
 export 'src/buttons/shop_pay/shop_pay_assets.dart';
 
-
 // Afterpay / Clearpay
 export 'src/buttons/afterpay/afterpay_button.dart';
 export 'src/buttons/afterpay/afterpay_color.dart';

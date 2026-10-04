@@ -48,9 +48,7 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shop Pay Showcase'),
-      ),
+      appBar: AppBar(title: const Text('Shop Pay Showcase')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -90,9 +88,8 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -252,9 +249,8 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
       children: [
         Text(
           'Shop Pay Color Schemes (Rounded & Pill)',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -316,9 +312,8 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
       children: [
         Text(
           'Custom "Buy with" Actions',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -330,22 +325,10 @@ class _ShopPayShowcasePageState extends State<ShopPayShowcasePage> {
           spacing: 16,
           runSpacing: 12,
           children: [
-            ShopPayButton(
-              onPressed: _handlePayPress,
-              text: 'Buy with',
-            ),
-            ShopPayButton(
-              onPressed: _handlePayPress,
-              text: 'Kaufen mit',
-            ),
-            ShopPayButton(
-              onPressed: _handlePayPress,
-              text: 'Acheter avec',
-            ),
-            ShopPayButton(
-              onPressed: _handlePayPress,
-              text: 'Comprar con',
-            ),
+            ShopPayButton(onPressed: _handlePayPress, text: 'Buy with'),
+            ShopPayButton(onPressed: _handlePayPress, text: 'Kaufen mit'),
+            ShopPayButton(onPressed: _handlePayPress, text: 'Acheter avec'),
+            ShopPayButton(onPressed: _handlePayPress, text: 'Comprar con'),
           ],
         ),
       ],

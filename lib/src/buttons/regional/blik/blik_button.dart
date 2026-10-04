@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
@@ -40,8 +41,7 @@ class BlikButton extends PayButton {
       shape == BlikShape.pill ? (height / 2) : 6.0;
 
   @override
-  String? get semanticLabel =>
-      super.semanticLabel ?? 'BLIK';
+  String? get semanticLabel => super.semanticLabel ?? 'BLIK';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {

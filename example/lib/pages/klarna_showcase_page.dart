@@ -13,6 +13,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
   KlarnaColor _color = KlarnaColor.pink;
   KlarnaShape _shape = KlarnaShape.rounded;
   String? _text = 'Pay with';
+  bool _logoFirst = true;
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
@@ -48,9 +49,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Klarna Buttons Showcase'),
-      ),
+      appBar: AppBar(title: const Text('Klarna Buttons Showcase')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -70,6 +69,13 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
 
           // 3. Custom Text Variations
           _buildInstallmentsSection(),
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+
+          // 4. Sign in with Klarna (SIWK) & Responsive Breakpoints
+          _buildSiwkSection(),
         ],
       ),
     );
@@ -90,9 +96,8 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -107,8 +112,12 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 16),
               decoration: BoxDecoration(
-                color: _color == KlarnaColor.white
-                    ? const Color(0xFF1E293B) // Dark background for white button
+                color:
+                    (_color == KlarnaColor.white ||
+                        _color == KlarnaColor.offWhite)
+                    ? const Color(
+                        0xFF1E293B,
+                      ) // Dark background for white/offWhite button
                     : const Color(0xFFF7F9FA),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade300),
@@ -121,6 +130,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   color: _color,
                   shape: _shape,
                   text: _text,
+                  logoFirst: _logoFirst,
                   height: _height,
                   width: _fullWidth ? double.infinity : null,
                   elevation: _elevation,
@@ -202,6 +212,13 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                   selected: _fullWidth,
                   onSelected: (val) => setState(() => _fullWidth = val),
                 ),
+                FilterChip(
+                  label: Text(
+                    _logoFirst ? 'Logo First: On' : 'Logo First: Off',
+                  ),
+                  selected: _logoFirst,
+                  onSelected: (val) => setState(() => _logoFirst = val),
+                ),
               ],
             ),
 
@@ -251,14 +268,13 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Klarna Color Schemes (Rounded & Pill)',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          'Klarna Color Schemes (Rounded, Rect & Pill)',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
-          'Side-by-side verification of all supported color themes.',
+          'Side-by-side verification of all supported color themes and contour shapes.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -269,7 +285,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
             return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: color == KlarnaColor.white
+                color:
+                    (color == KlarnaColor.white ||
+                        color == KlarnaColor.offWhite)
                     ? const Color(0xFF1E293B)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(8),
@@ -284,7 +302,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
-                      color: color == KlarnaColor.white
+                      color:
+                          (color == KlarnaColor.white ||
+                              color == KlarnaColor.offWhite)
                           ? Colors.white70
                           : Colors.black87,
                     ),
@@ -294,6 +314,13 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                     onPressed: _handlePayPress,
                     color: color,
                     shape: KlarnaShape.rounded,
+                    text: 'Pay with',
+                  ),
+                  const SizedBox(height: 10),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    color: color,
+                    shape: KlarnaShape.rect,
                     text: 'Pay with',
                   ),
                   const SizedBox(height: 10),
@@ -318,9 +345,8 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       children: [
         Text(
           'Klarna Custom Text Examples',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -332,21 +358,141 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
           spacing: 16,
           runSpacing: 12,
           children: [
-            KlarnaButton(
-              onPressed: _handlePayPress,
-              text: 'Pay in 30 days',
-            ),
+            KlarnaButton(onPressed: _handlePayPress, text: 'Pay in 30 days'),
             KlarnaButton(
               onPressed: _handlePayPress,
               text: 'In 30 Tagen bezahlen',
             ),
-            KlarnaButton(
-              onPressed: _handlePayPress,
-              text: 'Pay in 3',
+            KlarnaButton(onPressed: _handlePayPress, text: 'Pay in 3'),
+            KlarnaButton(onPressed: _handlePayPress, text: 'Sofort bezahlen'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSiwkSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Sign in with Klarna (SIWK) & Responsive Breakpoints',
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Complies with official Klarna Identity button styling guidelines. Demonstrates dark/light/off-white themes and dynamic responsive width collapse.',
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            // Variant 1: Full width (> 200px) with "Continue with Klarna."
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Full Variant (Width > 200px: 335dp default)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Displays full label: "Continue with" + Klarna logo',
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                  ),
+                  const SizedBox(height: 12),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    width: 335,
+                    text: 'Continue with',
+                    logoFirst: false,
+                    color: KlarnaColor.black,
+                    shape: KlarnaShape.rounded,
+                  ),
+                ],
+              ),
             ),
-            KlarnaButton(
-              onPressed: _handlePayPress,
-              text: 'Sofort bezahlen',
+
+            // Variant 2: Medium width (84px - 200px) logo only
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Medium Variant (84dp ≤ Width ≤ 200dp: 140dp)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Auto-collapses to "Klarna." wordmark only',
+                    style: TextStyle(fontSize: 12, color: Colors.white70),
+                  ),
+                  const SizedBox(height: 12),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    width: 140,
+                    text: 'Continue with',
+                    logoFirst: false,
+                    color: KlarnaColor.white,
+                    shape: KlarnaShape.rect,
+                  ),
+                ],
+              ),
+            ),
+
+            // Variant 3: Compact width (< 84px) monogram "K."
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Compact Variant (Width < 84dp: 54dp)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Auto-collapses to compact "K." monogram with dot',
+                    style: TextStyle(fontSize: 12, color: Colors.white70),
+                  ),
+                  const SizedBox(height: 12),
+                  KlarnaButton(
+                    onPressed: _handlePayPress,
+                    width: 54,
+                    color: KlarnaColor.offWhite,
+                    shape: KlarnaShape.pill,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import '../../base/pay_button_fonts.dart';
@@ -44,8 +45,7 @@ class PayPalButton extends PayButton {
   String get defaultSemanticLabel => 'PayPal';
 
   @override
-  String? get semanticLabel =>
-      super.semanticLabel ?? defaultSemanticLabel;
+  String? get semanticLabel => super.semanticLabel ?? defaultSemanticLabel;
 
   @override
   PayButtonColors resolveColors(BuildContext context) {

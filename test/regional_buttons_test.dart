@@ -6,38 +6,34 @@ import 'package:pay_buttons/pay_buttons.dart';
 void main() {
   group('European Regional Champions', () {
     group('TwintButton', () {
-      testWidgets('renders black rounded twint button without text by default', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: TwintButton(
-                onPressed: () {},
-              ),
+      testWidgets(
+        'renders black rounded twint button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: TwintButton(onPressed: () {})),
             ),
-          ),
-        );
+          );
 
-        expect(find.byType(TwintButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.byType(Text), findsNothing);
+          expect(find.byType(TwintButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
 
-        final material = tester.widget<Material>(
-          find.descendant(
-            of: find.byType(TwintButton),
-            matching: find.byType(Material),
-          ),
-        );
-        expect(material.color, const Color(0xFF000000));
-      });
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(TwintButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFF000000));
+        },
+      );
 
       testWidgets('renders custom text when provided', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: TwintButton(
-                text: 'Bezahlen mit',
-                onPressed: () {},
-              ),
+              body: TwintButton(text: 'Bezahlen mit', onPressed: () {}),
             ),
           ),
         );
@@ -66,10 +62,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: TwintButton(
-                text: 'Bezahlen mit',
-                onPressed: () {},
-              ),
+              body: TwintButton(text: 'Bezahlen mit', onPressed: () {}),
             ),
           ),
         );
@@ -78,7 +71,9 @@ void main() {
         expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.twint);
       });
 
-      testWidgets('renders all TwintColor and TwintShape options', (tester) async {
+      testWidgets('renders all TwintColor and TwintShape options', (
+        tester,
+      ) async {
         for (final color in TwintColor.values) {
           for (final shape in TwintShape.values) {
             await tester.pumpWidget(
@@ -99,30 +94,26 @@ void main() {
     });
 
     group('IdealButton', () {
-      testWidgets('renders white rounded ideal button without text by default', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: IdealButton(
-                onPressed: () {},
-              ),
+      testWidgets(
+        'renders white rounded ideal button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: IdealButton(onPressed: () {})),
             ),
-          ),
-        );
+          );
 
-        expect(find.byType(IdealButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.byType(Text), findsNothing);
-      });
+          expect(find.byType(IdealButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+        },
+      );
 
       testWidgets('renders custom text when provided', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: IdealButton(
-                text: 'Betaal met',
-                onPressed: () {},
-              ),
+              body: IdealButton(text: 'Betaal met', onPressed: () {}),
             ),
           ),
         );
@@ -130,7 +121,9 @@ void main() {
         expect(find.text('Betaal met'), findsOneWidget);
       });
 
-      testWidgets('renders all IdealColor and IdealShape options', (tester) async {
+      testWidgets('renders all IdealColor and IdealShape options', (
+        tester,
+      ) async {
         for (final color in IdealColor.values) {
           for (final shape in IdealShape.values) {
             await tester.pumpWidget(
@@ -151,14 +144,12 @@ void main() {
     });
 
     group('BlikButton', () {
-      testWidgets('renders black rounded blik button without text by default', (tester) async {
+      testWidgets('renders black rounded blik button without text by default', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: Scaffold(
-              body: BlikButton(
-                onPressed: () {},
-              ),
-            ),
+            home: Scaffold(body: BlikButton(onPressed: () {})),
           ),
         );
 
@@ -171,10 +162,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: BlikButton(
-                text: 'Zapłać z',
-                onPressed: () {},
-              ),
+              body: BlikButton(text: 'Zapłać z', onPressed: () {}),
             ),
           ),
         );
@@ -182,7 +170,9 @@ void main() {
         expect(find.text('Zapłać z'), findsOneWidget);
       });
 
-      testWidgets('renders all BlikColor and BlikShape options', (tester) async {
+      testWidgets('renders all BlikColor and BlikShape options', (
+        tester,
+      ) async {
         for (final color in BlikColor.values) {
           for (final shape in BlikShape.values) {
             await tester.pumpWidget(
@@ -203,30 +193,26 @@ void main() {
     });
 
     group('BancontactButton', () {
-      testWidgets('renders white rounded bancontact button without text by default', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: BancontactButton(
-                onPressed: () {},
-              ),
+      testWidgets(
+        'renders white rounded bancontact button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: BancontactButton(onPressed: () {})),
             ),
-          ),
-        );
+          );
 
-        expect(find.byType(BancontactButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.byType(Text), findsNothing);
-      });
+          expect(find.byType(BancontactButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+        },
+      );
 
       testWidgets('renders custom text when provided', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: BancontactButton(
-                text: 'Betaal met',
-                onPressed: () {},
-              ),
+              body: BancontactButton(text: 'Betaal met', onPressed: () {}),
             ),
           ),
         );
@@ -234,7 +220,9 @@ void main() {
         expect(find.text('Betaal met'), findsOneWidget);
       });
 
-      testWidgets('renders all BancontactColor and BancontactShape options', (tester) async {
+      testWidgets('renders all BancontactColor and BancontactShape options', (
+        tester,
+      ) async {
         for (final color in BancontactColor.values) {
           for (final shape in BancontactShape.values) {
             await tester.pumpWidget(
@@ -255,30 +243,26 @@ void main() {
     });
 
     group('BizumButton', () {
-      testWidgets('renders white rounded bizum button without text by default', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: BizumButton(
-                onPressed: () {},
-              ),
+      testWidgets(
+        'renders white rounded bizum button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: BizumButton(onPressed: () {})),
             ),
-          ),
-        );
+          );
 
-        expect(find.byType(BizumButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.byType(Text), findsNothing);
-      });
+          expect(find.byType(BizumButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+        },
+      );
 
       testWidgets('renders custom text when provided', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: BizumButton(
-                text: 'Pagar con',
-                onPressed: () {},
-              ),
+              body: BizumButton(text: 'Pagar con', onPressed: () {}),
             ),
           ),
         );
@@ -286,7 +270,9 @@ void main() {
         expect(find.text('Pagar con'), findsOneWidget);
       });
 
-      testWidgets('renders all BizumColor and BizumShape options', (tester) async {
+      testWidgets('renders all BizumColor and BizumShape options', (
+        tester,
+      ) async {
         for (final color in BizumColor.values) {
           for (final shape in BizumShape.values) {
             await tester.pumpWidget(
@@ -307,30 +293,26 @@ void main() {
     });
 
     group('WeroButton', () {
-      testWidgets('renders yellow rounded wero button without text by default', (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: WeroButton(
-                onPressed: () {},
-              ),
+      testWidgets(
+        'renders yellow rounded wero button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: WeroButton(onPressed: () {})),
             ),
-          ),
-        );
+          );
 
-        expect(find.byType(WeroButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.byType(Text), findsNothing);
-      });
+          expect(find.byType(WeroButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+        },
+      );
 
       testWidgets('renders custom text when provided', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: WeroButton(
-                text: 'Pay with',
-                onPressed: () {},
-              ),
+              body: WeroButton(text: 'Pay with', onPressed: () {}),
             ),
           ),
         );
@@ -338,7 +320,9 @@ void main() {
         expect(find.text('Pay with'), findsOneWidget);
       });
 
-      testWidgets('renders all WeroColor and WeroShape options', (tester) async {
+      testWidgets('renders all WeroColor and WeroShape options', (
+        tester,
+      ) async {
         for (final color in WeroColor.values) {
           for (final shape in WeroShape.values) {
             await tester.pumpWidget(
@@ -361,10 +345,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: WeroButton(
-                text: 'Payer avec',
-                onPressed: () {},
-              ),
+              body: WeroButton(text: 'Payer avec', onPressed: () {}),
             ),
           ),
         );
@@ -379,7 +360,10 @@ void main() {
             home: Scaffold(
               body: WeroButton(
                 text: 'Bezahlen mit',
-                textStyle: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.0),
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.0,
+                ),
                 onPressed: () {},
               ),
             ),

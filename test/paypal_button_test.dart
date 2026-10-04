@@ -5,14 +5,12 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('PayPalButton', () {
-    testWidgets('renders gold pill logo-only button by default', (tester) async {
+    testWidgets('renders gold pill logo-only button by default', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: PayPalButton(
-              onPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: PayPalButton(onPressed: () {})),
         ),
       );
 
@@ -33,10 +31,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: PayPalButton(
-              text: 'Checkout',
-              onPressed: () {},
-            ),
+            body: PayPalButton(text: 'Checkout', onPressed: () {}),
           ),
         ),
       );
@@ -50,10 +45,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: PayPalButton(
-                color: color,
-                onPressed: () {},
-              ),
+              body: PayPalButton(color: color, onPressed: () {}),
             ),
           ),
         );
@@ -61,14 +53,12 @@ void main() {
       }
     });
 
-    testWidgets('PayPalPayLaterButton defaults to Pay Later text', (tester) async {
+    testWidgets('PayPalPayLaterButton defaults to Pay Later text', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: PayPalPayLaterButton(
-              onPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: PayPalPayLaterButton(onPressed: () {})),
         ),
       );
 
@@ -76,7 +66,9 @@ void main() {
       expect(find.text('Pay Later'), findsOneWidget);
     });
 
-    testWidgets('PayPalButton applies custom textStyle when provided', (tester) async {
+    testWidgets('PayPalButton applies custom textStyle when provided', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -93,7 +85,9 @@ void main() {
       expect(textWidget.style?.fontWeight, FontWeight.w900);
     });
 
-    testWidgets('PayPalButton applies custom fontFamily when provided', (tester) async {
+    testWidgets('PayPalButton applies custom fontFamily when provided', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -110,14 +104,13 @@ void main() {
       expect(textWidget.style?.fontFamily, 'CustomPayPalFont');
     });
 
-    testWidgets('PayPalButton defaults to PayButtonFonts.paypal fallback', (tester) async {
+    testWidgets('PayPalButton defaults to PayButtonFonts.paypal fallback', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: PayPalButton(
-              text: 'Checkout',
-              onPressed: () {},
-            ),
+            body: PayPalButton(text: 'Checkout', onPressed: () {}),
           ),
         ),
       );
@@ -126,21 +119,22 @@ void main() {
       expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.paypal);
     });
 
-    testWidgets('PayPalPayLaterButton announces PayPal Pay Later to screen readers', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: PayPalPayLaterButton(
-              onPressed: () {},
-            ),
+    testWidgets(
+      'PayPalPayLaterButton announces PayPal Pay Later to screen readers',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(body: PayPalPayLaterButton(onPressed: () {})),
           ),
-        ),
-      );
+        );
 
-      final semantics = tester.getSemantics(find.byType(PayPalPayLaterButton));
-      expect(semantics.label, contains('PayPal Pay Later'));
-      expect(semantics.flagsCollection.isButton, isTrue);
-      expect(semantics.flagsCollection.isEnabled.value, 1);
-    });
+        final semantics = tester.getSemantics(
+          find.byType(PayPalPayLaterButton),
+        );
+        expect(semantics.label, contains('PayPal Pay Later'));
+        expect(semantics.flagsCollection.isButton, isTrue);
+        expect(semantics.flagsCollection.isEnabled.value, 1);
+      },
+    );
   });
 }

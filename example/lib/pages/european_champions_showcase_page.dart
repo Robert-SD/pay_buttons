@@ -105,9 +105,7 @@ class _EuropeanChampionsShowcasePageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('European Regional Champions'),
-      ),
+      appBar: AppBar(title: const Text('European Regional Champions')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -142,9 +140,8 @@ class _EuropeanChampionsShowcasePageState
                 const SizedBox(width: 8),
                 Text(
                   'Top European Payment Methods',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -228,9 +225,8 @@ class _EuropeanChampionsShowcasePageState
                 const SizedBox(width: 8),
                 Text(
                   '${_selectedChampion.title} Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -249,9 +245,7 @@ class _EuropeanChampionsShowcasePageState
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade300),
               ),
-              child: Center(
-                child: _buildSelectedButton(),
-              ),
+              child: Center(child: _buildSelectedButton()),
             ),
             const SizedBox(height: 24),
 
@@ -265,9 +259,8 @@ class _EuropeanChampionsShowcasePageState
             // Common Controls
             Text(
               'Common Controls',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(context).textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             SwitchListTile(
@@ -284,12 +277,17 @@ class _EuropeanChampionsShowcasePageState
             ),
             SwitchListTile(
               title: const Text('Full Width'),
-              subtitle: const Text('Expands button to fill available horizontal space'),
+              subtitle: const Text(
+                'Expands button to fill available horizontal space',
+              ),
               value: _fullWidth,
               onChanged: (val) => setState(() => _fullWidth = val),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Row(
                 children: [
                   Text('Height: ${_height.toStringAsFixed(0)} dp'),
@@ -432,7 +430,11 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _weroShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildTextInput('Custom Text', _weroTextController, (t) => setState(() => _weroText = t)),
+          _buildTextInput(
+            'Custom Text',
+            _weroTextController,
+            (t) => setState(() => _weroText = t),
+          ),
         ];
 
       case RegionalChampion.twint:
@@ -451,7 +453,11 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _twintShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildTextInput('Custom Text', _twintTextController, (t) => setState(() => _twintText = t)),
+          _buildTextInput(
+            'Custom Text',
+            _twintTextController,
+            (t) => setState(() => _twintText = t),
+          ),
         ];
 
       case RegionalChampion.ideal:
@@ -470,7 +476,11 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _idealShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildTextInput('Custom Text', _idealTextController, (t) => setState(() => _idealText = t)),
+          _buildTextInput(
+            'Custom Text',
+            _idealTextController,
+            (t) => setState(() => _idealText = t),
+          ),
         ];
 
       case RegionalChampion.blik:
@@ -489,7 +499,11 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _blikShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildTextInput('Custom Text', _blikTextController, (t) => setState(() => _blikText = t)),
+          _buildTextInput(
+            'Custom Text',
+            _blikTextController,
+            (t) => setState(() => _blikText = t),
+          ),
         ];
 
       case RegionalChampion.bancontact:
@@ -508,7 +522,11 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _bancontactShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildTextInput('Custom Text', _bancontactTextController, (t) => setState(() => _bancontactText = t)),
+          _buildTextInput(
+            'Custom Text',
+            _bancontactTextController,
+            (t) => setState(() => _bancontactText = t),
+          ),
         ];
 
       case RegionalChampion.bizum:
@@ -527,17 +545,28 @@ class _EuropeanChampionsShowcasePageState
             onChanged: (s) => setState(() => _bizumShape = s!),
           ),
           const SizedBox(height: 12),
-          _buildTextInput('Custom Text', _bizumTextController, (t) => setState(() => _bizumText = t)),
+          _buildTextInput(
+            'Custom Text',
+            _bizumTextController,
+            (t) => setState(() => _bizumText = t),
+          ),
         ];
     }
   }
 
-  Widget _buildTextInput(String label, TextEditingController controller, ValueChanged<String?> onChanged) {
+  Widget _buildTextInput(
+    String label,
+    TextEditingController controller,
+    ValueChanged<String?> onChanged,
+  ) {
     return Row(
       children: [
         SizedBox(
           width: 140,
-          child: Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+          child: Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
         ),
         Expanded(
           child: TextField(
@@ -563,7 +592,10 @@ class _EuropeanChampionsShowcasePageState
       children: [
         SizedBox(
           width: 140,
-          child: Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+          child: Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
         ),
         Expanded(
           child: DropdownButton<T>(
@@ -572,10 +604,7 @@ class _EuropeanChampionsShowcasePageState
             underline: Container(height: 1, color: Colors.grey.shade400),
             items: items.map((T item) {
               final text = item is Enum ? item.name : item.toString();
-              return DropdownMenuItem<T>(
-                value: item,
-                child: Text(text),
-              );
+              return DropdownMenuItem<T>(value: item, child: Text(text));
             }).toList(),
             onChanged: onChanged,
           ),
@@ -590,9 +619,8 @@ class _EuropeanChampionsShowcasePageState
       children: [
         Text(
           '${_selectedChampion.title} Gallery',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -638,10 +666,7 @@ class _EuropeanChampionsShowcasePageState
                         text: 'Pay with',
                         onPressed: () {},
                       ),
-                      WeroButton(
-                        color: color,
-                        onPressed: () {},
-                      ),
+                      WeroButton(color: color, onPressed: () {}),
                     ],
                   ),
                 ),
@@ -680,10 +705,7 @@ class _EuropeanChampionsShowcasePageState
                         text: 'Bezahlen mit',
                         onPressed: () {},
                       ),
-                      TwintButton(
-                        color: color,
-                        onPressed: () {},
-                      ),
+                      TwintButton(color: color, onPressed: () {}),
                     ],
                   ),
                 ),
@@ -720,10 +742,7 @@ class _EuropeanChampionsShowcasePageState
                         text: 'Betaal met',
                         onPressed: () {},
                       ),
-                      IdealButton(
-                        color: color,
-                        onPressed: () {},
-                      ),
+                      IdealButton(color: color, onPressed: () {}),
                     ],
                   ),
                 ),
@@ -762,10 +781,7 @@ class _EuropeanChampionsShowcasePageState
                         text: 'Zapłać z',
                         onPressed: () {},
                       ),
-                      BlikButton(
-                        color: color,
-                        onPressed: () {},
-                      ),
+                      BlikButton(color: color, onPressed: () {}),
                     ],
                   ),
                 ),
@@ -804,10 +820,7 @@ class _EuropeanChampionsShowcasePageState
                         text: 'Betaal met',
                         onPressed: () {},
                       ),
-                      BancontactButton(
-                        color: color,
-                        onPressed: () {},
-                      ),
+                      BancontactButton(color: color, onPressed: () {}),
                     ],
                   ),
                 ),
@@ -844,10 +857,7 @@ class _EuropeanChampionsShowcasePageState
                         text: 'Pagar con',
                         onPressed: () {},
                       ),
-                      BizumButton(
-                        color: color,
-                        onPressed: () {},
-                      ),
+                      BizumButton(color: color, onPressed: () {}),
                     ],
                   ),
                 ),

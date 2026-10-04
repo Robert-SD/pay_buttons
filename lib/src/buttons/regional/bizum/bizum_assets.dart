@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'bizum_color.dart';
 
 /// Vector asset generator for Spanish Bizum payment branding.
@@ -7,10 +8,7 @@ class BizumAssets {
   BizumAssets._();
 
   /// Renders the official Bizum logo.
-  static Widget logo({
-    required BizumColor color,
-    double height = 24.0,
-  }) {
+  static Widget logo({required BizumColor color, double height = 24.0}) {
     final String fillColor = color == BizumColor.teal ? '#FFFFFF' : '#00B4B6';
 
     return SvgPicture.string(

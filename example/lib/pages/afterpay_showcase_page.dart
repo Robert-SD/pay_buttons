@@ -49,9 +49,7 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Afterpay / Clearpay Showcase'),
-      ),
+      appBar: AppBar(title: const Text('Afterpay / Clearpay Showcase')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -98,9 +96,8 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -275,9 +272,8 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Color Schemes (Rounded & Pill)',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -341,9 +337,8 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Regional Adaptations (Afterpay vs Clearpay)',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -385,9 +380,8 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Custom Action Verbs',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -399,22 +393,13 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
           spacing: 16,
           runSpacing: 12,
           children: [
-            AfterpayButton(
-              onPressed: _handlePayPress,
-              text: 'Buy now with',
-            ),
+            AfterpayButton(onPressed: _handlePayPress, text: 'Buy now with'),
             AfterpayButton(
               onPressed: _handlePayPress,
               text: 'Jetzt kaufen mit',
             ),
-            AfterpayButton(
-              onPressed: _handlePayPress,
-              text: 'Payer avec',
-            ),
-            AfterpayButton(
-              onPressed: _handlePayPress,
-              text: 'Comprar con',
-            ),
+            AfterpayButton(onPressed: _handlePayPress, text: 'Payer avec'),
+            AfterpayButton(onPressed: _handlePayPress, text: 'Comprar con'),
           ],
         ),
       ],

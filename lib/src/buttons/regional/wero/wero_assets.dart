@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'wero_color.dart';
 
 /// Vector asset generator for Wero (European Payments Initiative) branding.
@@ -7,12 +8,8 @@ class WeroAssets {
   WeroAssets._();
 
   /// Renders the official Wero wordmark logo.
-  static Widget logo({
-    required WeroColor color,
-    double height = 22.0,
-  }) {
-    final String fillColor =
-        color == WeroColor.black ? '#FFFFFF' : '#1D1C1C';
+  static Widget logo({required WeroColor color, double height = 22.0}) {
+    final String fillColor = color == WeroColor.black ? '#FFFFFF' : '#1D1C1C';
 
     return SvgPicture.string(
       _weroSvg(fillColor: fillColor),

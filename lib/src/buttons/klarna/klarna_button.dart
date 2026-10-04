@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import '../../base/pay_button_fonts.dart';
@@ -6,10 +7,15 @@ import 'klarna_assets.dart';
 import 'klarna_color.dart';
 import 'klarna_shape.dart';
 
-/// A brand-compliant Klarna payment button.
+/// A brand-compliant Klarna payment and sign-in button.
 ///
-/// Complies with official [Klarna Design Guidelines](https://docs.klarna.com/merchant-journey/branding/design-guidelines/).
-/// Fully rendered in pure Flutter using official vector graphics without native SDK bloat.
+/// Complies with official [Klarna Design Guidelines](https://docs.klarna.com/merchant-journey/branding/design-guidelines/)
+/// and [Sign in with Klarna Button Styling](https://docs.klarna.com/acquirer/klarna/sign-in-with-klarna/additional-resources/button-styling/).
+///
+/// Features dynamic responsive width breakpoints:
+/// - **Width > 200px**: Displays full text label + Klarna logo (or text only if configured).
+/// - **84px ≤ Width ≤ 200px**: Displays the full "Klarna." wordmark only.
+/// - **Width < 84px**: Displays the compact "K." monogram with dot.
 class KlarnaButton extends PayButton {
   const KlarnaButton({
     super.key,
@@ -28,6 +34,7 @@ class KlarnaButton extends PayButton {
     super.semanticLabel,
     this.color = KlarnaColor.pink,
     this.shape = KlarnaShape.rounded,
+    this.logoFirst = true,
   });
 
   /// The brand color palette for the button. Defaults to [KlarnaColor.pink].
@@ -36,13 +43,25 @@ class KlarnaButton extends PayButton {
   /// The contour shape of the button. Defaults to [KlarnaShape.rounded] (5.0 dp).
   final KlarnaShape shape;
 
-  @override
-  double get defaultBorderRadius =>
-      shape == KlarnaShape.pill ? (height / 2) : 5.0;
+  /// Whether the Klarna logo appears before [text]. Defaults to `true`.
+  ///
+  /// Set to `false` when text precedes the brand logo (e.g. "Continue with Klarna.").
+  final bool logoFirst;
 
   @override
-  String? get semanticLabel =>
-      super.semanticLabel ?? 'Klarna';
+  double get defaultBorderRadius {
+    switch (shape) {
+      case KlarnaShape.pill:
+        return height / 2;
+      case KlarnaShape.rect:
+        return 0.0;
+      case KlarnaShape.rounded:
+        return 5.0;
+    }
+  }
+
+  @override
+  String? get semanticLabel => super.semanticLabel ?? 'Klarna';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
@@ -63,6 +82,15 @@ class KlarnaButton extends PayButton {
           splashColor: Color(0x1F0B051D),
           highlightColor: Color(0x0F0B051D),
         );
+      case KlarnaColor.offWhite:
+        return const PayButtonColors(
+          backgroundColor: Color(0xFFF9F8F5),
+          borderColor: Color(0xFFE5E5E5),
+          borderWidth: 1.0,
+          progressColor: Color(0xFF0B051D),
+          splashColor: Color(0x1F0B051D),
+          highlightColor: Color(0x0F0B051D),
+        );
       case KlarnaColor.black:
         return const PayButtonColors(
           backgroundColor: Color(0xFF0B051D),
@@ -77,6 +105,7 @@ class KlarnaButton extends PayButton {
     switch (color) {
       case KlarnaColor.pink:
       case KlarnaColor.white:
+      case KlarnaColor.offWhite:
         return const Color(0xFF0B051D);
       case KlarnaColor.black:
         return Colors.white;
@@ -85,31 +114,52 @@ class KlarnaButton extends PayButton {
 
   @override
   Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableWidth = constraints.maxWidth;
+        final textColor = _resolveTextColor();
+        final logoHeight = (height * 0.40).clamp(16.0, 22.0);
 
-    final logoHeight = (height * 0.40).clamp(16.0, 22.0);
-    final logoWidget = KlarnaAssets.wordmark(color: color, height: logoHeight);
+        // Responsive variant: Width < 84px displays compact monogram "K."
+        if (availableWidth < 84.0) {
+          final monogramHeight = (height * 0.45).clamp(18.0, 24.0);
+          return KlarnaAssets.monogram(color: color, height: monogramHeight);
+        }
 
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
+        final logoWidget = KlarnaAssets.wordmark(
+          color: color,
+          height: logoHeight,
+        );
 
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w700,
-      letterSpacing: -0.2,
-      defaultFontFamilyFallback: PayButtonFonts.klarna,
-    );
+        // Responsive variant: 84px <= Width <= 200px or no text displays wordmark only
+        if (availableWidth <= 200.0 || text == null || text!.isEmpty) {
+          return logoWidget;
+        }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        logoWidget,
-        const SizedBox(width: 8),
-        Text(text!, style: effectiveTextStyle),
-      ],
+        final effectiveTextStyle = resolveTextStyle(
+          textColor: textColor,
+          fontSize: (height * 0.31).clamp(13.0, 16.0),
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.2,
+          defaultFontFamilyFallback: PayButtonFonts.klarna,
+        );
+
+        final textWidget = Flexible(
+          child: Text(
+            text!,
+            style: effectiveTextStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
+        );
+
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: logoFirst
+              ? [logoWidget, const SizedBox(width: 8), textWidget]
+              : [textWidget, const SizedBox(width: 8), logoWidget],
+        );
+      },
     );
   }
 }

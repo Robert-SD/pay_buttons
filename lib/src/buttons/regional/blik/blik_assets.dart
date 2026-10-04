@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'blik_color.dart';
 
 /// Vector asset generator for Polish BLIK payment branding.
@@ -7,10 +8,7 @@ class BlikAssets {
   BlikAssets._();
 
   /// Renders the official BLIK logo.
-  static Widget logo({
-    required BlikColor color,
-    double height = 24.0,
-  }) {
+  static Widget logo({required BlikColor color, double height = 24.0}) {
     final String textColor = color == BlikColor.black ? '#FFFFFF' : '#000000';
 
     return SvgPicture.string(

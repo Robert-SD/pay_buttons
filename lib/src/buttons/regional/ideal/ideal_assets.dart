@@ -7,11 +7,7 @@ class IdealAssets {
 
   /// Renders the official iDEAL logo badge.
   static Widget logo({double height = 24.0}) {
-    return SvgPicture.string(
-      _idealSvg,
-      height: height,
-      fit: BoxFit.contain,
-    );
+    return SvgPicture.string(_idealSvg, height: height, fit: BoxFit.contain);
   }
 
   static const String _idealSvg = '''

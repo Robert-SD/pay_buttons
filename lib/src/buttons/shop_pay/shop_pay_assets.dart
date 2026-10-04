@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'shop_pay_color.dart';
 
 /// Vector asset generator for official Shopify Shop Pay branding.
@@ -7,10 +8,7 @@ class ShopPayAssets {
   ShopPayAssets._();
 
   /// Renders the official Shop Pay logo with wordmark and pill badge.
-  static Widget logo({
-    required ShopPayColor color,
-    double height = 24.0,
-  }) {
+  static Widget logo({required ShopPayColor color, double height = 24.0}) {
     final String fillColor;
 
     switch (color) {
@@ -31,9 +29,7 @@ class ShopPayAssets {
   }
 
   /// Official Shop Pay SVG geometry.
-  static String _shopPaySvg({
-    required String fillColor,
-  }) {
+  static String _shopPaySvg({required String fillColor}) {
     return '''
 <svg viewBox="0 0 683 164" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Pill badge with punched-out "Pay" -->

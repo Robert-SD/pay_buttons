@@ -48,9 +48,7 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Amazon Pay Showcase'),
-      ),
+      appBar: AppBar(title: const Text('Amazon Pay Showcase')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -90,9 +88,8 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -252,9 +249,8 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
       children: [
         Text(
           'Amazon Pay Color Schemes (Pill & Rounded)',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -318,9 +314,8 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
       children: [
         Text(
           'Custom Action Verbs',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -332,22 +327,10 @@ class _AmazonPayShowcasePageState extends State<AmazonPayShowcasePage> {
           spacing: 16,
           runSpacing: 12,
           children: [
-            AmazonPayButton(
-              onPressed: _handlePayPress,
-              text: 'Check out with',
-            ),
-            AmazonPayButton(
-              onPressed: _handlePayPress,
-              text: 'Bezahlen mit',
-            ),
-            AmazonPayButton(
-              onPressed: _handlePayPress,
-              text: 'Acheter avec',
-            ),
-            AmazonPayButton(
-              onPressed: _handlePayPress,
-              text: 'Comprar con',
-            ),
+            AmazonPayButton(onPressed: _handlePayPress, text: 'Check out with'),
+            AmazonPayButton(onPressed: _handlePayPress, text: 'Bezahlen mit'),
+            AmazonPayButton(onPressed: _handlePayPress, text: 'Acheter avec'),
+            AmazonPayButton(onPressed: _handlePayPress, text: 'Comprar con'),
           ],
         ),
       ],
