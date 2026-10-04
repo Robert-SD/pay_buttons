@@ -78,6 +78,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_svg:
     dependency: transitive
     description:
@@ -107,6 +112,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "1ca20c894b1717686a2319b8548763d812bc0aabdac580420a44c5178c57a867"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.3"
   leak_tracker:
     dependency: transitive
     description:
@@ -179,6 +192,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  pay:
+    dependency: transitive
+    description:
+      name: pay
+      sha256: e012871f065c188e4c275e30b0000c174f6df99101ef137f9cc52ed13fad80e8
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
+  pay_android:
+    dependency: transitive
+    description:
+      name: pay_android
+      sha256: "27dab62d564290aea584b6b39dbbda390b935d6d7296b54bc28de65579bfb049"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   pay_buttons:
     dependency: "direct main"
     description:
@@ -186,6 +215,22 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  pay_ios:
+    dependency: transitive
+    description:
+      name: pay_ios
+      sha256: f36ee24c99454b2ee3d02d5dee969abb769f8e2c8e9de5ae272b909732ab2cff
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  pay_platform_interface:
+    dependency: transitive
+    description:
+      name: pay_platform_interface
+      sha256: "39a9f5fa4bafc59ce103bd5e84a6362113c6e58c361aed8dde9494b182fac400"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   petitparser:
     dependency: transitive
     description:
@@ -311,6 +356,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.1"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      sha256: f67cdd8e07d3c6329146aaef1ba043542b3134c12489f553ca9a7435d1068aea
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.4"
 sdks:
   dart: ">=3.13.4 <4.0.0"
   flutter: ">=3.38.0"

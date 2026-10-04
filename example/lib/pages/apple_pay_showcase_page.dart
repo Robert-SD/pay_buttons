@@ -10,36 +10,17 @@ class ApplePayShowcasePage extends StatefulWidget {
 
 class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
   // Playground state
-  ApplePayColor _color = ApplePayColor.black;
-  ApplePayShape _shape = ApplePayShape.pill;
-  String? _text;
-  PayButtonVariant _variant = PayButtonVariant.responsive;
-  PayButtonTextPosition _textPosition = PayButtonTextPosition.leading;
-  bool _isLoading = false;
-  bool _enabled = true;
-  bool _fullWidth = false;
+  ApplePayButtonStyle _style = ApplePayButtonStyle.black;
+  ApplePayButtonType _type = ApplePayButtonType.plain;
   double _height = 48.0;
-  double _elevation = 0.0;
-  late final TextEditingController _textController;
-
-  @override
-  void initState() {
-    super.initState();
-    _textController = TextEditingController(text: _text);
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
+  double _width = 200.0;
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Apple Pay button triggered (${_color.name}, ${_shape.name})',
+          'Apple Pay button triggered (${_style.name}, ${_type.name})',
         ),
         backgroundColor: const Color(0xFF1E293B),
         duration: const Duration(seconds: 2),
@@ -50,7 +31,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Apple Pay Showcase')),
+      appBar: AppBar(title: const Text('Apple Pay Showcase (pay library)')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -59,14 +40,6 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
           _buildGallerySection(),
-          const SizedBox(height: 32),
-          const Divider(),
-          const SizedBox(height: 24),
-          _buildActionVerbsSection(),
-          const SizedBox(height: 32),
-          const Divider(),
-          const SizedBox(height: 24),
-          _buildSmallAndMediumSection(),
         ],
       ),
     );
@@ -74,7 +47,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
 
   Widget _buildPlaygroundSection() {
     final isWhiteTheme =
-        _color == ApplePayColor.white || _color == ApplePayColor.whiteOutline;
+        _style == ApplePayButtonStyle.white || _style == ApplePayButtonStyle.whiteOutline;
 
     return Card(
       elevation: 2,
@@ -98,7 +71,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Customize parameters in real-time and observe Apple Pay HIG behavior.',
+              'Official Apple Pay button from the Flutter pay package.',
               style: TextStyle(color: Colors.grey.shade600),
             ),
             const SizedBox(height: 24),
@@ -114,18 +87,14 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 border: Border.all(color: Colors.grey.shade300),
               ),
               child: Center(
-                child: ApplePayButton(
-                  onPressed: _enabled ? _handlePayPress : null,
-                  isLoading: _isLoading,
-                  enabled: _enabled,
-                  color: _color,
-                  shape: _shape,
-                  text: _text,
-                  variant: _variant,
-                  textPosition: _textPosition,
+                child: SizedBox(
+                  width: _width,
                   height: _height,
-                  width: _fullWidth ? double.infinity : null,
-                  elevation: _elevation,
+                  child: RawApplePayButton(
+                    onPressed: _handlePayPress,
+                    style: _style,
+                    type: _type,
+                  ),
                 ),
               ),
             ),
@@ -137,105 +106,57 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
               spacing: 16,
               runSpacing: 12,
               children: [
-                // Color Picker
-                DropdownButton<ApplePayColor>(
-                  value: _color,
-                  items: ApplePayColor.values.map((c) {
-                    return DropdownMenuItem(
-                      value: c,
-                      child: Text('Color: ${c.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _color = val);
-                  },
-                ),
-
-                // Shape Picker
-                DropdownButton<ApplePayShape>(
-                  value: _shape,
-                  items: ApplePayShape.values.map((s) {
+                // Style Picker
+                DropdownButton<ApplePayButtonStyle>(
+                  value: _style,
+                  items: ApplePayButtonStyle.values.map((s) {
                     return DropdownMenuItem(
                       value: s,
-                      child: Text('Shape: ${s.name}'),
+                      child: Text('Style: ${s.name}'),
                     );
                   }).toList(),
                   onChanged: (val) {
-                    if (val != null) setState(() => _shape = val);
+                    if (val != null) setState(() => _style = val);
                   },
                 ),
 
-                // Variant Picker
-                DropdownButton<PayButtonVariant>(
-                  value: _variant,
-                  items: PayButtonVariant.values.map((v) {
+                // Type Picker
+                DropdownButton<ApplePayButtonType>(
+                  value: _type,
+                  items: ApplePayButtonType.values.map((t) {
                     return DropdownMenuItem(
-                      value: v,
-                      child: Text('Variant: ${v.name}'),
+                      value: t,
+                      child: Text('Type: ${t.name}'),
                     );
                   }).toList(),
                   onChanged: (val) {
-                    if (val != null) setState(() => _variant = val);
+                    if (val != null) setState(() => _type = val);
                   },
-                ),
-
-                // Text Position Picker
-                DropdownButton<PayButtonTextPosition>(
-                  value: _textPosition,
-                  items: PayButtonTextPosition.values.map((p) {
-                    return DropdownMenuItem(
-                      value: p,
-                      child: Text('Text Pos: ${p.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _textPosition = val);
-                  },
-                ),
-
-                // Custom Text Input
-                SizedBox(
-                  width: 200,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Text prefix (e.g. Buy with)',
-                      isDense: true,
-                    ),
-                    controller: _textController,
-                    onChanged: (val) {
-                      setState(() => _text = val.isEmpty ? null : val);
-                    },
-                  ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
-            // Switches
-            Wrap(
-              spacing: 16,
-              runSpacing: 8,
-              children: [
-                FilterChip(
-                  label: const Text('Loading Spinner'),
-                  selected: _isLoading,
-                  onSelected: (val) => setState(() => _isLoading = val),
-                ),
-                FilterChip(
-                  label: const Text('Enabled'),
-                  selected: _enabled,
-                  onSelected: (val) => setState(() => _enabled = val),
-                ),
-                FilterChip(
-                  label: const Text('Full Width'),
-                  selected: _fullWidth,
-                  onSelected: (val) => setState(() => _fullWidth = val),
                 ),
               ],
             ),
 
             const SizedBox(height: 20),
+
+            // Width Slider
+            Row(
+              children: [
+                SizedBox(
+                  width: 90,
+                  child: Text('Width: ${_width.toInt()} dp'),
+                ),
+                Expanded(
+                  child: Slider(
+                    value: _width,
+                    min: 100.0,
+                    max: 350.0,
+                    divisions: 25,
+                    label: '${_width.toInt()} dp',
+                    onChanged: (val) => setState(() => _width = val),
+                  ),
+                ),
+              ],
+            ),
 
             // Height Slider
             Row(
@@ -247,31 +168,11 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 Expanded(
                   child: Slider(
                     value: _height,
-                    min: 40.0,
+                    min: 30.0,
                     max: 64.0,
-                    divisions: 12,
+                    divisions: 17,
                     label: '${_height.toInt()} dp',
                     onChanged: (val) => setState(() => _height = val),
-                  ),
-                ),
-              ],
-            ),
-
-            // Elevation Slider
-            Row(
-              children: [
-                SizedBox(
-                  width: 90,
-                  child: Text('Elevation: ${_elevation.toInt()}'),
-                ),
-                Expanded(
-                  child: Slider(
-                    value: _elevation,
-                    min: 0.0,
-                    max: 8.0,
-                    divisions: 8,
-                    label: '${_elevation.toInt()}',
-                    onChanged: (val) => setState(() => _elevation = val),
                   ),
                 ),
               ],
@@ -287,14 +188,14 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Brand Colors & Contour Shapes',
+          'Official Apple Pay Button Styles',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         const SizedBox(height: 8),
         Text(
-          'Apple Pay buttons with standard colors, outline styling, and contour shapes.',
+          'Black, White, and White Outline button styles.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -305,75 +206,75 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
             alignment: WrapAlignment.center,
             children: [
               _buildGalleryItem(
-                label: 'Black Pill (Default)',
-                button: ApplePayButton(
-                  color: ApplePayColor.black,
-                  shape: ApplePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'Black (Default)',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawApplePayButton(
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.plain,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'White Pill',
-                button: ApplePayButton(
-                  color: ApplePayColor.white,
-                  shape: ApplePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'White',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawApplePayButton(
+                    style: ApplePayButtonStyle.white,
+                    type: ApplePayButtonType.plain,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'White Outline Pill',
-                button: ApplePayButton(
-                  color: ApplePayColor.whiteOutline,
-                  shape: ApplePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'White Outline',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawApplePayButton(
+                    style: ApplePayButtonStyle.whiteOutline,
+                    type: ApplePayButtonType.plain,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'Black Rounded',
-                button: ApplePayButton(
-                  color: ApplePayColor.black,
-                  shape: ApplePayShape.rounded,
-                  onPressed: _handlePayPress,
+                label: 'Buy with Apple Pay',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawApplePayButton(
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.buy,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'White Rounded',
-                button: ApplePayButton(
-                  color: ApplePayColor.white,
-                  shape: ApplePayShape.rounded,
-                  onPressed: _handlePayPress,
+                label: 'Check out with Apple Pay',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawApplePayButton(
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.checkout,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'White Outline Rounded',
-                button: ApplePayButton(
-                  color: ApplePayColor.whiteOutline,
-                  shape: ApplePayShape.rounded,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Black Rect',
-                button: ApplePayButton(
-                  color: ApplePayColor.black,
-                  shape: ApplePayShape.rect,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'White Rect',
-                button: ApplePayButton(
-                  color: ApplePayColor.white,
-                  shape: ApplePayShape.rect,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'White Outline Rect',
-                button: ApplePayButton(
-                  color: ApplePayColor.whiteOutline,
-                  shape: ApplePayShape.rect,
-                  onPressed: _handlePayPress,
+                label: 'Donate with Apple Pay',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawApplePayButton(
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.donate,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
             ],
@@ -396,110 +297,6 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
         ),
         const SizedBox(height: 8),
         button,
-      ],
-    );
-  }
-
-  Widget _buildActionVerbsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Approved Action Callouts',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Official phrases supported by Apple Pay Human Interface Guidelines.',
-          style: TextStyle(color: Colors.grey.shade600),
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            alignment: WrapAlignment.center,
-            children: [
-              ApplePayButton(
-                text: 'Buy with',
-                color: ApplePayColor.black,
-                onPressed: _handlePayPress,
-              ),
-              ApplePayButton(
-                text: 'Check out with',
-                color: ApplePayColor.whiteOutline,
-                onPressed: _handlePayPress,
-              ),
-              ApplePayButton(
-                text: 'Pay with',
-                color: ApplePayColor.black,
-                onPressed: _handlePayPress,
-              ),
-              ApplePayButton(
-                text: 'Donate with',
-                color: ApplePayColor.whiteOutline,
-                onPressed: _handlePayPress,
-              ),
-              ApplePayButton(
-                text: 'Subscribe with',
-                color: ApplePayColor.black,
-                onPressed: _handlePayPress,
-              ),
-              ApplePayButton(
-                text: 'Top Up with',
-                color: ApplePayColor.whiteOutline,
-                onPressed: _handlePayPress,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSmallAndMediumSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Small & Medium Size Variants',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Compact Apple mark icon and medium size variations.',
-          style: TextStyle(color: Colors.grey.shade600),
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            alignment: WrapAlignment.center,
-            children: [
-              _buildGalleryItem(
-                label: 'Medium Variant',
-                button: ApplePayButton(
-                  variant: PayButtonVariant.medium,
-                  width: 140,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Small / Compact Variant',
-                button: ApplePayButton(
-                  variant: PayButtonVariant.compact,
-                  width: 52,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }

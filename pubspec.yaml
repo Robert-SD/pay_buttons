@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.3.0
+  pay: ^3.3.0
 
 dev_dependencies:
   flutter_test:

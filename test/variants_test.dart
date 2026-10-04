@@ -5,81 +5,6 @@ import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
   group('PayButtonVariant & PayButtonTextPosition Across All Providers', () {
-    testWidgets('ApplePayButton supports explicit compact, medium, and full variants', (tester) async {
-      // Compact
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(
-              onPressed: () {},
-              variant: PayButtonVariant.compact,
-            ),
-          ),
-        ),
-      );
-      expect(find.byType(SvgPicture), findsOneWidget);
-
-      // Medium
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(
-              onPressed: () {},
-              variant: PayButtonVariant.medium,
-            ),
-          ),
-        ),
-      );
-      expect(find.byType(SvgPicture), findsOneWidget);
-
-      // Full with text
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(
-              onPressed: () {},
-              variant: PayButtonVariant.full,
-              text: 'Buy with',
-              textPosition: PayButtonTextPosition.leading,
-            ),
-          ),
-        ),
-      );
-      expect(find.text('Buy with'), findsOneWidget);
-      expect(find.byType(SvgPicture), findsOneWidget);
-    });
-
-    testWidgets('GooglePayButton supports explicit compact, medium, and full variants', (tester) async {
-      // Compact
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: GooglePayButton(
-              onPressed: () {},
-              variant: PayButtonVariant.compact,
-            ),
-          ),
-        ),
-      );
-      expect(find.byType(SvgPicture), findsOneWidget);
-
-      // Full with trailing text
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: GooglePayButton(
-              onPressed: () {},
-              variant: PayButtonVariant.full,
-              text: 'Checkout',
-              textPosition: PayButtonTextPosition.trailing,
-            ),
-          ),
-        ),
-      );
-      expect(find.text('Checkout'), findsOneWidget);
-      expect(find.byType(SvgPicture), findsOneWidget);
-    });
-
     testWidgets('PayPalButton supports explicit compact, medium, and full variants', (tester) async {
       // Compact
       await tester.pumpWidget(
@@ -262,12 +187,12 @@ void main() {
     });
 
     testWidgets('Responsive auto-collapse based on layout width', (tester) async {
-      // Apple Pay at width 60dp collapses to compact
+      // PayPal at width 60dp collapses to compact
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Center(
-              child: ApplePayButton(
+              child: PayPalButton(
                 width: 60,
                 text: 'Buy with',
                 onPressed: () {},
@@ -279,12 +204,12 @@ void main() {
       expect(find.text('Buy with'), findsNothing);
       expect(find.byType(SvgPicture), findsOneWidget);
 
-      // Apple Pay at width 140dp collapses to medium (logo only, no text)
+      // PayPal at width 140dp collapses to medium (logo only, no text)
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Center(
-              child: ApplePayButton(
+              child: PayPalButton(
                 width: 140,
                 text: 'Buy with',
                 onPressed: () {},
@@ -294,14 +219,14 @@ void main() {
         ),
       );
       expect(find.text('Buy with'), findsNothing);
-      expect(find.byType(SvgPicture), findsOneWidget);
+      expect(find.byType(SvgPicture), findsNWidgets(2));
 
-      // Apple Pay at width 250dp displays full variant with text
+      // PayPal at width 250dp displays full variant with text
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Center(
-              child: ApplePayButton(
+              child: PayPalButton(
                 width: 250,
                 text: 'Buy with',
                 onPressed: () {},
@@ -311,7 +236,7 @@ void main() {
         ),
       );
       expect(find.text('Buy with'), findsOneWidget);
-      expect(find.byType(SvgPicture), findsOneWidget);
+      expect(find.byType(SvgPicture), findsNWidgets(2));
     });
   });
 }

@@ -1,22 +1,13 @@
 library;
 
+// Official Google Pay & Apple Pay from the Flutter pay package
+export 'package:pay/pay.dart' hide PayButton;
+
 // Base framework
 export 'src/base/pay_button.dart';
 export 'src/base/pay_button_colors.dart';
 export 'src/base/pay_button_fonts.dart';
 export 'src/base/pay_button_variant.dart';
-
-// Apple Pay
-export 'src/buttons/apple_pay/apple_pay_button.dart';
-export 'src/buttons/apple_pay/apple_pay_color.dart';
-export 'src/buttons/apple_pay/apple_pay_shape.dart';
-export 'src/buttons/apple_pay/apple_pay_assets.dart';
-
-// Google Pay
-export 'src/buttons/google_pay/google_pay_button.dart';
-export 'src/buttons/google_pay/google_pay_color.dart';
-export 'src/buttons/google_pay/google_pay_shape.dart';
-export 'src/buttons/google_pay/google_pay_assets.dart';
 
 // PayPal
 export 'src/buttons/paypal/paypal_button.dart';

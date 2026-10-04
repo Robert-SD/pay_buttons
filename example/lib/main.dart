@@ -82,14 +82,24 @@ class CatalogHomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          ApplePayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Apple Pay'),
+                          SizedBox(
+                            height: 48,
+                            child: RawApplePayButton(
+                              onPressed: () =>
+                                  _handlePayPress(context, 'Apple Pay'),
+                            ),
                           ),
                           const SizedBox(height: 12),
-                          GooglePayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Google Pay'),
+                          SizedBox(
+                            height: 48,
+                            child: RawGooglePayButton(
+                              paymentConfiguration:
+                                  PaymentConfiguration.fromJsonString(
+                                '{"provider": "google_pay", "data": {}}',
+                              ),
+                              onPressed: () =>
+                                  _handlePayPress(context, 'Google Pay'),
+                            ),
                           ),
                           const SizedBox(height: 12),
                           PayPalButton(

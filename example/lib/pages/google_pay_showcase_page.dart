@@ -9,37 +9,22 @@ class GooglePayShowcasePage extends StatefulWidget {
 }
 
 class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
+  static final _googlePayConfig = PaymentConfiguration.fromJsonString(
+    '{"provider": "google_pay", "data": {}}',
+  );
+
   // Playground state
-  GooglePayColor _color = GooglePayColor.black;
-  GooglePayShape _shape = GooglePayShape.pill;
-  String? _text;
-  PayButtonVariant _variant = PayButtonVariant.responsive;
-  PayButtonTextPosition _textPosition = PayButtonTextPosition.leading;
-  bool _isLoading = false;
-  bool _enabled = true;
-  bool _fullWidth = false;
+  GooglePayButtonTheme _theme = GooglePayButtonTheme.dark;
+  GooglePayButtonType _type = GooglePayButtonType.pay;
   double _height = 48.0;
-  double _elevation = 0.0;
-  late final TextEditingController _textController;
-
-  @override
-  void initState() {
-    super.initState();
-    _textController = TextEditingController(text: _text);
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
+  double _width = 200.0;
 
   void _handlePayPress() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Google Pay button triggered (${_color.name}, ${_shape.name})',
+          'Google Pay button triggered (${_theme.name}, ${_type.name})',
         ),
         backgroundColor: const Color(0xFF1E293B),
         duration: const Duration(seconds: 2),
@@ -50,7 +35,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Google Pay Showcase')),
+      appBar: AppBar(title: const Text('Google Pay Showcase (pay library)')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
@@ -59,22 +44,13 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
           const Divider(),
           const SizedBox(height: 24),
           _buildGallerySection(),
-          const SizedBox(height: 32),
-          const Divider(),
-          const SizedBox(height: 24),
-          _buildActionVerbsSection(),
-          const SizedBox(height: 32),
-          const Divider(),
-          const SizedBox(height: 24),
-          _buildSmallAndMediumSection(),
         ],
       ),
     );
   }
 
   Widget _buildPlaygroundSection() {
-    final isWhiteTheme =
-        _color == GooglePayColor.white || _color == GooglePayColor.monochromeWhite;
+    final isWhiteTheme = _theme == GooglePayButtonTheme.light;
 
     return Card(
       elevation: 2,
@@ -98,7 +74,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Customize parameters in real-time and observe official Google Pay behavior.',
+              'Official Google Pay button from the Flutter pay package.',
               style: TextStyle(color: Colors.grey.shade600),
             ),
             const SizedBox(height: 24),
@@ -114,18 +90,15 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 border: Border.all(color: Colors.grey.shade300),
               ),
               child: Center(
-                child: GooglePayButton(
-                  onPressed: _enabled ? _handlePayPress : null,
-                  isLoading: _isLoading,
-                  enabled: _enabled,
-                  color: _color,
-                  shape: _shape,
-                  text: _text,
-                  variant: _variant,
-                  textPosition: _textPosition,
+                child: SizedBox(
+                  width: _width,
                   height: _height,
-                  width: _fullWidth ? double.infinity : null,
-                  elevation: _elevation,
+                  child: RawGooglePayButton(
+                    paymentConfiguration: _googlePayConfig,
+                    onPressed: _handlePayPress,
+                    theme: _theme,
+                    type: _type,
+                  ),
                 ),
               ),
             ),
@@ -137,105 +110,57 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
               spacing: 16,
               runSpacing: 12,
               children: [
-                // Color Picker
-                DropdownButton<GooglePayColor>(
-                  value: _color,
-                  items: GooglePayColor.values.map((c) {
+                // Theme Picker
+                DropdownButton<GooglePayButtonTheme>(
+                  value: _theme,
+                  items: GooglePayButtonTheme.values.map((t) {
                     return DropdownMenuItem(
-                      value: c,
-                      child: Text('Color: ${c.name}'),
+                      value: t,
+                      child: Text('Theme: ${t.name}'),
                     );
                   }).toList(),
                   onChanged: (val) {
-                    if (val != null) setState(() => _color = val);
+                    if (val != null) setState(() => _theme = val);
                   },
                 ),
 
-                // Shape Picker
-                DropdownButton<GooglePayShape>(
-                  value: _shape,
-                  items: GooglePayShape.values.map((s) {
+                // Type Picker
+                DropdownButton<GooglePayButtonType>(
+                  value: _type,
+                  items: GooglePayButtonType.values.map((t) {
                     return DropdownMenuItem(
-                      value: s,
-                      child: Text('Shape: ${s.name}'),
+                      value: t,
+                      child: Text('Type: ${t.name}'),
                     );
                   }).toList(),
                   onChanged: (val) {
-                    if (val != null) setState(() => _shape = val);
+                    if (val != null) setState(() => _type = val);
                   },
-                ),
-
-                // Variant Picker
-                DropdownButton<PayButtonVariant>(
-                  value: _variant,
-                  items: PayButtonVariant.values.map((v) {
-                    return DropdownMenuItem(
-                      value: v,
-                      child: Text('Variant: ${v.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _variant = val);
-                  },
-                ),
-
-                // Text Position Picker
-                DropdownButton<PayButtonTextPosition>(
-                  value: _textPosition,
-                  items: PayButtonTextPosition.values.map((p) {
-                    return DropdownMenuItem(
-                      value: p,
-                      child: Text('Text Pos: ${p.name}'),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _textPosition = val);
-                  },
-                ),
-
-                // Custom Text Input
-                SizedBox(
-                  width: 200,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Text prefix (e.g. Buy with)',
-                      isDense: true,
-                    ),
-                    controller: _textController,
-                    onChanged: (val) {
-                      setState(() => _text = val.isEmpty ? null : val);
-                    },
-                  ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
-            // Switches
-            Wrap(
-              spacing: 16,
-              runSpacing: 8,
-              children: [
-                FilterChip(
-                  label: const Text('Loading Spinner'),
-                  selected: _isLoading,
-                  onSelected: (val) => setState(() => _isLoading = val),
-                ),
-                FilterChip(
-                  label: const Text('Enabled'),
-                  selected: _enabled,
-                  onSelected: (val) => setState(() => _enabled = val),
-                ),
-                FilterChip(
-                  label: const Text('Full Width'),
-                  selected: _fullWidth,
-                  onSelected: (val) => setState(() => _fullWidth = val),
                 ),
               ],
             ),
 
             const SizedBox(height: 20),
+
+            // Width Slider
+            Row(
+              children: [
+                SizedBox(
+                  width: 90,
+                  child: Text('Width: ${_width.toInt()} dp'),
+                ),
+                Expanded(
+                  child: Slider(
+                    value: _width,
+                    min: 100.0,
+                    max: 350.0,
+                    divisions: 25,
+                    label: '${_width.toInt()} dp',
+                    onChanged: (val) => setState(() => _width = val),
+                  ),
+                ),
+              ],
+            ),
 
             // Height Slider
             Row(
@@ -247,31 +172,11 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 Expanded(
                   child: Slider(
                     value: _height,
-                    min: 40.0,
+                    min: 30.0,
                     max: 64.0,
-                    divisions: 12,
+                    divisions: 17,
                     label: '${_height.toInt()} dp',
                     onChanged: (val) => setState(() => _height = val),
-                  ),
-                ),
-              ],
-            ),
-
-            // Elevation Slider
-            Row(
-              children: [
-                SizedBox(
-                  width: 90,
-                  child: Text('Elevation: ${_elevation.toInt()}'),
-                ),
-                Expanded(
-                  child: Slider(
-                    value: _elevation,
-                    min: 0.0,
-                    max: 8.0,
-                    divisions: 8,
-                    label: '${_elevation.toInt()}',
-                    onChanged: (val) => setState(() => _elevation = val),
                   ),
                 ),
               ],
@@ -287,14 +192,14 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Brand Colors & Contour Shapes',
+          'Official Google Pay Button Themes',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         const SizedBox(height: 8),
         Text(
-          'Google Pay buttons with standard colors, monochrome options, and shapes.',
+          'Dark and Light Google Pay button themes.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -305,67 +210,68 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
             alignment: WrapAlignment.center,
             children: [
               _buildGalleryItem(
-                label: 'Black Pill (Default)',
-                button: GooglePayButton(
-                  color: GooglePayColor.black,
-                  shape: GooglePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'Dark Theme (Default)',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawGooglePayButton(
+                    paymentConfiguration: _googlePayConfig,
+                    theme: GooglePayButtonTheme.dark,
+                    type: GooglePayButtonType.pay,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'White Pill',
-                button: GooglePayButton(
-                  color: GooglePayColor.white,
-                  shape: GooglePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'Light Theme',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawGooglePayButton(
+                    paymentConfiguration: _googlePayConfig,
+                    theme: GooglePayButtonTheme.light,
+                    type: GooglePayButtonType.pay,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'Monochrome Black Pill',
-                button: GooglePayButton(
-                  color: GooglePayColor.monochromeBlack,
-                  shape: GooglePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'Buy with Google Pay',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawGooglePayButton(
+                    paymentConfiguration: _googlePayConfig,
+                    theme: GooglePayButtonTheme.dark,
+                    type: GooglePayButtonType.buy,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'Monochrome White Pill',
-                button: GooglePayButton(
-                  color: GooglePayColor.monochromeWhite,
-                  shape: GooglePayShape.pill,
-                  onPressed: _handlePayPress,
+                label: 'Checkout with Google Pay',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawGooglePayButton(
+                    paymentConfiguration: _googlePayConfig,
+                    theme: GooglePayButtonTheme.dark,
+                    type: GooglePayButtonType.checkout,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
               _buildGalleryItem(
-                label: 'Black Rounded',
-                button: GooglePayButton(
-                  color: GooglePayColor.black,
-                  shape: GooglePayShape.rounded,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'White Rounded',
-                button: GooglePayButton(
-                  color: GooglePayColor.white,
-                  shape: GooglePayShape.rounded,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Black Rect',
-                button: GooglePayButton(
-                  color: GooglePayColor.black,
-                  shape: GooglePayShape.rect,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'White Rect',
-                button: GooglePayButton(
-                  color: GooglePayColor.white,
-                  shape: GooglePayShape.rect,
-                  onPressed: _handlePayPress,
+                label: 'Donate with Google Pay',
+                button: SizedBox(
+                  width: 200,
+                  height: 48,
+                  child: RawGooglePayButton(
+                    paymentConfiguration: _googlePayConfig,
+                    theme: GooglePayButtonTheme.dark,
+                    type: GooglePayButtonType.donate,
+                    onPressed: _handlePayPress,
+                  ),
                 ),
               ),
             ],
@@ -388,105 +294,6 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
         ),
         const SizedBox(height: 8),
         button,
-      ],
-    );
-  }
-
-  Widget _buildActionVerbsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Approved Action Callouts',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Compliant phrases recommended by Google Pay Brand Guidelines.',
-          style: TextStyle(color: Colors.grey.shade600),
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            alignment: WrapAlignment.center,
-            children: [
-              GooglePayButton(
-                text: 'Buy with',
-                color: GooglePayColor.black,
-                onPressed: _handlePayPress,
-              ),
-              GooglePayButton(
-                text: 'Pay with',
-                color: GooglePayColor.white,
-                onPressed: _handlePayPress,
-              ),
-              GooglePayButton(
-                text: 'Donate with',
-                color: GooglePayColor.black,
-                onPressed: _handlePayPress,
-              ),
-              GooglePayButton(
-                text: 'Subscribe with',
-                color: GooglePayColor.white,
-                onPressed: _handlePayPress,
-              ),
-              GooglePayButton(
-                text: 'Checkout with',
-                color: GooglePayColor.black,
-                onPressed: _handlePayPress,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSmallAndMediumSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Small & Medium Size Variants',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Compact G mark icon and medium size variations.',
-          style: TextStyle(color: Colors.grey.shade600),
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            alignment: WrapAlignment.center,
-            children: [
-              _buildGalleryItem(
-                label: 'Medium Variant',
-                button: GooglePayButton(
-                  variant: PayButtonVariant.medium,
-                  width: 140,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Small / Compact Variant',
-                button: GooglePayButton(
-                  variant: PayButtonVariant.compact,
-                  width: 52,
-                  onPressed: _handlePayPress,
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }

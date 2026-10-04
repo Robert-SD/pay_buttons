@@ -22,8 +22,7 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Supported Buttons
 
-* **Apple Pay**: Default logo-only or custom text prefix (`black`, `white`, `whiteOutline`), pill/rounded/rect shapes.
-* **Google Pay**: Default logo-only or custom text prefix (`black`, `white`, `monochromeBlack`, `monochromeWhite`), pill/rounded/rect shapes.
+* **Google Pay & Apple Pay**: Provided directly via re-export of the official Flutter [`pay`](https://pub.dev/packages/pay) package (`GooglePayButton`, `ApplePayButton`, `RawGooglePayButton`, `RawApplePayButton`).
 * **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
 * **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
 * **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
@@ -40,23 +39,21 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Quick Start
 
-### Apple Pay
+### Google Pay & Apple Pay (via `pay` package)
 ```dart
-ApplePayButton(
+// Native Apple Pay Button from official pay package
+RawApplePayButton(
+  style: ApplePayButtonStyle.black,
+  type: ApplePayButtonType.buy,
   onPressed: () => handleApplePay(),
-  text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
-  color: ApplePayColor.black,
-  shape: ApplePayShape.pill,
 )
-```
 
-### Google Pay
-```dart
-GooglePayButton(
+// Native Google Pay Button from official pay package
+RawGooglePayButton(
+  paymentConfiguration: paymentConfig,
+  theme: GooglePayButtonTheme.dark,
+  type: GooglePayButtonType.pay,
   onPressed: () => handleGooglePay(),
-  text: 'Buy with', // Optional custom text prefix, defaults to null (logo only)
-  color: GooglePayColor.black,
-  shape: GooglePayShape.pill,
 )
 ```
 
@@ -115,7 +112,7 @@ ShopPayButton(
 AfterpayButton(
   onPressed: () => handleAfterpay(),
   text: 'Buy now with',
-  brand: AfterpayBrand.afterpay, // or AfterpayBrand.clearpay
+  brand: AfterpayBrand.afterpay, // or AfterpayBrand.clearpay,
   color: AfterpayColor.mint,
   shape: AfterpayShape.rounded,
 )
@@ -157,91 +154,9 @@ BizumButton(
 
 ---
 
-## Responsive Breakpoints & Button Variants
-
-Every button in `pay_buttons` supports adaptive sizing and explicit variant selection via `PayButtonVariant`:
-
-| Variant | Breakpoint | Description | Ideal Use Case |
-| :--- | :--- | :--- | :--- |
-| `PayButtonVariant.responsive` *(default)* | Dynamic | Automatically detects width via `LayoutBuilder` and adapts | Responsive checkout screens & web layouts |
-| `PayButtonVariant.compact` | `< 84 dp` | Standalone icon / brand monogram (e.g. ``, `G`, `PP`, `K.`) | Mini toolbars, floating bars, tight action bars |
-| `PayButtonVariant.medium` | `84 dp – 200 dp` | Clean brand wordmark / logo without text | Compact payment grids & medium cards |
-| `PayButtonVariant.full` | `> 200 dp` | Complete brand logo + customizable action text | Standard checkout forms & bottom payment sheets |
-
-### Responsive Auto-Adapting
-```dart
-// Auto-collapses from full label -> wordmark -> compact monogram based on layout width
-ApplePayButton(
-  onPressed: () => handleApplePay(),
-  text: 'Buy with',
-  variant: PayButtonVariant.responsive, // default
-)
-```
-
-### Explicit Compact Monograms
-```dart
-// Render compact 52dp icon buttons for a multi-provider mini checkout row
-Row(
-  children: [
-    ApplePayButton(
-      onPressed: () => handleApplePay(),
-      variant: PayButtonVariant.compact,
-      width: 52,
-    ),
-    GooglePayButton(
-      onPressed: () => handleGooglePay(),
-      variant: PayButtonVariant.compact,
-      width: 52,
-    ),
-    PayPalButton(
-      onPressed: () => handlePayPal(),
-      variant: PayButtonVariant.compact,
-      width: 52,
-    ),
-    KlarnaButton(
-      onPressed: () => handleKlarna(),
-      variant: PayButtonVariant.compact,
-      width: 52,
-    ),
-  ],
-)
-```
-
----
-
-## Text Positioning (Leading vs Trailing)
-
-Customize where your button's text appears relative to the provider logo using `PayButtonTextPosition`:
-
-```dart
-// Text leading (default for Apple Pay, Google Pay, PayPal) -> "Buy with Pay"
-ApplePayButton(
-  onPressed: () => handlePay(),
-  text: 'Buy with',
-  textPosition: PayButtonTextPosition.leading,
-)
-
-// Text trailing -> "Pay Buy with" or "Klarna. Pay in 4"
-KlarnaButton(
-  onPressed: () => handleKlarna(),
-  text: 'Pay in 4 with',
-  textPosition: PayButtonTextPosition.leading, // or .trailing
-)
-```
-
----
-
 ## Typography & Custom Fonts (MIT Compliant)
 
 All payment buttons support custom typography out of the box while remaining **100% compliant with the MIT open-source license**.
-
-### MIT License Compliance Strategy
-Proprietary corporate typefaces (such as *PayPal Pro*, *Klarna Text*, or *Amazon Ember*) cannot legally be redistributed as binary font files (`.ttf`, `.otf`, `.woff`) inside an open-source MIT package. 
-
-Instead, `pay_buttons` implements a clean, compliant typography strategy:
-1. **Official Brand Fallback Chains (`PayButtonFonts`)**: Built-in nominative fallback chains representing each brand's official font family that fall back gracefully to clean system neo-grotesque typefaces (such as `-apple-system`, `BlinkMacSystemFont`, `Roboto`, `Segoe UI`, `Helvetica Neue`, and `Inter`).
-2. **First-Party or Custom Fonts**: If your app bundles licensed brand font assets (declared in your app's `pubspec.yaml`), pass `fontFamily: 'Klarna Text'` to use it directly.
-3. **Google Fonts Support**: Provide any open-source web font via the standard Flutter [`google_fonts`](https://pub.dev/packages/google_fonts) package using the `textStyle` parameter.
 
 ### Examples
 
@@ -268,23 +183,6 @@ PayPalButton(
   onPressed: () => handleCheckout(),
 )
 ```
-
-#### 3. Brand Font Stacks Reference
-| Button | Primary Brand Stack (`PayButtonFonts.*`) |
-| :--- | :--- |
-| **Apple Pay** | `-apple-system`, `BlinkMacSystemFont`, `SF Pro Text`, `SF Pro Display`, system sans |
-| **Google Pay** | `Google Sans`, `Product Sans`, `Roboto`, system sans |
-| **PayPal** | `PayPal Pro`, `PayPal Open`, `PayPal Sans`, system neo-grotesque |
-| **Amazon Pay** | `Amazon Ember`, system neo-grotesque |
-| **Klarna** | `Klarna Text`, `Klarna Headline`, system neo-grotesque |
-| **Wero** | `GT Walsheim`, `GT Walsheim Pro`, `Inter`, `Roboto`, system sans |
-| **Shop Pay** | `Shopify Sans`, system neo-grotesque |
-| **Afterpay** | `Youth`, `Cash Sans Mono`, `Italian Plate No. 2`, system sans |
-| **TWINT** | `Neue Haas Grotesk`, `Helvetica Neue`, `Arial`, system sans |
-| **BLIK** | `Lato`, `Montserrat`, `Roboto`, system sans |
-| **iDEAL** | `Inter`, `Roboto`, `Helvetica Neue`, system sans |
-| **Bancontact** | `Gotham`, `Montserrat`, `Inter`, system sans |
-| **Bizum** | `Omnes`, `Nunito`, `Roboto`, system sans |
 
 ---
 
