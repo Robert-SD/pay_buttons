@@ -8,7 +8,7 @@ A high-fidelity, brand-compliant, cross-platform Flutter package providing dedic
 
 Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessibility semantics, and strict adherence to provider brand guidelines.
 
-> 🌐 **Live Web Component Catalog**: Test and interact with all 13 buttons directly in your browser at **[robert-sd.github.io/pay_buttons](https://robert-sd.github.io/pay_buttons/)**.
+> 🌐 **Live Web Component Catalog**: Test and interact with the payment buttons directly in your browser at **[robert-sd.github.io/pay_buttons](https://robert-sd.github.io/pay_buttons/)**.
 
 <p align="center">
   <a href="https://robert-sd.github.io/pay_buttons/">
