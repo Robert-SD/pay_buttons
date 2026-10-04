@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_buttons/pay_buttons.dart';
 import 'pages/afterpay_showcase_page.dart';
 import 'pages/amazon_pay_showcase_page.dart';
 import 'pages/european_champions_showcase_page.dart';
@@ -30,6 +31,17 @@ class PayButtonsExampleApp extends StatelessWidget {
 class CatalogHomePage extends StatelessWidget {
   const CatalogHomePage({super.key});
 
+  void _handlePayPress(BuildContext context, String provider) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$provider default button pressed!'),
+        backgroundColor: const Color(0xFF1E293B),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,13 +52,67 @@ class CatalogHomePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          // Section 1: Default Payment Buttons (Zero Configuration)
           const Text(
-            'Active Payment Buttons',
+            'Default Payment Buttons',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               letterSpacing: -0.2,
             ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Out-of-the-box payment buttons with provider defaults and zero configuration.',
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+          ),
+          const SizedBox(height: 12),
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            color: const Color(0xFFF8FAFC),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Colors.grey.shade200),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  PayPalButton(onPressed: () => _handlePayPress(context, 'PayPal')),
+                  PayPalPayLaterButton(onPressed: () => _handlePayPress(context, 'PayPal Pay Later')),
+                  KlarnaButton(onPressed: () => _handlePayPress(context, 'Klarna')),
+                  AmazonPayButton(onPressed: () => _handlePayPress(context, 'Amazon Pay')),
+                  ShopPayButton(onPressed: () => _handlePayPress(context, 'Shop Pay')),
+                  AfterpayButton(onPressed: () => _handlePayPress(context, 'Afterpay')),
+                  WeroButton(onPressed: () => _handlePayPress(context, 'Wero')),
+                  TwintButton(onPressed: () => _handlePayPress(context, 'TWINT')),
+                  IdealButton(onPressed: () => _handlePayPress(context, 'iDEAL')),
+                  BlikButton(onPressed: () => _handlePayPress(context, 'BLIK')),
+                  BancontactButton(onPressed: () => _handlePayPress(context, 'Bancontact')),
+                  BizumButton(onPressed: () => _handlePayPress(context, 'Bizum')),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 28),
+
+          // Section 2: Customize Payment Buttons
+          const Text(
+            'Customize Payment Buttons',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: -0.2,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Interactive playgrounds to customize colors, shapes, typography, and states.',
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
           ),
           const SizedBox(height: 12),
 
