@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pay_buttons/pay_buttons.dart';
 
 enum RegionalChampion {
+  wero('Wero', 'Europe 🇪🇺'),
   twint('TWINT', 'Switzerland 🇨🇭'),
   ideal('iDEAL', 'Netherlands 🇳🇱'),
   blik('BLIK', 'Poland 🇵🇱'),
@@ -23,13 +24,18 @@ class EuropeanChampionsShowcasePage extends StatefulWidget {
 
 class _EuropeanChampionsShowcasePageState
     extends State<EuropeanChampionsShowcasePage> {
-  RegionalChampion _selectedChampion = RegionalChampion.twint;
+  RegionalChampion _selectedChampion = RegionalChampion.wero;
 
   // Shared Playground State
   bool _isLoading = false;
   bool _enabled = true;
   bool _fullWidth = false;
   double _height = 48.0;
+
+  // Wero state
+  WeroColor _weroColor = WeroColor.yellow;
+  WeroShape _weroShape = WeroShape.rounded;
+  String? _weroText = 'Pay with';
 
   // TWINT state
   TwintColor _twintColor = TwintColor.black;
@@ -56,6 +62,7 @@ class _EuropeanChampionsShowcasePageState
   BizumShape _bizumShape = BizumShape.rounded;
   String? _bizumText = 'Pagar con';
 
+  late final TextEditingController _weroTextController;
   late final TextEditingController _twintTextController;
   late final TextEditingController _idealTextController;
   late final TextEditingController _blikTextController;
@@ -65,6 +72,7 @@ class _EuropeanChampionsShowcasePageState
   @override
   void initState() {
     super.initState();
+    _weroTextController = TextEditingController(text: _weroText);
     _twintTextController = TextEditingController(text: _twintText);
     _idealTextController = TextEditingController(text: _idealText);
     _blikTextController = TextEditingController(text: _blikText);
@@ -74,6 +82,7 @@ class _EuropeanChampionsShowcasePageState
 
   @override
   void dispose() {
+    _weroTextController.dispose();
     _twintTextController.dispose();
     _idealTextController.dispose();
     _blikTextController.dispose();
@@ -149,6 +158,10 @@ class _EuropeanChampionsShowcasePageState
               spacing: 12,
               runSpacing: 12,
               children: [
+                WeroButton(
+                  text: 'Pay with',
+                  onPressed: () => _handlePayPress('Wero'),
+                ),
                 TwintButton(
                   text: 'Bezahlen mit',
                   onPressed: () => _handlePayPress('TWINT'),
@@ -300,6 +313,10 @@ class _EuropeanChampionsShowcasePageState
 
   Color _resolvePreviewBackground() {
     switch (_selectedChampion) {
+      case RegionalChampion.wero:
+        return _weroColor == WeroColor.black
+            ? const Color(0xFF1E293B)
+            : const Color(0xFFF8FAFC);
       case RegionalChampion.twint:
         return _twintColor == TwintColor.white
             ? const Color(0xFF1E293B)
@@ -328,6 +345,17 @@ class _EuropeanChampionsShowcasePageState
     void onPressed() => _handlePayPress(_selectedChampion.title);
 
     switch (_selectedChampion) {
+      case RegionalChampion.wero:
+        return WeroButton(
+          onPressed: onPressed,
+          color: _weroColor,
+          shape: _weroShape,
+          text: _weroText,
+          isLoading: _isLoading,
+          enabled: _enabled,
+          width: width,
+          height: _height,
+        );
       case RegionalChampion.twint:
         return TwintButton(
           onPressed: onPressed,
@@ -388,6 +416,25 @@ class _EuropeanChampionsShowcasePageState
 
   List<Widget> _buildChampionControls() {
     switch (_selectedChampion) {
+      case RegionalChampion.wero:
+        return [
+          _buildDropdown<WeroColor>(
+            label: 'Color Palette',
+            value: _weroColor,
+            items: WeroColor.values,
+            onChanged: (c) => setState(() => _weroColor = c!),
+          ),
+          const SizedBox(height: 12),
+          _buildDropdown<WeroShape>(
+            label: 'Shape',
+            value: _weroShape,
+            items: WeroShape.values,
+            onChanged: (s) => setState(() => _weroShape = s!),
+          ),
+          const SizedBox(height: 12),
+          _buildTextInput('Custom Text', _weroTextController, (t) => setState(() => _weroText = t)),
+        ];
+
       case RegionalChampion.twint:
         return [
           _buildDropdown<TwintColor>(
@@ -560,6 +607,48 @@ class _EuropeanChampionsShowcasePageState
 
   Widget _buildChampionGallery() {
     switch (_selectedChampion) {
+      case RegionalChampion.wero:
+        return Column(
+          children: [
+            for (final color in WeroColor.values)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: color == WeroColor.black
+                        ? const Color(0xFF1E293B)
+                        : const Color(0xFFF8FAFC),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      WeroButton(
+                        color: color,
+                        shape: WeroShape.rounded,
+                        text: 'Pay with',
+                        onPressed: () {},
+                      ),
+                      WeroButton(
+                        color: color,
+                        shape: WeroShape.pill,
+                        text: 'Pay with',
+                        onPressed: () {},
+                      ),
+                      WeroButton(
+                        color: color,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        );
+
       case RegionalChampion.twint:
         return Column(
           children: [

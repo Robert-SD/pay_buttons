@@ -17,6 +17,7 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **Shop Pay (Shopify)**: Default logo-only or custom text (`purple`, `black`, `white`).
 * **Afterpay / Clearpay**: Default logo-only or custom text, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
 * **European Regional Champions**:
+  * **Wero** (Europe 🇪🇺 / European Payments Initiative) - `WeroButton` (`yellow`, `black`, `white`)
   * **TWINT** (Switzerland 🇨🇭) - `TwintButton` (`black`, `white`)
   * **iDEAL** (Netherlands 🇳🇱) - `IdealButton` (`white`, `black`)
   * **BLIK** (Poland 🇵🇱) - `BlikButton` (`black`, `white`)
@@ -80,6 +81,13 @@ AfterpayButton(
 
 ### European Regional Champions
 ```dart
+// Europe (European Payments Initiative)
+WeroButton(
+  text: 'Pay with',
+  color: WeroColor.yellow,
+  onPressed: () => handleWero(),
+)
+
 // Switzerland
 TwintButton(
   text: 'Bezahlen mit',
@@ -164,6 +172,7 @@ PayPalButton(
 | **BLIK** | `Lato`, `Montserrat`, `Roboto`, system sans |
 | **Bancontact** | `Gotham`, `Montserrat`, `Inter`, system sans |
 | **Bizum** | `Omnes`, `Nunito`, `Roboto`, system sans |
+| **Wero** | `GT Walsheim`, `GT Walsheim Pro`, `Inter`, `Roboto`, system sans |
 
 ---
 

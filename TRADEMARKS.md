@@ -83,11 +83,15 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 ---
 
 ### 6. European Regional Champions
+* **Wero**:
+  * **Trademark Owner**: EPI Company SE (European Payments Initiative)
+  * **Guidelines**: [Wero Brand Portal](https://brand.epicompany.eu/)
+  * Approved colors: Wero Yellow (`#FFF48D`), Wero Black (`#1D1C1C`), White (`#FFFFFF`).
 * **TWINT**:
   * **Trademark Owner**: TWINT AG (Switzerland)
   * **Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)
   * Approved colors: Black, White, TWINT Green (`#00A859`).
-* **iDEAL / Wero**:
+* **iDEAL**:
   * **Trademark Owner**: Currence iDEAL B.V. / European Payments Initiative (EPI)
   * **Guidelines**: [iDEAL Brand Specifications](https://www.ideal.nl/en/businesses/logos-and-banners/)
   * Approved colors: Magenta & Navy on white or light gray.

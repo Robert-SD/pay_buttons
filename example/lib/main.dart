@@ -284,7 +284,7 @@ class CatalogHomePage extends StatelessWidget {
                 'European Champions',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: const Text('TWINT, iDEAL, BLIK, Bancontact, Bizum'),
+              subtitle: const Text('Wero, TWINT, iDEAL, BLIK, Bancontact, Bizum'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).push(

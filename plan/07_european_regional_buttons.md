@@ -1,10 +1,23 @@
 # Step 7: European Regional Payment Buttons
 
-This document specifies the design, options, and brand compliance for European market leaders: **TWINT**, **iDEAL / Wero**, **BLIK**, **Bancontact**, and **Bizum**.
+This document specifies the design, options, and brand compliance for European market leaders: **Wero**, **TWINT**, **iDEAL**, **BLIK**, **Bancontact**, and **Bizum**.
 
 ---
 
-## 1. TWINT (Switzerland 🇨🇭)
+## 1. Wero (Europe 🇪🇺 - European Payments Initiative)
+
+- **Market Scope**: Sovereign pan-European digital wallet by EPI (16 major European banks across Germany, France, Belgium, Netherlands). Successor to iDEAL and Paylib.
+- **Brand Colors**:
+  - Wero Yellow: `#FFF48D` (signature pale yellow) with `#1D1C1C` logo and text
+  - Wero Black: `#1D1C1C` with `#FFFFFF` logo and text
+  - Pure White: `#FFFFFF` with `#D9D8DB` border and `#1D1C1C` logo and text
+- **Shapes**: `rounded` (6.0 dp) or `pill`.
+- **Text**: "Pay with" / "Payer avec" / "Bezahlen mit" / "Betaal met".
+- **Typography**: Primary `GT Walsheim` (Grilli Type), with `Inter` and `Roboto` fallbacks.
+
+---
+
+## 2. TWINT (Switzerland 🇨🇭)
 
 - **Market Share**: >70% of Swiss mobile commerce.
 - **Brand Colors**:
@@ -15,18 +28,17 @@ This document specifies the design, options, and brand compliance for European m
 
 ---
 
-## 2. iDEAL / Wero (Netherlands 🇳🇱 & EU 🇪🇺)
+## 3. iDEAL (Netherlands 🇳🇱 & EU 🇪🇺)
 
 - **Market Share**: Dominates online payments in the Netherlands (~70%); transitioning to the unified European Payments Initiative (EPI) **Wero** standard.
 - **Brand Colors**:
   - iDEAL: Magenta/Navy badge (`#CC0066`, `#002D62`) on White or Light Gray (`#F5F5F5`).
-  - Wero: Modern blue/green gradient branding.
 - **Shapes**: `rounded` (4.0 - 6.0).
 - **Text**: "Betaal met iDEAL" / "Pay with iDEAL".
 
 ---
 
-## 3. BLIK (Poland 🇵🇱)
+## 4. BLIK (Poland 🇵🇱)
 
 - **Market Share**: >70% of Polish e-commerce payments.
 - **Brand Colors**:
@@ -37,7 +49,7 @@ This document specifies the design, options, and brand compliance for European m
 
 ---
 
-## 4. Bancontact (Belgium 🇧🇪)
+## 5. Bancontact (Belgium 🇧🇪)
 
 - **Market Share**: Belgian market leader.
 - **Brand Colors**:
@@ -48,7 +60,7 @@ This document specifies the design, options, and brand compliance for European m
 
 ---
 
-## 5. Bizum (Spain 🇪🇸)
+## 6. Bizum (Spain 🇪🇸)
 
 - **Market Share**: Leading peer-to-peer and online instant checkout in Spain.
 - **Brand Colors**:

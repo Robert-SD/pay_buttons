@@ -71,6 +71,12 @@ export 'src/buttons/regional/bizum/bizum_color.dart';
 export 'src/buttons/regional/bizum/bizum_shape.dart';
 export 'src/buttons/regional/bizum/bizum_assets.dart';
 
+// Wero (Europe / EPI)
+export 'src/buttons/regional/wero/wero_button.dart';
+export 'src/buttons/regional/wero/wero_color.dart';
+export 'src/buttons/regional/wero/wero_shape.dart';
+export 'src/buttons/regional/wero/wero_assets.dart';
+
 /// Legacy platform version helper from template.
 class PayButtons {
   Future<String?> getPlatformVersion() {

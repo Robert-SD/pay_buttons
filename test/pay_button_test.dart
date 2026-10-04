@@ -163,6 +163,7 @@ void main() {
       expect(PayButtonFonts.blik, contains('Lato'));
       expect(PayButtonFonts.bancontact, contains('Gotham'));
       expect(PayButtonFonts.bizum, contains('Omnes'));
+      expect(PayButtonFonts.wero, contains('GT Walsheim'));
     });
   });
 }

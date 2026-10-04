@@ -305,5 +305,91 @@ void main() {
         }
       });
     });
+
+    group('WeroButton', () {
+      testWidgets('renders yellow rounded wero button without text by default', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeroButton(
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        expect(find.byType(WeroButton), findsOneWidget);
+        expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(Text), findsNothing);
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeroButton(
+                text: 'Pay with',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay with'), findsOneWidget);
+      });
+
+      testWidgets('renders all WeroColor and WeroShape options', (tester) async {
+        for (final color in WeroColor.values) {
+          for (final shape in WeroShape.values) {
+            await tester.pumpWidget(
+              MaterialApp(
+                home: Scaffold(
+                  body: WeroButton(
+                    color: color,
+                    shape: shape,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            );
+            expect(find.byType(WeroButton), findsOneWidget);
+          }
+        }
+      });
+
+      testWidgets('defaults to PayButtonFonts.wero fallback', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeroButton(
+                text: 'Payer avec',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Payer avec'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.wero);
+      });
+
+      testWidgets('applies custom textStyle when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeroButton(
+                text: 'Bezahlen mit',
+                textStyle: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.0),
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Bezahlen mit'));
+        expect(textWidget.style?.fontWeight, FontWeight.w900);
+        expect(textWidget.style?.letterSpacing, 1.0);
+      });
+    });
   });
 }

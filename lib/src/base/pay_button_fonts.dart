@@ -139,4 +139,21 @@ abstract final class PayButtonFonts {
     'Arial',
     'sans-serif',
   ];
+
+  /// Font fallback chain for Wero (European Payments Initiative) buttons.
+  ///
+  /// References Wero's primary brand typeface (GT Walsheim by Grilli Type)
+  /// with fallbacks to Inter, Roboto, and clean system sans-serif typefaces.
+  static const List<String> wero = [
+    'GT Walsheim',
+    'GT Walsheim Pro',
+    'Inter',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
 }
