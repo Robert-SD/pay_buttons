@@ -53,47 +53,57 @@ class CatalogHomePage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         children: [
           // Section 1: Default Payment Buttons (Zero Configuration)
-          const Text(
-            'Default Payment Buttons',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              letterSpacing: -0.2,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'Out-of-the-box payment buttons with provider defaults and zero configuration.',
-            style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
-          ),
-          const SizedBox(height: 12),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            elevation: 2,
-            color: const Color(0xFFF8FAFC),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: Colors.grey.shade200),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                crossAxisAlignment: WrapCrossAlignment.center,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 580),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  PayPalButton(onPressed: () => _handlePayPress(context, 'PayPal')),
-                  PayPalPayLaterButton(onPressed: () => _handlePayPress(context, 'PayPal Pay Later')),
-                  KlarnaButton(onPressed: () => _handlePayPress(context, 'Klarna')),
-                  AmazonPayButton(onPressed: () => _handlePayPress(context, 'Amazon Pay')),
-                  ShopPayButton(onPressed: () => _handlePayPress(context, 'Shop Pay')),
-                  AfterpayButton(onPressed: () => _handlePayPress(context, 'Afterpay')),
-                  WeroButton(onPressed: () => _handlePayPress(context, 'Wero')),
-                  TwintButton(onPressed: () => _handlePayPress(context, 'TWINT')),
-                  IdealButton(onPressed: () => _handlePayPress(context, 'iDEAL')),
-                  BlikButton(onPressed: () => _handlePayPress(context, 'BLIK')),
-                  BancontactButton(onPressed: () => _handlePayPress(context, 'Bancontact')),
-                  BizumButton(onPressed: () => _handlePayPress(context, 'Bizum')),
+                  const Text(
+                    'Default Payment Buttons',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -0.2,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Out-of-the-box payment buttons with provider defaults and zero configuration.',
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+                  ),
+                  const SizedBox(height: 12),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: Colors.grey.shade200),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          PayPalButton(onPressed: () => _handlePayPress(context, 'PayPal')),
+                          KlarnaButton(onPressed: () => _handlePayPress(context, 'Klarna')),
+                          AmazonPayButton(onPressed: () => _handlePayPress(context, 'Amazon Pay')),
+                          ShopPayButton(onPressed: () => _handlePayPress(context, 'Shop Pay')),
+                          AfterpayButton(onPressed: () => _handlePayPress(context, 'Afterpay')),
+                          WeroButton(onPressed: () => _handlePayPress(context, 'Wero')),
+                          TwintButton(onPressed: () => _handlePayPress(context, 'TWINT')),
+                          IdealButton(onPressed: () => _handlePayPress(context, 'iDEAL')),
+                          BlikButton(onPressed: () => _handlePayPress(context, 'BLIK')),
+                          BancontactButton(onPressed: () => _handlePayPress(context, 'Bancontact')),
+                          BizumButton(onPressed: () => _handlePayPress(context, 'Bizum')),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
