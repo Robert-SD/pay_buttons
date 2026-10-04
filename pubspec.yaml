@@ -3,6 +3,15 @@ description: "A pure Flutter payment button library providing brand-compliant ch
 version: 0.0.1
 homepage: https://github.com/Robert-SD/pay_buttons
 
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+
 environment:
   sdk: ^3.13.4
   flutter: '>=3.3.0'
