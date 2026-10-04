@@ -22,4 +22,7 @@ class PayPalPayLaterButton extends PayPalButton {
     super.fontFamily,
     super.fontFamilyFallback,
   });
+
+  @override
+  String get defaultSemanticLabel => 'PayPal Pay Later';
 }

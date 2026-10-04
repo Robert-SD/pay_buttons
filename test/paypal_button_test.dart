@@ -125,5 +125,22 @@ void main() {
       final textWidget = tester.widget<Text>(find.text('Checkout'));
       expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.paypal);
     });
+
+    testWidgets('PayPalPayLaterButton announces PayPal Pay Later to screen readers', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayPalPayLaterButton(
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      final semantics = tester.getSemantics(find.byType(PayPalPayLaterButton));
+      expect(semantics.label, contains('PayPal Pay Later'));
+      expect(semantics.flagsCollection.isButton, isTrue);
+      expect(semantics.flagsCollection.isEnabled.value, 1);
+    });
   });
 }
