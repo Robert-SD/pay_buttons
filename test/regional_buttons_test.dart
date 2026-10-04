@@ -45,6 +45,39 @@ void main() {
         expect(find.text('Bezahlen mit'), findsOneWidget);
       });
 
+      testWidgets('applies custom fontFamily when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: TwintButton(
+                text: 'Bezahlen mit',
+                fontFamily: 'CustomSwissFont',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Bezahlen mit'));
+        expect(textWidget.style?.fontFamily, 'CustomSwissFont');
+      });
+
+      testWidgets('defaults to PayButtonFonts.twint fallback', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: TwintButton(
+                text: 'Bezahlen mit',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Bezahlen mit'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.twint);
+      });
+
       testWidgets('renders all TwintColor and TwintShape options', (tester) async {
         for (final color in TwintColor.values) {
           for (final shape in TwintShape.values) {

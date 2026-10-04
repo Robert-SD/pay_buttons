@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
+import '../../base/pay_button_fonts.dart';
 import 'afterpay_assets.dart';
 import 'afterpay_brand.dart';
 import 'afterpay_color.dart';
@@ -15,6 +16,9 @@ class AfterpayButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -26,7 +30,6 @@ class AfterpayButton extends PayButton {
     this.color = AfterpayColor.mint,
     this.shape = AfterpayShape.rounded,
     this.brand = AfterpayBrand.afterpay,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [AfterpayColor.mint].
@@ -37,9 +40,6 @@ class AfterpayButton extends PayButton {
 
   /// Regional branding variant (Afterpay vs Clearpay). Defaults to [AfterpayBrand.afterpay].
   final AfterpayBrand brand;
-
-  /// Optional custom text style override for the label text.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -102,14 +102,7 @@ class AfterpayButton extends PayButton {
       color: textColor,
       fontSize: (height * 0.35).clamp(15.0, 18.0),
       fontWeight: FontWeight.w800,
-      fontFamilyFallback: const [
-        'Sofia Pro',
-        'Gilroy',
-        'Helvetica Neue',
-        'Helvetica',
-        'Arial',
-        'sans-serif',
-      ],
+      fontFamilyFallback: PayButtonFonts.afterpay,
       letterSpacing: -0.4,
     );
 
@@ -127,20 +120,13 @@ class AfterpayButton extends PayButton {
       return brandLockup;
     }
 
-    final effectiveLabelStyle = TextStyle(
-      color: textColor,
+    final effectiveLabelStyle = resolveTextStyle(
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w600,
-      fontFamilyFallback: const [
-        'Sofia Pro',
-        'Gilroy',
-        'Helvetica Neue',
-        'Helvetica',
-        'Arial',
-        'sans-serif',
-      ],
       letterSpacing: -0.1,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.afterpay,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
+import '../../base/pay_button_fonts.dart';
 import 'klarna_assets.dart';
 import 'klarna_color.dart';
 import 'klarna_shape.dart';
@@ -14,6 +15,9 @@ class KlarnaButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,7 +28,6 @@ class KlarnaButton extends PayButton {
     super.semanticLabel,
     this.color = KlarnaColor.pink,
     this.shape = KlarnaShape.rounded,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [KlarnaColor.pink].
@@ -32,9 +35,6 @@ class KlarnaButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [KlarnaShape.rounded] (5.0 dp).
   final KlarnaShape shape;
-
-  /// Optional custom text style override for the label text.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -94,20 +94,13 @@ class KlarnaButton extends PayButton {
       return logoWidget;
     }
 
-    final effectiveTextStyle = TextStyle(
-      color: textColor,
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w700,
-      fontFamilyFallback: const [
-        'Klarna Text',
-        'Klarna Headline',
-        'Helvetica Neue',
-        'Helvetica',
-        'Arial',
-        'sans-serif',
-      ],
       letterSpacing: -0.2,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.klarna,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

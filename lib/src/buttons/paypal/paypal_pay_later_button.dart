@@ -19,5 +19,7 @@ class PayPalPayLaterButton extends PayPalButton {
     super.color = PayPalColor.white,
     super.shape = PayPalShape.pill,
     super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
   });
 }

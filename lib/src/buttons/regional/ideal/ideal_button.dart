@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
+import '../../../base/pay_button_fonts.dart';
 import 'ideal_assets.dart';
 import 'ideal_color.dart';
 import 'ideal_shape.dart';
@@ -13,6 +14,9 @@ class IdealButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,7 +27,6 @@ class IdealButton extends PayButton {
     super.semanticLabel,
     this.color = IdealColor.white,
     this.shape = IdealShape.rounded,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [IdealColor.white].
@@ -31,9 +34,6 @@ class IdealButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [IdealShape.rounded] (6.0 dp).
   final IdealShape shape;
-
-  /// Optional custom text style override for the label text.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -76,12 +76,13 @@ class IdealButton extends PayButton {
       return logoWidget;
     }
 
-    final effectiveTextStyle = TextStyle(
-      color: const Color(0xFF0A0B09),
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: const Color(0xFF0A0B09),
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w600,
       letterSpacing: -0.1,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.ideal,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

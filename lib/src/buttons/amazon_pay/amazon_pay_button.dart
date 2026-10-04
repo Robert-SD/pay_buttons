@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
+import '../../base/pay_button_fonts.dart';
 import 'amazon_pay_assets.dart';
 import 'amazon_pay_color.dart';
 import 'amazon_pay_shape.dart';
@@ -14,6 +15,9 @@ class AmazonPayButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,7 +28,6 @@ class AmazonPayButton extends PayButton {
     super.semanticLabel,
     this.color = AmazonPayColor.gold,
     this.shape = AmazonPayShape.pill,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [AmazonPayColor.gold].
@@ -32,9 +35,6 @@ class AmazonPayButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [AmazonPayShape.pill].
   final AmazonPayShape shape;
-
-  /// Optional custom text style override for the label text.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -94,19 +94,13 @@ class AmazonPayButton extends PayButton {
       return logoWidget;
     }
 
-    final effectiveTextStyle = TextStyle(
-      color: textColor,
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w600,
-      fontFamilyFallback: const [
-        'Amazon Ember',
-        'Helvetica Neue',
-        'Helvetica',
-        'Arial',
-        'sans-serif',
-      ],
       letterSpacing: -0.1,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.amazonPay,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

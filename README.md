@@ -124,6 +124,61 @@ BizumButton(
 
 ---
 
+## Typography & Custom Fonts (MIT Compliant)
+
+All payment buttons support custom typography out of the box while remaining **100% compliant with the MIT open-source license**.
+
+### MIT License Compliance Strategy
+Proprietary corporate typefaces (such as *PayPal Pro*, *Klarna Text*, *Amazon Ember*, or *Söhne*) cannot legally be redistributed as binary font files (`.ttf`, `.otf`, `.woff`) inside an open-source MIT package. 
+
+Instead, `pay_buttons` implements a clean, compliant typography strategy:
+1. **Official Brand Fallback Chains (`PayButtonFonts`)**: Built-in nominative fallback chains representing each brand's official font family that fall back gracefully to clean system neo-grotesque typefaces (such as `-apple-system`, `BlinkMacSystemFont`, `Roboto`, `Segoe UI`, `Helvetica Neue`, and `Inter`).
+2. **First-Party or Custom Fonts**: If your app bundles licensed brand font assets (declared in your app's `pubspec.yaml`), pass `fontFamily: 'Klarna Text'` to use it directly.
+3. **Google Fonts Support**: Provide any open-source web font via the standard Flutter [`google_fonts`](https://pub.dev/packages/google_fonts) package using the `textStyle` parameter.
+
+### Examples
+
+#### 1. Custom `fontFamily` & Fallbacks
+```dart
+KlarnaButton(
+  text: 'Pay in 4 with',
+  fontFamily: 'MyCustomFont',
+  fontFamilyFallback: PayButtonFonts.klarna,
+  onPressed: () => handleCheckout(),
+)
+```
+
+#### 2. Using `GoogleFonts` with `textStyle`
+```dart
+import 'package:google_fonts/google_fonts.dart';
+
+PayPalButton(
+  text: 'Checkout',
+  textStyle: GoogleFonts.inter(
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.2,
+  ),
+  onPressed: () => handleCheckout(),
+)
+```
+
+#### 3. Brand Font Stacks Reference
+| Button | Primary Brand Stack (`PayButtonFonts.*`) |
+| :--- | :--- |
+| **PayPal** | `PayPal Pro`, `PayPal Open`, `PayPal Sans`, system neo-grotesque |
+| **Klarna** | `Klarna Text`, `Klarna Headline`, system neo-grotesque |
+| **Amazon Pay** | `Amazon Ember`, system neo-grotesque |
+| **Shop Pay** | `Shopify Sans`, system neo-grotesque |
+| **Link by Stripe** | `Söhne`, `sohne-var`, system neo-grotesque |
+| **Afterpay** | `Youth`, `Cash Sans Mono`, `Italian Plate No. 2`, system sans |
+| **TWINT** | `Neue Haas Grotesk`, `Helvetica Neue`, `Arial`, system sans |
+| **iDEAL** | `Inter`, `Roboto`, `Helvetica Neue`, system sans |
+| **BLIK** | `Lato`, `Montserrat`, `Roboto`, system sans |
+| **Bancontact** | `Gotham`, `Montserrat`, `Inter`, system sans |
+| **Bizum** | `Omnes`, `Nunito`, `Roboto`, system sans |
+
+---
+
 ## Legal & Trademark Disclaimers
 
 ### 1. Non-Affiliation

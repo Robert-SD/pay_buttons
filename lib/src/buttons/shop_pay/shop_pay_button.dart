@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
+import '../../base/pay_button_fonts.dart';
 import 'shop_pay_assets.dart';
 import 'shop_pay_color.dart';
 import 'shop_pay_shape.dart';
@@ -14,6 +15,9 @@ class ShopPayButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,7 +28,6 @@ class ShopPayButton extends PayButton {
     super.semanticLabel,
     this.color = ShopPayColor.purple,
     this.shape = ShopPayShape.rounded,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [ShopPayColor.purple].
@@ -32,9 +35,6 @@ class ShopPayButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [ShopPayShape.rounded] (6.0 dp).
   final ShopPayShape shape;
-
-  /// Optional custom text style override for the label text.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -94,21 +94,13 @@ class ShopPayButton extends PayButton {
       return logoWidget;
     }
 
-    final effectiveTextStyle = TextStyle(
-      color: textColor,
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w600,
-      fontFamilyFallback: const [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        'Segoe UI',
-        'Roboto',
-        'Helvetica Neue',
-        'Arial',
-        'sans-serif',
-      ],
       letterSpacing: -0.1,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.shopPay,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

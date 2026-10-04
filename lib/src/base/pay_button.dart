@@ -11,6 +11,9 @@ abstract class PayButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.text,
+    this.textStyle,
+    this.fontFamily,
+    this.fontFamilyFallback,
     this.isLoading = false,
     this.enabled = true,
     this.width,
@@ -30,6 +33,21 @@ abstract class PayButton extends StatelessWidget {
   ///
   /// Defaults to `null` which renders the brand logo alone (no text).
   final String? text;
+
+  /// Optional custom text style override for the button label text.
+  ///
+  /// Merged on top of brand defaults and custom [fontFamily].
+  final TextStyle? textStyle;
+
+  /// Optional custom font family for the button label text.
+  ///
+  /// Overrides the brand default font family while retaining brand weight and sizing.
+  final String? fontFamily;
+
+  /// Optional custom font family fallback list.
+  ///
+  /// If null and [fontFamily] is null, brand-compliant default fallbacks are used.
+  final List<String>? fontFamilyFallback;
 
   /// Whether to display a loading indicator in place of the button content.
   ///
@@ -78,6 +96,32 @@ abstract class PayButton extends StatelessWidget {
   /// Subclasses implement this method to return the active color palette.
   @protected
   PayButtonColors resolveColors(BuildContext context);
+
+  /// Resolves the effective [TextStyle] for button text labels.
+  ///
+  /// Combines brand-specified typographic metrics with user-configured
+  /// [fontFamily], [fontFamilyFallback], and [textStyle] overrides.
+  @protected
+  TextStyle resolveTextStyle({
+    required Color textColor,
+    required double fontSize,
+    required FontWeight fontWeight,
+    double letterSpacing = -0.2,
+    FontStyle fontStyle = FontStyle.normal,
+    required List<String> defaultFontFamilyFallback,
+  }) {
+    final baseStyle = TextStyle(
+      color: textColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+      letterSpacing: letterSpacing,
+      fontFamily: fontFamily,
+      fontFamilyFallback: fontFamilyFallback ??
+          (fontFamily == null ? defaultFontFamilyFallback : null),
+    );
+    return textStyle != null ? baseStyle.merge(textStyle) : baseStyle;
+  }
 
   @override
   Widget build(BuildContext context) {

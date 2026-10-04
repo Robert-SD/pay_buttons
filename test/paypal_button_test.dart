@@ -92,5 +92,38 @@ void main() {
       final textWidget = tester.widget<Text>(find.text('Checkout'));
       expect(textWidget.style?.fontWeight, FontWeight.w900);
     });
+
+    testWidgets('PayPalButton applies custom fontFamily when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayPalButton(
+              text: 'Checkout',
+              onPressed: () {},
+              fontFamily: 'CustomPayPalFont',
+            ),
+          ),
+        ),
+      );
+
+      final textWidget = tester.widget<Text>(find.text('Checkout'));
+      expect(textWidget.style?.fontFamily, 'CustomPayPalFont');
+    });
+
+    testWidgets('PayPalButton defaults to PayButtonFonts.paypal fallback', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayPalButton(
+              text: 'Checkout',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      final textWidget = tester.widget<Text>(find.text('Checkout'));
+      expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.paypal);
+    });
   });
 }

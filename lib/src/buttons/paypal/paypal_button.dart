@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
+import '../../base/pay_button_fonts.dart';
 import 'paypal_assets.dart';
 import 'paypal_color.dart';
 import 'paypal_shape.dart';
@@ -14,6 +15,9 @@ class PayPalButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -24,7 +28,6 @@ class PayPalButton extends PayButton {
     super.semanticLabel,
     this.color = PayPalColor.gold,
     this.shape = PayPalShape.pill,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [PayPalColor.gold].
@@ -32,10 +35,6 @@ class PayPalButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [PayPalShape.pill].
   final PayPalShape shape;
-
-  /// Optional custom text style override for the button label text.
-  /// If null, brand-compliant typography (using PayPal's font styling standards) is used.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -123,20 +122,13 @@ class PayPalButton extends PayButton {
       return logoWidget;
     }
 
-    final effectiveTextStyle = TextStyle(
-      color: textColor,
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w700,
-      fontFamilyFallback: const [
-        'PayPalOpen',
-        'PayPal Sans',
-        'Helvetica Neue',
-        'Helvetica',
-        'Arial',
-        'sans-serif',
-      ],
       letterSpacing: -0.2,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.paypal,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

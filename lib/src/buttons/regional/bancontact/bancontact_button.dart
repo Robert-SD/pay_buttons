@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../base/pay_button.dart';
 import '../../../base/pay_button_colors.dart';
+import '../../../base/pay_button_fonts.dart';
 import 'bancontact_assets.dart';
 import 'bancontact_color.dart';
 import 'bancontact_shape.dart';
@@ -13,6 +14,9 @@ class BancontactButton extends PayButton {
     super.key,
     required super.onPressed,
     super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.width,
@@ -23,7 +27,6 @@ class BancontactButton extends PayButton {
     super.semanticLabel,
     this.color = BancontactColor.white,
     this.shape = BancontactShape.rounded,
-    this.textStyle,
   });
 
   /// The brand color palette for the button. Defaults to [BancontactColor.white].
@@ -31,9 +34,6 @@ class BancontactButton extends PayButton {
 
   /// The contour shape of the button. Defaults to [BancontactShape.rounded] (6.0 dp).
   final BancontactShape shape;
-
-  /// Optional custom text style override for the label text.
-  final TextStyle? textStyle;
 
   @override
   double get defaultBorderRadius =>
@@ -85,12 +85,13 @@ class BancontactButton extends PayButton {
       return logoWidget;
     }
 
-    final effectiveTextStyle = TextStyle(
-      color: textColor,
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w600,
       letterSpacing: -0.1,
-    ).merge(textStyle);
+      defaultFontFamilyFallback: PayButtonFonts.bancontact,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

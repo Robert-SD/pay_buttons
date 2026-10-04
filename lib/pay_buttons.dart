@@ -5,6 +5,7 @@ import 'pay_buttons_platform_interface.dart';
 // Base framework
 export 'src/base/pay_button.dart';
 export 'src/base/pay_button_colors.dart';
+export 'src/base/pay_button_fonts.dart';
 
 // PayPal
 export 'src/buttons/paypal/paypal_button.dart';

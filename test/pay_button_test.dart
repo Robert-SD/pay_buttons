@@ -5,6 +5,10 @@ import 'package:pay_buttons/pay_buttons.dart';
 class _TestPayButton extends PayButton {
   const _TestPayButton({
     required super.onPressed,
+    super.text,
+    super.textStyle,
+    super.fontFamily,
+    super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
     super.semanticLabel,
@@ -20,6 +24,20 @@ class _TestPayButton extends PayButton {
     return const PayButtonColors(
       backgroundColor: Colors.blue,
       progressColor: Colors.white,
+    );
+  }
+
+  TextStyle testResolveTextStyle({
+    required Color textColor,
+    required double fontSize,
+    required FontWeight fontWeight,
+    required List<String> defaultFontFamilyFallback,
+  }) {
+    return resolveTextStyle(
+      textColor: textColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      defaultFontFamilyFallback: defaultFontFamilyFallback,
     );
   }
 }
@@ -108,6 +126,44 @@ void main() {
       expect(semantics.label, contains('Custom Semantic Label'));
       expect(semantics.flagsCollection.isButton, isTrue);
       expect(semantics.flagsCollection.isEnabled.value, 1);
+    });
+
+    test('resolveTextStyle merges custom textStyle and font properties', () {
+      final button = _TestPayButton(
+        onPressed: () {},
+        text: 'Checkout',
+        textStyle: const TextStyle(letterSpacing: 1.5, color: Colors.purple),
+        fontFamily: 'MyBrandFont',
+        fontFamilyFallback: const ['BackupFont1', 'BackupFont2'],
+      );
+
+      final resolved = button.testResolveTextStyle(
+        textColor: Colors.black,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+        defaultFontFamilyFallback: const ['DefaultFallback'],
+      );
+
+      expect(resolved.color, Colors.purple);
+      expect(resolved.fontSize, 16.0);
+      expect(resolved.fontWeight, FontWeight.bold);
+      expect(resolved.letterSpacing, 1.5);
+      expect(resolved.fontFamily, 'MyBrandFont');
+      expect(resolved.fontFamilyFallback, ['BackupFont1', 'BackupFont2']);
+    });
+
+    test('PayButtonFonts defines valid fallback chains for all providers', () {
+      expect(PayButtonFonts.paypal, contains('PayPal Pro'));
+      expect(PayButtonFonts.klarna, contains('Klarna Text'));
+      expect(PayButtonFonts.amazonPay, contains('Amazon Ember'));
+      expect(PayButtonFonts.shopPay, contains('Shopify Sans'));
+      expect(PayButtonFonts.stripeLink, contains('Söhne'));
+      expect(PayButtonFonts.afterpay, contains('Youth'));
+      expect(PayButtonFonts.twint, contains('Helvetica Neue'));
+      expect(PayButtonFonts.ideal, contains('Inter'));
+      expect(PayButtonFonts.blik, contains('Lato'));
+      expect(PayButtonFonts.bancontact, contains('Gotham'));
+      expect(PayButtonFonts.bizum, contains('Omnes'));
     });
   });
 }
