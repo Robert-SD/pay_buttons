@@ -10,6 +10,14 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 > 🌐 **Live Web Component Catalog**: Test and interact with all 13 buttons directly in your browser at **[robert-sd.github.io/pay_buttons](https://robert-sd.github.io/pay_buttons/)**.
 
+<p align="center">
+  <a href="https://robert-sd.github.io/pay_buttons/">
+    <img src="doc/assets/preview.png" alt="Pay Buttons Web Catalog Demo" width="680" />
+  </a>
+  <br />
+  <sub>👉 <em>Click image above to open the live interactive demo in your browser</em></sub>
+</p>
+
 ---
 
 ## Supported Buttons
