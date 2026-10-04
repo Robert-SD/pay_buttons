@@ -1,7 +1,5 @@
 library;
 
-import 'pay_buttons_platform_interface.dart';
-
 // Base framework
 export 'src/base/pay_button.dart';
 export 'src/base/pay_button_colors.dart';
@@ -75,10 +73,3 @@ export 'src/buttons/regional/wero/wero_button.dart';
 export 'src/buttons/regional/wero/wero_color.dart';
 export 'src/buttons/regional/wero/wero_shape.dart';
 export 'src/buttons/regional/wero/wero_assets.dart';
-
-/// Legacy platform version helper from template.
-class PayButtons {
-  Future<String?> getPlatformVersion() {
-    return PayButtonsPlatform.instance.getPlatformVersion();
-  }
-}
