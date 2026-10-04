@@ -76,67 +76,77 @@ class CatalogHomePage extends StatelessWidget {
                     style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
                   ),
                   const SizedBox(height: 12),
-                  Column(
-                    children: [
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        spacing: 12,
-                        runSpacing: 12,
-                        crossAxisAlignment: WrapCrossAlignment.center,
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 320),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           ApplePayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Apple Pay'),
                           ),
+                          const SizedBox(height: 12),
                           GooglePayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Google Pay'),
                           ),
+                          const SizedBox(height: 12),
                           PayPalButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'PayPal'),
                           ),
+                          const SizedBox(height: 12),
                           AmazonPayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Amazon Pay'),
                           ),
+                          const SizedBox(height: 12),
                           KlarnaButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Klarna'),
                           ),
+                          const SizedBox(height: 12),
                           WeroButton(
                             onPressed: () => _handlePayPress(context, 'Wero'),
                           ),
+                          const SizedBox(height: 12),
                           ShopPayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Shop Pay'),
                           ),
+                          const SizedBox(height: 12),
                           AfterpayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Afterpay'),
                           ),
+                          const SizedBox(height: 12),
                           TwintButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'TWINT'),
                           ),
+                          const SizedBox(height: 12),
                           BlikButton(
                             onPressed: () => _handlePayPress(context, 'BLIK'),
                           ),
+                          const SizedBox(height: 12),
                           IdealButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'iDEAL'),
                           ),
+                          const SizedBox(height: 12),
                           BancontactButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Bancontact'),
                           ),
+                          const SizedBox(height: 12),
                           BizumButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Bizum'),
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 28),
 
