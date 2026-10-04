@@ -27,10 +27,17 @@ class ApplePayButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    PayButtonTextPosition? textPosition,
     this.color = ApplePayColor.black,
     this.shape = ApplePayShape.pill,
-    this.logoFirst = false,
-  });
+    bool? logoFirst,
+  }) : super(
+         textPosition: textPosition ??
+             (logoFirst == true
+                 ? PayButtonTextPosition.trailing
+                 : PayButtonTextPosition.leading),
+       );
 
   /// The brand color palette for the button. Defaults to [ApplePayColor.black].
   final ApplePayColor color;
@@ -39,9 +46,7 @@ class ApplePayButton extends PayButton {
   final ApplePayShape shape;
 
   /// Whether the Apple Pay mark appears before [text]. Defaults to `false`.
-  ///
-  /// Set to `false` when text precedes the brand logo (e.g. "Buy with [Pay]").
-  final bool logoFirst;
+  bool get logoFirst => textPosition == PayButtonTextPosition.trailing;
 
   @override
   double get defaultBorderRadius {
@@ -100,15 +105,26 @@ class ApplePayButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+  Widget buildCompactContent(BuildContext context) {
+    final markHeight = (height * 0.48).clamp(20.0, 26.0);
+    return ApplePayAssets.appleMark(color: color, height: markHeight);
+  }
+
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    final logoWidget = ApplePayAssets.logo(color: color, height: logoHeight);
+    return ApplePayAssets.logo(color: color, height: logoHeight);
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveTextStyle = resolveTextStyle(
       textColor: textColor,
       fontSize: (height * 0.33).clamp(14.0, 17.0),
@@ -128,7 +144,7 @@ class ApplePayButton extends PayButton {
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: logoFirst
+      children: textPosition == PayButtonTextPosition.trailing
           ? [logoWidget, const SizedBox(width: 8), textWidget]
           : [textWidget, const SizedBox(width: 8), logoWidget],
     );

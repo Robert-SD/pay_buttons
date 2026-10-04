@@ -27,10 +27,17 @@ class GooglePayButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    PayButtonTextPosition? textPosition,
     this.color = GooglePayColor.black,
     this.shape = GooglePayShape.pill,
-    this.logoFirst = false,
-  });
+    bool? logoFirst,
+  }) : super(
+         textPosition: textPosition ??
+             (logoFirst == true
+                 ? PayButtonTextPosition.trailing
+                 : PayButtonTextPosition.leading),
+       );
 
   /// The brand color palette for the button. Defaults to [GooglePayColor.black].
   final GooglePayColor color;
@@ -39,9 +46,7 @@ class GooglePayButton extends PayButton {
   final GooglePayShape shape;
 
   /// Whether the Google Pay mark appears before [text]. Defaults to `false`.
-  ///
-  /// Set to `false` when text precedes the brand logo (e.g. "Buy with GPay").
-  final bool logoFirst;
+  bool get logoFirst => textPosition == PayButtonTextPosition.trailing;
 
   @override
   double get defaultBorderRadius {
@@ -95,15 +100,26 @@ class GooglePayButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+  Widget buildCompactContent(BuildContext context) {
+    final markHeight = (height * 0.46).clamp(18.0, 24.0);
+    return GooglePayAssets.gMark(color: color, height: markHeight);
+  }
+
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    final logoWidget = GooglePayAssets.logo(color: color, height: logoHeight);
+    return GooglePayAssets.logo(color: color, height: logoHeight);
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveTextStyle = resolveTextStyle(
       textColor: textColor,
       fontSize: (height * 0.33).clamp(14.0, 17.0),
@@ -123,7 +139,7 @@ class GooglePayButton extends PayButton {
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: logoFirst
+      children: textPosition == PayButtonTextPosition.trailing
           ? [logoWidget, const SizedBox(width: 8), textWidget]
           : [textWidget, const SizedBox(width: 8), logoWidget],
     );

@@ -157,6 +157,80 @@ BizumButton(
 
 ---
 
+## Responsive Breakpoints & Button Variants
+
+Every button in `pay_buttons` supports adaptive sizing and explicit variant selection via `PayButtonVariant`:
+
+| Variant | Breakpoint | Description | Ideal Use Case |
+| :--- | :--- | :--- | :--- |
+| `PayButtonVariant.responsive` *(default)* | Dynamic | Automatically detects width via `LayoutBuilder` and adapts | Responsive checkout screens & web layouts |
+| `PayButtonVariant.compact` | `< 84 dp` | Standalone icon / brand monogram (e.g. ``, `G`, `PP`, `K.`) | Mini toolbars, floating bars, tight action bars |
+| `PayButtonVariant.medium` | `84 dp – 200 dp` | Clean brand wordmark / logo without text | Compact payment grids & medium cards |
+| `PayButtonVariant.full` | `> 200 dp` | Complete brand logo + customizable action text | Standard checkout forms & bottom payment sheets |
+
+### Responsive Auto-Adapting
+```dart
+// Auto-collapses from full label -> wordmark -> compact monogram based on layout width
+ApplePayButton(
+  onPressed: () => handleApplePay(),
+  text: 'Buy with',
+  variant: PayButtonVariant.responsive, // default
+)
+```
+
+### Explicit Compact Monograms
+```dart
+// Render compact 52dp icon buttons for a multi-provider mini checkout row
+Row(
+  children: [
+    ApplePayButton(
+      onPressed: () => handleApplePay(),
+      variant: PayButtonVariant.compact,
+      width: 52,
+    ),
+    GooglePayButton(
+      onPressed: () => handleGooglePay(),
+      variant: PayButtonVariant.compact,
+      width: 52,
+    ),
+    PayPalButton(
+      onPressed: () => handlePayPal(),
+      variant: PayButtonVariant.compact,
+      width: 52,
+    ),
+    KlarnaButton(
+      onPressed: () => handleKlarna(),
+      variant: PayButtonVariant.compact,
+      width: 52,
+    ),
+  ],
+)
+```
+
+---
+
+## Text Positioning (Leading vs Trailing)
+
+Customize where your button's text appears relative to the provider logo using `PayButtonTextPosition`:
+
+```dart
+// Text leading (default for Apple Pay, Google Pay, PayPal) -> "Buy with Pay"
+ApplePayButton(
+  onPressed: () => handlePay(),
+  text: 'Buy with',
+  textPosition: PayButtonTextPosition.leading,
+)
+
+// Text trailing -> "Pay Buy with" or "Klarna. Pay in 4"
+KlarnaButton(
+  onPressed: () => handleKlarna(),
+  text: 'Pay in 4 with',
+  textPosition: PayButtonTextPosition.leading, // or .trailing
+)
+```
+
+---
+
 ## Typography & Custom Fonts (MIT Compliant)
 
 All payment buttons support custom typography out of the box while remaining **100% compliant with the MIT open-source license**.

@@ -18,6 +18,25 @@ class WeroAssets {
     );
   }
 
+  /// Renders the standalone Wero 'w' monogram vector.
+  static Widget wMark({required WeroColor color, double height = 22.0}) {
+    final String fillColor = color == WeroColor.black ? '#FFFFFF' : '#1D1C1C';
+
+    return SvgPicture.string(
+      _weroMarkSvg(fillColor: fillColor),
+      height: height,
+      fit: BoxFit.contain,
+    );
+  }
+
+  static String _weroMarkSvg({required String fillColor}) {
+    return '''
+<svg viewBox="0 0 61 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M48.7497 1.05249L41.8244 24.2091L35.0657 1.05249H25.8714L19.0572 24.2091L12.1874 1.05249H0L13.9592 39.8319H23.9863L30.4674 18.7247L36.8953 39.8319H46.9756L60.9371 1.05249H48.7497Z" fill="$fillColor"/>
+</svg>
+''';
+  }
+
   /// Official Wero SVG geometry from European Payments Initiative.
   static String _weroSvg({required String fillColor}) {
     final cleanId = fillColor.replaceAll('#', '');

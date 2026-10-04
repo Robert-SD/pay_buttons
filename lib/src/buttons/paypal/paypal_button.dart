@@ -27,6 +27,8 @@ class PayPalButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    super.textPosition = PayButtonTextPosition.trailing,
     this.color = PayPalColor.gold,
     this.shape = PayPalShape.pill,
   });
@@ -105,13 +107,17 @@ class PayPalButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+  Widget buildCompactContent(BuildContext context) {
+    final monogramHeight = (height * 0.52).clamp(20.0, 28.0);
+    return PayPalAssets.monogram(color: color, height: monogramHeight);
+  }
 
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.46).clamp(18.0, 26.0);
     final wordmarkHeight = (height * 0.40).clamp(16.0, 22.0);
 
-    final logoWidget = Row(
+    return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -120,11 +126,17 @@ class PayPalButton extends PayButton {
         PayPalAssets.wordmark(color: color, height: wordmarkHeight),
       ],
     );
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveTextStyle = resolveTextStyle(
       textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
@@ -133,14 +145,20 @@ class PayPalButton extends PayButton {
       defaultFontFamilyFallback: PayButtonFonts.paypal,
     );
 
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        logoWidget,
-        const SizedBox(width: 8),
-        Text(text!, style: effectiveTextStyle),
-      ],
+      children: textPosition == PayButtonTextPosition.leading
+          ? [textWidget, const SizedBox(width: 8), logoWidget]
+          : [logoWidget, const SizedBox(width: 8), textWidget],
     );
   }
 }

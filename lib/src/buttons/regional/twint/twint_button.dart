@@ -26,6 +26,8 @@ class TwintButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    super.textPosition = PayButtonTextPosition.leading,
     this.color = TwintColor.black,
     this.shape = TwintShape.rounded,
   });
@@ -75,16 +77,26 @@ class TwintButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+  Widget buildCompactContent(BuildContext context) {
+    final beaconHeight = (height * 0.48).clamp(20.0, 26.0);
+    return TwintAssets.beacon(height: beaconHeight);
+  }
 
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    final logoWidget = TwintAssets.logo(color: color, height: logoHeight);
+    return TwintAssets.logo(color: color, height: logoHeight);
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveTextStyle = resolveTextStyle(
       textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
@@ -93,14 +105,20 @@ class TwintButton extends PayButton {
       defaultFontFamilyFallback: PayButtonFonts.twint,
     );
 
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(text!, style: effectiveTextStyle),
-        const SizedBox(width: 8),
-        logoWidget,
-      ],
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [logoWidget, const SizedBox(width: 8), textWidget]
+          : [textWidget, const SizedBox(width: 8), logoWidget],
     );
   }
 }

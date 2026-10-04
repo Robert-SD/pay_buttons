@@ -20,6 +20,32 @@ class BancontactAssets {
     );
   }
 
+  /// Renders the standalone Belgian Bancontact wings mark vector.
+  static Widget wings({double height = 24.0}) {
+    return SvgPicture.string(
+      _bancontactWingsSvg,
+      height: height,
+      fit: BoxFit.contain,
+    );
+  }
+
+  static const String _bancontactWingsSvg = '''
+<svg viewBox="15 12 90 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bcBlue_w" x1="24.5" y1="40" x2="57.2" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#005AB9"/>
+      <stop offset="1" stop-color="#1E3764"/>
+    </linearGradient>
+    <linearGradient id="bcYellow_w" x1="62.7" y1="31.7" x2="97.4" y2="20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBA900"/>
+      <stop offset="1" stop-color="#FFD800"/>
+    </linearGradient>
+  </defs>
+  <path d="M33.18 48.24C46.59 48.24 53.29 39.18 60 30.12H15.5V48.24H33.18Z" fill="url(#bcBlue_w)"/>
+  <path d="M86.82 12C73.41 12 66.71 21.06 60 30.12H104.5V12H86.82Z" fill="url(#bcYellow_w)"/>
+</svg>
+''';
+
   static String _bancontactSvg({required String textColor}) {
     return '''
 <svg viewBox="15 12 90 56" fill="none" xmlns="http://www.w3.org/2000/svg">

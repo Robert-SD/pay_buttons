@@ -32,10 +32,17 @@ class KlarnaButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    PayButtonTextPosition? textPosition,
     this.color = KlarnaColor.pink,
     this.shape = KlarnaShape.rounded,
-    this.logoFirst = true,
-  });
+    bool? logoFirst,
+  }) : super(
+         textPosition: textPosition ??
+             (logoFirst == false
+                 ? PayButtonTextPosition.leading
+                 : PayButtonTextPosition.trailing),
+       );
 
   /// The brand color palette for the button. Defaults to [KlarnaColor.pink].
   final KlarnaColor color;
@@ -44,9 +51,7 @@ class KlarnaButton extends PayButton {
   final KlarnaShape shape;
 
   /// Whether the Klarna logo appears before [text]. Defaults to `true`.
-  ///
-  /// Set to `false` when text precedes the brand logo (e.g. "Continue with Klarna.").
-  final bool logoFirst;
+  bool get logoFirst => textPosition == PayButtonTextPosition.trailing;
 
   @override
   double get defaultBorderRadius {
@@ -113,53 +118,48 @@ class KlarnaButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final availableWidth = constraints.maxWidth;
-        final textColor = _resolveTextColor();
-        final logoHeight = (height * 0.40).clamp(16.0, 22.0);
+  Widget buildCompactContent(BuildContext context) {
+    final monogramHeight = (height * 0.45).clamp(18.0, 24.0);
+    return KlarnaAssets.monogram(color: color, height: monogramHeight);
+  }
 
-        // Responsive variant: Width < 84px displays compact monogram "K."
-        if (availableWidth < 84.0) {
-          final monogramHeight = (height * 0.45).clamp(18.0, 24.0);
-          return KlarnaAssets.monogram(color: color, height: monogramHeight);
-        }
+  @override
+  Widget buildMediumContent(BuildContext context) {
+    final logoHeight = (height * 0.40).clamp(16.0, 22.0);
+    return KlarnaAssets.wordmark(color: color, height: logoHeight);
+  }
 
-        final logoWidget = KlarnaAssets.wordmark(
-          color: color,
-          height: logoHeight,
-        );
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
-        // Responsive variant: 84px <= Width <= 200px or no text displays wordmark only
-        if (availableWidth <= 200.0 || text == null || text!.isEmpty) {
-          return logoWidget;
-        }
+    if (text == null || text!.isEmpty) {
+      return logoWidget;
+    }
 
-        final effectiveTextStyle = resolveTextStyle(
-          textColor: textColor,
-          fontSize: (height * 0.31).clamp(13.0, 16.0),
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.2,
-          defaultFontFamilyFallback: PayButtonFonts.klarna,
-        );
+    final textColor = _resolveTextColor();
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: textColor,
+      fontSize: (height * 0.31).clamp(13.0, 16.0),
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.2,
+      defaultFontFamilyFallback: PayButtonFonts.klarna,
+    );
 
-        final textWidget = Flexible(
-          child: Text(
-            text!,
-            style: effectiveTextStyle,
-            overflow: TextOverflow.ellipsis,
-          ),
-        );
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
 
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: logoFirst
-              ? [logoWidget, const SizedBox(width: 8), textWidget]
-              : [textWidget, const SizedBox(width: 8), logoWidget],
-        );
-      },
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [logoWidget, const SizedBox(width: 8), textWidget]
+          : [textWidget, const SizedBox(width: 8), logoWidget],
     );
   }
 }

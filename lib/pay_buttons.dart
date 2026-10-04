@@ -4,6 +4,7 @@ library;
 export 'src/base/pay_button.dart';
 export 'src/base/pay_button_colors.dart';
 export 'src/base/pay_button_fonts.dart';
+export 'src/base/pay_button_variant.dart';
 
 // Apple Pay
 export 'src/buttons/apple_pay/apple_pay_button.dart';

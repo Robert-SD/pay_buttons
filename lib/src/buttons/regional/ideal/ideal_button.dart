@@ -26,6 +26,8 @@ class IdealButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    super.textPosition = PayButtonTextPosition.leading,
     this.color = IdealColor.white,
     this.shape = IdealShape.rounded,
   });
@@ -68,9 +70,20 @@ class IdealButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
+  Widget buildCompactContent(BuildContext context) {
+    final logoHeight = (height * 0.55).clamp(22.0, 30.0);
+    return IdealAssets.logo(height: logoHeight);
+  }
+
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.52).clamp(20.0, 28.0);
-    final logoWidget = IdealAssets.logo(height: logoHeight);
+    return IdealAssets.logo(height: logoHeight);
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
@@ -84,14 +97,20 @@ class IdealButton extends PayButton {
       defaultFontFamilyFallback: PayButtonFonts.ideal,
     );
 
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(text!, style: effectiveTextStyle),
-        const SizedBox(width: 8),
-        logoWidget,
-      ],
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [logoWidget, const SizedBox(width: 8), textWidget]
+          : [textWidget, const SizedBox(width: 8), logoWidget],
     );
   }
 }

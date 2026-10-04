@@ -28,6 +28,8 @@ class AfterpayButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    super.textPosition = PayButtonTextPosition.leading,
     this.color = AfterpayColor.mint,
     this.shape = AfterpayShape.rounded,
     this.brand = AfterpayBrand.afterpay,
@@ -93,10 +95,16 @@ class AfterpayButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+  Widget buildCompactContent(BuildContext context) {
+    final badgeHeight = (height * 0.48).clamp(20.0, 26.0);
+    return AfterpayAssets.loopBadge(color: color, height: badgeHeight);
+  }
 
+  @override
+  Widget buildMediumContent(BuildContext context) {
+    final textColor = _resolveTextColor();
     final badgeHeight = (height * 0.44).clamp(18.0, 24.0);
+
     final badgeWidget = AfterpayAssets.loopBadge(
       color: color,
       height: badgeHeight,
@@ -110,7 +118,7 @@ class AfterpayButton extends PayButton {
       letterSpacing: -0.4,
     );
 
-    final brandLockup = Row(
+    return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -119,11 +127,17 @@ class AfterpayButton extends PayButton {
         badgeWidget,
       ],
     );
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final brandLockup = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return brandLockup;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveLabelStyle = resolveTextStyle(
       textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
@@ -132,14 +146,20 @@ class AfterpayButton extends PayButton {
       defaultFontFamilyFallback: PayButtonFonts.afterpay,
     );
 
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveLabelStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(text!, style: effectiveLabelStyle),
-        const SizedBox(width: 6),
-        brandLockup,
-      ],
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [brandLockup, const SizedBox(width: 6), textWidget]
+          : [textWidget, const SizedBox(width: 6), brandLockup],
     );
   }
 }

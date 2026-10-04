@@ -26,6 +26,8 @@ class WeroButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    super.textPosition = PayButtonTextPosition.leading,
     this.color = WeroColor.yellow,
     this.shape = WeroShape.rounded,
   });
@@ -73,9 +75,20 @@ class WeroButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
+  Widget buildCompactContent(BuildContext context) {
+    final markHeight = (height * 0.44).clamp(18.0, 24.0);
+    return WeroAssets.wMark(color: color, height: markHeight);
+  }
+
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.44).clamp(18.0, 26.0);
-    final logoWidget = WeroAssets.logo(color: color, height: logoHeight);
+    return WeroAssets.logo(color: color, height: logoHeight);
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
@@ -93,14 +106,20 @@ class WeroButton extends PayButton {
       defaultFontFamilyFallback: PayButtonFonts.wero,
     );
 
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(text!, style: effectiveTextStyle),
-        const SizedBox(width: 8),
-        logoWidget,
-      ],
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [logoWidget, const SizedBox(width: 8), textWidget]
+          : [textWidget, const SizedBox(width: 8), logoWidget],
     );
   }
 }

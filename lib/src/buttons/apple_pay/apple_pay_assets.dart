@@ -35,6 +35,44 @@ class ApplePayAssets {
     );
   }
 
+  /// Renders the standalone official Apple mark () vector.
+  static Widget appleMark({
+    required ApplePayColor color,
+    double height = 22.0,
+    Color? customColor,
+  }) {
+    final String fill;
+    if (customColor != null) {
+      fill =
+          '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
+    } else {
+      switch (color) {
+        case ApplePayColor.black:
+          fill = '#FFFFFF';
+          break;
+        case ApplePayColor.white:
+        case ApplePayColor.whiteOutline:
+          fill = '#000000';
+          break;
+      }
+    }
+
+    return SvgPicture.string(
+      _appleMarkSvg(fill: fill),
+      height: height,
+      fit: BoxFit.contain,
+    );
+  }
+
+  /// Standalone Apple mark SVG vector geometry.
+  static String _appleMarkSvg({required String fill}) {
+    return '''
+<svg viewBox="0 0 170 210.2" xmlns="http://www.w3.org/2000/svg">
+  <path fill="$fill" fill-rule="evenodd" d="M93.6,27.1C87.6,34.2,78,39.8,68.4,39c-1.2-9.6,3.5-19.8,9-26.1c6-7.3,16.5-12.5,25-12.9 C103.4,10,99.5,19.8,93.6,27.1 M102.3,40.9c-13.9-0.8-25.8,7.9-32.4,7.9c-6.7,0-16.8-7.5-27.8-7.3c-14.3,0.2-27.6,8.3-34.9,21.2 c-15,25.8-3.9,64,10.6,85c7.1,10.4,15.6,21.8,26.8,21.4c10.6-0.4,14.8-6.9,27.6-6.9c12.9,0,16.6,6.9,27.8,6.7 c11.6-0.2,18.9-10.4,26-20.8c8.1-11.8,11.4-23.3,11.6-23.9c-0.2-0.2-22.4-8.7-22.6-34.3c-0.2-21.4,17.5-31.6,18.3-32.2 C123.3,42.9,107.7,41.3,102.3,40.9"/>
+</svg>
+''';
+  }
+
   /// Official Apple Pay SVG vector geometry.
   static String _applePayLogoSvg({required String fill}) {
     return '''

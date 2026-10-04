@@ -16,6 +16,8 @@ class PayPalPayLaterButton extends PayPalButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant,
+    super.textPosition,
     super.color = PayPalColor.white,
     super.shape = PayPalShape.pill,
     super.textStyle,

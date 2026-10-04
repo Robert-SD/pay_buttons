@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'pay_button_colors.dart';
+import 'pay_button_variant.dart';
+
+export 'pay_button_variant.dart';
 
 /// Abstract base class for all payment buttons in `pay_buttons`.
 ///
@@ -23,6 +26,8 @@ abstract class PayButton extends StatelessWidget {
     this.margin,
     this.elevation = 0.0,
     this.semanticLabel,
+    this.variant = PayButtonVariant.responsive,
+    this.textPosition = PayButtonTextPosition.leading,
   });
 
   /// Callback executed when the button is tapped.
@@ -83,6 +88,20 @@ abstract class PayButton extends StatelessWidget {
   /// Accessibility label read by screen readers.
   final String? semanticLabel;
 
+  /// The visual layout variant of the button. Defaults to [PayButtonVariant.responsive].
+  final PayButtonVariant variant;
+
+  /// The placement of [text] relative to the brand mark. Defaults to [PayButtonTextPosition.leading].
+  final PayButtonTextPosition textPosition;
+
+  /// Breakpoint width below which a [PayButtonVariant.responsive] button collapses to [PayButtonVariant.compact].
+  @protected
+  double get compactBreakpoint => 84.0;
+
+  /// Breakpoint width below which a [PayButtonVariant.responsive] button collapses to [PayButtonVariant.medium].
+  @protected
+  double get mediumBreakpoint => 200.0;
+
   /// Whether the button can currently be tapped.
   bool get isInteractive => enabled && !isLoading && onPressed != null;
 
@@ -92,7 +111,44 @@ abstract class PayButton extends StatelessWidget {
 
   /// Subclasses implement this method to render their branded content (logos, text, badges).
   @protected
-  Widget buildButtonContent(BuildContext context);
+  Widget buildButtonContent(BuildContext context) {
+    switch (variant) {
+      case PayButtonVariant.compact:
+        return buildCompactContent(context);
+      case PayButtonVariant.medium:
+        return buildMediumContent(context);
+      case PayButtonVariant.full:
+        return buildFullContent(context);
+      case PayButtonVariant.responsive:
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final availableWidth = constraints.maxWidth;
+            if (availableWidth < compactBreakpoint) {
+              return buildCompactContent(context);
+            }
+            if (availableWidth <= mediumBreakpoint ||
+                text == null ||
+                text!.isEmpty) {
+              return buildMediumContent(context);
+            }
+            return buildFullContent(context);
+          },
+        );
+    }
+  }
+
+  /// Subclasses implement this to render the compact mark, icon, or monogram.
+  @protected
+  Widget buildCompactContent(BuildContext context) =>
+      buildMediumContent(context);
+
+  /// Subclasses implement this to render the standard brand logo or wordmark.
+  @protected
+  Widget buildMediumContent(BuildContext context) => const SizedBox.shrink();
+
+  /// Subclasses implement this to render the full variant combining text and brand logo.
+  @protected
+  Widget buildFullContent(BuildContext context) => buildMediumContent(context);
 
   /// Subclasses implement this method to return the active color palette.
   @protected

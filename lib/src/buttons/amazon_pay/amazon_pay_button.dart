@@ -27,6 +27,8 @@ class AmazonPayButton extends PayButton {
     super.margin,
     super.elevation,
     super.semanticLabel,
+    super.variant = PayButtonVariant.responsive,
+    super.textPosition = PayButtonTextPosition.leading,
     this.color = AmazonPayColor.gold,
     this.shape = AmazonPayShape.pill,
   });
@@ -84,16 +86,26 @@ class AmazonPayButton extends PayButton {
   }
 
   @override
-  Widget buildButtonContent(BuildContext context) {
-    final textColor = _resolveTextColor();
+  Widget buildCompactContent(BuildContext context) {
+    final smileHeight = (height * 0.40).clamp(18.0, 24.0);
+    return AmazonPayAssets.smileMark(color: color, height: smileHeight);
+  }
 
+  @override
+  Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.52).clamp(20.0, 32.0);
-    final logoWidget = AmazonPayAssets.logo(color: color, height: logoHeight);
+    return AmazonPayAssets.logo(color: color, height: logoHeight);
+  }
+
+  @override
+  Widget buildFullContent(BuildContext context) {
+    final logoWidget = buildMediumContent(context);
 
     if (text == null || text!.isEmpty) {
       return logoWidget;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveTextStyle = resolveTextStyle(
       textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
@@ -102,14 +114,20 @@ class AmazonPayButton extends PayButton {
       defaultFontFamilyFallback: PayButtonFonts.amazonPay,
     );
 
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(text!, style: effectiveTextStyle),
-        const SizedBox(width: 6),
-        logoWidget,
-      ],
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [logoWidget, const SizedBox(width: 6), textWidget]
+          : [textWidget, const SizedBox(width: 6), logoWidget],
     );
   }
 }

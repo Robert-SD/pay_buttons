@@ -50,6 +50,66 @@ class GooglePayAssets {
     );
   }
 
+  /// Renders the standalone official Google "G" mark vector.
+  static Widget gMark({
+    required GooglePayColor color,
+    double height = 22.0,
+    Color? customColor,
+  }) {
+    final bool isMonochrome = color == GooglePayColor.monochromeBlack ||
+        color == GooglePayColor.monochromeWhite;
+
+    final String payFill;
+    if (customColor != null) {
+      payFill =
+          '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
+    } else {
+      switch (color) {
+        case GooglePayColor.black:
+        case GooglePayColor.monochromeBlack:
+          payFill = '#FFFFFF';
+          break;
+        case GooglePayColor.white:
+        case GooglePayColor.monochromeWhite:
+          payFill = '#000000';
+          break;
+      }
+    }
+
+    final String blueFill = isMonochrome ? payFill : '#4285F4';
+    final String greenFill = isMonochrome ? payFill : '#34A853';
+    final String yellowFill = isMonochrome ? payFill : '#FBBC05';
+    final String redFill = isMonochrome ? payFill : '#EA4335';
+
+    return SvgPicture.string(
+      _gMarkSvg(
+        blueFill: blueFill,
+        greenFill: greenFill,
+        yellowFill: yellowFill,
+        redFill: redFill,
+      ),
+      height: height,
+      fit: BoxFit.contain,
+    );
+  }
+
+  /// Standalone Google "G" vector SVG geometry.
+  static String _gMarkSvg({
+    required String blueFill,
+    required String greenFill,
+    required String yellowFill,
+    required String redFill,
+  }) {
+    return '''
+<svg viewBox="0 0 22 23" xmlns="http://www.w3.org/2000/svg">
+  <path fill="$blueFill" d="M21.56 12.25c0-.78-.07-1.53-.2-2.25H11v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+  <path fill="$greenFill" d="M11 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H1.18v2.84C2.99 20.53 6.7 23 11 23z"/>
+  <path fill="$yellowFill" d="M4.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H1.18C.43 8.55 0 10.22 0 12s.43 3.45 1.18 4.94l3.66-2.85z"/>
+  <path fill="$redFill" d="M11 4.54c1.62 0 3.06.56 4.21 1.64l3.15-3.15C16.45 1.09 13.97 0 11 0 6.7 0 2.99 2.47 1.18 6.06l3.66 2.84c.87-2.6 3.3-4.36 6.16-4.36z"/>
+</svg>
+''';
+  }
+
   /// Official Google Pay SVG geometry.
   static String _googlePayLogoSvg({
     required String blueFill,
