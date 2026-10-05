@@ -32,7 +32,7 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **Afterpay / Clearpay**: Default logo-only or custom text, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
 * **TWINT**: Switzerland 🇨🇭 national mobile payment (`black`, `white`).
 * **BLIK**: Poland 🇵🇱 mobile banking champion (`black`, `white`).
-* **iDEAL**: Netherlands 🇳🇱 online banking standard (`white`, `black`).
+* **iDEAL | Wero**: Netherlands 🇳🇱 online banking standard migrating to Wero (`yellow`, `black`, `white`, `lightGray`).
 * **Bizum**: Spain 🇪🇸 instant account payment (`white`, `darkTeal`).
 * **Pix**: Brazil 🇧🇷 instant payment system by Banco Central do Brasil (`teal`, `white`, `black`).
 * **OXXO**: Mexico 🇲🇽 market leader cash voucher & digital payment (`red`, `white`, `yellow`).
@@ -158,9 +158,10 @@ BlikButton(
   onPressed: () => handleBlik(),
 )
 
-// Netherlands
+// Netherlands (iDEAL -> Wero migration lockup)
 IdealButton(
   text: 'Betaal met',
+  color: IdealColor.yellow,
   onPressed: () => handleIdeal(),
 )
 

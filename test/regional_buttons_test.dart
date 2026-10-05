@@ -95,7 +95,7 @@ void main() {
 
     group('IdealButton', () {
       testWidgets(
-        'renders white rounded ideal button without text by default',
+        'renders yellow rounded ideal button without text by default',
         (tester) async {
           await tester.pumpWidget(
             MaterialApp(
@@ -106,6 +106,14 @@ void main() {
           expect(find.byType(IdealButton), findsOneWidget);
           expect(find.byType(SvgPicture), findsOneWidget);
           expect(find.byType(Text), findsNothing);
+
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(IdealButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFFFFF48D));
         },
       );
 
@@ -119,6 +127,19 @@ void main() {
         );
 
         expect(find.text('Betaal met'), findsOneWidget);
+      });
+
+      testWidgets('defaults to PayButtonFonts.ideal fallback', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: IdealButton(text: 'Betaal met', onPressed: () {}),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Betaal met'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.ideal);
       });
 
       testWidgets('renders all IdealColor and IdealShape options', (

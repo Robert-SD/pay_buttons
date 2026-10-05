@@ -7,7 +7,11 @@ import 'ideal_assets.dart';
 import 'ideal_color.dart';
 import 'ideal_shape.dart';
 
-/// A brand-compliant iDEAL (Netherlands / EU) payment button.
+/// A brand-compliant iDEAL / Wero transition payment button.
+///
+/// Implements the official co-branded iDEAL | Wero lockup during the migration
+/// from iDEAL to European Wero:
+/// https://ideal.nl/naar-wero
 ///
 /// Fully rendered in pure Flutter using vector graphics without native SDK bloat.
 class IdealButton extends PayButton {
@@ -28,11 +32,11 @@ class IdealButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
-    this.color = IdealColor.white,
+    this.color = IdealColor.yellow,
     this.shape = IdealShape.rounded,
   });
 
-  /// The brand color palette for the button. Defaults to [IdealColor.white].
+  /// The brand color palette for the button. Defaults to [IdealColor.yellow].
   final IdealColor color;
 
   /// The contour shape of the button. Defaults to [IdealShape.rounded] (6.0 dp).
@@ -43,42 +47,67 @@ class IdealButton extends PayButton {
       shape == IdealShape.pill ? (height / 2) : 6.0;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'iDEAL';
+  String? get semanticLabel => super.semanticLabel ?? 'iDEAL | Wero';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {
     switch (color) {
+      case IdealColor.yellow:
+        return const PayButtonColors(
+          backgroundColor: Color(0xFFFFF48D),
+          progressColor: Color(0xFF1D1C1C),
+          splashColor: Color(0x1F1D1C1C),
+          highlightColor: Color(0x0F1D1C1C),
+        );
+      case IdealColor.black:
+        return const PayButtonColors(
+          backgroundColor: Color(0xFF1D1C1C),
+          progressColor: Color(0xFFFFF48D),
+          splashColor: Color(0x1FFFFFFF),
+          highlightColor: Color(0x0FFFFFFF),
+        );
       case IdealColor.white:
         return const PayButtonColors(
           backgroundColor: Color(0xFFFFFFFF),
           borderColor: Color(0xFFD1D5DB),
           borderWidth: 1.0,
-          progressColor: Color(0xFFD50172),
-          splashColor: Color(0x1FD50172),
-          highlightColor: Color(0x0FD50172),
+          progressColor: Color(0xFFCC0066),
+          splashColor: Color(0x1F1D1C1C),
+          highlightColor: Color(0x0F1D1C1C),
         );
       case IdealColor.lightGray:
         return const PayButtonColors(
           backgroundColor: Color(0xFFF5F5F5),
           borderColor: Color(0xFFE0E0E0),
           borderWidth: 1.0,
-          progressColor: Color(0xFFD50172),
-          splashColor: Color(0x1FD50172),
-          highlightColor: Color(0x0FD50172),
+          progressColor: Color(0xFFCC0066),
+          splashColor: Color(0x1F1D1C1C),
+          highlightColor: Color(0x0F1D1C1C),
         );
+    }
+  }
+
+  Color _resolveTextColor() {
+    switch (color) {
+      case IdealColor.black:
+        return Colors.white;
+      case IdealColor.yellow:
+      case IdealColor.white:
+      case IdealColor.lightGray:
+        return const Color(0xFF1D1C1C);
     }
   }
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    final logoHeight = (height * 0.55).clamp(22.0, 30.0);
-    return IdealAssets.logo(height: logoHeight);
+    final markHeight = (height * 0.52).clamp(20.0, 28.0);
+    return IdealAssets.emblem(color: color, height: markHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.52).clamp(20.0, 28.0);
-    return IdealAssets.logo(height: logoHeight);
+    final logoHeight = (height * 0.44).clamp(18.0, 26.0);
+    return IdealAssets.logo(color: color, height: logoHeight);
   }
 
   @override
@@ -89,8 +118,9 @@ class IdealButton extends PayButton {
       return logoWidget;
     }
 
+    final textColor = _resolveTextColor();
     final effectiveTextStyle = resolveTextStyle(
-      textColor: const Color(0xFF0A0B09),
+      textColor: textColor,
       fontSize: (height * 0.31).clamp(13.0, 16.0),
       fontWeight: FontWeight.w600,
       letterSpacing: -0.1,

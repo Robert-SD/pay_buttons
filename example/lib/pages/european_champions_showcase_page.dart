@@ -50,7 +50,7 @@ class _EuropeanChampionsShowcasePageState
   String? _twintText = 'Bezahlen mit';
 
   // iDEAL state
-  IdealColor _idealColor = IdealColor.white;
+  IdealColor _idealColor = IdealColor.yellow;
   IdealShape _idealShape = IdealShape.rounded;
   String? _idealText = 'Betaal met';
 

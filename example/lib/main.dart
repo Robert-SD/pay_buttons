@@ -726,27 +726,26 @@ class CatalogHomePage extends StatelessWidget {
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF1F5F9),
+                          color: const Color(0xFFFFF48D),
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.grey.shade300),
                         ),
                         child: const Center(
                           child: Text(
-                            'i',
+                            'i|w',
                             style: TextStyle(
-                              color: Color(0xFFCC0066),
+                              color: Color(0xFF1D1C1C),
                               fontWeight: FontWeight.w900,
-                              fontSize: 22,
+                              fontSize: 16,
                             ),
                           ),
                         ),
                       ),
                       title: const Text(
-                        'iDEAL',
+                        'iDEAL | Wero',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: const Text(
-                        'Netherlands online banking standard, White/Black',
+                        'Netherlands online banking migrating to Wero, Yellow/Black/White',
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {

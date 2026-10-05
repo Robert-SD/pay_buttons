@@ -91,10 +91,11 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * **Trademark Owner**: TWINT AG (Switzerland)
   * **Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)
   * Approved colors: Black, White, TWINT Green (`#00A859`).
-* **iDEAL**:
-  * **Trademark Owner**: Currence iDEAL B.V. / European Payments Initiative (EPI)
-  * **Guidelines**: [iDEAL Brand Specifications](https://www.ideal.nl/en/businesses/logos-and-banners/)
-  * Approved colors: Magenta & Navy on white or light gray.
+* **iDEAL / Wero Migration**:
+  * **Trademark Owner**: Currence iDEAL B.V. / EPI Company SE (European Payments Initiative)
+  * **Guidelines & Migration Specifications**: [iDEAL naar Wero Portal](https://ideal.nl/naar-wero) & [Official iDEAL-Wero Cloudfront Asset Distribution](https://d1twnm33rljaon.cloudfront.net/Logos/iDEAL-Wero/)
+  * **Co-Branding Transition (2026–2027)**: Mandated co-branded horizontal lockup combining the iDEAL emblem badge with the Wero wordmark.
+  * Approved colors: Wero Yellow (`#FFF48D`), Darkmode / Black (`#1D1C1C`), White (`#FFFFFF`), Light Gray (`#F5F5F5`).
 * **BLIK**:
   * **Trademark Owner**: Polski Standard Płatności Sp. z o.o. (PSP, Poland)
   * **Guidelines**: [BLIK Brand Standards](https://blik.com/en/for-business/materials-to-download)
