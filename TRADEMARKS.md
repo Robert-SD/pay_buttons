@@ -107,6 +107,10 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * **Trademark Owner**: Sociedad de Procedimientos de Pago S.L. (Spain)
   * **Guidelines**: [Bizum Brand Guidelines](https://bizum.es/en/brand/)
   * Approved colors: Teal (`#00B4B6`) and Dark Cyan (`#004455`).
+
+---
+
+### 7. Latin American Champions
 * **Pix**:
   * **Trademark Owner**: Banco Central do Brasil (BCB)
   * **Guidelines**: [Manual de Uso da Marca Pix](https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos)
@@ -119,7 +123,37 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * **Regulatory Body**: Federação Brasileira de Bancos (FEBRABAN)
   * Approved colors: White (`#FFFFFF`), Black (`#1A1A1A`), Light Gray (`#F5F5F7`).
 
-### 7. Google Pay
+---
+
+### 8. Asian Champions
+* **Alipay**:
+  * **Trademark Owner**: Alipay.com Co., Ltd. / Ant Group Co., Ltd.
+  * **Registered Trademarks**: "Alipay", the "支" emblem, the Alipay wordmark.
+  * **Guidelines**: [Alipay Brand Guidelines](https://global.alipay.com/)
+  * Approved colors: Alipay Blue (`#1677FF`), White (`#FFFFFF`), Black (`#000000`).
+  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
+* **WeChat Pay**:
+  * **Trademark Owner**: Tencent Holdings Limited / Tenpay Payment Technology Co., Ltd.
+  * **Registered Trademarks**: "WeChat", "WeChat Pay", the WeChat speech bubbles monogram.
+  * **Guidelines**: [WeChat Pay Brand Resources](https://pay.weixin.qq.com/)
+  * Approved colors: WeChat Green (`#07C160`), White (`#FFFFFF`), Black (`#000000`).
+  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
+* **PayNow**:
+  * **Trademark Owner / Governing Body**: Association of Banks in Singapore (ABS) / Monetary Authority of Singapore (MAS)
+  * **Registered Trademarks**: "PayNow", stylized bold "PayNow" wordmark with "P" monogram.
+  * **Guidelines**: [PayNow Singapore Brand Guidelines](https://www.abs.org.sg/consumer-banking/pay-now)
+  * Approved colors: Deep Purple (`#7D1978`), Vibrant Magenta (`#ED0080`), White (`#FFFFFF`).
+  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
+* **PromptPay**:
+  * **Trademark Owner / Governing Body**: Bank of Thailand (BOT) / National ITMX
+  * **Registered Trademarks**: "PromptPay", Thai QR payment badge with chevron arrows.
+  * **Guidelines**: [Bank of Thailand PromptPay Standard](https://www.bot.or.th/)
+  * Approved colors: Deep Navy Blue (`#003D6B`), White (`#FFFFFF`), Black (`#000000`).
+  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
+
+---
+
+### 9. Google Pay
 
 * **Trademark Owner**: Google LLC / Alphabet Inc.
 * **Registered Trademarks**: "Google", "Google Pay", "GPay", the multi-color Google "G" logo.
@@ -131,7 +165,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 8. Apple Pay
+### 10. Apple Pay
 * **Trademark Owner**: Apple Inc.
 * **Registered Trademarks**: "Apple", "Apple Pay", the Apple logo with "Pay" wordmark.
 * **Official Brand Guidelines**: [Apple Pay Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay)

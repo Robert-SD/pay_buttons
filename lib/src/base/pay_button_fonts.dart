@@ -224,5 +224,65 @@ abstract final class PayButtonFonts {
     'Arial',
     'sans-serif',
   ];
+
+  /// Font fallback chain for Alipay buttons.
+  ///
+  /// References Alipay Sans, PingFang SC, and clean CJK sans-serif fallbacks.
+  static const List<String> alipay = [
+    'Alipay Sans',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Inter',
+    'Roboto',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
+
+  /// Font fallback chain for WeChat Pay buttons.
+  ///
+  /// References WeChat / Tencent UI typefaces and CJK system fallbacks.
+  static const List<String> wechatPay = [
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Inter',
+    'Roboto',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
+
+  /// Font fallback chain for PayNow (Singapore) buttons.
+  ///
+  /// Clean modern geometric and neo-grotesque sans-serif typography.
+  static const List<String> paynow = [
+    'Inter',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
+
+  /// Font fallback chain for PromptPay (Thailand) buttons.
+  ///
+  /// References Thai modern sans-serif typefaces (Thonburi, Sukhumvit Set, Kanit).
+  static const List<String> promptpay = [
+    'Thonburi',
+    'Sukhumvit Set',
+    'Kanit',
+    'Inter',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
 }
 

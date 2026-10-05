@@ -108,3 +108,27 @@ export 'src/buttons/regional/boleto/boleto_color.dart';
 export 'src/buttons/regional/boleto/boleto_shape.dart';
 export 'src/buttons/regional/boleto/boleto_assets.dart';
 
+// Alipay (China / Global)
+export 'src/buttons/regional/alipay/alipay_button.dart';
+export 'src/buttons/regional/alipay/alipay_color.dart';
+export 'src/buttons/regional/alipay/alipay_shape.dart';
+export 'src/buttons/regional/alipay/alipay_assets.dart';
+
+// WeChat Pay (China / Global)
+export 'src/buttons/regional/wechat_pay/wechat_pay_button.dart';
+export 'src/buttons/regional/wechat_pay/wechat_pay_color.dart';
+export 'src/buttons/regional/wechat_pay/wechat_pay_shape.dart';
+export 'src/buttons/regional/wechat_pay/wechat_pay_assets.dart';
+
+// PayNow (Singapore)
+export 'src/buttons/regional/paynow/paynow_button.dart';
+export 'src/buttons/regional/paynow/paynow_color.dart';
+export 'src/buttons/regional/paynow/paynow_shape.dart';
+export 'src/buttons/regional/paynow/paynow_assets.dart';
+
+// PromptPay (Thailand)
+export 'src/buttons/regional/promptpay/promptpay_button.dart';
+export 'src/buttons/regional/promptpay/promptpay_color.dart';
+export 'src/buttons/regional/promptpay/promptpay_shape.dart';
+export 'src/buttons/regional/promptpay/promptpay_assets.dart';
+

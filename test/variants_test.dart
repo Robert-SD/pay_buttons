@@ -150,6 +150,10 @@ void main() {
         PixButton(onPressed: () {}, variant: PayButtonVariant.compact),
         OxxoButton(onPressed: () {}, variant: PayButtonVariant.compact),
         BoletoButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        AlipayButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        WeChatPayButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        PayNowButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        PromptPayButton(onPressed: () {}, variant: PayButtonVariant.compact),
       ];
 
 
@@ -183,6 +187,114 @@ void main() {
               text: 'Pay with',
               textPosition: PayButtonTextPosition.trailing,
               variant: PayButtonVariant.full,
+            ),
+          ),
+        ),
+      );
+      expect(find.text('Pay with'), findsOneWidget);
+    });
+
+    testWidgets('Asian champions support compact, medium, and full variants with text positioning', (tester) async {
+      // Alipay
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: AlipayButton(
+              onPressed: () {},
+              variant: PayButtonVariant.compact,
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(SvgPicture), findsOneWidget);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: AlipayButton(
+              onPressed: () {},
+              variant: PayButtonVariant.full,
+              text: 'Pay with',
+              textPosition: PayButtonTextPosition.leading,
+            ),
+          ),
+        ),
+      );
+      expect(find.text('Pay with'), findsOneWidget);
+
+      // WeChat Pay
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: WeChatPayButton(
+              onPressed: () {},
+              variant: PayButtonVariant.compact,
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(SvgPicture), findsOneWidget);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: WeChatPayButton(
+              onPressed: () {},
+              variant: PayButtonVariant.full,
+              text: 'Pay with',
+              textPosition: PayButtonTextPosition.trailing,
+            ),
+          ),
+        ),
+      );
+      expect(find.text('Pay with'), findsOneWidget);
+
+      // PayNow
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayNowButton(
+              onPressed: () {},
+              variant: PayButtonVariant.compact,
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(SvgPicture), findsOneWidget);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayNowButton(
+              onPressed: () {},
+              variant: PayButtonVariant.full,
+              text: 'Pay with',
+            ),
+          ),
+        ),
+      );
+      expect(find.text('Pay with'), findsOneWidget);
+
+      // PromptPay
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PromptPayButton(
+              onPressed: () {},
+              variant: PayButtonVariant.compact,
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(SvgPicture), findsOneWidget);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PromptPayButton(
+              onPressed: () {},
+              variant: PayButtonVariant.full,
+              text: 'Pay with',
             ),
           ),
         ),

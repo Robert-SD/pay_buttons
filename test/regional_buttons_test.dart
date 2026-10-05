@@ -599,5 +599,361 @@ void main() {
       });
     });
   });
+
+  group('Asian Regional Champions', () {
+    group('AlipayButton', () {
+      testWidgets(
+        'renders blue rounded alipay button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(home: Scaffold(body: AlipayButton(onPressed: () {}))),
+          );
+
+          expect(find.byType(AlipayButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(AlipayButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFF1677FF));
+        },
+      );
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: AlipayButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay with'), findsOneWidget);
+      });
+
+      testWidgets('applies custom fontFamily when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: AlipayButton(
+                text: 'Pay with',
+                fontFamily: 'CustomFont',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamily, 'CustomFont');
+      });
+
+      testWidgets('defaults to PayButtonFonts.alipay fallback', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: AlipayButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.alipay);
+      });
+
+      testWidgets('renders all AlipayColor and AlipayShape options', (
+        tester,
+      ) async {
+        for (final color in AlipayColor.values) {
+          for (final shape in AlipayShape.values) {
+            await tester.pumpWidget(
+              MaterialApp(
+                home: Scaffold(
+                  body: AlipayButton(
+                    color: color,
+                    shape: shape,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            );
+            expect(find.byType(AlipayButton), findsOneWidget);
+          }
+        }
+      });
+    });
+
+    group('WeChatPayButton', () {
+      testWidgets(
+        'renders green rounded wechat pay button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: WeChatPayButton(onPressed: () {})),
+            ),
+          );
+
+          expect(find.byType(WeChatPayButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(WeChatPayButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFF07C160));
+        },
+      );
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeChatPayButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay with'), findsOneWidget);
+      });
+
+      testWidgets('applies custom fontFamily when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeChatPayButton(
+                text: 'Pay with',
+                fontFamily: 'CustomFont',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamily, 'CustomFont');
+      });
+
+      testWidgets('defaults to PayButtonFonts.wechatPay fallback', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: WeChatPayButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.wechatPay);
+      });
+
+      testWidgets('renders all WeChatPayColor and WeChatPayShape options', (
+        tester,
+      ) async {
+        for (final color in WeChatPayColor.values) {
+          for (final shape in WeChatPayShape.values) {
+            await tester.pumpWidget(
+              MaterialApp(
+                home: Scaffold(
+                  body: WeChatPayButton(
+                    color: color,
+                    shape: shape,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            );
+            expect(find.byType(WeChatPayButton), findsOneWidget);
+          }
+        }
+      });
+    });
+
+    group('PayNowButton', () {
+      testWidgets(
+        'renders purple rounded paynow button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(home: Scaffold(body: PayNowButton(onPressed: () {}))),
+          );
+
+          expect(find.byType(PayNowButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(PayNowButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFF7D1978));
+        },
+      );
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PayNowButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay with'), findsOneWidget);
+      });
+
+      testWidgets('applies custom fontFamily when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PayNowButton(
+                text: 'Pay with',
+                fontFamily: 'CustomFont',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamily, 'CustomFont');
+      });
+
+      testWidgets('defaults to PayButtonFonts.paynow fallback', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PayNowButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.paynow);
+      });
+
+      testWidgets('renders all PayNowColor and PayNowShape options', (
+        tester,
+      ) async {
+        for (final color in PayNowColor.values) {
+          for (final shape in PayNowShape.values) {
+            await tester.pumpWidget(
+              MaterialApp(
+                home: Scaffold(
+                  body: PayNowButton(
+                    color: color,
+                    shape: shape,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            );
+            expect(find.byType(PayNowButton), findsOneWidget);
+          }
+        }
+      });
+    });
+
+    group('PromptPayButton', () {
+      testWidgets(
+        'renders blue rounded promptpay button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: PromptPayButton(onPressed: () {})),
+            ),
+          );
+
+          expect(find.byType(PromptPayButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
+
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(PromptPayButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFF003D6B));
+        },
+      );
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PromptPayButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay with'), findsOneWidget);
+      });
+
+      testWidgets('applies custom fontFamily when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PromptPayButton(
+                text: 'Pay with',
+                fontFamily: 'CustomFont',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamily, 'CustomFont');
+      });
+
+      testWidgets('defaults to PayButtonFonts.promptpay fallback', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PromptPayButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        final textWidget = tester.widget<Text>(find.text('Pay with'));
+        expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.promptpay);
+      });
+
+      testWidgets('renders all PromptPayColor and PromptPayShape options', (
+        tester,
+      ) async {
+        for (final color in PromptPayColor.values) {
+          for (final shape in PromptPayShape.values) {
+            await tester.pumpWidget(
+              MaterialApp(
+                home: Scaffold(
+                  body: PromptPayButton(
+                    color: color,
+                    shape: shape,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            );
+            expect(find.byType(PromptPayButton), findsOneWidget);
+          }
+        }
+      });
+    });
+  });
 }
 

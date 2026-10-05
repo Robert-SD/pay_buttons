@@ -37,6 +37,10 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **Pix**: Brazil 🇧🇷 instant payment system by Banco Central do Brasil (`teal`, `white`, `black`).
 * **OXXO**: Mexico 🇲🇽 market leader cash voucher & digital payment (`red`, `white`, `yellow`).
 * **Boleto Bancário**: Brazil 🇧🇷 official barcode bank slip checkout (`white`, `black`, `lightGray`).
+* **Alipay**: China 🇨🇳 / Global digital payment champion (`blue`, `white`, `black`).
+* **WeChat Pay**: China 🇨🇳 / Global WeChat mobile payment ecosystem (`green`, `white`, `black`).
+* **PayNow**: Singapore 🇸🇬 national instant funds transfer (`purple`, `magenta`, `white`).
+* **PromptPay**: Thailand 🇹🇭 national instant payment standard (`blue`, `white`, `black`).
 
 
 ---
@@ -191,6 +195,34 @@ BoletoButton(
   text: 'Pagar via',
   color: BoletoColor.white,
   onPressed: () => handleBoleto(),
+)
+
+// China / Global (Alipay)
+AlipayButton(
+  text: 'Pay with',
+  color: AlipayColor.blue,
+  onPressed: () => handleAlipay(),
+)
+
+// China / Global (WeChat Pay)
+WeChatPayButton(
+  text: 'Pay with',
+  color: WeChatPayColor.green,
+  onPressed: () => handleWeChatPay(),
+)
+
+// Singapore (PayNow)
+PayNowButton(
+  text: 'Pay with',
+  color: PayNowColor.purple,
+  onPressed: () => handlePayNow(),
+)
+
+// Thailand (PromptPay)
+PromptPayButton(
+  text: 'Pay with',
+  color: PromptPayColor.blue,
+  onPressed: () => handlePromptPay(),
 )
 ```
 

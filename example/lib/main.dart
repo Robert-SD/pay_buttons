@@ -4,6 +4,7 @@ import 'package:pay_buttons/pay_buttons.dart';
 import 'pages/afterpay_showcase_page.dart';
 import 'pages/amazon_pay_showcase_page.dart';
 import 'pages/apple_pay_showcase_page.dart';
+import 'pages/asian_champions_showcase_page.dart';
 import 'pages/european_champions_showcase_page.dart';
 import 'pages/google_pay_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
@@ -92,16 +93,9 @@ class CatalogHomePage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 12),
-                          SizedBox(
-                            height: 48,
-                            child: RawGooglePayButton(
-                              paymentConfiguration:
-                                  PaymentConfiguration.fromJsonString(
-                                '{"provider": "google_pay", "data": {}}',
-                              ),
-                              onPressed: () =>
-                                  _handlePayPress(context, 'Google Pay'),
-                            ),
+                          GooglePayButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'Google Pay'),
                           ),
                           const SizedBox(height: 12),
                           PayPalButton(
@@ -170,6 +164,26 @@ class CatalogHomePage extends StatelessWidget {
                           BoletoButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Boleto Bancário'),
+                          ),
+                          const SizedBox(height: 12),
+                          AlipayButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'Alipay'),
+                          ),
+                          const SizedBox(height: 12),
+                          WeChatPayButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'WeChat Pay'),
+                          ),
+                          const SizedBox(height: 12),
+                          PayNowButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'PayNow'),
+                          ),
+                          const SizedBox(height: 12),
+                          PromptPayButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'PromptPay'),
                           ),
                         ],
                       ),
@@ -901,6 +915,56 @@ class CatalogHomePage extends StatelessWidget {
                     ),
                   ),
 
+                  const SizedBox(height: 12),
+
+                  // 15. Asian Champions Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFC41230),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'ASIA',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'Asian Champions',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Alipay, WeChat Pay, PayNow (Singapore), PromptPay (Thailand)',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const AsianChampionsShowcasePage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                   const SizedBox(height: 28),
                   const Text(
                     'Upcoming Buttons (Planned)',
@@ -912,9 +976,9 @@ class CatalogHomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   _buildUpcomingItem(
-                    name: 'Asian Champions',
-                    details: 'Alipay, WeChat Pay, PayNow, PromptPay',
-                    badgeColor: const Color(0xFFFF5000),
+                    name: 'Indian Champions',
+                    details: 'UPI, RuPay, Paytm',
+                    badgeColor: const Color(0xFFFF9933),
                     textColor: Colors.white,
                   ),
                 ],

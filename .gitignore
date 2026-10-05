@@ -33,3 +33,4 @@ migrate_working_dir/
 /coverage/
 # Widget Preview related
 .widget_preview/
+.commandcode/
