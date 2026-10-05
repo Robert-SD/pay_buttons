@@ -21,6 +21,7 @@ Widget? buildApplePayJsButton({
   required String type,
   required double width,
   required double height,
+  required double borderRadius,
 }) {
   return null;
 }

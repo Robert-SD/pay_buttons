@@ -54,30 +54,22 @@ void ensureApplePayJsInjected() {
   if (existingScript != null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
-  script.src = 'https://applepay.cdn-apple.com/jssdk/1.1.0/apple-pay-sdk.js';
+  script.src = 'https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js';
+  script.crossOrigin = 'anonymous';
   script.async = true;
   web.document.head?.appendChild(script);
 }
 
 /// Renders the official Apple Pay JS SDK `<apple-pay-button>` custom element.
-///
-/// Returns `null` when Apple Pay is unavailable in this browser or the device
-/// is not set up to pay, because Apple's guidelines do not permit
-/// substituting a hand-drawn button. Callers should render nothing.
-Widget? buildApplePayJsButton({
+Widget buildApplePayJsButton({
   required VoidCallback? onPressed,
   required String style,
   required String type,
   required double width,
   required double height,
+  required double borderRadius,
 }) {
   ensureApplePayJsInjected();
-
-  // Apple Pay is unavailable in this browser (Chrome, Firefox, Edge, Android
-  // browsers, ...) or the device is not set up to pay.
-  if (!isApplePayJsAvailable() || !canMakeApplePayPayments()) {
-    return null;
-  }
 
   return SizedBox(
     width: width,
@@ -86,6 +78,7 @@ Widget? buildApplePayJsButton({
       onPressed: onPressed,
       style: style,
       type: type,
+      borderRadius: borderRadius,
     ),
   );
 }
@@ -97,11 +90,13 @@ class _ApplePayJsButton extends StatefulWidget {
     required this.onPressed,
     required this.style,
     required this.type,
+    required this.borderRadius,
   });
 
   final VoidCallback? onPressed;
   final String style;
   final String type;
+  final double borderRadius;
 
   @override
   State<_ApplePayJsButton> createState() => _ApplePayJsButtonState();
@@ -138,6 +133,12 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
     if (oldWidget.type != widget.type) {
       element.setAttribute('type', widget.type);
     }
+    if (oldWidget.borderRadius != widget.borderRadius) {
+      element.style.setProperty(
+        '--apple-pay-button-border-radius',
+        '${widget.borderRadius.toStringAsFixed(1)}px',
+      );
+    }
     element.style.cursor = _onPressed != null ? 'pointer' : 'default';
   }
 
@@ -160,12 +161,40 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
         button.style.display = 'block';
         button.style.cursor = _onPressed != null ? 'pointer' : 'default';
 
+        // Apple Pay custom element styling requires custom CSS properties
+        button.style.setProperty('--apple-pay-button-width', '100%');
+        button.style.setProperty('--apple-pay-button-height', '100%');
+        button.style.setProperty(
+          '--apple-pay-button-border-radius',
+          '${widget.borderRadius.toStringAsFixed(1)}px',
+        );
+
         button.addEventListener(
           'click',
           ((web.Event _) => _onPressed?.call()).toJS,
         );
 
         _element = button;
+
+        // If the custom element has not been defined yet (e.g. script still loading),
+        // listen for script load to trigger re-rendering
+        final script = web.document
+            .querySelector('script[src*="apple-pay-sdk.js"]');
+        if (script != null) {
+          script.addEventListener(
+            'load',
+            ((web.Event _) {
+              if (mounted && _element != null) {
+                _element!.setAttribute('buttonstyle', widget.style);
+                _element!.setAttribute('type', widget.type);
+                _element!.style.setProperty(
+                  '--apple-pay-button-border-radius',
+                  '${widget.borderRadius.toStringAsFixed(1)}px',
+                );
+              }
+            }).toJS,
+          );
+        }
       },
     );
   }

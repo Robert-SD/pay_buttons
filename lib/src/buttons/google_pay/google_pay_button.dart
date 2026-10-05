@@ -168,7 +168,9 @@ class GooglePayButton extends PayButton {
         'donate with' || 'donate' => 'donate',
         'subscribe with' || 'subscribe' => 'subscribe',
         'book with' || 'book' => 'book',
-        _ => 'standard',
+        'order with' || 'order' => 'order',
+        'pay with' || 'pay' => 'pay',
+        _ => 'buy',
       };
 
       return buildGooglePayJsButton(
@@ -177,7 +179,7 @@ class GooglePayButton extends PayButton {
         type: typeString,
         width: width ?? 200.0,
         height: height,
-        fallback: super.build(context),
+        borderRadius: borderRadius ?? defaultBorderRadius,
       );
     }
 

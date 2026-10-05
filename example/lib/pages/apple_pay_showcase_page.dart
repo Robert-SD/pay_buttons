@@ -18,6 +18,7 @@ class ApplePayShowcasePage extends StatefulWidget {
 class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
   ApplePayColor _color = ApplePayColor.black;
   ApplePayType _type = ApplePayType.plain;
+  ApplePayShape _shape = ApplePayShape.pill;
   double _height = 48.0;
   double _width = 200.0;
 
@@ -133,6 +134,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                   onPressed: _handlePayPress,
                   color: _color,
                   type: _type,
+                  shape: _shape,
                   width: _width,
                   height: _height,
                 ),
@@ -145,6 +147,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
               spacing: 16,
               runSpacing: 12,
               children: [
+                // Color Picker
                 DropdownButton<ApplePayColor>(
                   value: _color,
                   items: ApplePayColor.values.map((c) {
@@ -158,12 +161,27 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                   },
                 ),
 
+                // Shape Picker
+                DropdownButton<ApplePayShape>(
+                  value: _shape,
+                  items: ApplePayShape.values.map((s) {
+                    return DropdownMenuItem(
+                      value: s,
+                      child: Text('Shape: ${s.name}'),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setState(() => _shape = val);
+                  },
+                ),
+
+                // Label Picker
                 DropdownButton<ApplePayType>(
                   value: _type,
                   items: ApplePayType.values.map((t) {
                     return DropdownMenuItem(
                       value: t,
-                      child: Text('Type: ${t.name}'),
+                      child: Text('Label: ${t.name}'),
                     );
                   }).toList(),
                   onChanged: (val) {

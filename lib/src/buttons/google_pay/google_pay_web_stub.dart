@@ -7,7 +7,7 @@ Widget buildGooglePayJsButton({
   required String type,
   required double width,
   required double height,
-  required Widget fallback,
+  required double borderRadius,
 }) {
-  return fallback;
+  return const SizedBox.shrink();
 }

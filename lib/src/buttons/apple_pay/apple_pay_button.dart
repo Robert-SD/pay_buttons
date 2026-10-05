@@ -5,6 +5,7 @@ import 'package:pay/pay.dart' as pay;
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import 'apple_pay_color.dart';
+import 'apple_pay_shape.dart';
 import 'apple_pay_type.dart';
 import 'apple_pay_web_stub.dart'
     if (dart.library.js_interop) 'apple_pay_web.dart';
@@ -35,8 +36,10 @@ class ApplePayButton extends PayButton {
     super.enabled,
     super.width,
     super.height = 48.0,
+    super.borderRadius,
     super.margin,
     this.color = ApplePayColor.black,
+    this.shape = ApplePayShape.pill,
     this.type,
     this.userCanPay = true,
   }) : super(
@@ -49,6 +52,9 @@ class ApplePayButton extends PayButton {
 
   /// The brand color palette of the button. Defaults to [ApplePayColor.black].
   final ApplePayColor color;
+
+  /// The contour shape of the button. Defaults to [ApplePayShape.pill].
+  final ApplePayShape shape;
 
   /// The transaction intent, which determines the wording on the button.
   ///
@@ -71,6 +77,18 @@ class ApplePayButton extends PayButton {
   /// and finally to [ApplePayType.plain].
   ApplePayType get effectiveType =>
       type ?? ApplePayType.tryParseLabel(text) ?? ApplePayType.plain;
+
+  @override
+  double get defaultBorderRadius {
+    switch (shape) {
+      case ApplePayShape.pill:
+        return height / 2;
+      case ApplePayShape.rounded:
+        return 4.0;
+      case ApplePayShape.rect:
+        return 0.0;
+    }
+  }
 
   @override
   String get semanticLabel =>
@@ -99,6 +117,8 @@ class ApplePayButton extends PayButton {
   Widget build(BuildContext context) {
     if (!userCanPay) return const SizedBox.shrink();
 
+    final effectiveRadius = borderRadius ?? defaultBorderRadius;
+
     if (kIsWeb) {
       final jsButton = buildApplePayJsButton(
         onPressed: isInteractive ? onPressed : null,
@@ -110,6 +130,7 @@ class ApplePayButton extends PayButton {
         type: effectiveType.jsValue,
         width: width ?? _defaultWidth,
         height: height,
+        borderRadius: effectiveRadius,
       );
 
       // Apple Pay is unsupported in this browser, or the device is not set up
@@ -134,6 +155,7 @@ class ApplePayButton extends PayButton {
           height: height,
           child: pay.RawApplePayButton(
             onPressed: isInteractive ? onPressed : null,
+            cornerRadius: effectiveRadius,
             style: switch (color) {
               ApplePayColor.black => pay.ApplePayButtonStyle.black,
               ApplePayColor.white => pay.ApplePayButtonStyle.white,
@@ -178,7 +200,4 @@ class ApplePayButton extends PayButton {
     'ApplePayButton renders only native Apple Pay controls, which are styled '
     'by Apple and cannot use a Flutter color palette.',
   );
-
-  @override
-  double get defaultBorderRadius => 0.0;
 }
