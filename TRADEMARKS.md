@@ -107,8 +107,20 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * **Trademark Owner**: Sociedad de Procedimientos de Pago S.L. (Spain)
   * **Guidelines**: [Bizum Brand Guidelines](https://bizum.es/en/brand/)
   * Approved colors: Teal (`#00B4B6`) and Dark Cyan (`#004455`).
+* **Pix**:
+  * **Trademark Owner**: Banco Central do Brasil (BCB)
+  * **Guidelines**: [Manual de Uso da Marca Pix](https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos)
+  * Approved colors: Signature Teal (`#32BCAD`), White (`#FFFFFF`), Black (`#000000`).
+* **OXXO**:
+  * **Trademark Owner**: Cadena Comercial OXXO, S.A. de C.V. / FEMSA Comercio (Mexico)
+  * **Guidelines**: OXXO Brand Identity Guidelines
+  * Approved colors: Red (`#E70020`), White (`#FFFFFF`), Yellow (`#FBB110`).
+* **Boleto Bancário**:
+  * **Regulatory Body**: Federação Brasileira de Bancos (FEBRABAN)
+  * Approved colors: White (`#FFFFFF`), Black (`#1A1A1A`), Light Gray (`#F5F5F7`).
 
 ### 7. Google Pay
+
 * **Trademark Owner**: Google LLC / Alphabet Inc.
 * **Registered Trademarks**: "Google", "Google Pay", "GPay", the multi-color Google "G" logo.
 * **Official Brand Guidelines**: [Google Pay Brand Guidelines](https://developers.google.com/pay/api/web/guides/brand-guidelines)
@@ -127,6 +139,11 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * Approved colors: Black (`#000000`), White (`#FFFFFF`), White with Outline (`#FFFFFF` with `#000000` 1.0 dp border).
   * Approved shapes: Rounded Rectangle (`borderRadius: 4.0`, Apple HIG default), Pill (`borderRadius: height / 2`), Rectangle (`borderRadius: 0.0`).
   * The Apple logo and wordmark must retain their standard proportional relationship and clear-space margins.
+
+> [!CAUTION]
+> **No manual reproduction is permitted.** Apple does not distribute button assets, and its guidelines forbid reproducing the Apple Pay mark or composing a button from it. `ApplePayButton` therefore renders only Apple's own controls: the native `PKPaymentButton` on iOS (via `package:pay`) and the official Apple Pay JS SDK `<apple-pay-button>` element in supporting browsers.
+>
+> On every other target — Android, desktop, and browsers without Apple Pay — the widget renders an empty box rather than a drawn approximation. The `ApplePayAssets` vector helpers and the `ApplePayShape` enum remain exported for backwards compatibility, but `ApplePayButton` does not use them, and they must not be used to present an Apple Pay button to customers.
 
 ---
 

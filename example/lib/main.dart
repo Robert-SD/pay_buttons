@@ -7,8 +7,10 @@ import 'pages/apple_pay_showcase_page.dart';
 import 'pages/european_champions_showcase_page.dart';
 import 'pages/google_pay_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
+import 'pages/latin_america_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
 import 'pages/shop_pay_showcase_page.dart';
+
 
 void main() {
   runApp(const PayButtonsExampleApp());
@@ -84,7 +86,7 @@ class CatalogHomePage extends StatelessWidget {
                         children: [
                           SizedBox(
                             height: 48,
-                            child: RawApplePayButton(
+                            child: ApplePayButton(
                               onPressed: () =>
                                   _handlePayPress(context, 'Apple Pay'),
                             ),
@@ -154,10 +156,26 @@ class CatalogHomePage extends StatelessWidget {
                             onPressed: () =>
                                 _handlePayPress(context, 'Bizum'),
                           ),
+                          const SizedBox(height: 12),
+                          PixButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'Pix'),
+                          ),
+                          const SizedBox(height: 12),
+                          OxxoButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'OXXO'),
+                          ),
+                          const SizedBox(height: 12),
+                          BoletoButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'Boleto Bancário'),
+                          ),
                         ],
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 28),
 
                   // Section 2: Customize Payment Buttons
@@ -833,6 +851,56 @@ class CatalogHomePage extends StatelessWidget {
                     ),
                   ),
 
+                  const SizedBox(height: 12),
+
+                  // 14. Latin America Card
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF00A859),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'LAT',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: const Text(
+                        'Latin America',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                        'Pix (Brazil), OXXO (Mexico), Boleto Bancário (Brazil)',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const LatinAmericaShowcasePage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                   const SizedBox(height: 28),
                   const Text(
                     'Upcoming Buttons (Planned)',
@@ -849,12 +917,6 @@ class CatalogHomePage extends StatelessWidget {
                     badgeColor: const Color(0xFFFF5000),
                     textColor: Colors.white,
                   ),
-                  _buildUpcomingItem(
-                    name: 'Latin America',
-                    details: 'Pix, Boleto Bancário, OXXO',
-                    badgeColor: const Color(0xFF00A859),
-                    textColor: Colors.white,
-                  ),
                 ],
               ),
             ),
@@ -863,6 +925,7 @@ class CatalogHomePage extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildUpcomingItem({
     required String name,

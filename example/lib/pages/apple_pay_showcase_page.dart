@@ -1,6 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_buttons/pay_buttons.dart';
 
+/// Demonstrates [ApplePayButton], which renders only Apple's own controls.
+///
+/// Apple's guidelines do not permit reproducing the Apple Pay mark, so the
+/// button intentionally renders nothing on Android, desktop, and in browsers
+/// without Apple Pay support. That makes this page look empty in Chrome; it is
+/// working as intended.
 class ApplePayShowcasePage extends StatefulWidget {
   const ApplePayShowcasePage({super.key});
 
@@ -9,9 +16,8 @@ class ApplePayShowcasePage extends StatefulWidget {
 }
 
 class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
-  // Playground state
-  ApplePayButtonStyle _style = ApplePayButtonStyle.black;
-  ApplePayButtonType _type = ApplePayButtonType.plain;
+  ApplePayColor _color = ApplePayColor.black;
+  ApplePayType _type = ApplePayType.plain;
   double _height = 48.0;
   double _width = 200.0;
 
@@ -19,22 +25,25 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          'Apple Pay button triggered (${_style.name}, ${_type.name})',
-        ),
+        content: Text('Apple Pay button triggered (${_type.name})'),
         backgroundColor: const Color(0xFF1E293B),
         duration: const Duration(seconds: 2),
       ),
     );
   }
 
+  bool get _isApplePayCapablePlatform =>
+      kIsWeb || defaultTargetPlatform == TargetPlatform.iOS;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Apple Pay Showcase (pay library)')),
+      appBar: AppBar(title: const Text('Apple Pay Showcase')),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
+          _buildNotice(),
+          const SizedBox(height: 24),
           _buildPlaygroundSection(),
           const SizedBox(height: 32),
           const Divider(),
@@ -45,9 +54,47 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
     );
   }
 
+  Widget _buildNotice() {
+    final capable = _isApplePayCapablePlatform;
+
+    return Card(
+      color: capable ? const Color(0xFFEFF6FF) : const Color(0xFFFEF3C7),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              capable ? Icons.info_outline : Icons.warning_amber_rounded,
+              size: 20,
+              color: capable ? const Color(0xFF1D4ED8) : const Color(0xFF92400E),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                capable
+                    ? 'Apple Pay renders only Apple\'s own controls: the '
+                          'Apple Pay JS SDK element in supporting browsers, and '
+                          'the native PassKit button on iOS.'
+                    : 'Apple Pay is not available on this platform. Apple\'s '
+                          'guidelines forbid drawing the Apple Pay mark '
+                          'manually, so the button correctly renders nothing '
+                          'here. Open this page on iOS or in Safari to see it.',
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.4,
+                  color: capable ? const Color(0xFF1E3A8A) : const Color(0xFF78350F),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildPlaygroundSection() {
-    final isWhiteTheme =
-        _style == ApplePayButtonStyle.white || _style == ApplePayButtonStyle.whiteOutline;
+    final isWhiteTheme = _color != ApplePayColor.black;
 
     return Card(
       elevation: 2,
@@ -69,11 +116,6 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Official Apple Pay button from the Flutter pay package.',
-              style: TextStyle(color: Colors.grey.shade600),
-            ),
             const SizedBox(height: 24),
 
             // Live Preview Box
@@ -87,43 +129,38 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 border: Border.all(color: Colors.grey.shade300),
               ),
               child: Center(
-                child: SizedBox(
+                child: ApplePayButton(
+                  onPressed: _handlePayPress,
+                  color: _color,
+                  type: _type,
                   width: _width,
                   height: _height,
-                  child: RawApplePayButton(
-                    onPressed: _handlePayPress,
-                    style: _style,
-                    type: _type,
-                  ),
                 ),
               ),
             ),
 
             const SizedBox(height: 24),
 
-            // Controls
             Wrap(
               spacing: 16,
               runSpacing: 12,
               children: [
-                // Style Picker
-                DropdownButton<ApplePayButtonStyle>(
-                  value: _style,
-                  items: ApplePayButtonStyle.values.map((s) {
+                DropdownButton<ApplePayColor>(
+                  value: _color,
+                  items: ApplePayColor.values.map((c) {
                     return DropdownMenuItem(
-                      value: s,
-                      child: Text('Style: ${s.name}'),
+                      value: c,
+                      child: Text('Color: ${c.name}'),
                     );
                   }).toList(),
                   onChanged: (val) {
-                    if (val != null) setState(() => _style = val);
+                    if (val != null) setState(() => _color = val);
                   },
                 ),
 
-                // Type Picker
-                DropdownButton<ApplePayButtonType>(
+                DropdownButton<ApplePayType>(
                   value: _type,
-                  items: ApplePayButtonType.values.map((t) {
+                  items: ApplePayType.values.map((t) {
                     return DropdownMenuItem(
                       value: t,
                       child: Text('Type: ${t.name}'),
@@ -138,7 +175,6 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
 
             const SizedBox(height: 20),
 
-            // Width Slider
             Row(
               children: [
                 SizedBox(
@@ -158,7 +194,6 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
               ],
             ),
 
-            // Height Slider
             Row(
               children: [
                 SizedBox(
@@ -188,14 +223,14 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Official Apple Pay Button Styles',
+          'Apple Pay Button Styles',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         const SizedBox(height: 8),
         Text(
-          'Black, White, and White Outline button styles.',
+          'Apple\'s official controls, in each supported style and type.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
@@ -207,80 +242,78 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
             children: [
               _buildGalleryItem(
                 label: 'Black (Default)',
-                button: SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: RawApplePayButton(
-                    style: ApplePayButtonStyle.black,
-                    type: ApplePayButtonType.plain,
-                    onPressed: _handlePayPress,
-                  ),
+                button: _galleryButton(
+                  color: ApplePayColor.black,
+                  type: ApplePayType.plain,
                 ),
               ),
               _buildGalleryItem(
                 label: 'White',
-                button: SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: RawApplePayButton(
-                    style: ApplePayButtonStyle.white,
-                    type: ApplePayButtonType.plain,
-                    onPressed: _handlePayPress,
-                  ),
+                button: _galleryButton(
+                  color: ApplePayColor.white,
+                  type: ApplePayType.plain,
+                  onDark: true,
                 ),
               ),
               _buildGalleryItem(
                 label: 'White Outline',
-                button: SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: RawApplePayButton(
-                    style: ApplePayButtonStyle.whiteOutline,
-                    type: ApplePayButtonType.plain,
-                    onPressed: _handlePayPress,
-                  ),
+                button: _galleryButton(
+                  color: ApplePayColor.whiteOutline,
+                  type: ApplePayType.plain,
                 ),
               ),
               _buildGalleryItem(
                 label: 'Buy with Apple Pay',
-                button: SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: RawApplePayButton(
-                    style: ApplePayButtonStyle.black,
-                    type: ApplePayButtonType.buy,
-                    onPressed: _handlePayPress,
-                  ),
+                button: _galleryButton(
+                  color: ApplePayColor.black,
+                  type: ApplePayType.buy,
                 ),
               ),
               _buildGalleryItem(
                 label: 'Check out with Apple Pay',
-                button: SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: RawApplePayButton(
-                    style: ApplePayButtonStyle.black,
-                    type: ApplePayButtonType.checkout,
-                    onPressed: _handlePayPress,
-                  ),
+                button: _galleryButton(
+                  color: ApplePayColor.black,
+                  type: ApplePayType.checkout,
                 ),
               ),
               _buildGalleryItem(
                 label: 'Donate with Apple Pay',
-                button: SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: RawApplePayButton(
-                    style: ApplePayButtonStyle.black,
-                    type: ApplePayButtonType.donate,
-                    onPressed: _handlePayPress,
-                  ),
+                button: _galleryButton(
+                  color: ApplePayColor.black,
+                  type: ApplePayType.donate,
                 ),
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _galleryButton({
+    required ApplePayColor color,
+    required ApplePayType type,
+    bool onDark = false,
+  }) {
+    final button = SizedBox(
+      width: 200,
+      height: 48,
+      child: ApplePayButton(
+        onPressed: _handlePayPress,
+        color: color,
+        type: type,
+      ),
+    );
+
+    if (!onDark) return button;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: button,
     );
   }
 
@@ -291,12 +324,15 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        SizedBox(
+          height: 88,
+          child: Center(child: button),
+        ),
+        const SizedBox(height: 8),
         Text(
           label,
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         ),
-        const SizedBox(height: 8),
-        button,
       ],
     );
   }

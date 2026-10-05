@@ -22,7 +22,8 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 
 ## Supported Buttons
 
-* **Google Pay & Apple Pay**: Provided directly via re-export of the official Flutter [`pay`](https://pub.dev/packages/pay) package (`GooglePayButton`, `ApplePayButton`, `RawGooglePayButton`, `RawApplePayButton`).
+* **Apple Pay**: Rendered only with Apple's own controls — the native PassKit button on iOS, and the official Apple Pay JS SDK `<apple-pay-button>` element in supporting browsers. Renders nothing on Android, desktop, and browsers without Apple Pay, because Apple's guidelines forbid drawing the mark.
+* **Google Pay**: Provided directly via re-export of the official Flutter [`pay`](https://pub.dev/packages/pay) package (`GooglePayButton`, `RawGooglePayButton`).
 * **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
 * **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
 * **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
@@ -32,22 +33,42 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **TWINT**: Switzerland 🇨🇭 national mobile payment (`black`, `white`).
 * **BLIK**: Poland 🇵🇱 mobile banking champion (`black`, `white`).
 * **iDEAL**: Netherlands 🇳🇱 online banking standard (`white`, `black`).
-* **Bancontact**: Belgium 🇧🇪 market leader (`white`, `blue`).
 * **Bizum**: Spain 🇪🇸 instant account payment (`white`, `darkTeal`).
+* **Pix**: Brazil 🇧🇷 instant payment system by Banco Central do Brasil (`teal`, `white`, `black`).
+* **OXXO**: Mexico 🇲🇽 market leader cash voucher & digital payment (`red`, `white`, `yellow`).
+* **Boleto Bancário**: Brazil 🇧🇷 official barcode bank slip checkout (`white`, `black`, `lightGray`).
+
 
 ---
 
 ## Quick Start
 
-### Google Pay & Apple Pay (via `pay` package)
+### Apple Pay
 ```dart
-// Native Apple Pay Button from official pay package
-RawApplePayButton(
-  style: ApplePayButtonStyle.black,
-  type: ApplePayButtonType.buy,
+// Renders Apple's own control: PKPaymentButton on iOS, or the Apple Pay JS
+// SDK element in supporting browsers. Renders nothing elsewhere.
+ApplePayButton(
   onPressed: () => handleApplePay(),
+  color: ApplePayColor.black,
+  type: ApplePayType.buy,   // "Buy with Apple Pay"
 )
 
+// Hide the button when you already know Apple Pay is unavailable.
+ApplePayButton(
+  userCanPay: isApplePayAvailable,
+  onPressed: () => handleApplePay(),
+)
+```
+
+> [!IMPORTANT]
+> Apple's guidelines do not permit reproducing the Apple Pay mark or composing
+> a button from it. `ApplePayButton` therefore never draws a fallback button —
+> it renders an empty box on Android, desktop, and browsers without Apple Pay.
+> If you need a checkout option on those platforms, use another button from
+> this package alongside it.
+
+### Google Pay (via `pay` package)
+```dart
 // Native Google Pay Button from official pay package
 RawGooglePayButton(
   paymentConfiguration: paymentConfig,
@@ -150,7 +171,29 @@ BizumButton(
   text: 'Pagar con',
   onPressed: () => handleBizum(),
 )
+
+// Brazil (Pix)
+PixButton(
+  text: 'Pagar com',
+  color: PixColor.teal,
+  onPressed: () => handlePix(),
+)
+
+// Mexico (OXXO)
+OxxoButton(
+  text: 'Pagar con',
+  color: OxxoColor.red,
+  onPressed: () => handleOxxo(),
+)
+
+// Brazil (Boleto Bancário)
+BoletoButton(
+  text: 'Pagar via',
+  color: BoletoColor.white,
+  onPressed: () => handleBoleto(),
+)
 ```
+
 
 ---
 

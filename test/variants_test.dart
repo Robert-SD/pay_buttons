@@ -139,7 +139,7 @@ void main() {
       expect(find.text('Buy now with'), findsOneWidget);
     });
 
-    testWidgets('European champions support compact and full variants with text positioning', (tester) async {
+    testWidgets('Regional champions support compact and full variants with text positioning', (tester) async {
       final regionalButtons = <Widget>[
         WeroButton(onPressed: () {}, variant: PayButtonVariant.compact),
         TwintButton(onPressed: () {}, variant: PayButtonVariant.compact),
@@ -147,7 +147,11 @@ void main() {
         IdealButton(onPressed: () {}, variant: PayButtonVariant.compact),
         BancontactButton(onPressed: () {}, variant: PayButtonVariant.compact),
         BizumButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        PixButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        OxxoButton(onPressed: () {}, variant: PayButtonVariant.compact),
+        BoletoButton(onPressed: () {}, variant: PayButtonVariant.compact),
       ];
+
 
       for (final btn in regionalButtons) {
         await tester.pumpWidget(

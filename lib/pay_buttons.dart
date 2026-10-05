@@ -14,6 +14,7 @@ export 'src/buttons/apple_pay/apple_pay_assets.dart';
 export 'src/buttons/apple_pay/apple_pay_button.dart';
 export 'src/buttons/apple_pay/apple_pay_color.dart';
 export 'src/buttons/apple_pay/apple_pay_shape.dart';
+export 'src/buttons/apple_pay/apple_pay_type.dart';
 
 // Google Pay
 export 'src/buttons/google_pay/google_pay_assets.dart';
@@ -88,3 +89,22 @@ export 'src/buttons/regional/bizum/bizum_button.dart';
 export 'src/buttons/regional/bizum/bizum_color.dart';
 export 'src/buttons/regional/bizum/bizum_shape.dart';
 export 'src/buttons/regional/bizum/bizum_assets.dart';
+
+// Pix (Brazil)
+export 'src/buttons/regional/pix/pix_button.dart';
+export 'src/buttons/regional/pix/pix_color.dart';
+export 'src/buttons/regional/pix/pix_shape.dart';
+export 'src/buttons/regional/pix/pix_assets.dart';
+
+// OXXO (Mexico)
+export 'src/buttons/regional/oxxo/oxxo_button.dart';
+export 'src/buttons/regional/oxxo/oxxo_color.dart';
+export 'src/buttons/regional/oxxo/oxxo_shape.dart';
+export 'src/buttons/regional/oxxo/oxxo_assets.dart';
+
+// Boleto Bancário (Brazil)
+export 'src/buttons/regional/boleto/boleto_button.dart';
+export 'src/buttons/regional/boleto/boleto_color.dart';
+export 'src/buttons/regional/boleto/boleto_shape.dart';
+export 'src/buttons/regional/boleto/boleto_assets.dart';
+

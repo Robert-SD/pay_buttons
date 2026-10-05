@@ -156,6 +156,46 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 
+  /// Font fallback chain for Pix (Banco Central do Brasil) buttons.
+  ///
+  /// Clean, modern sans-serif typography matching Pix branding.
+  static const List<String> pix = [
+    'Inter',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
+
+  /// Font fallback chain for OXXO (Mexico) buttons.
+  ///
+  /// Bold geometric typography complementing OXXO's retail identity.
+  static const List<String> oxxo = [
+    'Helvetica Neue',
+    'Arial Black',
+    'Futura',
+    'Impact',
+    'Arial',
+    'sans-serif',
+  ];
+
+  /// Font fallback chain for Boleto Bancário (Brazil) buttons.
+  ///
+  /// Structured banking sans-serif font stack.
+  static const List<String> boleto = [
+    'Inter',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
+
   /// Font fallback chain for Google Pay buttons.
   ///
   /// References Google Sans / Product Sans with ubiquitous Android/system fallbacks.
@@ -185,3 +225,4 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 }
+
