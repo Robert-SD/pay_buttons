@@ -58,7 +58,7 @@ class CatalogHomePage extends StatelessWidget {
         children: [
           Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 580),
+              constraints: const BoxConstraints(maxWidth: 720),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -76,102 +76,129 @@ class CatalogHomePage extends StatelessWidget {
                     'Out-of-the-box payment buttons with provider defaults and zero configuration.',
                     style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
                   ),
-                  const SizedBox(height: 12),
-                  Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 320),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SizedBox(
-                            height: 48,
-                            child: ApplePayButton(
-                              onPressed: () =>
-                                  _handlePayPress(context, 'Apple Pay'),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          GooglePayButton(
+                  const SizedBox(height: 16),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isTwoColumns = constraints.maxWidth >= 600;
+
+                      final leftButtons = <Widget>[
+                        SizedBox(
+                          height: 48,
+                          child: ApplePayButton(
                             onPressed: () =>
-                                _handlePayPress(context, 'Google Pay'),
+                                _handlePayPress(context, 'Apple Pay'),
                           ),
-                          const SizedBox(height: 12),
-                          PayPalButton(
-                            onPressed: () => _handlePayPress(context, 'PayPal'),
-                          ),
-                          const SizedBox(height: 12),
-                          KlarnaButton(
-                            onPressed: () => _handlePayPress(context, 'Klarna'),
-                          ),
-                          const SizedBox(height: 12),
-                          WeroButton(
-                            onPressed: () => _handlePayPress(context, 'Wero'),
-                          ),
-                          const SizedBox(height: 12),
-                          ShopPayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Shop Pay'),
-                          ),
-                          const SizedBox(height: 12),
-                          AfterpayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Afterpay'),
-                          ),
-                          const SizedBox(height: 12),
-                          TwintButton(
-                            onPressed: () => _handlePayPress(context, 'TWINT'),
-                          ),
-                          const SizedBox(height: 12),
-                          BlikButton(
-                            onPressed: () => _handlePayPress(context, 'BLIK'),
-                          ),
-                          const SizedBox(height: 12),
-                          IdealButton(
-                            onPressed: () => _handlePayPress(context, 'iDEAL'),
-                          ),
-                          const SizedBox(height: 12),
-                          BancontactButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Bancontact'),
-                          ),
-                          const SizedBox(height: 12),
-                          BizumButton(
-                            onPressed: () => _handlePayPress(context, 'Bizum'),
-                          ),
-                          const SizedBox(height: 12),
-                          PixButton(
-                            onPressed: () => _handlePayPress(context, 'Pix'),
-                          ),
-                          const SizedBox(height: 12),
-                          OxxoButton(
-                            onPressed: () => _handlePayPress(context, 'OXXO'),
-                          ),
-                          const SizedBox(height: 12),
-                          BoletoButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Boleto Bancário'),
-                          ),
-                          const SizedBox(height: 12),
-                          AlipayButton(
-                            onPressed: () => _handlePayPress(context, 'Alipay'),
-                          ),
-                          const SizedBox(height: 12),
-                          WeChatPayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'WeChat Pay'),
-                          ),
-                          const SizedBox(height: 12),
-                          PayNowButton(
-                            onPressed: () => _handlePayPress(context, 'PayNow'),
-                          ),
-                          const SizedBox(height: 12),
-                          PromptPayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'PromptPay'),
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                        PayPalButton(
+                          onPressed: () => _handlePayPress(context, 'PayPal'),
+                        ),
+                        WeroButton(
+                          onPressed: () => _handlePayPress(context, 'Wero'),
+                        ),
+                        AfterpayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Afterpay'),
+                        ),
+                        BlikButton(
+                          onPressed: () => _handlePayPress(context, 'BLIK'),
+                        ),
+                        BancontactButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Bancontact'),
+                        ),
+                        PixButton(
+                          onPressed: () => _handlePayPress(context, 'Pix'),
+                        ),
+                        BoletoButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Boleto Bancário'),
+                        ),
+                        WeChatPayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'WeChat Pay'),
+                        ),
+                        PromptPayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'PromptPay'),
+                        ),
+                      ];
+
+                      final rightButtons = <Widget>[
+                        GooglePayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Google Pay'),
+                        ),
+                        KlarnaButton(
+                          onPressed: () => _handlePayPress(context, 'Klarna'),
+                        ),
+                        ShopPayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Shop Pay'),
+                        ),
+                        IdealButton(
+                          onPressed: () => _handlePayPress(context, 'iDEAL'),
+                        ),
+                        TwintButton(
+                          onPressed: () => _handlePayPress(context, 'TWINT'),
+                        ),
+                        BizumButton(
+                          onPressed: () => _handlePayPress(context, 'Bizum'),
+                        ),
+                        OxxoButton(
+                          onPressed: () => _handlePayPress(context, 'OXXO'),
+                        ),
+                        AlipayButton(
+                          onPressed: () => _handlePayPress(context, 'Alipay'),
+                        ),
+                        PayNowButton(
+                          onPressed: () => _handlePayPress(context, 'PayNow'),
+                        ),
+                      ];
+
+                      Widget buildColumn(List<Widget> buttons) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            for (int i = 0; i < buttons.length; i++) ...[
+                              if (i > 0) const SizedBox(height: 12),
+                              buttons[i],
+                            ],
+                          ],
+                        );
+                      }
+
+                      if (isTwoColumns) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(child: buildColumn(leftButtons)),
+                            const SizedBox(width: 16),
+                            Expanded(child: buildColumn(rightButtons)),
+                          ],
+                        );
+                      }
+
+                      // Mobile: single column
+                      final allButtons = <Widget>[];
+                      final maxLen = leftButtons.length > rightButtons.length
+                          ? leftButtons.length
+                          : rightButtons.length;
+                      for (int i = 0; i < maxLen; i++) {
+                        if (i < leftButtons.length) {
+                          allButtons.add(leftButtons[i]);
+                        }
+                        if (i < rightButtons.length) {
+                          allButtons.add(rightButtons[i]);
+                        }
+                      }
+
+                      return Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 320),
+                          child: buildColumn(allButtons),
+                        ),
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 28),

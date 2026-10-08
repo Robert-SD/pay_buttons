@@ -22,7 +22,7 @@ Built with clean vector graphics, smooth 120 FPS rendering, accessibility semant
 
 ## Supported Buttons
 
-* **Apple Pay**: Rendered only with Apple's own controls — the native PassKit button on iOS, and the official Apple Pay JS SDK `<apple-pay-button>` element in supporting browsers. Renders nothing on Android, desktop, and browsers without Apple Pay, because Apple's guidelines forbid drawing the mark.
+* **Apple Pay**: Provided via the official Flutter [`pay`](https://pub.dev/packages/pay) package on iOS (`PKPaymentButton`) and official Apple Pay JS SDK on web.
 * **Google Pay**: Provided directly via re-export of the official Flutter [`pay`](https://pub.dev/packages/pay) package (`GooglePayButton`, `RawGooglePayButton`).
 * **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
 * **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
@@ -46,10 +46,10 @@ Built with clean vector graphics, smooth 120 FPS rendering, accessibility semant
 
 ## Quick Start
 
-### Apple Pay
+### Apple Pay (via `pay` package & Web JS SDK)
 ```dart
-// Renders Apple's own control: PKPaymentButton on iOS, or the Apple Pay JS
-// SDK element in supporting browsers. Renders nothing elsewhere.
+// Renders native PKPaymentButton on iOS via the pay package,
+// or the official Apple Pay JS SDK element in supporting web browsers.
 ApplePayButton(
   onPressed: () => handleApplePay(),
   color: ApplePayColor.black,
@@ -63,12 +63,9 @@ ApplePayButton(
 )
 ```
 
-> [!IMPORTANT]
-> Apple's guidelines do not permit reproducing the Apple Pay mark or composing
-> a button from it. `ApplePayButton` therefore never draws a fallback button —
-> it renders an empty box on Android, desktop, and browsers without Apple Pay.
-> If you need a checkout option on those platforms, use another button from
-> this package alongside it.
+> [!NOTE]
+> Apple's brand guidelines require using Apple's official controls (`PKPaymentButton` on iOS and the Web JS SDK).
+> On unsupported platforms (such as Android or desktop), `ApplePayButton` returns an empty box to comply with Apple's guidelines.
 
 ### Google Pay (via `pay` package)
 ```dart
