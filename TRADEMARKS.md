@@ -27,161 +27,244 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 ## 2. Provider Legal Directory & Guidelines
 
 ### 1. PayPal & PayPal Pay Later
-* **Trademark Owner**: PayPal, Inc. / PayPal Holdings, Inc.
-* **Registered Trademarks**: "PayPal", the PayPal Monogram (overlapping "PP" logo), "Pay in 4", "PayPal Checkout".
+* **Trademark Owner / Governing Body**: PayPal, Inc. / PayPal Holdings, Inc.
+* **Registered Trademarks / Marks**: "PayPal", the PayPal Monogram (overlapping "PP" logo), "Pay in 4", "PayPal Pay Later", "PayPal Checkout".
 * **Official Brand Guidelines**: [PayPal Button Style Guidelines](https://developer.paypal.com/docs/checkout/standard/customize/button-style/) & [PayPal Brand Central](https://brand.paypal.com/)
-* **Open Source Origin of Assets**:
-  * Vector geometry and paths derived from PayPal's official open-source distribution [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos), licensed under the **Apache License, Version 2.0**.
-  * Mobile SDK reference patterns licensed by Braintree (a division of PayPal, Inc.) under the **MIT License**.
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from PayPal's official open-source distribution [@paypal/sdk-logos@2.3.7](https://github.com/paypal/paypal-sdk-logos/tree/v2.3.7) under Apache-2.0 License.
 * **Permitted Customizations**:
-  * Approved colors: Gold (`#FFC439`), Blue (`#0070BA`), Navy (`#003087`), Black (`#000000`), White (`#FFFFFF`), Silver (`#EEEEEE`).
-  * Approved shapes: Pill (`borderRadius: height / 2`) and Rounded Rectangle (`borderRadius: 4.0 - 6.0`).
-  * Aspect ratio of monogram and wordmark must remain undistorted.
+  * *Approved colors*: Gold (`#FFC439`), Blue (`#0070BA`), Navy (`#003087`), Black (`#000000`), White (`#FFFFFF`), Silver (`#EEEEEE`).
+  * *Approved shapes*: Pill (`borderRadius: height / 2`) and Rounded Rectangle (`borderRadius: 4.0 - 6.0`).
+  * *Brand rules*: Monogram and wordmark aspect ratios must remain undistorted; clear-space margins preserved.
 
 ---
 
-### 2. Klarna
-* **Trademark Owner**: Klarna Bank AB (publ)
-* **Registered Trademarks**: "Klarna", the Klarna wordmark, the Klarna badge.
+### 2. Apple Pay
+* **Trademark Owner / Governing Body**: Apple Inc.
+* **Registered Trademarks / Marks**: "Apple", "Apple Pay", Apple logo with "Pay" wordmark.
+* **Official Brand Guidelines**: [Apple Pay Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay) & [Apple Pay on the Web](https://developer.apple.com/documentation/applepayontheweb/displaying-apple-pay-buttons-using-javascript)
+* **Asset Implementation & Provenance**: Rendered strictly through official platform controls: native `PKPaymentButton` on iOS (via `package:pay`) and `<apple-pay-button>` in supported web browsers. No SVG vector assets are distributed.
+* **Permitted Customizations**:
+  * *Approved colors*: Black (`#000000`), White (`#FFFFFF`), White with Outline (`#FFFFFF` with `#000000` 1.0 dp border).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0`, Apple HIG default), Pill (`borderRadius: height / 2`), Rectangle (`borderRadius: 0.0`).
+  * *Brand rules*: Strict prohibition of manual vector reproduction or composite drawing of the Apple Pay mark.
+
+> [!CAUTION]
+> **No manual reproduction is permitted.** Apple does not distribute button assets, and its guidelines forbid reproducing the Apple Pay mark or composing a button from it. `ApplePayButton` therefore renders only Apple's own controls: the native `PKPaymentButton` on iOS and `<apple-pay-button>` on web. On targets without official Apple Pay controls, the widget renders an empty box.
+
+---
+
+### 3. Google Pay
+* **Trademark Owner / Governing Body**: Google LLC / Alphabet Inc.
+* **Registered Trademarks / Marks**: "Google", "Google Pay", "GPay", multi-color Google "G" logo.
+* **Official Brand Guidelines**: [Google Pay Brand Guidelines](https://developers.google.com/pay/api/web/guides/brand-guidelines) & [Google Pay Android Guidelines](https://developers.google.com/pay/api/android/guides/brand-guidelines)
+* **Asset Implementation & Provenance**: Rendered strictly through official platform controls: native `RawGooglePayButton` on Android (via `package:pay`) and official Google Pay `createButton()` JS SDK on web. No SVG vector assets are distributed.
+* **Permitted Customizations**:
+  * *Approved colors*: Black (`#000000`), White (`#FFFFFF`), Monochrome Black, Monochrome White.
+  * *Approved shapes*: Pill (`borderRadius: height / 2`, Google standard), Rounded Rectangle (`borderRadius: 4.0`), Rectangle (`borderRadius: 0.0`).
+  * *Brand rules*: White background buttons must maintain the `#747775` border for contrast. No drawn approximations allowed.
+
+> [!CAUTION]
+> **No manual reproduction is permitted.** `GooglePayButton` renders only official controls: the native `RawGooglePayButton` on Android and the official Google Pay JS SDK element in web browsers. On targets without official Google Pay controls, the widget renders an empty box.
+
+---
+
+### 4. Klarna
+* **Trademark Owner / Governing Body**: Klarna Bank AB (publ)
+* **Registered Trademarks / Marks**: "Klarna", Klarna wordmark ("Klarna."), Klarna "K" monogram dot badge.
 * **Official Brand Guidelines**: [Klarna Merchant Brand Guidelines](https://docs.klarna.com/merchant-journey/branding/design-guidelines/) & [Klarna Brand Portal](https://brand.klarna.com/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Klarna brand specifications ([brand.klarna.com](https://brand.klarna.com/)).
 * **Permitted Customizations**:
-  * Approved colors: Klarna Pink (`#FFA8CD`), Deep Charcoal (`#0B051D`), White with border (`#FFFFFF`).
-  * Approved shapes: Rounded Rectangle (`borderRadius: 5.0`) and Pill.
-  * The Klarna wordmark and badge must always have appropriate clear-space protection.
-
+  * *Approved colors*: Klarna Pink (`#FFA8CD`), Deep Charcoal (`#0B051D`), White with border (`#FFFFFF`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 5.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: The Klarna wordmark and monogram badge must always maintain minimum clear-space protection and undistorted aspect ratios.
 
 ---
 
-### 3. Shop Pay (Shopify)
-* **Trademark Owner**: Shopify Inc.
-* **Registered Trademarks**: "Shop", "Shop Pay", the Shop Pay logo.
-* **Official Brand Guidelines**: [Shop Pay Brand Guidelines](https://help.shopify.com/en/manual/payments/shop-pay/brand-assets)
-* **Brand Integrity**:
-  * Unified lockup: The "shop" wordmark and "Pay" pill badge are rendered together as a unified vector lockup across all button variants (including compact mode), honoring Shopify's requirement that the mark never be separated.
+### 5. Shop Pay
+* **Trademark Owner / Governing Body**: Shopify Inc.
+* **Registered Trademarks / Marks**: "Shop", "Shop Pay", Shop Pay logo and pill badge.
+* **Official Brand Guidelines**: [Shop Pay Brand Guidelines](https://help.shopify.com/en/manual/payments/shop-pay/brand-assets) & [Shopify Brand Assets](https://www.shopify.com/brand-assets)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Shopify brand assets portal.
 * **Permitted Customizations**:
-  * Approved colors: Shop Purple (`#5A31F4`), Black (`#000000`), White (`#FFFFFF`).
-  * Approved shapes: Rounded (`borderRadius: 4.0 - 6.0`) and Pill.
+  * *Approved colors*: Shop Purple (`#5A31F4`), Black (`#000000`), White (`#FFFFFF`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0 - 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Unified lockup: the "shop" wordmark and "Pay" pill badge are rendered together as an inseparable vector lockup across all button variants (including compact mode), honoring Shopify's brand requirements.
 
 ---
 
-### 4. Afterpay / Clearpay
-* **Trademark Owner**: Afterpay Pty Ltd / Block, Inc.
-* **Registered Trademarks**: "Afterpay", "Clearpay", the continuous loop logo.
-* **Official Brand Guidelines**: [Afterpay Brand Guidelines](https://developers.afterpay.com/afterpay-online/docs/brand-guidelines)
-* **Open Source Origin of Assets**:
-  * Official vector lockups (`afterpay_lockup.xml` and `clearpay_lockup.xml`) derived directly from Block's official [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android) repository under the Apache-2.0 License, eliminating font substitution risks.
+### 6. Afterpay / Clearpay
+* **Trademark Owner / Governing Body**: Afterpay Pty Ltd / Block, Inc.
+* **Registered Trademarks / Marks**: "Afterpay", "Clearpay", continuous loop badge logo.
+* **Official Brand Guidelines**: [Afterpay Brand Guidelines](https://developers.afterpay.com/afterpay-online/docs/brand-guidelines) & [Afterpay Developer Portal](https://developers.afterpay.com/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry extracted directly from Block's official open-source [afterpay/sdk-android](https://github.com/afterpay/sdk-android) repository under Apache-2.0 License.
 * **Permitted Customizations**:
-  * Approved colors: Bondi Mint (`#B2FCE4`), Black (`#000000`), White (`#FFFFFF`).
-  * Regional awareness: Must display "Afterpay" in US/Canada/Australia/NZ, and "Clearpay" in the UK and EU.
+  * *Approved colors*: Bondi Mint (`#B2FCE4`), Black (`#000000`), White (`#FFFFFF`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0 - 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Regional awareness: displays "Afterpay" in US/Canada/Australia/NZ, and "Clearpay" in the UK and EU.
 
 ---
 
-### 5. European Regional Champions
-* **Wero**:
-  * **Trademark Owner**: EPI Company SE (European Payments Initiative)
-  * **Guidelines**: [Wero Checkout Brand Guidelines](https://wero-wallet.eu/brand-guidelines/checkout) & [Wero Brand Portal](https://brand.epicompany.eu/)
-  * Approved colors: Wero Yellow (`#FFF48D`), Wero Black (`#1D1C1C`), White (`#FFFFFF`).
-  * Approved shapes: Rounded Card (`borderRadius: 6.0`, official checkout card radius) and Pill.
-* **TWINT**:
-  * **Trademark Owner**: TWINT AG (Switzerland)
-  * **Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)
-  * Approved colors: Black, White, TWINT Green (`#00A859`).
-* **iDEAL / Wero Migration**:
-  * **Trademark Owner**: Currence iDEAL B.V. / EPI Company SE (European Payments Initiative)
-  * **Guidelines & Migration Specifications**: [iDEAL naar Wero Portal](https://ideal.nl/naar-wero) & [Official iDEAL-Wero Cloudfront Asset Distribution](https://d1twnm33rljaon.cloudfront.net/Logos/iDEAL-Wero/)
-  * **Co-Branding Transition (2026–2027)**: Mandated co-branded horizontal lockup combining the iDEAL emblem badge with the Wero wordmark.
-  * Approved colors: Wero Yellow (`#FFF48D`), Darkmode / Black (`#1D1C1C`), White (`#FFFFFF`), Light Gray (`#F5F5F5`).
-* **BLIK**:
-  * **Trademark Owner**: Polski Standard Płatności Sp. z o.o. (PSP, Poland)
-  * **Guidelines**: [BLIK Brand Standards](https://blik.com/en/for-business/materials-to-download)
-  * Approved colors: Black, White with BLIK Red (`#E30613`).
-* **Bancontact**:
-  * **Trademark Owner**: Bancontact Payconiq Company (Belgium)
-  * **Guidelines**: [Bancontact Brand Rules](https://www.bancontact.com/en/merchants)
-  * Approved colors: Yellow (`#FFD200`) and Blue (`#00559F`) badge.
-* **Bizum**:
-  * **Trademark Owner**: Sociedad de Procedimientos de Pago S.L. (Spain)
-  * **Guidelines**: [Bizum Brand Guidelines](https://bizum.es/en/brand/)
-  * Approved colors: Teal (`#00B4B6`) and Dark Cyan (`#004455`).
-
----
-
-### 6. Latin American Champions
-* **Pix**:
-  * **Trademark Owner**: Banco Central do Brasil (BCB)
-  * **Guidelines**: [Manual de Uso da Marca Pix](https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos)
-  * Approved colors: Signature Teal (`#32BCAD`), White (`#FFFFFF`), Black (`#000000`).
-* **OXXO**:
-  * **Trademark Owner**: Cadena Comercial OXXO, S.A. de C.V. / FEMSA Comercio (Mexico)
-  * **Guidelines**: OXXO Brand Identity Guidelines
-  * Approved colors: Red (`#E70020`), White (`#FFFFFF`), Yellow (`#FBB110`).
-* **Boleto Bancário**:
-  * **Regulatory Body**: Federação Brasileira de Bancos (FEBRABAN)
-  * Approved colors: White (`#FFFFFF`), Black (`#1A1A1A`), Light Gray (`#F5F5F7`).
-
----
-
-### 7. Asian Champions
-* **Alipay**:
-  * **Trademark Owner**: Alipay.com Co., Ltd. / Ant Group Co., Ltd.
-  * **Registered Trademarks**: "Alipay", the "支" emblem, the Alipay wordmark.
-  * **Guidelines**: [Alipay Brand Guidelines](https://global.alipay.com/)
-  * Approved colors: Alipay Blue (`#1677FF`), White (`#FFFFFF`). (Black is deprecated for strict compliance with Ant Group checkout guidelines).
-  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
-* **WeChat Pay**:
-  * **Trademark Owner**: Tencent Holdings Limited / Tenpay Payment Technology Co., Ltd.
-  * **Registered Trademarks**: "WeChat", "WeChat Pay", the WeChat speech bubbles monogram.
-  * **Guidelines**: [WeChat Pay Brand Resources](https://pay.weixin.qq.com/)
-  * Approved colors: WeChat Green (`#07C160`), White (`#FFFFFF`). (Black is deprecated for strict compliance with Tencent checkout guidelines).
-  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
-* **PayNow**:
-  * **Trademark Owner / Governing Body**: Association of Banks in Singapore (ABS) / Monetary Authority of Singapore (MAS)
-  * **Registered Trademarks**: "PayNow", stylized bold "PayNow" wordmark with "P" monogram.
-  * **Guidelines**: [PayNow Singapore Brand Guidelines](https://www.abs.org.sg/consumer-banking/pay-now)
-  * Approved colors: Deep Purple (`#7D1978`), Vibrant Magenta (`#ED0080`), White (`#FFFFFF`).
-  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
-* **PromptPay**:
-  * **Trademark Owner / Governing Body**: Bank of Thailand (BOT) / National ITMX
-  * **Registered Trademarks**: "PromptPay", Thai QR payment badge with chevron arrows.
-  * **Guidelines**: [Bank of Thailand PromptPay Standard](https://www.bot.or.th/)
-  * Approved colors: Deep Navy Blue (`#003D6B`), White (`#FFFFFF`), Black (`#000000`).
-  * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
-
----
-
-### 8. Google Pay
-
-* **Trademark Owner**: Google LLC / Alphabet Inc.
-* **Registered Trademarks**: "Google", "Google Pay", "GPay", the multi-color Google "G" logo.
-* **Official Brand Guidelines**: [Google Pay Brand Guidelines](https://developers.google.com/pay/api/web/guides/brand-guidelines)
+### 7. Alipay
+* **Trademark Owner / Governing Body**: Alipay.com Co., Ltd. / Ant Group Co., Ltd.
+* **Registered Trademarks / Marks**: "Alipay", "支付宝", "支" emblem badge, Alipay horizontal wordmark.
+* **Official Brand Guidelines**: [Alipay Brand Resources](https://global.alipay.com/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Ant Group / Alipay merchant specifications.
 * **Permitted Customizations**:
-  * Approved colors: Black (`#000000`), White (`#FFFFFF`), Monochrome Black, Monochrome White.
-  * Approved shapes: Pill (`borderRadius: height / 2`, Google standard), Rounded Rectangle (`borderRadius: 4.0`), Rectangle (`borderRadius: 0.0`).
-  * White background buttons must maintain the `#747775` border for contrast.
-
-> [!CAUTION]
-> **No manual reproduction is permitted.** `GooglePayButton` renders only official controls: the native `RawGooglePayButton` on Android (via `package:pay`) and the official Google Pay JS SDK element in web browsers. On targets without official Google Pay controls, the widget renders an empty box.
+  * *Approved colors*: Alipay Blue (`#1677FF`), White (`#FFFFFF`). (Black is deprecated in accordance with Ant Group checkout guidelines).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Blue emblem background or blue fill must maintain exact official brand color; clear-space margins preserved.
 
 ---
 
-### 9. Apple Pay
-* **Trademark Owner**: Apple Inc.
-* **Registered Trademarks**: "Apple", "Apple Pay", the Apple logo with "Pay" wordmark.
-* **Official Brand Guidelines**: [Apple Pay Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay)
+### 8. WeChat Pay
+* **Trademark Owner / Governing Body**: Tencent Holdings Limited / Tenpay Payment Technology Co., Ltd.
+* **Registered Trademarks / Marks**: "WeChat", "WeChat Pay", "微信支付", dual chat bubbles emblem.
+* **Official Brand Guidelines**: [WeChat Pay Brand Resources](https://pay.weixin.qq.com/static/material/brand.shtml)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Tencent WeChat Pay brand specifications.
 * **Permitted Customizations**:
-  * Approved colors: Black (`#000000`), White (`#FFFFFF`), White with Outline (`#FFFFFF` with `#000000` 1.0 dp border).
-  * Approved shapes: Rounded Rectangle (`borderRadius: 4.0`, Apple HIG default), Pill (`borderRadius: height / 2`), Rectangle (`borderRadius: 0.0`).
-  * The Apple logo and wordmark must retain their standard proportional relationship and clear-space margins.
+  * *Approved colors*: WeChat Green (`#07C160`), White (`#FFFFFF`). (Black is deprecated in accordance with Tencent checkout guidelines).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Chat bubbles emblem aspect ratio and green brand color strictly maintained; clear-space margins preserved.
 
-> [!CAUTION]
-> **No manual reproduction is permitted.** Apple does not distribute button assets, and its guidelines forbid reproducing the Apple Pay mark or composing a button from it. `ApplePayButton` therefore renders only Apple's own controls: the native `PKPaymentButton` on iOS (via `package:pay`) and the official Apple Pay JS SDK `<apple-pay-button>` element in supporting browsers.
->
-> On every other target — Android, desktop, and browsers without Apple Pay — the widget renders an empty box rather than a drawn approximation. All vector asset helpers for Apple Pay have been eliminated from the package.
+---
+
+### 9. Pix
+* **Trademark Owner / Governing Body**: Banco Central do Brasil (BCB)
+* **Registered Trademarks / Marks**: "Pix", geometric overlapping rhomboid emblem, "pix" lowercase wordmark.
+* **Official Brand Guidelines**: [Manual de Uso da Marca Pix (BCB)](https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Banco Central do Brasil Pix Brand Manual asset package.
+* **Permitted Customizations**:
+  * *Approved colors*: Signature Teal (`#32BCAD`), White (`#FFFFFF`), Black (`#000000`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0 - 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Geometry of overlapping diamonds must remain mathematically accurate; minimum clear area maintained around the mark.
+
+---
+
+### 10. Wero
+* **Trademark Owner / Governing Body**: EPI Company SE (European Payments Initiative)
+* **Registered Trademarks / Marks**: "wero", stylized Wero badge, Wero wordmark.
+* **Official Brand Guidelines**: [Wero Checkout Brand Guidelines](https://wero-wallet.eu/brand-guidelines/checkout) & [Wero Brand Portal](https://brand.epicompany.eu/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official EPI checkout asset distribution (`Checkout-Card-Radius.svg`, `Wero_Logo_Badge_RGB.svg`).
+* **Permitted Customizations**:
+  * *Approved colors*: Wero Yellow (`#FFF48D`), Wero Black (`#1D1C1C`), White (`#FFFFFF`).
+  * *Approved shapes*: Rounded Card (`borderRadius: 6.0`, official EPI checkout radius) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Distinctive checkout card radius geometry preserved; high contrast maintained against light and dark backgrounds.
+
+---
+
+### 11. iDEAL / Wero Migration
+* **Trademark Owner / Governing Body**: Currence iDEAL B.V. / EPI Company SE (European Payments Initiative)
+* **Registered Trademarks / Marks**: "iDEAL", "wero", iDEAL emblem badge, unified "iDEAL | wero" lockup.
+* **Official Brand Guidelines**: [iDEAL naar Wero Portal](https://ideal.nl/naar-wero) & [Official iDEAL-Wero CloudFront Distribution](https://d1twnm33rljaon.cloudfront.net/Logos/iDEAL-Wero/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Currence / EPI migration assets (`iDEAL_Wero_Lockup_Yellow_Horizontal_RGB.svg`, `iDEAL_Wero-Lockup-Darkmode-Horizontal.svg`).
+* **Permitted Customizations**:
+  * *Approved colors*: Wero Yellow (`#FFF48D`), Darkmode / Black (`#1D1C1C`), White (`#FFFFFF`), Light Gray (`#F5F5F5`).
+  * *Approved shapes*: Rounded Card (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: 2026–2027 mandatory migration lockup uniting the iDEAL badge and Wero brand mark; aspect ratio and clear spacing preserved.
+
+---
+
+### 12. BLIK
+* **Trademark Owner / Governing Body**: Polski Standard Płatności Sp. z o.o. (PSP, Poland)
+* **Registered Trademarks / Marks**: "BLIK", lowercase "b" mark with orange dot, "blik" wordmark.
+* **Official Brand Guidelines**: [BLIK Brand Standards](https://blik.com/en/for-business/materials-to-download)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official PSP BLIK merchant downloads.
+* **Permitted Customizations**:
+  * *Approved colors*: Black (`#000000`), White (`#FFFFFF`), with BLIK Red/Orange dot (`#E52F08` / `#E30613`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Red dot position and relative scale to the 'b' glyph must remain exact; clear-space protection maintained.
+
+---
+
+### 13. Bancontact
+* **Trademark Owner / Governing Body**: Bancontact Payconiq Company (Belgium)
+* **Registered Trademarks / Marks**: "Bancontact", dual-wing emblem, Bancontact wordmark.
+* **Official Brand Guidelines**: [Bancontact Brand Rules](https://www.bancontact.com/en)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Bancontact Payconiq brand specifications.
+* **Permitted Customizations**:
+  * *Approved colors*: Blue (`#005AB9` to `#1E3764` gradient), Yellow (`#FBA900` to `#FFD800` gradient), White (`#FFFFFF`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: The blue and yellow wing gradients and proportional spacing must remain intact; clear area around the logo enforced.
+
+---
+
+### 14. Bizum
+* **Trademark Owner / Governing Body**: Sociedad de Procedimientos de Pago S.L. (Spain)
+* **Registered Trademarks / Marks**: "Bizum", Bizum asterisk emblem, Bizum wordmark.
+* **Official Brand Guidelines**: [Bizum Brand Guidelines](https://bizum.com/es/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Bizum merchant brand resources.
+* **Permitted Customizations**:
+  * *Approved colors*: Teal (`#00B4B6`), White (`#FFFFFF`), Dark Cyan (`#004455`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Angular orientation of the asterisk spokes must remain exact; clear-space margins preserved.
+
+---
+
+### 15. TWINT
+* **Trademark Owner / Governing Body**: TWINT AG (Switzerland)
+* **Registered Trademarks / Marks**: "TWINT", dual-radial-gradient beacon emblem, TWINT wordmark.
+* **Official Brand Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official TWINT AG brand guidelines.
+* **Permitted Customizations**:
+  * *Approved colors*: Black (`#000000`), White (`#FFFFFF`), TWINT Green (`#00A859`), with dual radial gradient beacon (`#FFCC00` to `#FF0000` and `#00B4E6` to `#054696`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Dual radial gradient centers and focal points in the beacon mark must remain exact; clear-space protection maintained.
+
+---
+
+### 16. PayNow
+* **Trademark Owner / Governing Body**: Association of Banks in Singapore (ABS) / Monetary Authority of Singapore (MAS)
+* **Registered Trademarks / Marks**: "PayNow", bold stylized wordmark with stylized "P" monogram.
+* **Official Brand Guidelines**: [PayNow Singapore Brand Guidelines](https://www.abs.org.sg/consumer-banking/pay-now)
+* **Asset Implementation & Provenance**: Clean inlined SVG Bézier vector geometry derived from official Singapore ABS checkout CDN standard.
+* **Permitted Customizations**:
+  * *Approved colors*: Deep Purple (`#7D1978`), Vibrant Magenta (`#ED0080`), White (`#FFFFFF`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Precise gradient transition from purple to magenta across the brand lockup; clean Bézier curves without rasterization.
+
+---
+
+### 17. PromptPay
+* **Trademark Owner / Governing Body**: Bank of Thailand (BOT) / National ITMX
+* **Registered Trademarks / Marks**: "PromptPay", "พร้อมเพย์", Thai QR payment badge with chevron arrows.
+* **Official Brand Guidelines**: [Bank of Thailand PromptPay Standard](https://www.bot.or.th/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector paths derived from official Bank of Thailand Thai QR standard (`Thai_QR_Logo.svg`).
+* **Permitted Customizations**:
+  * *Approved colors*: Deep Navy Blue (`#003D6B`), White (`#FFFFFF`), Black (`#000000`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Chevron arrow angles and Thai QR boundary geometry strictly compliant with Bank of Thailand specifications.
+
+---
+
+### 18. OXXO
+* **Trademark Owner / Governing Body**: Cadena Comercial OXXO, S.A. de C.V. / FEMSA Comercio (Mexico)
+* **Registered Trademarks / Marks**: "OXXO", "OXXO PAY", official red and yellow horizontal stripe badge.
+* **Official Brand Guidelines**: [OXXO Pay Brand Portal](https://www.oxxo.com/oxxopay)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector paths derived from official OXXO merchant brand specifications.
+* **Permitted Customizations**:
+  * *Approved colors*: Red (`#E70020`), White (`#FFFFFF`), Yellow (`#FBB110`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Top and bottom yellow stripes and red typography geometry maintained; clear-space margins preserved.
+
+---
+
+### 19. Boleto Bancário
+* **Trademark Owner / Governing Body**: Federação Brasileira de Bancos (FEBRABAN)
+* **Registered Trademarks / Marks**: Official FEBRABAN Boleto barcode and typography emblem.
+* **Official Brand Guidelines**: [FEBRABAN Standards Portal](https://portal.febraban.org.br/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vectorized barcode and typography path data derived from official Brazilian checkout standard.
+* **Permitted Customizations**:
+  * *Approved colors*: White (`#FFFFFF`), Black (`#1A1A1A`), Light Gray (`#F5F5F7`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0 - 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Barcode line ratios and FEBRABAN regulatory formatting standards strictly maintained.
 
 ---
 
 ## 3. Summary of Open Source Licenses Used
 
-* **Package Code**: Distributed under the [MIT License](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/LICENSE).
-* **Vector Path Data**: Derived from official open-source repositories licensed under the **Apache License 2.0** (`@paypal/sdk-logos`) and **MIT License** (`braintree_android`).
+* **Package Code**: Distributed under the [MIT License](LICENSE).
+* **Vector Path Data**:
+  * [@paypal/sdk-logos](https://github.com/paypal/paypal-sdk-logos): **Apache License 2.0** (PayPal, PayPal Pay Later)
+  * [afterpay/sdk-android](https://github.com/afterpay/sdk-android): **Apache License 2.0** (Afterpay, Clearpay)
+  * `braintree_android`: **MIT License** (reference integration patterns)
 

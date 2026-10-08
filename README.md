@@ -4,9 +4,9 @@
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/LICENSE)
 [![Live Web Demo](https://img.shields.io/badge/demo-live%20web-blue?logo=googlechrome&style=flat-square)](https://robert-sd.github.io/pay_buttons/)
 
-A high-fidelity, brand-compliant, cross-platform Flutter package providing dedicated payment buttons for modern e-commerce checkouts.
+A lightweight, brand-compliant, cross-platform Flutter package providing beautiful, ready-to-use payment buttons for modern e-commerce checkouts.
 
-Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessibility semantics, and strict adherence to provider brand guidelines.
+Built with clean vector graphics, smooth 120 FPS rendering, accessibility semantics out of the box, and careful adherence to official provider brand guidelines.
 
 > 🌐 **Live Web Component Catalog**: Test and interact with the payment buttons directly in your browser at **[robert-sd.github.io/pay_buttons](https://robert-sd.github.io/pay_buttons/)**.
 
@@ -36,8 +36,8 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **Pix**: Brazil 🇧🇷 instant payment system by Banco Central do Brasil (`teal`, `white`, `black`).
 * **OXXO**: Mexico 🇲🇽 market leader cash voucher & digital payment (`red`, `white`, `yellow`).
 * **Boleto Bancário**: Brazil 🇧🇷 official barcode bank slip checkout (`white`, `black`, `lightGray`).
-* **Alipay**: China 🇨🇳 / Global digital payment champion (`blue`, `white`, `black`).
-* **WeChat Pay**: China 🇨🇳 / Global WeChat mobile payment ecosystem (`green`, `white`, `black`).
+* **Alipay**: China 🇨🇳 / Global digital payment champion (`blue`, `white`).
+* **WeChat Pay**: China 🇨🇳 / Global WeChat mobile payment ecosystem (`green`, `white`).
 * **PayNow**: Singapore 🇸🇬 national instant funds transfer (`purple`, `magenta`, `white`).
 * **PromptPay**: Thailand 🇹🇭 national instant payment standard (`blue`, `white`, `black`).
 
@@ -260,6 +260,6 @@ This package is an independent open-source library and is **not affiliated with,
 All trademarks, logos, and service marks displayed in this package belong to their respective owners. They are used solely under the doctrine of **nominative fair use** to identify the payment services accepted by merchants and to assist developers in building brand-compliant checkout buttons.
 
 ### 3. Open Source Licensure
-The vector paths used to render the PayPal logo are derived from PayPal's official open-source repository [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos), published by PayPal under the **Apache License, Version 2.0**. Braintree developer components are licensed under the **MIT License**.
+The vector paths used to render logos are derived from official open-source distributions including [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos) and [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android), published under the **Apache License, Version 2.0**. Braintree developer integration patterns are licensed under the **MIT License**.
 
 See [**`LICENSE`**](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/LICENSE) and [**`TRADEMARKS.md`**](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/TRADEMARKS.md) for full terms.
