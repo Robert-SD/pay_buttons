@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_buttons/pay_buttons.dart';
 
@@ -82,12 +83,9 @@ class CatalogHomePage extends StatelessWidget {
                       final isTwoColumns = constraints.maxWidth >= 600;
 
                       final leftButtons = <Widget>[
-                        SizedBox(
-                          height: 48,
-                          child: ApplePayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Apple Pay'),
-                          ),
+                        ApplePayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Apple Pay'),
                         ),
                         PayPalButton(
                           onPressed: () => _handlePayPress(context, 'PayPal'),
@@ -181,17 +179,18 @@ class CatalogHomePage extends StatelessWidget {
 
                       // Mobile: single column with harmonious color grouping
                       final mobileButtons = <Widget>[
-                        SizedBox(
-                          height: 48,
-                          child: ApplePayButton(
+                        if (kIsWeb ||
+                            defaultTargetPlatform == TargetPlatform.iOS)
+                          ApplePayButton(
                             onPressed: () =>
                                 _handlePayPress(context, 'Apple Pay'),
                           ),
-                        ),
-                        GooglePayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Google Pay'),
-                        ),
+                        if (kIsWeb ||
+                            defaultTargetPlatform == TargetPlatform.android)
+                          GooglePayButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'Google Pay'),
+                          ),
                         PayPalButton(
                           onPressed: () => _handlePayPress(context, 'PayPal'),
                         ),
