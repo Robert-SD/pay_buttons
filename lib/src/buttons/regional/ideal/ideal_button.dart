@@ -13,7 +13,7 @@ import 'ideal_shape.dart';
 /// from iDEAL to European Wero:
 /// https://ideal.nl/naar-wero
 ///
-/// Fully rendered in pure Flutter using vector graphics without native SDK bloat.
+/// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class IdealButton extends PayButton {
   const IdealButton({
     super.key,

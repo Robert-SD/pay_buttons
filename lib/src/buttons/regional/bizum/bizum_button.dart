@@ -9,7 +9,7 @@ import 'bizum_shape.dart';
 
 /// A brand-compliant Bizum (Spain) payment button.
 ///
-/// Fully rendered in pure Flutter using vector graphics without native SDK bloat.
+/// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class BizumButton extends PayButton {
   const BizumButton({
     super.key,

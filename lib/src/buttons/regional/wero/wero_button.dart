@@ -9,7 +9,7 @@ import 'wero_shape.dart';
 
 /// A brand-compliant Wero (European Payments Initiative) payment button.
 ///
-/// Fully rendered in pure Flutter using vector graphics without native SDK bloat.
+/// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class WeroButton extends PayButton {
   const WeroButton({
     super.key,

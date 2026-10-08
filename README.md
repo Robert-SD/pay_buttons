@@ -1,7 +1,7 @@
 # pay_buttons
 
 [![pub package](https://img.shields.io/badge/pub-v0.0.1-blue.svg)](https://pub.dev)
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE)
 [![Live Web Demo](https://img.shields.io/badge/demo-live%20web-blue?logo=googlechrome&style=flat-square)](https://robert-sd.github.io/pay_buttons/)
 
 A lightweight, brand-compliant, cross-platform Flutter package providing beautiful, ready-to-use payment buttons for modern e-commerce checkouts.
@@ -22,41 +22,42 @@ Built with clean vector graphics, smooth 120 FPS rendering, accessibility semant
 
 ## Supported Buttons
 
-* **Apple Pay**: Provided via the official Flutter [`pay`](https://pub.dev/packages/pay) package on iOS (`PKPaymentButton`) and official Apple Pay JS SDK on web.
-* **Google Pay**: Provided directly via re-export of the official Flutter [`pay`](https://pub.dev/packages/pay) package (`GooglePayButton`, `RawGooglePayButton`).
-* **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
-* **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
-* **Wero**: Europe 🇪🇺 / European Payments Initiative (`yellow`, `black`, `white`).
-* **Shop Pay (Shopify)**: Default logo-only or custom text (`purple`, `black`, `white`).
-* **Afterpay / Clearpay**: Default logo-only or custom text, Auto-brand switching (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU), (`mint`, `black`, `white`).
-* **TWINT**: Switzerland 🇨🇭 national mobile payment (`black`, `white`).
-* **BLIK**: Poland 🇵🇱 mobile banking champion (`black`, `white`).
-* **iDEAL | Wero**: Netherlands 🇳🇱 online banking standard migrating to Wero (`yellow`, `black`, `white`, `lightGray`).
-* **Bizum**: Spain 🇪🇸 instant account payment (`white`, `darkTeal`).
-* **Pix**: Brazil 🇧🇷 instant payment system by Banco Central do Brasil (`teal`, `white`, `black`).
-* **OXXO**: Mexico 🇲🇽 market leader cash voucher & digital payment (`red`, `white`, `yellow`).
-* **Boleto Bancário**: Brazil 🇧🇷 official barcode bank slip checkout (`white`, `black`, `lightGray`).
-* **Alipay**: China 🇨🇳 / Global digital payment champion (`blue`, `white`).
-* **WeChat Pay**: China 🇨🇳 / Global WeChat mobile payment ecosystem (`green`, `white`).
-* **PayNow**: Singapore 🇸🇬 national instant funds transfer (`purple`, `magenta`, `white`).
-* **PromptPay**: Thailand 🇹🇭 national instant payment standard (`blue`, `white`, `black`).
-
+* **Apple Pay**: Native `PKPaymentButton` on iOS via `package:pay`, and official Apple Pay JS SDK on web.
+* **Google Pay**: Native Google Pay on Android via `package:pay`, and official Google Pay JS SDK on web.
+* **PayPal & PayPal Pay Later**: Official vector branding (`gold`, `blue`, `black`, `white`, `silver`).
+* **Klarna**: Official vector branding (`pink`, `black`, `white`).
+* **Shop Pay**: Official Shopify checkout branding (`purple`, `black`, `white`).
+* **Afterpay / Clearpay**: Auto-switching branding (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU) (`mint`, `black`, `white`).
+* **Wero**: European Payments Initiative payment standard (`yellow`, `black`, `white`).
+* **iDEAL | Wero**: Dutch online banking standard migrating to Wero (`yellow`, `black`, `white`, `lightGray`).
+* **BLIK**: Polish mobile payment standard (`black`, `white`).
+* **TWINT**: Swiss mobile payment standard (`black`, `white`).
+* **Bancontact**: Belgian electronic payment standard (`white`, `blue`).
+* **Bizum**: Spanish instant account payment standard (`white`, `darkTeal`).
+* **Pix**: Brazilian instant payment system by Banco Central do Brasil (`teal`, `white`, `black`).
+* **Boleto Bancário**: Brazilian barcode bank slip checkout (`white`, `black`, `lightGray`).
+* **OXXO**: Mexican voucher & digital payment standard (`red`, `white`, `yellow`).
+* **Alipay**: Digital payment wallet standard (`blue`, `white`).
+* **WeChat Pay**: Mobile payment ecosystem standard (`green`, `white`).
+* **PayNow**: Singapore instant funds transfer standard (`purple`, `magenta`, `white`).
+* **PromptPay**: Thailand national instant payment standard (`blue`, `white`, `black`).
 
 ---
 
 ## Quick Start
 
 ### Apple Pay (via `pay` package & Web JS SDK)
+
+Renders native `PKPaymentButton` on iOS via `package:pay`, or the official Apple Pay JS SDK `<apple-pay-button>` in supporting web browsers.
+
 ```dart
-// Renders native PKPaymentButton on iOS via the pay package,
-// or the official Apple Pay JS SDK element in supporting web browsers.
 ApplePayButton(
   onPressed: () => handleApplePay(),
   color: ApplePayColor.black,
-  type: ApplePayType.buy,   // "Buy with Apple Pay"
+  type: ApplePayType.buy, // "Buy with Apple Pay"
 )
 
-// Hide the button when you already know Apple Pay is unavailable.
+// Optionally gate visibility when Apple Pay is unavailable
 ApplePayButton(
   userCanPay: isApplePayAvailable,
   onPressed: () => handleApplePay(),
@@ -64,21 +65,29 @@ ApplePayButton(
 ```
 
 > [!NOTE]
-> Apple's brand guidelines require using Apple's official controls (`PKPaymentButton` on iOS and the Web JS SDK).
-> On unsupported platforms (such as Android or desktop), `ApplePayButton` returns an empty box to comply with Apple's guidelines.
+> Apple's Human Interface Guidelines require using Apple's official controls (`PKPaymentButton` on iOS and the Web JS SDK).
+> On unsupported platforms (such as Android or desktop), `ApplePayButton` renders an empty box to comply with Apple guidelines.
 
-### Google Pay (via `pay` package)
+### Google Pay (via `pay` package & Web JS SDK)
+
+Renders native Google Pay controls on Android via `package:pay` (when `paymentConfiguration` is provided), or the official Google Pay JS SDK button element on web.
+
 ```dart
-// Native Google Pay Button from official pay package
-RawGooglePayButton(
-  paymentConfiguration: paymentConfig,
-  theme: GooglePayButtonTheme.dark,
-  type: GooglePayButtonType.pay,
+GooglePayButton(
   onPressed: () => handleGooglePay(),
+  color: GooglePayColor.black,
+  shape: GooglePayShape.pill,
+  text: 'Buy with', // maps to buy, checkout, donate, pay, order, etc.
+  paymentConfiguration: paymentConfig, // For native Android package:pay
 )
 ```
 
-### PayPal
+> [!NOTE]
+> Google's Brand Guidelines require using Google's official controls.
+> On unsupported platforms (such as iOS or desktop without web), `GooglePayButton` renders an empty box to comply with Google guidelines.
+
+### PayPal & PayPal Pay Later
+
 ```dart
 PayPalButton(
   onPressed: () => handlePayPalCheckout(),
@@ -86,9 +95,16 @@ PayPalButton(
   color: PayPalColor.gold,
   shape: PayPalShape.pill,
 )
+
+PayPalPayLaterButton(
+  onPressed: () => handlePayPalPayLater(),
+  color: PayPalColor.gold,
+  shape: PayPalShape.pill,
+)
 ```
 
 ### Klarna
+
 ```dart
 KlarnaButton(
   onPressed: () => handleKlarnaCheckout(),
@@ -98,17 +114,8 @@ KlarnaButton(
 )
 ```
 
-### Wero
-```dart
-WeroButton(
-  onPressed: () => handleWero(),
-  text: 'Pay with',
-  color: WeroColor.yellow,
-  shape: WeroShape.rounded,
-)
-```
-
 ### Shop Pay
+
 ```dart
 ShopPayButton(
   onPressed: () => handleShopPay(),
@@ -119,100 +126,159 @@ ShopPayButton(
 ```
 
 ### Afterpay / Clearpay
+
 ```dart
 AfterpayButton(
   onPressed: () => handleAfterpay(),
   text: 'Buy now with',
-  brand: AfterpayBrand.afterpay, // or AfterpayBrand.clearpay,
+  brand: AfterpayBrand.afterpay, // or AfterpayBrand.clearpay
   color: AfterpayColor.mint,
   shape: AfterpayShape.rounded,
 )
 ```
 
-### Regional Champions
+### Wero
 
 ```dart
-// Switzerland
-TwintButton(
-  text: 'Bezahlen mit',
-  onPressed: () => handleTwint(),
-)
-
-// Poland
-BlikButton(
-  text: 'Zapłać z',
-  onPressed: () => handleBlik(),
-)
-
-// Netherlands (iDEAL -> Wero migration lockup)
-IdealButton(
-  text: 'Betaal met',
-  color: IdealColor.yellow,
-  onPressed: () => handleIdeal(),
-)
-
-// Belgium
-BancontactButton(
-  text: 'Betaal met',
-  onPressed: () => handleBancontact(),
-)
-
-// Spain
-BizumButton(
-  text: 'Pagar con',
-  onPressed: () => handleBizum(),
-)
-
-// Brazil (Pix)
-PixButton(
-  text: 'Pagar com',
-  color: PixColor.teal,
-  onPressed: () => handlePix(),
-)
-
-// Mexico (OXXO)
-OxxoButton(
-  text: 'Pagar con',
-  color: OxxoColor.red,
-  onPressed: () => handleOxxo(),
-)
-
-// Brazil (Boleto Bancário)
-BoletoButton(
-  text: 'Pagar via',
-  color: BoletoColor.white,
-  onPressed: () => handleBoleto(),
-)
-
-// China / Global (Alipay)
-AlipayButton(
+WeroButton(
+  onPressed: () => handleWero(),
   text: 'Pay with',
-  color: AlipayColor.blue,
-  onPressed: () => handleAlipay(),
-)
-
-// China / Global (WeChat Pay)
-WeChatPayButton(
-  text: 'Pay with',
-  color: WeChatPayColor.green,
-  onPressed: () => handleWeChatPay(),
-)
-
-// Singapore (PayNow)
-PayNowButton(
-  text: 'Pay with',
-  color: PayNowColor.purple,
-  onPressed: () => handlePayNow(),
-)
-
-// Thailand (PromptPay)
-PromptPayButton(
-  text: 'Pay with',
-  color: PromptPayColor.blue,
-  onPressed: () => handlePromptPay(),
+  color: WeroColor.yellow,
+  shape: WeroShape.rounded,
 )
 ```
 
+### iDEAL | Wero
+
+```dart
+IdealButton(
+  onPressed: () => handleIdeal(),
+  text: 'Betaal met',
+  color: IdealColor.yellow,
+  shape: IdealShape.rounded,
+)
+```
+
+### BLIK
+
+```dart
+BlikButton(
+  onPressed: () => handleBlik(),
+  text: 'Zapłać z',
+  color: BlikColor.black,
+  shape: BlikShape.rounded,
+)
+```
+
+### TWINT
+
+```dart
+TwintButton(
+  onPressed: () => handleTwint(),
+  text: 'Bezahlen mit',
+  color: TwintColor.black,
+  shape: TwintShape.rounded,
+)
+```
+
+### Bancontact
+
+```dart
+BancontactButton(
+  onPressed: () => handleBancontact(),
+  text: 'Betaal met',
+  color: BancontactColor.white,
+  shape: BancontactShape.rounded,
+)
+```
+
+### Bizum
+
+```dart
+BizumButton(
+  onPressed: () => handleBizum(),
+  text: 'Pagar con',
+  color: BizumColor.white,
+  shape: BizumShape.rounded,
+)
+```
+
+### Pix
+
+```dart
+PixButton(
+  onPressed: () => handlePix(),
+  text: 'Pagar com',
+  color: PixColor.teal,
+  shape: PixShape.rounded,
+)
+```
+
+### Boleto Bancário
+
+```dart
+BoletoButton(
+  onPressed: () => handleBoleto(),
+  text: 'Pagar via',
+  color: BoletoColor.white,
+  shape: BoletoShape.rounded,
+)
+```
+
+### OXXO
+
+```dart
+OxxoButton(
+  onPressed: () => handleOxxo(),
+  text: 'Pagar con',
+  color: OxxoColor.red,
+  shape: OxxoShape.rounded,
+)
+```
+
+### Alipay
+
+```dart
+AlipayButton(
+  onPressed: () => handleAlipay(),
+  text: 'Pay with',
+  color: AlipayColor.blue,
+  shape: AlipayShape.rounded,
+)
+```
+
+### WeChat Pay
+
+```dart
+WeChatPayButton(
+  onPressed: () => handleWeChatPay(),
+  text: 'Pay with',
+  color: WeChatPayColor.green,
+  shape: WeChatPayShape.rounded,
+)
+```
+
+### PayNow
+
+```dart
+PayNowButton(
+  onPressed: () => handlePayNow(),
+  text: 'Pay with',
+  color: PayNowColor.purple,
+  shape: PayNowShape.rounded,
+)
+```
+
+### PromptPay
+
+```dart
+PromptPayButton(
+  onPressed: () => handlePromptPay(),
+  text: 'Pay with',
+  color: PromptPayColor.blue,
+  shape: PromptPayShape.rounded,
+)
+```
 
 ---
 
@@ -251,7 +317,7 @@ PayPalButton(
 ## Legal & Trademark Disclaimers
 
 ### 1. Non-Affiliation
-This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed by PayPal, Inc.**, Klarna Bank AB, or any other payment provider.
+This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed by PayPal, Inc.**, Klarna Bank AB, Apple Inc., Google LLC, or any other payment provider.
 
 ### 2. Nominative Fair Use
 All trademarks, logos, and service marks displayed in this package belong to their respective owners. They are used solely under the doctrine of **nominative fair use** to identify the payment services accepted by merchants and to assist developers in building brand-compliant checkout buttons.
@@ -259,4 +325,4 @@ All trademarks, logos, and service marks displayed in this package belong to the
 ### 3. Open Source Licensure
 The vector paths used to render logos are derived from official open-source distributions including [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos) and [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android), published under the **Apache License, Version 2.0**. Braintree developer integration patterns are licensed under the **MIT License**.
 
-See [**`LICENSE`**](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/LICENSE) and [**`TRADEMARKS.md`**](file:///Users/robert/Developer/AndroidStudioProjects/pay_buttons/TRADEMARKS.md) for full terms.
+See [**`LICENSE`**](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE) and [**`TRADEMARKS.md`**](https://github.com/Robert-SD/pay_buttons/blob/main/TRADEMARKS.md) for full terms.

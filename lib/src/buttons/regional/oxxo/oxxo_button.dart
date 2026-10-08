@@ -9,7 +9,7 @@ import 'oxxo_shape.dart';
 
 /// A brand-compliant OXXO (Mexico) payment button.
 ///
-/// Fully rendered in pure Flutter using vector graphics without native SDK bloat.
+/// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class OxxoButton extends PayButton {
   const OxxoButton({
     super.key,

@@ -129,12 +129,10 @@ class CatalogHomePage extends StatelessWidget {
                           onPressed: () => _handlePayPress(context, 'Klarna'),
                         ),
                         ShopPayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Shop Pay'),
+                          onPressed: () => _handlePayPress(context, 'Shop Pay'),
                         ),
                         AfterpayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Afterpay'),
+                          onPressed: () => _handlePayPress(context, 'Afterpay'),
                         ),
                         BancontactButton(
                           onPressed: () =>
@@ -198,12 +196,10 @@ class CatalogHomePage extends StatelessWidget {
                           onPressed: () => _handlePayPress(context, 'Klarna'),
                         ),
                         ShopPayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Shop Pay'),
+                          onPressed: () => _handlePayPress(context, 'Shop Pay'),
                         ),
                         AfterpayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Afterpay'),
+                          onPressed: () => _handlePayPress(context, 'Afterpay'),
                         ),
                         WeroButton(
                           onPressed: () => _handlePayPress(context, 'Wero'),

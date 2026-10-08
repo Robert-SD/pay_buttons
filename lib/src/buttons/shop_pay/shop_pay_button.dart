@@ -10,7 +10,7 @@ import 'shop_pay_shape.dart';
 /// A brand-compliant Shop Pay (Shopify) payment button.
 ///
 /// Complies with official Shopify brand guidelines.
-/// Fully rendered in pure Flutter using vector graphics without native SDK bloat.
+/// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class ShopPayButton extends PayButton {
   const ShopPayButton({
     super.key,

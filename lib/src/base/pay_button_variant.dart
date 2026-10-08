@@ -19,9 +19,9 @@ enum PayButtonVariant {
 
 /// Specifies the position of custom text relative to the brand logo.
 enum PayButtonTextPosition {
-  /// The custom text precedes the brand logo (e.g. "Buy with [Pay]").
+  /// The custom text precedes the brand logo (e.g. "Buy with Pay").
   leading,
 
-  /// The custom text follows the brand logo (e.g. "[Klarna.] Pay in 4").
+  /// The custom text follows the brand logo (e.g. "Klarna. Pay in 4").
   trailing,
 }
