@@ -143,12 +143,12 @@ class CatalogHomePage extends StatelessWidget {
                         BizumButton(
                           onPressed: () => _handlePayPress(context, 'Bizum'),
                         ),
-                        OxxoButton(
-                          onPressed: () => _handlePayPress(context, 'OXXO'),
-                        ),
                         BoletoButton(
                           onPressed: () =>
                               _handlePayPress(context, 'Boleto Bancário'),
+                        ),
+                        OxxoButton(
+                          onPressed: () => _handlePayPress(context, 'OXXO'),
                         ),
                         PayNowButton(
                           onPressed: () => _handlePayPress(context, 'PayNow'),
@@ -224,15 +224,15 @@ class CatalogHomePage extends StatelessWidget {
                         BizumButton(
                           onPressed: () => _handlePayPress(context, 'Bizum'),
                         ),
+                        BoletoButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Boleto Bancário'),
+                        ),
                         PixButton(
                           onPressed: () => _handlePayPress(context, 'Pix'),
                         ),
                         OxxoButton(
                           onPressed: () => _handlePayPress(context, 'OXXO'),
-                        ),
-                        BoletoButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Boleto Bancário'),
                         ),
                         AlipayButton(
                           onPressed: () => _handlePayPress(context, 'Alipay'),
