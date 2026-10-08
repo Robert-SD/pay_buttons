@@ -1,5 +1,5 @@
 name: pay_buttons
-description: "A pure Flutter payment button library providing brand-compliant checkout and pay buttons for PayPal, Klarna, Amazon Pay, Shop Pay, Afterpay, Wero, and European payment champions."
+description: "A pure Flutter payment button library providing brand-compliant checkout and pay buttons for PayPal, Klarna, Shop Pay, Afterpay, Wero, and European payment champions."
 version: 0.0.1
 homepage: https://github.com/Robert-SD/pay_buttons
 

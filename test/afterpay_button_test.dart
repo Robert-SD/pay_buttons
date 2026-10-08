@@ -16,7 +16,9 @@ void main() {
 
       expect(find.byType(AfterpayButton), findsOneWidget);
       expect(find.byType(SvgPicture), findsOneWidget);
-      expect(find.text('afterpay'), findsOneWidget);
+
+      final semantics = tester.getSemantics(find.byType(AfterpayButton));
+      expect(semantics.label, contains('Afterpay'));
 
       final material = tester.widget<Material>(
         find.descendant(
@@ -39,7 +41,11 @@ void main() {
         ),
       );
 
-      expect(find.text('clearpay'), findsOneWidget);
+      expect(find.byType(AfterpayButton), findsOneWidget);
+      expect(find.byType(SvgPicture), findsOneWidget);
+
+      final semantics = tester.getSemantics(find.byType(AfterpayButton));
+      expect(semantics.label, contains('Clearpay'));
     });
 
     testWidgets('renders custom text when provided', (tester) async {

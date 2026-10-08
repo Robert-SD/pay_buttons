@@ -7,5 +7,11 @@ enum WeChatPayColor {
   white,
 
   /// Deep Black (`#000000`) for high-contrast or dark mode checkouts.
+  ///
+  /// Note: Official Tencent WeChat Pay brand guidelines specify green or white
+  /// themes for checkout acceptance buttons.
+  @Deprecated(
+    'Brand guidelines authorize only primary green and white themes for checkout buttons.',
+  )
   black,
 }

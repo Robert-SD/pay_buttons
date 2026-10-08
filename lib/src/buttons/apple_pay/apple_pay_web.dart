@@ -49,8 +49,9 @@ void ensureApplePayJsInjected() {
   if (_applePayJsScriptInjected) return;
   _applePayJsScriptInjected = true;
 
-  final existingScript =
-      web.document.querySelector('script[src*="apple-pay-sdk.js"]');
+  final existingScript = web.document.querySelector(
+    'script[src*="apple-pay-sdk.js"]',
+  );
   if (existingScript != null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
@@ -178,8 +179,9 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
 
         // If the custom element has not been defined yet (e.g. script still loading),
         // listen for script load to trigger re-rendering
-        final script = web.document
-            .querySelector('script[src*="apple-pay-sdk.js"]');
+        final script = web.document.querySelector(
+          'script[src*="apple-pay-sdk.js"]',
+        );
         if (script != null) {
           script.addEventListener(
             'load',

@@ -162,7 +162,6 @@ void main() {
     test('PayButtonFonts defines valid fallback chains for all providers', () {
       expect(PayButtonFonts.paypal, contains('PayPal Pro'));
       expect(PayButtonFonts.klarna, contains('Klarna Text'));
-      expect(PayButtonFonts.amazonPay, contains('Amazon Ember'));
       expect(PayButtonFonts.shopPay, contains('Shopify Sans'));
       expect(PayButtonFonts.afterpay, contains('Youth'));
       expect(PayButtonFonts.twint, contains('Helvetica Neue'));

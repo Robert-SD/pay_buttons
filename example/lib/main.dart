@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pay_buttons/pay_buttons.dart';
 
 import 'pages/afterpay_showcase_page.dart';
-import 'pages/amazon_pay_showcase_page.dart';
 import 'pages/apple_pay_showcase_page.dart';
 import 'pages/asian_champions_showcase_page.dart';
 import 'pages/european_champions_showcase_page.dart';
@@ -11,7 +10,6 @@ import 'pages/klarna_showcase_page.dart';
 import 'pages/latin_america_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
 import 'pages/shop_pay_showcase_page.dart';
-
 
 void main() {
   runApp(const PayButtonsExampleApp());
@@ -99,18 +97,11 @@ class CatalogHomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           PayPalButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'PayPal'),
-                          ),
-                          const SizedBox(height: 12),
-                          AmazonPayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Amazon Pay'),
+                            onPressed: () => _handlePayPress(context, 'PayPal'),
                           ),
                           const SizedBox(height: 12),
                           KlarnaButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Klarna'),
+                            onPressed: () => _handlePayPress(context, 'Klarna'),
                           ),
                           const SizedBox(height: 12),
                           WeroButton(
@@ -128,8 +119,7 @@ class CatalogHomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           TwintButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'TWINT'),
+                            onPressed: () => _handlePayPress(context, 'TWINT'),
                           ),
                           const SizedBox(height: 12),
                           BlikButton(
@@ -137,8 +127,7 @@ class CatalogHomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           IdealButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'iDEAL'),
+                            onPressed: () => _handlePayPress(context, 'iDEAL'),
                           ),
                           const SizedBox(height: 12),
                           BancontactButton(
@@ -147,18 +136,15 @@ class CatalogHomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           BizumButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Bizum'),
+                            onPressed: () => _handlePayPress(context, 'Bizum'),
                           ),
                           const SizedBox(height: 12),
                           PixButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Pix'),
+                            onPressed: () => _handlePayPress(context, 'Pix'),
                           ),
                           const SizedBox(height: 12),
                           OxxoButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'OXXO'),
+                            onPressed: () => _handlePayPress(context, 'OXXO'),
                           ),
                           const SizedBox(height: 12),
                           BoletoButton(
@@ -167,8 +153,7 @@ class CatalogHomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           AlipayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Alipay'),
+                            onPressed: () => _handlePayPress(context, 'Alipay'),
                           ),
                           const SizedBox(height: 12),
                           WeChatPayButton(
@@ -177,8 +162,7 @@ class CatalogHomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           PayNowButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'PayNow'),
+                            onPressed: () => _handlePayPress(context, 'PayNow'),
                           ),
                           const SizedBox(height: 12),
                           PromptPayButton(
@@ -355,57 +339,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 4. Amazon Pay Card
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      leading: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFC439),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'a',
-                            style: TextStyle(
-                              color: Color(0xFF111111),
-                              fontWeight: FontWeight.w900,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                      title: const Text(
-                        'Amazon Pay',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: const Text(
-                        'Pay, Checkout, Buy Now, Gold/Dark/Light themes',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => const AmazonPayShowcasePage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // 5. Klarna Card
+                  // 4. Klarna Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -454,7 +388,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 6. Wero (Vero) Card
+                  // 5. Wero (Vero) Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -506,7 +440,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 7. Shop Pay Card
+                  // 6. Shop Pay Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -556,7 +490,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 8. Afterpay / Clearpay Card
+                  // 7. Afterpay / Clearpay Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -606,7 +540,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 9. TWINT (Twins) Card
+                  // 8. TWINT (Twins) Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -658,7 +592,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 10. BLIK (Blick) Card
+                  // 9. BLIK (Blick) Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -710,7 +644,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 11. iDEAL Card
+                  // 10. iDEAL Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -762,7 +696,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 12. Bancontact (BankContact) Card
+                  // 11. Bancontact (BankContact) Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -814,7 +748,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 13. Bizum Card
+                  // 12. Bizum Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -866,7 +800,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 14. Latin America Card
+                  // 13. Latin America Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -916,7 +850,7 @@ class CatalogHomePage extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // 15. Asian Champions Card
+                  // 14. Asian Champions Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
@@ -988,7 +922,6 @@ class CatalogHomePage extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildUpcomingItem({
     required String name,

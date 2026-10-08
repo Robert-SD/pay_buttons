@@ -82,7 +82,9 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
       decoration: BoxDecoration(
         color: const Color(0xFF00A859).withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF00A859).withValues(alpha: 0.2)),
+        border: Border.all(
+          color: const Color(0xFF00A859).withValues(alpha: 0.2),
+        ),
       ),
       child: Row(
         children: [
@@ -184,7 +186,10 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
             Center(
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 36,
+                  horizontal: 20,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade50,
                   borderRadius: BorderRadius.circular(12),

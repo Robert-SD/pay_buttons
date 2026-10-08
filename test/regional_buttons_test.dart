@@ -404,7 +404,9 @@ void main() {
         tester,
       ) async {
         await tester.pumpWidget(
-          MaterialApp(home: Scaffold(body: PixButton(onPressed: () {}))),
+          MaterialApp(
+            home: Scaffold(body: PixButton(onPressed: () {})),
+          ),
         );
 
         expect(find.byType(PixButton), findsOneWidget);
@@ -438,11 +440,7 @@ void main() {
             await tester.pumpWidget(
               MaterialApp(
                 home: Scaffold(
-                  body: PixButton(
-                    color: color,
-                    shape: shape,
-                    onPressed: () {},
-                  ),
+                  body: PixButton(color: color, shape: shape, onPressed: () {}),
                 ),
               ),
             );
@@ -491,7 +489,9 @@ void main() {
         tester,
       ) async {
         await tester.pumpWidget(
-          MaterialApp(home: Scaffold(body: OxxoButton(onPressed: () {}))),
+          MaterialApp(
+            home: Scaffold(body: OxxoButton(onPressed: () {})),
+          ),
         );
 
         expect(find.byType(OxxoButton), findsOneWidget);
@@ -519,7 +519,9 @@ void main() {
         expect(find.text('Pagar con'), findsOneWidget);
       });
 
-      testWidgets('renders all OxxoColor and OxxoShape options', (tester) async {
+      testWidgets('renders all OxxoColor and OxxoShape options', (
+        tester,
+      ) async {
         for (final color in OxxoColor.values) {
           for (final shape in OxxoShape.values) {
             await tester.pumpWidget(
@@ -553,25 +555,28 @@ void main() {
     });
 
     group('BoletoButton', () {
-      testWidgets('renders white rounded boleto button without text by default', (
-        tester,
-      ) async {
-        await tester.pumpWidget(
-          MaterialApp(home: Scaffold(body: BoletoButton(onPressed: () {}))),
-        );
+      testWidgets(
+        'renders white rounded boleto button without text by default',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(body: BoletoButton(onPressed: () {})),
+            ),
+          );
 
-        expect(find.byType(BoletoButton), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
-        expect(find.byType(Text), findsNothing);
+          expect(find.byType(BoletoButton), findsOneWidget);
+          expect(find.byType(SvgPicture), findsOneWidget);
+          expect(find.byType(Text), findsNothing);
 
-        final material = tester.widget<Material>(
-          find.descendant(
-            of: find.byType(BoletoButton),
-            matching: find.byType(Material),
-          ),
-        );
-        expect(material.color, const Color(0xFFFFFFFF));
-      });
+          final material = tester.widget<Material>(
+            find.descendant(
+              of: find.byType(BoletoButton),
+              matching: find.byType(Material),
+            ),
+          );
+          expect(material.color, const Color(0xFFFFFFFF));
+        },
+      );
 
       testWidgets('renders custom text when provided', (tester) async {
         await tester.pumpWidget(
@@ -627,7 +632,9 @@ void main() {
         'renders blue rounded alipay button without text by default',
         (tester) async {
           await tester.pumpWidget(
-            MaterialApp(home: Scaffold(body: AlipayButton(onPressed: () {}))),
+            MaterialApp(
+              home: Scaffold(body: AlipayButton(onPressed: () {})),
+            ),
           );
 
           expect(find.byType(AlipayButton), findsOneWidget);
@@ -803,7 +810,9 @@ void main() {
         'renders purple rounded paynow button without text by default',
         (tester) async {
           await tester.pumpWidget(
-            MaterialApp(home: Scaffold(body: PayNowButton(onPressed: () {}))),
+            MaterialApp(
+              home: Scaffold(body: PayNowButton(onPressed: () {})),
+            ),
           );
 
           expect(find.byType(PayNowButton), findsOneWidget);
@@ -849,9 +858,7 @@ void main() {
         expect(textWidget.style?.fontFamily, 'CustomFont');
       });
 
-      testWidgets('defaults to PayButtonFonts.paynow fallback', (
-        tester,
-      ) async {
+      testWidgets('defaults to PayButtonFonts.paynow fallback', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -977,4 +984,3 @@ void main() {
     });
   });
 }
-

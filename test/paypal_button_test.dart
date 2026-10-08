@@ -136,5 +136,43 @@ void main() {
         expect(semantics.flagsCollection.isEnabled.value, 1);
       },
     );
+
+    testWidgets('PayPalPayLaterButton renders vector mark in compact variant', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PayPalPayLaterButton(
+              variant: PayButtonVariant.compact,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(PayPalPayLaterButton), findsOneWidget);
+      expect(find.byType(SvgPicture), findsOneWidget); // payLaterMark
+    });
+
+    testWidgets(
+      'PayPalPayLaterButton renders vector mark in medium variant without text',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PayPalPayLaterButton(
+                text: null,
+                variant: PayButtonVariant.medium,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        expect(find.byType(PayPalPayLaterButton), findsOneWidget);
+        expect(find.byType(SvgPicture), findsOneWidget); // payLaterMark
+      },
+    );
   });
 }

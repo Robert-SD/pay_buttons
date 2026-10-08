@@ -4,7 +4,9 @@ import 'package:pay_buttons/pay_buttons.dart';
 import 'package:pay_buttons_example/main.dart';
 
 void main() {
-  testWidgets('CatalogHomePage renders active buttons', (WidgetTester tester) async {
+  testWidgets('CatalogHomePage renders active buttons', (
+    WidgetTester tester,
+  ) async {
     tester.view.physicalSize = const Size(800, 2400);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
@@ -17,7 +19,6 @@ void main() {
     expect(find.text('Pay Buttons Component Catalog'), findsOneWidget);
     expect(find.text('PayPal & Pay Later'), findsOneWidget);
     expect(find.text('Klarna'), findsOneWidget);
-    expect(find.text('Amazon Pay'), findsOneWidget);
     expect(find.text('Shop Pay'), findsOneWidget);
     expect(find.text('Default Payment Buttons'), findsOneWidget);
     expect(find.text('Customize Payment Buttons'), findsOneWidget);

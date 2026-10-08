@@ -39,19 +39,6 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 
-  /// Font fallback chain for Amazon Pay buttons.
-  ///
-  /// References Amazon's brand typeface (Amazon Ember)
-  /// with fallbacks to standard system sans-serifs.
-  static const List<String> amazonPay = [
-    'Amazon Ember',
-    'Inter',
-    'Helvetica Neue',
-    'Helvetica',
-    'Arial',
-    'sans-serif',
-  ];
-
   /// Font fallback chain for Shop Pay buttons.
   ///
   /// References Shopify's native UI system font stack.
@@ -285,4 +272,3 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 }
-

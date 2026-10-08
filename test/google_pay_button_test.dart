@@ -9,14 +9,25 @@ void main() {
     ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: GooglePayButton(onPressed: () {}),
-          ),
+          home: Scaffold(body: GooglePayButton(onPressed: () {})),
         ),
       );
 
       expect(find.byType(GooglePayButton), findsOneWidget);
     });
+
+    testWidgets(
+      'renders nothing where Google Pay is unavailable without config',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(body: GooglePayButton(onPressed: () {})),
+          ),
+        );
+
+        expect(find.byType(InkWell), findsNothing);
+      },
+    );
 
     testWidgets('renders all GooglePayColor options without error', (
       tester,
@@ -61,8 +72,9 @@ void main() {
         ),
       );
 
-      final button =
-          tester.widget<GooglePayButton>(find.byType(GooglePayButton));
+      final button = tester.widget<GooglePayButton>(
+        find.byType(GooglePayButton),
+      );
       expect(button.semanticLabel, 'Custom Google Pay');
       expect(button.text, 'Buy with');
     });
@@ -80,8 +92,9 @@ void main() {
         ),
       );
 
-      final button =
-          tester.widget<GooglePayButton>(find.byType(GooglePayButton));
+      final button = tester.widget<GooglePayButton>(
+        find.byType(GooglePayButton),
+      );
       expect(button.enabled, isFalse);
       expect(button.isInteractive, isFalse);
       expect(pressed, isFalse);

@@ -102,30 +102,11 @@ class AfterpayButton extends PayButton {
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final textColor = _resolveTextColor();
-    final badgeHeight = (height * 0.44).clamp(18.0, 24.0);
-
-    final badgeWidget = AfterpayAssets.loopBadge(
+    final lockupHeight = (height * 0.40).clamp(16.0, 22.0);
+    return AfterpayAssets.lockup(
+      brand: brand,
       color: color,
-      height: badgeHeight,
-    );
-
-    final brandTextStyle = TextStyle(
-      color: textColor,
-      fontSize: (height * 0.35).clamp(15.0, 18.0),
-      fontWeight: FontWeight.w800,
-      fontFamilyFallback: PayButtonFonts.afterpay,
-      letterSpacing: -0.4,
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(brand.displayName, style: brandTextStyle),
-        const SizedBox(width: 4),
-        badgeWidget,
-      ],
+      height: lockupHeight,
     );
   }
 

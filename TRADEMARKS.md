@@ -49,44 +49,39 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * Approved shapes: Rounded Rectangle (`borderRadius: 5.0`) and Pill.
   * The Klarna wordmark and badge must always have appropriate clear-space protection.
 
----
-
-### 3. Amazon Pay
-* **Trademark Owner**: Amazon.com, Inc. or its affiliates
-* **Registered Trademarks**: "Amazon", "Amazon Pay", the Amazon Smile logo.
-* **Official Brand Guidelines**: [Amazon Pay Button Integration Guidelines](https://developer.amazon.com/docs/amazon-pay-checkout/button-branding.html)
-* **Permitted Customizations**:
-  * Approved colors: Amazon Gold/Orange (`#FF9900` / `#FFC439`), Light Gray (`#E7E9EC`), Dark Squid Ink (`#232F3E`).
-  * Approved shapes: Pill and Rounded.
-  * The curved Amazon smile vector must remain unaltered.
 
 ---
 
-### 4. Shop Pay (Shopify)
+### 3. Shop Pay (Shopify)
 * **Trademark Owner**: Shopify Inc.
 * **Registered Trademarks**: "Shop", "Shop Pay", the Shop Pay logo.
 * **Official Brand Guidelines**: [Shop Pay Brand Guidelines](https://help.shopify.com/en/manual/payments/shop-pay/brand-assets)
+* **Brand Integrity**:
+  * Unified lockup: The "shop" wordmark and "Pay" pill badge are rendered together as a unified vector lockup across all button variants (including compact mode), honoring Shopify's requirement that the mark never be separated.
 * **Permitted Customizations**:
   * Approved colors: Shop Purple (`#5A31F4`), Black (`#000000`), White (`#FFFFFF`).
   * Approved shapes: Rounded (`borderRadius: 4.0 - 6.0`) and Pill.
 
 ---
 
-### 5. Afterpay / Clearpay
+### 4. Afterpay / Clearpay
 * **Trademark Owner**: Afterpay Pty Ltd / Block, Inc.
 * **Registered Trademarks**: "Afterpay", "Clearpay", the continuous loop logo.
 * **Official Brand Guidelines**: [Afterpay Brand Guidelines](https://developers.afterpay.com/afterpay-online/docs/brand-guidelines)
+* **Open Source Origin of Assets**:
+  * Official vector lockups (`afterpay_lockup.xml` and `clearpay_lockup.xml`) derived directly from Block's official [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android) repository under the Apache-2.0 License, eliminating font substitution risks.
 * **Permitted Customizations**:
   * Approved colors: Bondi Mint (`#B2FCE4`), Black (`#000000`), White (`#FFFFFF`).
   * Regional awareness: Must display "Afterpay" in US/Canada/Australia/NZ, and "Clearpay" in the UK and EU.
 
 ---
 
-### 6. European Regional Champions
+### 5. European Regional Champions
 * **Wero**:
   * **Trademark Owner**: EPI Company SE (European Payments Initiative)
-  * **Guidelines**: [Wero Brand Portal](https://brand.epicompany.eu/)
+  * **Guidelines**: [Wero Checkout Brand Guidelines](https://wero-wallet.eu/brand-guidelines/checkout) & [Wero Brand Portal](https://brand.epicompany.eu/)
   * Approved colors: Wero Yellow (`#FFF48D`), Wero Black (`#1D1C1C`), White (`#FFFFFF`).
+  * Approved shapes: Rounded Card (`borderRadius: 6.0`, official checkout card radius) and Pill.
 * **TWINT**:
   * **Trademark Owner**: TWINT AG (Switzerland)
   * **Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)
@@ -111,7 +106,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 7. Latin American Champions
+### 6. Latin American Champions
 * **Pix**:
   * **Trademark Owner**: Banco Central do Brasil (BCB)
   * **Guidelines**: [Manual de Uso da Marca Pix](https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos)
@@ -126,18 +121,18 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 8. Asian Champions
+### 7. Asian Champions
 * **Alipay**:
   * **Trademark Owner**: Alipay.com Co., Ltd. / Ant Group Co., Ltd.
   * **Registered Trademarks**: "Alipay", the "支" emblem, the Alipay wordmark.
   * **Guidelines**: [Alipay Brand Guidelines](https://global.alipay.com/)
-  * Approved colors: Alipay Blue (`#1677FF`), White (`#FFFFFF`), Black (`#000000`).
+  * Approved colors: Alipay Blue (`#1677FF`), White (`#FFFFFF`). (Black is deprecated for strict compliance with Ant Group checkout guidelines).
   * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
 * **WeChat Pay**:
   * **Trademark Owner**: Tencent Holdings Limited / Tenpay Payment Technology Co., Ltd.
   * **Registered Trademarks**: "WeChat", "WeChat Pay", the WeChat speech bubbles monogram.
   * **Guidelines**: [WeChat Pay Brand Resources](https://pay.weixin.qq.com/)
-  * Approved colors: WeChat Green (`#07C160`), White (`#FFFFFF`), Black (`#000000`).
+  * Approved colors: WeChat Green (`#07C160`), White (`#FFFFFF`). (Black is deprecated for strict compliance with Tencent checkout guidelines).
   * Approved shapes: Rounded Rectangle (`borderRadius: 6.0`) and Pill.
 * **PayNow**:
   * **Trademark Owner / Governing Body**: Association of Banks in Singapore (ABS) / Monetary Authority of Singapore (MAS)
@@ -154,7 +149,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 9. Google Pay
+### 8. Google Pay
 
 * **Trademark Owner**: Google LLC / Alphabet Inc.
 * **Registered Trademarks**: "Google", "Google Pay", "GPay", the multi-color Google "G" logo.
@@ -164,9 +159,12 @@ Payment providers intentionally publish and distribute merchant brand guidelines
   * Approved shapes: Pill (`borderRadius: height / 2`, Google standard), Rounded Rectangle (`borderRadius: 4.0`), Rectangle (`borderRadius: 0.0`).
   * White background buttons must maintain the `#747775` border for contrast.
 
+> [!CAUTION]
+> **No manual reproduction is permitted.** `GooglePayButton` renders only official controls: the native `RawGooglePayButton` on Android (via `package:pay`) and the official Google Pay JS SDK element in web browsers. On targets without official Google Pay controls, the widget renders an empty box.
+
 ---
 
-### 10. Apple Pay
+### 9. Apple Pay
 * **Trademark Owner**: Apple Inc.
 * **Registered Trademarks**: "Apple", "Apple Pay", the Apple logo with "Pay" wordmark.
 * **Official Brand Guidelines**: [Apple Pay Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay)
@@ -178,7 +176,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 > [!CAUTION]
 > **No manual reproduction is permitted.** Apple does not distribute button assets, and its guidelines forbid reproducing the Apple Pay mark or composing a button from it. `ApplePayButton` therefore renders only Apple's own controls: the native `PKPaymentButton` on iOS (via `package:pay`) and the official Apple Pay JS SDK `<apple-pay-button>` element in supporting browsers.
 >
-> On every other target — Android, desktop, and browsers without Apple Pay — the widget renders an empty box rather than a drawn approximation. The `ApplePayAssets` vector helpers and the `ApplePayShape` enum remain exported for backwards compatibility, but `ApplePayButton` does not use them, and they must not be used to present an Apple Pay button to customers.
+> On every other target — Android, desktop, and browsers without Apple Pay — the widget renders an empty box rather than a drawn approximation. All vector asset helpers for Apple Pay have been eliminated from the package.
 
 ---
 

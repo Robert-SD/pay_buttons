@@ -25,7 +25,6 @@ Designed with **zero native SDK bloat**, instant 120 FPS rendering, full accessi
 * **Apple Pay**: Rendered only with Apple's own controls — the native PassKit button on iOS, and the official Apple Pay JS SDK `<apple-pay-button>` element in supporting browsers. Renders nothing on Android, desktop, and browsers without Apple Pay, because Apple's guidelines forbid drawing the mark.
 * **Google Pay**: Provided directly via re-export of the official Flutter [`pay`](https://pub.dev/packages/pay) package (`GooglePayButton`, `RawGooglePayButton`).
 * **PayPal & PayPal Pay Later**: Default logo-only or custom text (`gold`, `blue`, `black`, `white`, `silver`).
-* **Amazon Pay**: Default logo-only or custom text (`gold`, `lightGray`, `darkGray`).
 * **Klarna**: Default logo-only or custom text (`pink`, `black`, `white`).
 * **Wero**: Europe 🇪🇺 / European Payments Initiative (`yellow`, `black`, `white`).
 * **Shop Pay (Shopify)**: Default logo-only or custom text (`purple`, `black`, `white`).
@@ -89,16 +88,6 @@ PayPalButton(
   text: 'Checkout', // Optional custom text, defaults to null (logo only)
   color: PayPalColor.gold,
   shape: PayPalShape.pill,
-)
-```
-
-### Amazon Pay
-```dart
-AmazonPayButton(
-  onPressed: () => handleAmazonPay(),
-  text: 'Check out with',
-  color: AmazonPayColor.gold,
-  shape: AmazonPayShape.pill,
 )
 ```
 
@@ -265,7 +254,7 @@ PayPalButton(
 ## Legal & Trademark Disclaimers
 
 ### 1. Non-Affiliation
-This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed by PayPal, Inc.**, Klarna Bank AB, Amazon.com, Inc., or any other payment provider.
+This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed by PayPal, Inc.**, Klarna Bank AB, or any other payment provider.
 
 ### 2. Nominative Fair Use
 All trademarks, logos, and service marks displayed in this package belong to their respective owners. They are used solely under the doctrine of **nominative fair use** to identify the payment services accepted by merchants and to assist developers in building brand-compliant checkout buttons.

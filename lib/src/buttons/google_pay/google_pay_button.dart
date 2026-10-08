@@ -4,18 +4,16 @@ import 'package:pay/pay.dart' as pay;
 
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
-import '../../base/pay_button_fonts.dart';
-import 'google_pay_assets.dart';
 import 'google_pay_color.dart';
 import 'google_pay_shape.dart';
 import 'google_pay_web_stub.dart'
     if (dart.library.js_interop) 'google_pay_web.dart';
 
-/// A brand-compliant Google Pay payment button.
+/// A brand-compliant Google Pay payment button that renders only official controls.
 ///
-/// Uses official Google Pay JS SDK on Web (`kIsWeb`), native Android Google Pay controls
-/// via `package:pay` on Android when a [paymentConfiguration] is provided, and pure Flutter vector rendering
-/// on iOS, desktop, and tests.
+/// Uses official Google Pay JS SDK on Web (`kIsWeb`) and native Android Google Pay controls
+/// via `package:pay` on Android when a [paymentConfiguration] is provided.
+/// Renders an empty box on unsupported platforms.
 class GooglePayButton extends PayButton {
   const GooglePayButton({
     super.key,
@@ -39,7 +37,8 @@ class GooglePayButton extends PayButton {
     this.paymentConfiguration,
     bool? logoFirst,
   }) : super(
-         textPosition: textPosition ??
+         textPosition:
+             textPosition ??
              (logoFirst == true
                  ? PayButtonTextPosition.trailing
                  : PayButtonTextPosition.leading),
@@ -73,87 +72,6 @@ class GooglePayButton extends PayButton {
   String? get semanticLabel =>
       super.semanticLabel ??
       (text != null && text!.isNotEmpty ? '$text Google Pay' : 'Google Pay');
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case GooglePayColor.black:
-      case GooglePayColor.monochromeBlack:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF000000),
-          progressColor: Color(0xFFFFFFFF),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case GooglePayColor.white:
-      case GooglePayColor.monochromeWhite:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFF747775),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF1F1F1F),
-          splashColor: Color(0x1F000000),
-          highlightColor: Color(0x0F000000),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case GooglePayColor.black:
-      case GooglePayColor.monochromeBlack:
-        return Colors.white;
-      case GooglePayColor.white:
-      case GooglePayColor.monochromeWhite:
-        return const Color(0xFF1F1F1F);
-    }
-  }
-
-  @override
-  Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.46).clamp(18.0, 24.0);
-    return GooglePayAssets.gMark(color: color, height: markHeight);
-  }
-
-  @override
-  Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    return GooglePayAssets.logo(color: color, height: logoHeight);
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.33).clamp(14.0, 17.0),
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
-      defaultFontFamilyFallback: PayButtonFonts.googlePay,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,6 +123,14 @@ class GooglePayButton extends PayButton {
       );
     }
 
-    return super.build(context);
+    // Android without config, iOS, desktop, test, and any unsupported target:
+    // render an empty box, matching ApplePayButton.
+    return const SizedBox.shrink();
   }
+
+  @override
+  PayButtonColors resolveColors(BuildContext context) => throw UnsupportedError(
+    'GooglePayButton renders only official Google Pay controls, which are styled '
+    'by Google and cannot use a Flutter color palette.',
+  );
 }

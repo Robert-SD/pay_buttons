@@ -68,7 +68,9 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
             Icon(
               capable ? Icons.info_outline : Icons.warning_amber_rounded,
               size: 20,
-              color: capable ? const Color(0xFF1D4ED8) : const Color(0xFF92400E),
+              color: capable
+                  ? const Color(0xFF1D4ED8)
+                  : const Color(0xFF92400E),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -84,7 +86,9 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 style: TextStyle(
                   fontSize: 13,
                   height: 1.4,
-                  color: capable ? const Color(0xFF1E3A8A) : const Color(0xFF78350F),
+                  color: capable
+                      ? const Color(0xFF1E3A8A)
+                      : const Color(0xFF78350F),
                 ),
               ),
             ),
@@ -111,9 +115,8 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -195,10 +198,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
 
             Row(
               children: [
-                SizedBox(
-                  width: 90,
-                  child: Text('Width: ${_width.toInt()} dp'),
-                ),
+                SizedBox(width: 90, child: Text('Width: ${_width.toInt()} dp')),
                 Expanded(
                   child: Slider(
                     value: _width,
@@ -242,9 +242,8 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
       children: [
         Text(
           'Apple Pay Button Styles',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -335,17 +334,11 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
     );
   }
 
-  Widget _buildGalleryItem({
-    required String label,
-    required Widget button,
-  }) {
+  Widget _buildGalleryItem({required String label, required Widget button}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 88,
-          child: Center(child: button),
-        ),
+        SizedBox(height: 88, child: Center(child: button)),
         const SizedBox(height: 8),
         Text(
           label,

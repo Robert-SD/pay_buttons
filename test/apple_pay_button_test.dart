@@ -156,10 +156,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ApplePayButton(
-              semanticLabel: 'Pay now',
-              onPressed: () {},
-            ),
+            body: ApplePayButton(semanticLabel: 'Pay now', onPressed: () {}),
           ),
         ),
       );
@@ -172,7 +169,9 @@ void main() {
       for (final type in ApplePayType.values) {
         await tester.pumpWidget(
           MaterialApp(
-            home: Scaffold(body: ApplePayButton(type: type, onPressed: () {})),
+            home: Scaffold(
+              body: ApplePayButton(type: type, onPressed: () {}),
+            ),
           ),
         );
         expect(find.byType(ApplePayButton), findsOneWidget);
@@ -201,9 +200,7 @@ void main() {
 
       final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
       expect(
-        () => button.resolveColors(
-          tester.element(find.byType(ApplePayButton)),
-        ),
+        () => button.resolveColors(tester.element(find.byType(ApplePayButton))),
         throwsUnsupportedError,
       );
     });

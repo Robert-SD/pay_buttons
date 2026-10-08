@@ -10,14 +10,12 @@ export 'src/base/pay_button_fonts.dart';
 export 'src/base/pay_button_variant.dart';
 
 // Apple Pay
-export 'src/buttons/apple_pay/apple_pay_assets.dart';
 export 'src/buttons/apple_pay/apple_pay_button.dart';
 export 'src/buttons/apple_pay/apple_pay_color.dart';
 export 'src/buttons/apple_pay/apple_pay_shape.dart';
 export 'src/buttons/apple_pay/apple_pay_type.dart';
 
 // Google Pay
-export 'src/buttons/google_pay/google_pay_assets.dart';
 export 'src/buttons/google_pay/google_pay_button.dart';
 export 'src/buttons/google_pay/google_pay_color.dart';
 export 'src/buttons/google_pay/google_pay_shape.dart';
@@ -28,12 +26,6 @@ export 'src/buttons/paypal/paypal_pay_later_button.dart';
 export 'src/buttons/paypal/paypal_color.dart';
 export 'src/buttons/paypal/paypal_shape.dart';
 export 'src/buttons/paypal/paypal_assets.dart';
-
-// Amazon Pay
-export 'src/buttons/amazon_pay/amazon_pay_button.dart';
-export 'src/buttons/amazon_pay/amazon_pay_color.dart';
-export 'src/buttons/amazon_pay/amazon_pay_shape.dart';
-export 'src/buttons/amazon_pay/amazon_pay_assets.dart';
 
 // Klarna
 export 'src/buttons/klarna/klarna_button.dart';
@@ -131,4 +123,3 @@ export 'src/buttons/regional/promptpay/promptpay_button.dart';
 export 'src/buttons/regional/promptpay/promptpay_color.dart';
 export 'src/buttons/regional/promptpay/promptpay_shape.dart';
 export 'src/buttons/regional/promptpay/promptpay_assets.dart';
-

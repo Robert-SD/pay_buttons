@@ -39,8 +39,7 @@ class PixButton extends PayButton {
   final PixShape shape;
 
   @override
-  double get defaultBorderRadius =>
-      shape == PixShape.pill ? (height / 2) : 6.0;
+  double get defaultBorderRadius => shape == PixShape.pill ? (height / 2) : 6.0;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'Pix';

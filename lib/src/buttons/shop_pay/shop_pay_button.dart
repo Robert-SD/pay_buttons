@@ -87,8 +87,8 @@ class ShopPayButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    final badgeHeight = (height * 0.44).clamp(18.0, 24.0);
-    return ShopPayAssets.badge(color: color, height: badgeHeight);
+    final logoHeight = (height * 0.44).clamp(18.0, 24.0);
+    return ShopPayAssets.logo(color: color, height: logoHeight);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 
@@ -14,8 +15,9 @@ void _ensureGooglePayJsInjected() {
   if (_googlePayJsScriptInjected) return;
   _googlePayJsScriptInjected = true;
 
-  final existingScript =
-      web.document.querySelector('script[src*="pay.google.com/gp/p/js/pay.js"]');
+  final existingScript = web.document.querySelector(
+    'script[src*="pay.google.com/gp/p/js/pay.js"]',
+  );
   if (existingScript != null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
@@ -100,15 +102,17 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
         {'environment': 'TEST'}.jsify() as JSObject,
       );
 
-      final buttonOptions = {
-        'buttonColor': widget.theme == 'light' ? 'white' : 'black',
-        'buttonType': widget.type,
-        'buttonSizeMode': 'fill',
-        'buttonRadius': widget.borderRadius.round(),
-        'onClick': (() {
-          _onPressed?.call();
-        }).toJS,
-      }.jsify() as JSObject;
+      final buttonOptions =
+          {
+                'buttonColor': widget.theme == 'light' ? 'white' : 'black',
+                'buttonType': widget.type,
+                'buttonSizeMode': 'fill',
+                'buttonRadius': widget.borderRadius.round(),
+                'onClick': (() {
+                  _onPressed?.call();
+                }).toJS,
+              }.jsify()
+              as JSObject;
 
       final button = paymentsClient.createButton(buttonOptions);
       button.style.width = '100%';
@@ -143,8 +147,9 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
         // If the script hasn't finished loading yet when onElementCreated fires,
         // retry rendering the button when the script loads.
         if (container.firstChild == null) {
-          final script = web.document
-              .querySelector('script[src*="pay.google.com/gp/p/js/pay.js"]');
+          final script = web.document.querySelector(
+            'script[src*="pay.google.com/gp/p/js/pay.js"]',
+          );
           if (script != null) {
             script.addEventListener(
               'load',

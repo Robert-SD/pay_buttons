@@ -7,5 +7,11 @@ enum AlipayColor {
   white,
 
   /// Deep Black (`#000000`) for high-contrast or dark mode checkouts.
+  ///
+  /// Note: Official Ant Group Alipay brand guidelines specify blue or white
+  /// themes for checkout acceptance buttons.
+  @Deprecated(
+    'Brand guidelines authorize only primary blue and white themes for checkout buttons.',
+  )
   black,
 }

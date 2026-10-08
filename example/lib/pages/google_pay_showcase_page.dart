@@ -67,7 +67,9 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
             Icon(
               capable ? Icons.info_outline : Icons.warning_amber_rounded,
               size: 20,
-              color: capable ? const Color(0xFF1D4ED8) : const Color(0xFF92400E),
+              color: capable
+                  ? const Color(0xFF1D4ED8)
+                  : const Color(0xFF92400E),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -83,7 +85,9 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 style: TextStyle(
                   fontSize: 13,
                   height: 1.4,
-                  color: capable ? const Color(0xFF1E3A8A) : const Color(0xFF78350F),
+                  color: capable
+                      ? const Color(0xFF1E3A8A)
+                      : const Color(0xFF78350F),
                 ),
               ),
             ),
@@ -94,7 +98,8 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
   }
 
   Widget _buildPlaygroundSection() {
-    final isWhiteTheme = _color == GooglePayColor.white ||
+    final isWhiteTheme =
+        _color == GooglePayColor.white ||
         _color == GooglePayColor.monochromeWhite;
 
     return Card(
@@ -111,9 +116,8 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -184,12 +188,30 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 DropdownButton<String>(
                   value: _label,
                   items: const [
-                    DropdownMenuItem(value: 'Buy with', child: Text('Label: Buy with')),
-                    DropdownMenuItem(value: 'Checkout with', child: Text('Label: Checkout')),
-                    DropdownMenuItem(value: 'Donate with', child: Text('Label: Donate')),
-                    DropdownMenuItem(value: 'Subscribe with', child: Text('Label: Subscribe')),
-                    DropdownMenuItem(value: 'Book with', child: Text('Label: Book')),
-                    DropdownMenuItem(value: 'Pay with', child: Text('Label: Pay with')),
+                    DropdownMenuItem(
+                      value: 'Buy with',
+                      child: Text('Label: Buy with'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Checkout with',
+                      child: Text('Label: Checkout'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Donate with',
+                      child: Text('Label: Donate'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Subscribe with',
+                      child: Text('Label: Subscribe'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Book with',
+                      child: Text('Label: Book'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Pay with',
+                      child: Text('Label: Pay with'),
+                    ),
                   ],
                   onChanged: (val) {
                     if (val != null) setState(() => _label = val);
@@ -203,10 +225,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
             // Width Slider
             Row(
               children: [
-                SizedBox(
-                  width: 90,
-                  child: Text('Width: ${_width.toInt()} dp'),
-                ),
+                SizedBox(width: 90, child: Text('Width: ${_width.toInt()} dp')),
                 Expanded(
                   child: Slider(
                     value: _width,
@@ -251,9 +270,8 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
       children: [
         Text(
           'Official Google Pay Button Themes',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -337,17 +355,11 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
     );
   }
 
-  Widget _buildGalleryItem({
-    required String label,
-    required Widget button,
-  }) {
+  Widget _buildGalleryItem({required String label, required Widget button}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 88,
-          child: Center(child: button),
-        ),
+        SizedBox(height: 88, child: Center(child: button)),
         const SizedBox(height: 8),
         Text(
           label,

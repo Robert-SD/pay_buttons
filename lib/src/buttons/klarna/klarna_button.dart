@@ -38,7 +38,8 @@ class KlarnaButton extends PayButton {
     this.shape = KlarnaShape.rounded,
     bool? logoFirst,
   }) : super(
-         textPosition: textPosition ??
+         textPosition:
+             textPosition ??
              (logoFirst == false
                  ? PayButtonTextPosition.leading
                  : PayButtonTextPosition.trailing),
