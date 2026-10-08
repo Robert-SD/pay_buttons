@@ -5,7 +5,8 @@ enum AsianChampion {
   alipay('Alipay', 'China 🇨🇳 / Global'),
   wechatPay('WeChat Pay', 'China 🇨🇳 / Global'),
   paynow('PayNow', 'Singapore 🇸🇬'),
-  promptpay('PromptPay', 'Thailand 🇹🇭');
+  promptpay('PromptPay', 'Thailand 🇹🇭'),
+  upi('UPI', 'India 🇮🇳');
 
   const AsianChampion(this.title, this.country);
   final String title;
@@ -56,6 +57,11 @@ class _AsianChampionsShowcasePageState
   PromptPayColor _promptpayColor = PromptPayColor.blue;
   PromptPayShape _promptpayShape = PromptPayShape.rounded;
   String? _promptpayText = 'Pay with';
+
+  // UPI state
+  UpiColor _upiColor = UpiColor.white;
+  UpiShape _upiShape = UpiShape.rounded;
+  String? _upiText = 'Pay with';
 
   @override
   Widget build(BuildContext context) {
@@ -264,6 +270,18 @@ class _AsianChampionsShowcasePageState
           color: _promptpayColor,
           shape: _promptpayShape,
           text: _promptpayText,
+          height: _height,
+          isLoading: _isLoading,
+          enabled: _enabled,
+          variant: _variant,
+          textPosition: _textPosition,
+        );
+      case AsianChampion.upi:
+        return UpiButton(
+          onPressed: _enabled ? () => _handlePayPress('UPI') : null,
+          color: _upiColor,
+          shape: _upiShape,
+          text: _upiText,
           height: _height,
           isLoading: _isLoading,
           enabled: _enabled,
@@ -522,6 +540,47 @@ class _AsianChampionsShowcasePageState
             ),
           ],
         );
+      case AsianChampion.upi:
+        return Column(
+          children: [
+            DropdownButtonFormField<UpiColor>(
+              initialValue: _upiColor,
+              decoration: const InputDecoration(
+                labelText: 'Color',
+                border: OutlineInputBorder(),
+              ),
+              items: UpiColor.values.map((c) {
+                return DropdownMenuItem(value: c, child: Text(c.name));
+              }).toList(),
+              onChanged: (val) {
+                if (val != null) setState(() => _upiColor = val);
+              },
+            ),
+            const SizedBox(height: 12),
+            DropdownButtonFormField<UpiShape>(
+              initialValue: _upiShape,
+              decoration: const InputDecoration(
+                labelText: 'Shape',
+                border: OutlineInputBorder(),
+              ),
+              items: UpiShape.values.map((s) {
+                return DropdownMenuItem(value: s, child: Text(s.name));
+              }).toList(),
+              onChanged: (val) {
+                if (val != null) setState(() => _upiShape = val);
+              },
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              initialValue: _upiText,
+              decoration: const InputDecoration(
+                labelText: 'Button Text (Empty for Logo-Only)',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (val) => setState(() => _upiText = val),
+            ),
+          ],
+        );
     }
   }
 
@@ -565,6 +624,11 @@ class _AsianChampionsShowcasePageState
                 PromptPayButton(
                   text: 'Pay with',
                   onPressed: () => _handlePayPress('PromptPay'),
+                ),
+                const SizedBox(height: 12),
+                UpiButton(
+                  text: 'Pay with',
+                  onPressed: () => _handlePayPress('UPI'),
                 ),
               ],
             ),

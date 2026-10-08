@@ -41,6 +41,7 @@ Built with clean vector graphics, smooth 120 FPS rendering, accessibility semant
 * **WeChat Pay**: Mobile payment ecosystem standard (`green`, `white`).
 * **PayNow**: Singapore instant funds transfer standard (`purple`, `magenta`, `white`).
 * **PromptPay**: Thailand national instant payment standard (`blue`, `white`, `black`).
+* **UPI**: India national instant real-time payments standard by NPCI (`white`, `black`, `orange`, `navy`).
 
 ---
 
@@ -277,6 +278,17 @@ PromptPayButton(
   text: 'Pay with',
   color: PromptPayColor.blue,
   shape: PromptPayShape.rounded,
+)
+```
+
+### UPI
+
+```dart
+UpiButton(
+  onPressed: () => handleUpi(),
+  text: 'Pay with', // Supports English or Hindi (e.g. 'भुगतान करें')
+  color: UpiColor.white,
+  shape: UpiShape.rounded,
 )
 ```
 

@@ -260,6 +260,18 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
+### 20. UPI (Unified Payments Interface)
+* **Trademark Owner / Governing Body**: National Payments Corporation of India (NPCI)
+* **Registered Trademarks / Marks**: "UPI", "Unified Payments Interface", official dual directional arrows emblem.
+* **Official Brand Guidelines**: [NPCI UPI Brand Guidelines & Media Kit](https://www.npci.org.in/)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector paths derived from official NPCI open specifications and Wikimedia Commons vector distribution.
+* **Permitted Customizations**:
+  * *Approved colors*: White (`#FFFFFF`), Black (`#000000`), Saffron Orange (`#F47920`), Corporate Navy (`#0B2545`).
+  * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
+  * *Brand rules*: Saffron and green arrow directional angles and "UPI" italic letterforms strictly preserved; clear-space margins maintained.
+
+---
+
 ## 3. Summary of Open Source Licenses Used
 
 * **Package Code**: Distributed under the [MIT License](LICENSE).

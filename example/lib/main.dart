@@ -151,6 +151,9 @@ class CatalogHomePage extends StatelessWidget {
                         PayNowButton(
                           onPressed: () => _handlePayPress(context, 'PayNow'),
                         ),
+                        UpiButton(
+                          onPressed: () => _handlePayPress(context, 'UPI'),
+                        ),
                       ];
 
                       Widget buildColumn(List<Widget> buttons) {
@@ -243,6 +246,9 @@ class CatalogHomePage extends StatelessWidget {
                         PromptPayButton(
                           onPressed: () =>
                               _handlePayPress(context, 'PromptPay'),
+                        ),
+                        UpiButton(
+                          onPressed: () => _handlePayPress(context, 'UPI'),
                         ),
                       ];
 
@@ -978,67 +984,11 @@ class CatalogHomePage extends StatelessWidget {
                       },
                     ),
                   ),
-
-                  const SizedBox(height: 28),
-                  const Text(
-                    'Upcoming Buttons (Planned)',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  _buildUpcomingItem(
-                    name: 'Indian Champions',
-                    details: 'UPI, RuPay, Paytm',
-                    badgeColor: const Color(0xFFFF9933),
-                    textColor: Colors.white,
-                  ),
                 ],
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildUpcomingItem({
-    required String name,
-    required String details,
-    required Color badgeColor,
-    required Color textColor,
-  }) {
-    return Card(
-      elevation: 0,
-      color: Colors.grey.shade100,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: ListTile(
-        leading: Container(
-          width: 38,
-          height: 38,
-          decoration: BoxDecoration(
-            color: badgeColor,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Center(
-            child: Text(
-              name.substring(0, 1),
-              style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        title: Text(name, style: const TextStyle(color: Colors.black87)),
-        subtitle: Text(
-          details,
-          style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-        ),
-        trailing: const Chip(
-          label: Text('Roadmap', style: TextStyle(fontSize: 10)),
-          padding: EdgeInsets.zero,
-          visualDensity: VisualDensity.compact,
-        ),
       ),
     );
   }

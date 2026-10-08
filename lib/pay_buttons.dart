@@ -123,3 +123,9 @@ export 'src/buttons/regional/promptpay/promptpay_button.dart';
 export 'src/buttons/regional/promptpay/promptpay_color.dart';
 export 'src/buttons/regional/promptpay/promptpay_shape.dart';
 export 'src/buttons/regional/promptpay/promptpay_assets.dart';
+
+// UPI (India)
+export 'src/buttons/regional/upi/upi_button.dart';
+export 'src/buttons/regional/upi/upi_color.dart';
+export 'src/buttons/regional/upi/upi_shape.dart';
+export 'src/buttons/regional/upi/upi_assets.dart';

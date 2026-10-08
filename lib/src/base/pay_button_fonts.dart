@@ -271,4 +271,22 @@ abstract final class PayButtonFonts {
     'Arial',
     'sans-serif',
   ];
+
+  /// Font fallback chain for UPI (Unified Payments Interface, India) buttons.
+  ///
+  /// References modern Indian and global sans-serif typefaces with Devanagari script support.
+  static const List<String> upi = [
+    'Kohinoor Devanagari',
+    'Nirmala UI',
+    'Noto Sans Devanagari',
+    'Mangal',
+    'Inter',
+    'Roboto',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ];
 }

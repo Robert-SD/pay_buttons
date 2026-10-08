@@ -135,6 +135,7 @@ void main() {
           WeChatPayButton(onPressed: () {}, variant: PayButtonVariant.compact),
           PayNowButton(onPressed: () {}, variant: PayButtonVariant.compact),
           PromptPayButton(onPressed: () {}, variant: PayButtonVariant.compact),
+          UpiButton(onPressed: () {}, variant: PayButtonVariant.compact),
         ];
 
         for (final btn in regionalButtons) {

@@ -21,4 +21,5 @@
   * WeChat Pay
   * PayNow
   * PromptPay
+  * UPI
 * Responsive layouts, custom fonts, typography fallback support, and full accessibility semantics.

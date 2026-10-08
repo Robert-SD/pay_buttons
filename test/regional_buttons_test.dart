@@ -982,5 +982,72 @@ void main() {
         }
       });
     });
+
+    group('UpiButton', () {
+      testWidgets('renders white rounded upi button without text by default', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(body: UpiButton(onPressed: () {})),
+          ),
+        );
+
+        expect(find.byType(UpiButton), findsOneWidget);
+        expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.text('UPI'), findsNothing);
+
+        final material = tester.widget<Material>(
+          find.descendant(
+            of: find.byType(UpiButton),
+            matching: find.byType(Material),
+          ),
+        );
+        expect(material.color, const Color(0xFFFFFFFF));
+      });
+
+      testWidgets('renders custom text when provided', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: UpiButton(text: 'Pay with', onPressed: () {}),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay with'), findsOneWidget);
+      });
+
+      testWidgets(
+        'defaults to PayButtonFonts.upi fallback for text typography',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: UpiButton(text: 'Pay with', onPressed: () {}),
+              ),
+            ),
+          );
+
+          final textWidget = tester.widget<Text>(find.text('Pay with'));
+          expect(textWidget.style?.fontFamilyFallback, PayButtonFonts.upi);
+        },
+      );
+
+      testWidgets('renders all UpiColor and UpiShape options', (tester) async {
+        for (final color in UpiColor.values) {
+          for (final shape in UpiShape.values) {
+            await tester.pumpWidget(
+              MaterialApp(
+                home: Scaffold(
+                  body: UpiButton(color: color, shape: shape, onPressed: () {}),
+                ),
+              ),
+            );
+            expect(find.byType(UpiButton), findsOneWidget);
+          }
+        }
+      });
+    });
   });
 }
