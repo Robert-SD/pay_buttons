@@ -95,23 +95,20 @@ class CatalogHomePage extends StatelessWidget {
                         WeroButton(
                           onPressed: () => _handlePayPress(context, 'Wero'),
                         ),
-                        AfterpayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Afterpay'),
+                        IdealButton(
+                          onPressed: () => _handlePayPress(context, 'iDEAL'),
                         ),
                         BlikButton(
                           onPressed: () => _handlePayPress(context, 'BLIK'),
                         ),
-                        BancontactButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Bancontact'),
+                        TwintButton(
+                          onPressed: () => _handlePayPress(context, 'TWINT'),
                         ),
                         PixButton(
                           onPressed: () => _handlePayPress(context, 'Pix'),
                         ),
-                        BoletoButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Boleto Bancário'),
+                        AlipayButton(
+                          onPressed: () => _handlePayPress(context, 'Alipay'),
                         ),
                         WeChatPayButton(
                           onPressed: () =>
@@ -135,11 +132,13 @@ class CatalogHomePage extends StatelessWidget {
                           onPressed: () =>
                               _handlePayPress(context, 'Shop Pay'),
                         ),
-                        IdealButton(
-                          onPressed: () => _handlePayPress(context, 'iDEAL'),
+                        AfterpayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Afterpay'),
                         ),
-                        TwintButton(
-                          onPressed: () => _handlePayPress(context, 'TWINT'),
+                        BancontactButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Bancontact'),
                         ),
                         BizumButton(
                           onPressed: () => _handlePayPress(context, 'Bizum'),
@@ -147,8 +146,9 @@ class CatalogHomePage extends StatelessWidget {
                         OxxoButton(
                           onPressed: () => _handlePayPress(context, 'OXXO'),
                         ),
-                        AlipayButton(
-                          onPressed: () => _handlePayPress(context, 'Alipay'),
+                        BoletoButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Boleto Bancário'),
                         ),
                         PayNowButton(
                           onPressed: () => _handlePayPress(context, 'PayNow'),
@@ -178,24 +178,82 @@ class CatalogHomePage extends StatelessWidget {
                         );
                       }
 
-                      // Mobile: single column
-                      final allButtons = <Widget>[];
-                      final maxLen = leftButtons.length > rightButtons.length
-                          ? leftButtons.length
-                          : rightButtons.length;
-                      for (int i = 0; i < maxLen; i++) {
-                        if (i < leftButtons.length) {
-                          allButtons.add(leftButtons[i]);
-                        }
-                        if (i < rightButtons.length) {
-                          allButtons.add(rightButtons[i]);
-                        }
-                      }
+                      // Mobile: single column with harmonious color grouping
+                      final mobileButtons = <Widget>[
+                        SizedBox(
+                          height: 48,
+                          child: ApplePayButton(
+                            onPressed: () =>
+                                _handlePayPress(context, 'Apple Pay'),
+                          ),
+                        ),
+                        GooglePayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Google Pay'),
+                        ),
+                        PayPalButton(
+                          onPressed: () => _handlePayPress(context, 'PayPal'),
+                        ),
+                        KlarnaButton(
+                          onPressed: () => _handlePayPress(context, 'Klarna'),
+                        ),
+                        ShopPayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Shop Pay'),
+                        ),
+                        AfterpayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Afterpay'),
+                        ),
+                        WeroButton(
+                          onPressed: () => _handlePayPress(context, 'Wero'),
+                        ),
+                        IdealButton(
+                          onPressed: () => _handlePayPress(context, 'iDEAL'),
+                        ),
+                        BlikButton(
+                          onPressed: () => _handlePayPress(context, 'BLIK'),
+                        ),
+                        TwintButton(
+                          onPressed: () => _handlePayPress(context, 'TWINT'),
+                        ),
+                        BancontactButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Bancontact'),
+                        ),
+                        BizumButton(
+                          onPressed: () => _handlePayPress(context, 'Bizum'),
+                        ),
+                        PixButton(
+                          onPressed: () => _handlePayPress(context, 'Pix'),
+                        ),
+                        OxxoButton(
+                          onPressed: () => _handlePayPress(context, 'OXXO'),
+                        ),
+                        BoletoButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'Boleto Bancário'),
+                        ),
+                        AlipayButton(
+                          onPressed: () => _handlePayPress(context, 'Alipay'),
+                        ),
+                        WeChatPayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'WeChat Pay'),
+                        ),
+                        PayNowButton(
+                          onPressed: () => _handlePayPress(context, 'PayNow'),
+                        ),
+                        PromptPayButton(
+                          onPressed: () =>
+                              _handlePayPress(context, 'PromptPay'),
+                        ),
+                      ];
 
                       return Center(
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 320),
-                          child: buildColumn(allButtons),
+                          child: buildColumn(mobileButtons),
                         ),
                       );
                     },
