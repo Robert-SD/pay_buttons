@@ -1,3 +1,5 @@
+/// A cross-platform Flutter package providing beautiful, brand-compliant, and
+/// accessible payment buttons for modern e-commerce checkouts.
 library;
 
 // Official Google Pay & Apple Pay from the Flutter pay package
