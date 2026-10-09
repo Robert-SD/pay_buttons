@@ -1,4 +1,4 @@
-## 0.0.1
+## 0.1.0
 
 * Initial release of `pay_buttons`.
 * Included cross-platform payment buttons:

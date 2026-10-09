@@ -1,6 +1,6 @@
 # pay_buttons
 
-[![pub package](https://img.shields.io/badge/pub-v0.0.1-blue.svg)](https://pub.dev)
+[![pub package](https://img.shields.io/badge/pub-v0.1.0-blue.svg)](https://pub.dev)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE)
 [![Live Web Demo](https://img.shields.io/badge/demo-live%20web-blue?logo=googlechrome&style=flat-square)](https://robert-sd.github.io/pay_buttons/)
 
