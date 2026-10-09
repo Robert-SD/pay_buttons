@@ -19,7 +19,7 @@ void main() {
     expect(find.text('Pay Buttons Component Catalog'), findsOneWidget);
     expect(find.text('PayPal & Pay Later'), findsOneWidget);
     expect(find.text('Klarna'), findsOneWidget);
-    expect(find.text('Shop Pay'), findsOneWidget);
+    expect(find.text('Afterpay / Clearpay'), findsOneWidget);
     expect(find.text('Default Payment Buttons'), findsOneWidget);
     expect(find.text('Customize Payment Buttons'), findsOneWidget);
     expect(find.byType(PayPalButton), findsOneWidget);

@@ -7,7 +7,7 @@ import 'bancontact_assets.dart';
 import 'bancontact_color.dart';
 import 'bancontact_shape.dart';
 
-/// A brand-compliant Bancontact (Belgium) payment button.
+/// A Bancontact (Belgium) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class BancontactButton extends PayButton {

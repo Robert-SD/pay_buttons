@@ -4,9 +4,9 @@
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE)
 [![Live Web Demo](https://img.shields.io/badge/demo-live%20web-blue?logo=googlechrome&style=flat-square)](https://robert-sd.github.io/pay_buttons/)
 
-A lightweight, brand-compliant, cross-platform Flutter package providing beautiful, ready-to-use payment buttons for modern e-commerce checkouts.
+A lightweight, cross-platform Flutter package providing beautiful, ready-to-use payment buttons for modern e-commerce checkouts.
 
-Built with clean vector graphics, smooth 120 FPS rendering, accessibility semantics out of the box, and careful adherence to official provider brand guidelines.
+Built with clean vector graphics, smooth 120 FPS rendering, accessibility semantics out of the box, and adherence to standard merchant checkout specifications.
 
 > 🌐 **Live Web Component Catalog**: Test and interact with the payment buttons directly in your browser at **[robert-sd.github.io/pay_buttons](https://robert-sd.github.io/pay_buttons/)**.
 
@@ -22,11 +22,10 @@ Built with clean vector graphics, smooth 120 FPS rendering, accessibility semant
 
 ## Supported Buttons
 
-* **Apple Pay**: Native `PKPaymentButton` on iOS via `package:pay`, and official Apple Pay JS SDK on web.
-* **Google Pay**: Native Google Pay on Android via `package:pay`, and official Google Pay JS SDK on web.
-* **PayPal & PayPal Pay Later**: Official vector branding (`gold`, `blue`, `black`, `white`, `silver`).
-* **Klarna**: Official vector branding (`pink`, `black`, `white`).
-* **Shop Pay**: Official Shopify checkout branding (`purple`, `black`, `white`).
+* **Apple Pay**: Native `PKPaymentButton` on iOS via `package:pay`, and Apple Pay JS SDK on web.
+* **Google Pay**: Native Google Pay on Android via `package:pay`, and Google Pay JS SDK on web.
+* **PayPal & PayPal Pay Later**: Vector branding (`gold`, `blue`, `black`, `white`, `silver`).
+* **Klarna**: Vector branding (`pink`, `black`, `white`).
 * **Afterpay / Clearpay**: Auto-switching branding (Afterpay in US/AU/NZ/CA, Clearpay in UK/EU) (`mint`, `black`, `white`).
 * **Wero**: European Payments Initiative payment standard (`yellow`, `black`, `white`).
 * **iDEAL | Wero**: Dutch online banking standard migrating to Wero (`yellow`, `black`, `white`, `lightGray`).
@@ -112,17 +111,6 @@ KlarnaButton(
   text: 'Pay with',
   color: KlarnaColor.pink,
   shape: KlarnaShape.rounded,
-)
-```
-
-### Shop Pay
-
-```dart
-ShopPayButton(
-  onPressed: () => handleShopPay(),
-  text: 'Buy with',
-  color: ShopPayColor.purple,
-  shape: ShopPayShape.rounded,
 )
 ```
 
@@ -332,9 +320,9 @@ PayPalButton(
 This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed by PayPal, Inc.**, Klarna Bank AB, Apple Inc., Google LLC, or any other payment provider.
 
 ### 2. Nominative Fair Use
-All trademarks, logos, and service marks displayed in this package belong to their respective owners. They are used solely under the doctrine of **nominative fair use** to identify the payment services accepted by merchants and to assist developers in building brand-compliant checkout buttons.
+All trademarks, logos, and service marks displayed in this package belong to their respective owners. They are used solely under the doctrine of **nominative fair use** to identify the payment services accepted by merchants and to assist developers in building recognizable checkout buttons.
 
 ### 3. Open Source Licensure
-The vector paths used to render logos are derived from official open-source distributions including [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos) and [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android), published under the **Apache License, Version 2.0**. Braintree developer integration patterns are licensed under the **MIT License**.
+The vector paths used to render logos are derived from open-source distributions including [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos) and [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android), published under the **Apache License, Version 2.0**. Braintree developer integration patterns are licensed under the **MIT License**.
 
 See [**`LICENSE`**](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE) and [**`TRADEMARKS.md`**](https://github.com/Robert-SD/pay_buttons/blob/main/TRADEMARKS.md) for full terms.

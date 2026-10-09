@@ -120,7 +120,7 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Official brand assets, vector typography, and styling for Pix, OXXO, and Boleto Bancário.',
+                  'Vector typography and styling for Pix, OXXO, and Boleto Bancário.',
                   style: TextStyle(color: Colors.grey.shade700, fontSize: 13),
                 ),
               ],

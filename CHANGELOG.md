@@ -6,7 +6,6 @@
   * Google Pay (native Android via `package:pay` and Web JS SDK)
   * PayPal & PayPal Pay Later
   * Klarna
-  * Shop Pay
   * Afterpay / Clearpay
   * Wero
   * iDEAL | Wero

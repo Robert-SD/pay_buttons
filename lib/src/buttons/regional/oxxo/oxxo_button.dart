@@ -7,7 +7,7 @@ import 'oxxo_assets.dart';
 import 'oxxo_color.dart';
 import 'oxxo_shape.dart';
 
-/// A brand-compliant OXXO (Mexico) payment button.
+/// An OXXO (Mexico) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class OxxoButton extends PayButton {

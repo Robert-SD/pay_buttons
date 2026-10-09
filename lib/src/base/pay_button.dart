@@ -52,7 +52,7 @@ abstract class PayButton extends StatelessWidget {
 
   /// Optional custom font family fallback list.
   ///
-  /// If null and [fontFamily] is null, brand-compliant default fallbacks are used.
+  /// If null and [fontFamily] is null, default fallbacks are used.
   final List<String>? fontFamilyFallback;
 
   /// Whether to display a loading indicator in place of the button content.

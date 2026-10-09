@@ -7,7 +7,7 @@ import 'upi_assets.dart';
 import 'upi_color.dart';
 import 'upi_shape.dart';
 
-/// A brand-compliant UPI (India, Unified Payments Interface) payment button.
+/// A UPI (India, Unified Payments Interface) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class UpiButton extends PayButton {

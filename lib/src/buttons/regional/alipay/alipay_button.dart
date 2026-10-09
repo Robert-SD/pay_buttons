@@ -7,7 +7,7 @@ import 'alipay_assets.dart';
 import 'alipay_color.dart';
 import 'alipay_shape.dart';
 
-/// A brand-compliant Alipay payment button.
+/// An Alipay payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class AlipayButton extends PayButton {

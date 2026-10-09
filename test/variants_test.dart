@@ -54,39 +54,6 @@ void main() {
     );
 
     testWidgets(
-      'ShopPayButton supports explicit compact, medium, and full variants',
-      (tester) async {
-        // Compact
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: ShopPayButton(
-                onPressed: () {},
-                variant: PayButtonVariant.compact,
-              ),
-            ),
-          ),
-        );
-        expect(find.byType(SvgPicture), findsOneWidget);
-
-        // Full with trailing text
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: ShopPayButton(
-                onPressed: () {},
-                variant: PayButtonVariant.full,
-                text: 'Checkout',
-                textPosition: PayButtonTextPosition.trailing,
-              ),
-            ),
-          ),
-        );
-        expect(find.text('Checkout'), findsOneWidget);
-      },
-    );
-
-    testWidgets(
       'AfterpayButton supports explicit compact, medium, and full variants',
       (tester) async {
         // Compact

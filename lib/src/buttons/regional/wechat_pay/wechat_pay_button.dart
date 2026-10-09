@@ -7,7 +7,7 @@ import 'wechat_pay_assets.dart';
 import 'wechat_pay_color.dart';
 import 'wechat_pay_shape.dart';
 
-/// A brand-compliant WeChat Pay payment button.
+/// A WeChat Pay payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class WeChatPayButton extends PayButton {

@@ -1,5 +1,5 @@
 name: pay_buttons
-description: "A cross-platform Flutter package providing beautiful, brand-compliant, and accessible payment buttons for modern e-commerce checkouts."
+description: "A cross-platform Flutter package providing beautiful, accessible payment buttons for modern e-commerce checkouts."
 version: 0.1.0
 homepage: https://github.com/Robert-SD/pay_buttons
 repository: https://github.com/Robert-SD/pay_buttons

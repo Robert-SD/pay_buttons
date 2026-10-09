@@ -8,9 +8,9 @@ import 'afterpay_brand.dart';
 import 'afterpay_color.dart';
 import 'afterpay_shape.dart';
 
-/// A brand-compliant Afterpay / Clearpay payment button.
+/// An Afterpay / Clearpay payment button.
 ///
-/// Complies with official Afterpay/Clearpay brand guidelines.
+/// Designed following Afterpay/Clearpay brand guidelines.
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class AfterpayButton extends PayButton {
   const AfterpayButton({

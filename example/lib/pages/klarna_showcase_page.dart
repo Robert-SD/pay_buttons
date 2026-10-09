@@ -410,7 +410,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Complies with official Klarna Identity button styling guidelines. Demonstrates dark/light/off-white themes and dynamic responsive width collapse.',
+          'Styled according to Klarna Identity button guidelines. Demonstrates dark/light/off-white themes and dynamic responsive width collapse.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),

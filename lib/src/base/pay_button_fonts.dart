@@ -39,21 +39,6 @@ abstract final class PayButtonFonts {
     'sans-serif',
   ];
 
-  /// Font fallback chain for Shop Pay buttons.
-  ///
-  /// References Shopify's native UI system font stack.
-  static const List<String> shopPay = [
-    'Shopify Sans',
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Inter',
-    'Helvetica Neue',
-    'Arial',
-    'sans-serif',
-  ];
-
   /// Font fallback chain for Afterpay / Clearpay buttons.
   ///
   /// References Afterpay's primary brand typefaces (Youth, Cash Sans Mono, Italian Plate No.2)

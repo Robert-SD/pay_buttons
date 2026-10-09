@@ -7,7 +7,7 @@ import 'boleto_assets.dart';
 import 'boleto_color.dart';
 import 'boleto_shape.dart';
 
-/// A brand-compliant Boleto Bancário (Brazil) payment button.
+/// A Boleto Bancário (Brazil) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class BoletoButton extends PayButton {

@@ -1,5 +1,5 @@
-/// A cross-platform Flutter package providing beautiful, brand-compliant, and
-/// accessible payment buttons for modern e-commerce checkouts.
+/// A cross-platform Flutter package providing beautiful, accessible payment
+/// buttons for modern e-commerce checkouts.
 library;
 
 // Official Google Pay & Apple Pay from the Flutter pay package
@@ -40,12 +40,6 @@ export 'src/buttons/regional/wero/wero_button.dart';
 export 'src/buttons/regional/wero/wero_color.dart';
 export 'src/buttons/regional/wero/wero_shape.dart';
 export 'src/buttons/regional/wero/wero_assets.dart';
-
-// Shop Pay
-export 'src/buttons/shop_pay/shop_pay_button.dart';
-export 'src/buttons/shop_pay/shop_pay_color.dart';
-export 'src/buttons/shop_pay/shop_pay_shape.dart';
-export 'src/buttons/shop_pay/shop_pay_assets.dart';
 
 // Afterpay / Clearpay
 export 'src/buttons/afterpay/afterpay_button.dart';

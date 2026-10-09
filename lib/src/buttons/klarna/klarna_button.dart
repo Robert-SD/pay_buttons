@@ -7,9 +7,9 @@ import 'klarna_assets.dart';
 import 'klarna_color.dart';
 import 'klarna_shape.dart';
 
-/// A brand-compliant Klarna payment and sign-in button.
+/// A Klarna payment and sign-in button.
 ///
-/// Complies with official [Klarna Design Guidelines](https://docs.klarna.com/merchant-journey/branding/design-guidelines/)
+/// Designed following [Klarna Design Guidelines](https://docs.klarna.com/merchant-journey/branding/design-guidelines/)
 /// and [Sign in with Klarna Button Styling](https://docs.klarna.com/acquirer/klarna/sign-in-with-klarna/additional-resources/button-styling/).
 ///
 /// Features dynamic responsive width breakpoints:

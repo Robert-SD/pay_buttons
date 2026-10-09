@@ -7,7 +7,7 @@ import 'blik_assets.dart';
 import 'blik_color.dart';
 import 'blik_shape.dart';
 
-/// A brand-compliant BLIK (Poland) payment button.
+/// A BLIK (Poland) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class BlikButton extends PayButton {

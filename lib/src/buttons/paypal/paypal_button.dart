@@ -7,10 +7,10 @@ import 'paypal_assets.dart';
 import 'paypal_color.dart';
 import 'paypal_shape.dart';
 
-/// A brand-compliant PayPal payment button.
+/// A PayPal payment button.
 ///
-/// Complies with official [PayPal Brand Guidelines](https://developer.paypal.com/docs/checkout/standard/customize/button-style/).
-/// Fully rendered in pure Flutter using official vector graphics without any native SDK dependencies.
+/// Designed following [PayPal Brand Guidelines](https://developer.paypal.com/docs/checkout/standard/customize/button-style/).
+/// Fully rendered in pure Flutter using vector graphics without any native SDK dependencies.
 class PayPalButton extends PayButton {
   const PayPalButton({
     super.key,

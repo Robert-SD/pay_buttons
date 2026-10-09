@@ -7,7 +7,7 @@ import 'twint_assets.dart';
 import 'twint_color.dart';
 import 'twint_shape.dart';
 
-/// A brand-compliant TWINT (Switzerland) payment button.
+/// A TWINT (Switzerland) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class TwintButton extends PayButton {

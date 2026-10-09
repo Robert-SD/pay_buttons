@@ -1,4 +1,4 @@
-# Trademarks & Legal Compliance Directory
+# Trademarks & Brand Directory
 
 This document provides a centralized registry of trademark notices, nominative fair use principles, brand guideline references, and open-source licenses for every payment button provided by `pay_buttons`.
 
@@ -80,19 +80,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 5. Shop Pay
-* **Trademark Owner / Governing Body**: Shopify Inc.
-* **Registered Trademarks / Marks**: "Shop", "Shop Pay", Shop Pay logo and pill badge.
-* **Official Brand Guidelines**: [Shop Pay Brand Guidelines](https://help.shopify.com/en/manual/payments/shop-pay/brand-assets) & [Shopify Brand Assets](https://www.shopify.com/brand-assets)
-* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry derived from official Shopify brand assets portal.
-* **Permitted Customizations**:
-  * *Approved colors*: Shop Purple (`#5A31F4`), Black (`#000000`), White (`#FFFFFF`).
-  * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0 - 6.0`) and Pill (`borderRadius: height / 2`).
-  * *Brand rules*: Unified lockup: the "shop" wordmark and "Pay" pill badge are rendered together as an inseparable vector lockup across all button variants (including compact mode), honoring Shopify's brand requirements.
-
----
-
-### 6. Afterpay / Clearpay
+### 5. Afterpay / Clearpay
 * **Trademark Owner / Governing Body**: Afterpay Pty Ltd / Block, Inc.
 * **Registered Trademarks / Marks**: "Afterpay", "Clearpay", continuous loop badge logo.
 * **Official Brand Guidelines**: [Afterpay Brand Guidelines](https://developers.afterpay.com/afterpay-online/docs/brand-guidelines) & [Afterpay Developer Portal](https://developers.afterpay.com/)
@@ -104,7 +92,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 7. Alipay
+### 6. Alipay
 * **Trademark Owner / Governing Body**: Alipay.com Co., Ltd. / Ant Group Co., Ltd.
 * **Registered Trademarks / Marks**: "Alipay", "支付宝", "支" emblem badge, Alipay horizontal wordmark.
 * **Official Brand Guidelines**: [Alipay Brand Resources](https://global.alipay.com/)
@@ -116,7 +104,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 8. WeChat Pay
+### 7. WeChat Pay
 * **Trademark Owner / Governing Body**: Tencent Holdings Limited / Tenpay Payment Technology Co., Ltd.
 * **Registered Trademarks / Marks**: "WeChat", "WeChat Pay", "微信支付", dual chat bubbles emblem.
 * **Official Brand Guidelines**: [WeChat Pay Brand Resources](https://pay.weixin.qq.com/static/material/brand.shtml)
@@ -128,7 +116,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 9. Pix
+### 8. Pix
 * **Trademark Owner / Governing Body**: Banco Central do Brasil (BCB)
 * **Registered Trademarks / Marks**: "Pix", geometric overlapping rhomboid emblem, "pix" lowercase wordmark.
 * **Official Brand Guidelines**: [Manual de Uso da Marca Pix (BCB)](https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos)
@@ -140,7 +128,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 10. Wero
+### 9. Wero
 * **Trademark Owner / Governing Body**: EPI Company SE (European Payments Initiative)
 * **Registered Trademarks / Marks**: "wero", stylized Wero badge, Wero wordmark.
 * **Official Brand Guidelines**: [Wero Checkout Brand Guidelines](https://wero-wallet.eu/brand-guidelines/checkout) & [Wero Brand Portal](https://brand.epicompany.eu/)
@@ -152,7 +140,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 11. iDEAL / Wero Migration
+### 10. iDEAL / Wero Migration
 * **Trademark Owner / Governing Body**: Currence iDEAL B.V. / EPI Company SE (European Payments Initiative)
 * **Registered Trademarks / Marks**: "iDEAL", "wero", iDEAL emblem badge, unified "iDEAL | wero" lockup.
 * **Official Brand Guidelines**: [iDEAL naar Wero Portal](https://ideal.nl/naar-wero) & [Official iDEAL-Wero CloudFront Distribution](https://d1twnm33rljaon.cloudfront.net/Logos/iDEAL-Wero/)
@@ -164,7 +152,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 12. BLIK
+### 11. BLIK
 * **Trademark Owner / Governing Body**: Polski Standard Płatności Sp. z o.o. (PSP, Poland)
 * **Registered Trademarks / Marks**: "BLIK", lowercase "b" mark with orange dot, "blik" wordmark.
 * **Official Brand Guidelines**: [BLIK Brand Standards](https://blik.com/en/for-business/materials-to-download)
@@ -176,7 +164,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 13. Bancontact
+### 12. Bancontact
 * **Trademark Owner / Governing Body**: Bancontact Payconiq Company (Belgium)
 * **Registered Trademarks / Marks**: "Bancontact", dual-wing emblem, Bancontact wordmark.
 * **Official Brand Guidelines**: [Bancontact Brand Rules](https://www.bancontact.com/en)
@@ -188,7 +176,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 14. Bizum
+### 13. Bizum
 * **Trademark Owner / Governing Body**: Sociedad de Procedimientos de Pago S.L. (Spain)
 * **Registered Trademarks / Marks**: "Bizum", Bizum asterisk emblem, Bizum wordmark.
 * **Official Brand Guidelines**: [Bizum Brand Guidelines](https://bizum.com/es/)
@@ -200,7 +188,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 15. TWINT
+### 14. TWINT
 * **Trademark Owner / Governing Body**: TWINT AG (Switzerland)
 * **Registered Trademarks / Marks**: "TWINT", dual-radial-gradient beacon emblem, TWINT wordmark.
 * **Official Brand Guidelines**: [TWINT Brand Guidelines](https://www.twint.ch/en/business-customers/integration/branding/)
@@ -212,7 +200,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 16. PayNow
+### 15. PayNow
 * **Trademark Owner / Governing Body**: Association of Banks in Singapore (ABS) / Monetary Authority of Singapore (MAS)
 * **Registered Trademarks / Marks**: "PayNow", bold stylized wordmark with stylized "P" monogram.
 * **Official Brand Guidelines**: [PayNow Singapore Brand Guidelines](https://www.abs.org.sg/consumer-banking/pay-now)
@@ -224,7 +212,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 17. PromptPay
+### 16. PromptPay
 * **Trademark Owner / Governing Body**: Bank of Thailand (BOT) / National ITMX
 * **Registered Trademarks / Marks**: "PromptPay", "พร้อมเพย์", Thai QR payment badge with chevron arrows.
 * **Official Brand Guidelines**: [Bank of Thailand PromptPay Standard](https://www.bot.or.th/)
@@ -232,11 +220,11 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 * **Permitted Customizations**:
   * *Approved colors*: Deep Navy Blue (`#003D6B`), White (`#FFFFFF`), Black (`#000000`).
   * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
-  * *Brand rules*: Chevron arrow angles and Thai QR boundary geometry strictly compliant with Bank of Thailand specifications.
+  * *Brand rules*: Chevron arrow angles and Thai QR boundary geometry adhere to Bank of Thailand specifications.
 
 ---
 
-### 18. OXXO
+### 17. OXXO
 * **Trademark Owner / Governing Body**: Cadena Comercial OXXO, S.A. de C.V. / FEMSA Comercio (Mexico)
 * **Registered Trademarks / Marks**: "OXXO", "OXXO PAY", official red and yellow horizontal stripe badge.
 * **Official Brand Guidelines**: [OXXO Pay Brand Portal](https://www.oxxo.com/oxxopay)
@@ -248,7 +236,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 19. Boleto Bancário
+### 18. Boleto Bancário
 * **Trademark Owner / Governing Body**: Federação Brasileira de Bancos (FEBRABAN)
 * **Registered Trademarks / Marks**: Official FEBRABAN Boleto barcode and typography emblem.
 * **Official Brand Guidelines**: [FEBRABAN Standards Portal](https://portal.febraban.org.br/)
@@ -260,7 +248,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ---
 
-### 20. UPI (Unified Payments Interface)
+### 19. UPI (Unified Payments Interface)
 * **Trademark Owner / Governing Body**: National Payments Corporation of India (NPCI)
 * **Registered Trademarks / Marks**: "UPI", "Unified Payments Interface", official dual directional arrows emblem.
 * **Official Brand Guidelines**: [NPCI UPI Brand Guidelines & Media Kit](https://www.npci.org.in/)

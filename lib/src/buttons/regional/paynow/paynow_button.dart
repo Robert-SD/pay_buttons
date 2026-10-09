@@ -7,7 +7,7 @@ import 'paynow_assets.dart';
 import 'paynow_color.dart';
 import 'paynow_shape.dart';
 
-/// A brand-compliant PayNow (Singapore) payment button.
+/// A PayNow (Singapore) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class PayNowButton extends PayButton {

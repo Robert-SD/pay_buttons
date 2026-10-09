@@ -7,7 +7,7 @@ import 'ideal_assets.dart';
 import 'ideal_color.dart';
 import 'ideal_shape.dart';
 
-/// A brand-compliant iDEAL / Wero transition payment button.
+/// An iDEAL / Wero transition payment button.
 ///
 /// Implements the official co-branded iDEAL | Wero lockup during the migration
 /// from iDEAL to European Wero:

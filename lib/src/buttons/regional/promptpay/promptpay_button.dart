@@ -7,7 +7,7 @@ import 'promptpay_assets.dart';
 import 'promptpay_color.dart';
 import 'promptpay_shape.dart';
 
-/// A brand-compliant PromptPay (Thailand) payment button.
+/// A PromptPay (Thailand) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class PromptPayButton extends PayButton {

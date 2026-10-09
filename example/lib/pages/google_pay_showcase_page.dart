@@ -269,13 +269,13 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Official Google Pay Button Themes',
+          'Google Pay Button Themes',
           style: Theme.of(context).textTheme.titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
-          'Official Google Pay button themes and intents.',
+          'Google Pay button themes and intents.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),

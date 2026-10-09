@@ -9,9 +9,9 @@ import 'google_pay_shape.dart';
 import 'google_pay_web_stub.dart'
     if (dart.library.js_interop) 'google_pay_web.dart';
 
-/// A brand-compliant Google Pay payment button that renders only official controls.
+/// A Google Pay payment button that renders platform controls.
 ///
-/// Uses official Google Pay JS SDK on Web (`kIsWeb`) and native Android Google Pay controls
+/// Uses the Google Pay JS SDK on Web (`kIsWeb`) and native Android Google Pay controls
 /// via `package:pay` on Android when a [paymentConfiguration] is provided.
 /// Renders an empty box on unsupported platforms.
 class GooglePayButton extends PayButton {

@@ -7,7 +7,7 @@ import 'pix_assets.dart';
 import 'pix_color.dart';
 import 'pix_shape.dart';
 
-/// A brand-compliant Pix (Banco Central do Brasil) payment button.
+/// A Pix (Banco Central do Brasil) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
 class PixButton extends PayButton {

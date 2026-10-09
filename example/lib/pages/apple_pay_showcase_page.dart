@@ -247,7 +247,7 @@ class _ApplePayShowcasePageState extends State<ApplePayShowcasePage> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Apple\'s official controls, in each supported style and type.',
+          'Apple Pay controls in each supported style and type.',
           style: TextStyle(color: Colors.grey.shade600),
         ),
         const SizedBox(height: 16),
