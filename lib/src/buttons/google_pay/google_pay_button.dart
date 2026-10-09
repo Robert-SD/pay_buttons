@@ -167,9 +167,24 @@ class GooglePayButton extends PayButton {
     return const SizedBox.shrink();
   }
 
+  /// Returns the color palette corresponding to [color] according to official
+  /// Google Pay guidelines (e.g. dark `#000000` background for [GooglePayColor.black]).
+  ///
+  /// Note: Google Pay buttons are rendered directly by platform controls
+  /// (package:pay / Google Pay JS SDK) and do not use a custom Flutter canvas.
   @override
-  PayButtonColors resolveColors(BuildContext context) => throw UnsupportedError(
-    'GooglePayButton renders only official Google Pay controls, which are styled '
-    'by Google and cannot use a Flutter color palette.',
-  );
+  PayButtonColors resolveColors(BuildContext context) => switch (color) {
+    GooglePayColor.black || GooglePayColor.monochromeBlack =>
+      const PayButtonColors(
+        backgroundColor: Color(0xFF000000),
+        progressColor: Color(0xFFFFFFFF),
+      ),
+    GooglePayColor.white || GooglePayColor.monochromeWhite =>
+      const PayButtonColors(
+        backgroundColor: Color(0xFFFFFFFF),
+        progressColor: Color(0xFF3C4043),
+        borderColor: Color(0xFF747775),
+        borderWidth: 1.0,
+      ),
+  };
 }

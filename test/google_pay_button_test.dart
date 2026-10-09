@@ -186,5 +186,26 @@ void main() {
       const button = GooglePayButton(onPressed: null);
       expect(button.effectiveEnvironment, GooglePayEnvironment.test);
     });
+
+    testWidgets('resolveColors returns authentic palette matching GooglePayColor', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(body: GooglePayButton(onPressed: () {})),
+        ),
+      );
+
+      final element = tester.element(find.byType(GooglePayButton));
+
+      const blackButton = GooglePayButton(color: GooglePayColor.black, onPressed: null);
+      final blackColors = blackButton.resolveColors(element);
+      expect(blackColors.backgroundColor, const Color(0xFF000000));
+      expect(blackColors.progressColor, const Color(0xFFFFFFFF));
+
+      const whiteButton = GooglePayButton(color: GooglePayColor.white, onPressed: null);
+      final whiteColors = whiteButton.resolveColors(element);
+      expect(whiteColors.backgroundColor, const Color(0xFFFFFFFF));
+      expect(whiteColors.progressColor, const Color(0xFF3C4043));
+      expect(whiteColors.borderColor, const Color(0xFF747775));
+    });
   });
 }
