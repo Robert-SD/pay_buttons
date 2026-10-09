@@ -15,7 +15,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
   // Playground state
   GooglePayColor _color = GooglePayColor.black;
   GooglePayShape _shape = GooglePayShape.pill;
-  String _label = 'Buy with';
+  GooglePayType _type = GooglePayType.buy;
   double _height = 48.0;
   double _width = 200.0;
 
@@ -98,9 +98,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
   }
 
   Widget _buildPlaygroundSection() {
-    final isWhiteTheme =
-        _color == GooglePayColor.white ||
-        _color == GooglePayColor.monochromeWhite;
+    final isWhiteTheme = _color == GooglePayColor.white;
 
     return Card(
       elevation: 2,
@@ -141,7 +139,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                     onPressed: _handlePayPress,
                     color: _color,
                     shape: _shape,
-                    text: _label,
+                    type: _type,
                     width: _width,
                     height: _height,
                   ),
@@ -184,37 +182,17 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                   },
                 ),
 
-                // Label Picker
-                DropdownButton<String>(
-                  value: _label,
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'Buy with',
-                      child: Text('Label: Buy with'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Checkout with',
-                      child: Text('Label: Checkout'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Donate with',
-                      child: Text('Label: Donate'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Subscribe with',
-                      child: Text('Label: Subscribe'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Book with',
-                      child: Text('Label: Book'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Pay with',
-                      child: Text('Label: Pay with'),
-                    ),
-                  ],
+                // Type Picker
+                DropdownButton<GooglePayType>(
+                  value: _type,
+                  items: GooglePayType.values.map((t) {
+                    return DropdownMenuItem(
+                      value: t,
+                      child: Text('Type: ${t.name}'),
+                    );
+                  }).toList(),
                   onChanged: (val) {
-                    if (val != null) setState(() => _label = val);
+                    if (val != null) setState(() => _type = val);
                   },
                 ),
               ],
@@ -289,36 +267,36 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
                 label: 'Black (Default)',
                 button: _galleryButton(
                   color: GooglePayColor.black,
-                  text: 'Buy with',
+                  type: GooglePayType.buy,
                 ),
               ),
               _buildGalleryItem(
                 label: 'White',
                 button: _galleryButton(
                   color: GooglePayColor.white,
-                  text: 'Buy with',
+                  type: GooglePayType.buy,
                   onDark: true,
-                ),
-              ),
-              _buildGalleryItem(
-                label: 'Monochrome Black',
-                button: _galleryButton(
-                  color: GooglePayColor.monochromeBlack,
-                  text: 'Buy with',
                 ),
               ),
               _buildGalleryItem(
                 label: 'Checkout with Google Pay',
                 button: _galleryButton(
                   color: GooglePayColor.black,
-                  text: 'Checkout with',
+                  type: GooglePayType.checkout,
                 ),
               ),
               _buildGalleryItem(
                 label: 'Donate with Google Pay',
                 button: _galleryButton(
                   color: GooglePayColor.black,
-                  text: 'Donate with',
+                  type: GooglePayType.donate,
+                ),
+              ),
+              _buildGalleryItem(
+                label: 'Pay with Google Pay',
+                button: _galleryButton(
+                  color: GooglePayColor.black,
+                  type: GooglePayType.pay,
                 ),
               ),
             ],
@@ -330,7 +308,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
 
   Widget _galleryButton({
     required GooglePayColor color,
-    required String text,
+    GooglePayType type = GooglePayType.buy,
     bool onDark = false,
   }) {
     final button = SizedBox(
@@ -338,7 +316,7 @@ class _GooglePayShowcasePageState extends State<GooglePayShowcasePage> {
       height: 48,
       child: GooglePayButton(
         color: color,
-        text: text,
+        type: type,
         onPressed: _handlePayPress,
       ),
     );

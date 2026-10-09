@@ -163,7 +163,7 @@ abstract class PayButton extends StatelessWidget {
     required Color textColor,
     required double fontSize,
     required FontWeight fontWeight,
-    double letterSpacing = -0.2,
+    required double letterSpacing,
     FontStyle fontStyle = FontStyle.normal,
     required List<String> defaultFontFamilyFallback,
   }) {

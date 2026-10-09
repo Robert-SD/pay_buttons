@@ -18,7 +18,7 @@ class PayPalPayLaterButton extends PayPalButton {
     super.borderRadius,
     super.margin,
     super.elevation,
-    super.semanticLabel,
+    String? semanticLabel,
     super.variant,
     super.textPosition,
     super.color = PayPalColor.white,
@@ -26,10 +26,9 @@ class PayPalPayLaterButton extends PayPalButton {
     super.textStyle,
     super.fontFamily,
     super.fontFamilyFallback,
-  });
-
-  @override
-  String get defaultSemanticLabel => 'PayPal Pay Later';
+  }) : super(
+         semanticLabel: semanticLabel ?? 'PayPal Pay Later',
+       );
 
   @override
   Widget buildCompactContent(BuildContext context) {

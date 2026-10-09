@@ -31,12 +31,14 @@ class _TestPayButton extends PayButton {
     required Color textColor,
     required double fontSize,
     required FontWeight fontWeight,
+    double letterSpacing = -0.2,
     required List<String> defaultFontFamilyFallback,
   }) {
     return resolveTextStyle(
       textColor: textColor,
       fontSize: fontSize,
       fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
       defaultFontFamilyFallback: defaultFontFamilyFallback,
     );
   }

@@ -43,11 +43,8 @@ class PayPalButton extends PayButton {
   double get defaultBorderRadius =>
       shape == PayPalShape.pill ? (height / 2) : 6.0;
 
-  @protected
-  String get defaultSemanticLabel => 'PayPal';
-
   @override
-  String? get semanticLabel => super.semanticLabel ?? defaultSemanticLabel;
+  String? get semanticLabel => super.semanticLabel ?? 'PayPal';
 
   @override
   PayButtonColors resolveColors(BuildContext context) {

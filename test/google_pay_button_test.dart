@@ -4,6 +4,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pay_buttons/pay_buttons.dart';
 
 void main() {
+  group('GooglePayType', () {
+    test('maps every intent to expected JS SDK value', () {
+      expect(GooglePayType.pay.jsValue, 'pay');
+      expect(GooglePayType.buy.jsValue, 'buy');
+      expect(GooglePayType.checkout.jsValue, 'checkout');
+      expect(GooglePayType.donate.jsValue, 'donate');
+      expect(GooglePayType.order.jsValue, 'order');
+      expect(GooglePayType.book.jsValue, 'book');
+      expect(GooglePayType.subscribe.jsValue, 'subscribe');
+      expect(GooglePayType.plain.jsValue, 'plain');
+    });
+
+    test('every intent has a distinct JS SDK value', () {
+      final values = GooglePayType.values.map((t) => t.jsValue).toSet();
+      expect(values.length, GooglePayType.values.length);
+    });
+  });
+
   group('GooglePayButton', () {
     testWidgets('renders without error with default parameters', (
       tester,
@@ -60,12 +78,12 @@ void main() {
       }
     });
 
-    testWidgets('applies custom text and semanticLabel', (tester) async {
+    testWidgets('applies custom type and semanticLabel', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: GooglePayButton(
-              text: 'Buy with',
+              type: GooglePayType.checkout,
               semanticLabel: 'Custom Google Pay',
               onPressed: () {},
             ),
@@ -77,7 +95,7 @@ void main() {
         find.byType(GooglePayButton),
       );
       expect(button.semanticLabel, 'Custom Google Pay');
-      expect(button.text, 'Buy with');
+      expect(button.type, GooglePayType.checkout);
     });
 
     testWidgets('respects enabled and interactive state', (tester) async {
@@ -224,6 +242,70 @@ void main() {
         expect(semanticsWidget.properties.label, 'Buy with Google Pay');
         expect(semanticsWidget.properties.button, isTrue);
         expect(semanticsWidget.properties.enabled, isTrue);
+      } finally {
+        debugDefaultTargetPlatformOverride = null;
+      }
+    });
+
+    testWidgets('renders loading spinner and disables interaction when isLoading is true', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: GooglePayButton(
+              isLoading: true,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('applies margin and elevation parameters', (
+      tester,
+    ) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      try {
+        final config = PaymentConfiguration.fromJsonString('''{
+          "provider": "google_pay",
+          "data": {
+            "environment": "TEST",
+            "apiVersion": 2,
+            "apiVersionMinor": 0
+          }
+        }''');
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: GooglePayButton(
+                paymentConfiguration: config,
+                margin: const EdgeInsets.all(16),
+                elevation: 3.0,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final paddingFinder = find.descendant(
+          of: find.byType(GooglePayButton),
+          matching: find.byWidgetPredicate(
+            (w) => w is Padding && w.padding == const EdgeInsets.all(16),
+          ),
+        );
+        expect(paddingFinder, findsOneWidget);
+
+        final materialFinder = find.descendant(
+          of: find.byType(GooglePayButton),
+          matching: find.byWidgetPredicate(
+            (w) => w is Material && w.elevation == 3.0,
+          ),
+        );
+        expect(materialFinder, findsOneWidget);
       } finally {
         debugDefaultTargetPlatformOverride = null;
       }
