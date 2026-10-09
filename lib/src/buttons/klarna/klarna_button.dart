@@ -34,79 +34,30 @@ class KlarnaButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.trailing,
+    super.shape = KlarnaShape.rounded,
     this.color = KlarnaColor.pink,
-    this.shape = KlarnaShape.rounded,
   });
 
   /// The brand color palette for the button. Defaults to [KlarnaColor.pink].
   final KlarnaColor color;
 
-  /// The contour shape of the button. Defaults to [KlarnaShape.rounded] (5.0 dp).
-  final KlarnaShape shape;
+  @override
+  double get roundedBorderRadius => 5.0;
 
   @override
-  double get defaultBorderRadius {
-    switch (shape) {
-      case KlarnaShape.pill:
-        return height / 2;
-      case KlarnaShape.rect:
-        return 0.0;
-      case KlarnaShape.rounded:
-        return 5.0;
-    }
-  }
+  FontWeight get labelFontWeight => FontWeight.w700;
+
+  @override
+  double get labelLetterSpacing => -0.2;
+
+  @override
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.klarna;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'Klarna';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case KlarnaColor.pink:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFA8CD),
-          progressColor: Color(0xFF0B051D),
-          splashColor: Color(0x1F0B051D),
-          highlightColor: Color(0x0F0B051D),
-        );
-      case KlarnaColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFE5E5E5),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF0B051D),
-          splashColor: Color(0x1F0B051D),
-          highlightColor: Color(0x0F0B051D),
-        );
-      case KlarnaColor.offWhite:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFF9F8F5),
-          borderColor: Color(0xFFE5E5E5),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF0B051D),
-          splashColor: Color(0x1F0B051D),
-          highlightColor: Color(0x0F0B051D),
-        );
-      case KlarnaColor.black:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF0B051D),
-          progressColor: Color(0xFFFFA8CD),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case KlarnaColor.pink:
-      case KlarnaColor.white:
-      case KlarnaColor.offWhite:
-        return const Color(0xFF0B051D);
-      case KlarnaColor.black:
-        return Colors.white;
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -118,39 +69,5 @@ class KlarnaButton extends PayButton {
   Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.40).clamp(16.0, 22.0);
     return KlarnaAssets.wordmark(color: color, height: logoHeight);
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w700,
-      letterSpacing: -0.2,
-      defaultFontFamilyFallback: PayButtonFonts.klarna,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
-    );
   }
 }

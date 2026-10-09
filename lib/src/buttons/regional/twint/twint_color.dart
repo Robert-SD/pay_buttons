@@ -1,8 +1,30 @@
+import 'package:flutter/material.dart';
+
+import '../../../base/pay_button_colors.dart';
+
 /// Supported color schemes for TWINT buttons.
 enum TwintColor {
   /// Sleek Black (`#000000`) background with TWINT logo.
-  black,
+  black(
+    PayButtonColors(
+      backgroundColor: Color(0xFF000000),
+      textColor: Colors.white,
+    ),
+  ),
 
   /// Clean White (`#FFFFFF`) with border (`#E0E0E0`).
-  white,
+  white(
+    PayButtonColors(
+      backgroundColor: Color(0xFFFFFFFF),
+      borderColor: Color(0xFFE0E0E0),
+      borderWidth: 1.0,
+      textColor: Color(0xFF000000),
+    ),
+  );
+
+  const TwintColor(this.palette);
+
+  /// The resolved color palette for this TWINT theme.
+  final PayButtonColors palette;
 }
+

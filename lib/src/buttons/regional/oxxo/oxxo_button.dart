@@ -28,62 +28,27 @@ class OxxoButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
+    super.shape = OxxoShape.rounded,
     this.color = OxxoColor.red,
-    this.shape = OxxoShape.rounded,
   });
 
   /// The brand color palette for the button. Defaults to [OxxoColor.red].
   final OxxoColor color;
 
-  /// The contour shape of the button. Defaults to [OxxoShape.rounded] (6.0 dp).
-  final OxxoShape shape;
+  @override
+  double get roundedBorderRadius => 6.0;
 
   @override
-  double get defaultBorderRadius =>
-      shape == OxxoShape.pill ? (height / 2) : 6.0;
+  FontWeight get labelFontWeight => FontWeight.w700;
+
+  @override
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.oxxo;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'OXXO';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case OxxoColor.red:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFE70020),
-          progressColor: Color(0xFFFFFFFF),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case OxxoColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFE0E0E0),
-          borderWidth: 1.0,
-          progressColor: Color(0xFFE70020),
-          splashColor: Color(0x1FE70020),
-          highlightColor: Color(0x0FE70020),
-        );
-      case OxxoColor.yellow:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFBB110),
-          progressColor: Color(0xFFE70020),
-          splashColor: Color(0x1FE70020),
-          highlightColor: Color(0x0FE70020),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case OxxoColor.red:
-        return Colors.white;
-      case OxxoColor.white:
-        return const Color(0xFFE70020);
-      case OxxoColor.yellow:
-        return const Color(0xFFE70020);
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -95,39 +60,5 @@ class OxxoButton extends PayButton {
   Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.52).clamp(22.0, 30.0);
     return OxxoAssets.logo(color: color, height: logoHeight);
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w700,
-      letterSpacing: -0.1,
-      defaultFontFamilyFallback: PayButtonFonts.oxxo,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
-    );
   }
 }

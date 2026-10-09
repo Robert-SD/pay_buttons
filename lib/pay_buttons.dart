@@ -9,6 +9,7 @@ export 'package:pay/pay.dart' show PaymentConfiguration, PaymentItem;
 export 'src/base/pay_button.dart';
 export 'src/base/pay_button_colors.dart';
 export 'src/base/pay_button_fonts.dart';
+export 'src/base/pay_button_shape.dart';
 export 'src/base/pay_button_variant.dart';
 
 // Apple Pay

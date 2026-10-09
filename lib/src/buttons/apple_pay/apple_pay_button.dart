@@ -32,7 +32,7 @@ class ApplePayButton extends PayButton {
     required super.onPressed,
     this.type = ApplePayType.plain,
     this.color = ApplePayColor.black,
-    this.shape = ApplePayShape.pill,
+    super.shape = ApplePayShape.pill,
     this.userCanPay = true,
     super.width,
     super.height = 48.0,
@@ -58,9 +58,6 @@ class ApplePayButton extends PayButton {
   /// The brand color palette of the button. Defaults to [ApplePayColor.black].
   final ApplePayColor color;
 
-  /// The contour shape of the button. Defaults to [ApplePayShape.pill].
-  final ApplePayShape shape;
-
   /// Whether Apple Pay is expected to be usable in the current context.
   ///
   /// When `false`, the button renders nothing. This lets a caller that has
@@ -71,17 +68,6 @@ class ApplePayButton extends PayButton {
   /// The effective transaction intent applied to the button.
   ApplePayType get effectiveType => type;
 
-  @override
-  double get defaultBorderRadius {
-    switch (shape) {
-      case ApplePayShape.pill:
-        return height / 2;
-      case ApplePayShape.rounded:
-        return 4.0;
-      case ApplePayShape.rect:
-        return 0.0;
-    }
-  }
 
   @override
   String get semanticLabel =>
@@ -243,20 +229,5 @@ class ApplePayButton extends PayButton {
   /// Note: Apple Pay buttons are rendered directly by platform controls
   /// (PKPaymentButton / Apple Pay JS SDK) and do not use a custom Flutter canvas.
   @override
-  PayButtonColors resolveColors(BuildContext context) => switch (color) {
-    ApplePayColor.black => const PayButtonColors(
-      backgroundColor: Color(0xFF000000),
-      progressColor: Color(0xFFFFFFFF),
-    ),
-    ApplePayColor.white => const PayButtonColors(
-      backgroundColor: Color(0xFFFFFFFF),
-      progressColor: Color(0xFF000000),
-    ),
-    ApplePayColor.whiteOutline => const PayButtonColors(
-      backgroundColor: Color(0xFFFFFFFF),
-      progressColor: Color(0xFF000000),
-      borderColor: Color(0xFF000000),
-      borderWidth: 1.0,
-    ),
-  };
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 }

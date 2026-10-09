@@ -1,11 +1,4 @@
-/// Contour shapes supported by Google Pay button guidelines.
-enum GooglePayShape {
-  /// Fully rounded pill shape (Google standard default, border radius = height / 2).
-  pill,
+import '../../base/pay_button_shape.dart';
 
-  /// Rounded rectangle with 4.0 dp corner radius.
-  rounded,
-
-  /// Sharp rectangle with 0.0 dp corner radius.
-  rect,
-}
+/// Supported corner contour shapes for Google Pay buttons.
+typedef GooglePayShape = PayButtonShape;

@@ -29,79 +29,30 @@ class PayPalButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.trailing,
+    super.shape = PayPalShape.pill,
     this.color = PayPalColor.gold,
-    this.shape = PayPalShape.pill,
   });
 
   /// The brand color palette for the button. Defaults to [PayPalColor.gold].
   final PayPalColor color;
 
-  /// The contour shape of the button. Defaults to [PayPalShape.pill].
-  final PayPalShape shape;
+  @override
+  double get roundedBorderRadius => 6.0;
 
   @override
-  double get defaultBorderRadius =>
-      shape == PayPalShape.pill ? (height / 2) : 6.0;
+  FontWeight get labelFontWeight => FontWeight.w700;
+
+  @override
+  double get labelLetterSpacing => -0.2;
+
+  @override
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.paypal;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'PayPal';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case PayPalColor.gold:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFC439),
-          progressColor: Color(0xFF003087),
-          splashColor: Color(0x1F003087),
-          highlightColor: Color(0x0F003087),
-        );
-      case PayPalColor.blue:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF0070BA),
-          progressColor: Colors.white,
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case PayPalColor.black:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF000000),
-          progressColor: Colors.white,
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case PayPalColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFD6D6D6),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF003087),
-          splashColor: Color(0x1F003087),
-          highlightColor: Color(0x0F003087),
-        );
-      case PayPalColor.silver:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFEEEEEE),
-          borderColor: Color(0xFFE0E0E0),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF003087),
-          splashColor: Color(0x1F003087),
-          highlightColor: Color(0x0F003087),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case PayPalColor.blue:
-      case PayPalColor.black:
-        return Colors.white;
-      case PayPalColor.gold:
-      case PayPalColor.white:
-      case PayPalColor.silver:
-        return const Color(0xFF003087);
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -122,40 +73,6 @@ class PayPalButton extends PayButton {
         const SizedBox(width: 5),
         PayPalAssets.wordmark(color: color, height: wordmarkHeight),
       ],
-    );
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w700,
-      letterSpacing: -0.2,
-      defaultFontFamilyFallback: PayButtonFonts.paypal,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.leading
-          ? [textWidget, const SizedBox(width: 8), logoWidget]
-          : [logoWidget, const SizedBox(width: 8), textWidget],
     );
   }
 }
