@@ -1,0 +1,20 @@
+pay_buttons
+Copyright 2026 pay_buttons contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The Apache-2.0 license covers the package source code only. It grants no rights
+to any third-party trade names, trademarks, service marks, or brand marks
+rendered by this package (see TRADEMARKS.md and ASSET_SOURCES.md). All such
+marks remain the property of their respective owners.
+
+This product includes vector artwork derived from the following Apache-2.0
+licensed projects:
+
+  * @paypal/sdk-logos (https://github.com/paypal/paypal-sdk-logos)
+    Copyright PayPal, Inc. -- used for PayPal and PayPal Pay Later marks.
+
+  * afterpay/sdk-android (https://github.com/afterpay/sdk-android)
+    Copyright Afterpay -- used for Afterpay and Clearpay lockups.
+
+Full license text: LICENSES/Apache-2.0.txt
