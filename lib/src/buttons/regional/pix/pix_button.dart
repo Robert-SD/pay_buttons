@@ -28,60 +28,24 @@ class PixButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
+    super.shape = PixShape.rounded,
     this.color = PixColor.teal,
-    this.shape = PixShape.rounded,
   });
 
   /// The brand color palette for the button. Defaults to [PixColor.teal].
   final PixColor color;
 
-  /// The contour shape of the button. Defaults to [PixShape.rounded] (6.0 dp).
-  final PixShape shape;
+  @override
+  double get roundedBorderRadius => 6.0;
 
   @override
-  double get defaultBorderRadius => shape == PixShape.pill ? (height / 2) : 6.0;
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.pix;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'Pix';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case PixColor.teal:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF32BCAD),
-          progressColor: Color(0xFFFFFFFF),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case PixColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFE0E0E0),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF32BCAD),
-          splashColor: Color(0x1F32BCAD),
-          highlightColor: Color(0x0F32BCAD),
-        );
-      case PixColor.black:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF000000),
-          progressColor: Color(0xFF32BCAD),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case PixColor.teal:
-      case PixColor.black:
-        return Colors.white;
-      case PixColor.white:
-        return const Color(0xFF3C3C3B);
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -93,39 +57,5 @@ class PixButton extends PayButton {
   Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.44).clamp(18.0, 24.0);
     return PixAssets.logo(color: color, height: logoHeight);
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w600,
-      letterSpacing: -0.1,
-      defaultFontFamilyFallback: PayButtonFonts.pix,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
-    );
   }
 }

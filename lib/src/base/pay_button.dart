@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'pay_button_colors.dart';
+import 'pay_button_shape.dart';
 import 'pay_button_variant.dart';
 
+export 'pay_button_shape.dart';
 export 'pay_button_variant.dart';
 
 /// Abstract base class for all payment buttons in `pay_buttons`.
@@ -26,6 +28,7 @@ abstract class PayButton extends StatelessWidget {
     this.margin,
     this.elevation = 0.0,
     this.semanticLabel,
+    this.shape = PayButtonShape.rounded,
     this.variant = PayButtonVariant.responsive,
     this.textPosition = PayButtonTextPosition.leading,
   });
@@ -76,7 +79,7 @@ abstract class PayButton extends StatelessWidget {
 
   /// Optional override for the corner radius.
   ///
-  /// If null, [defaultBorderRadius] defined by the brand implementation is used.
+  /// If null, [defaultBorderRadius] derived from [shape] is used.
   final double? borderRadius;
 
   /// Optional outer margin around the button.
@@ -87,6 +90,9 @@ abstract class PayButton extends StatelessWidget {
 
   /// Accessibility label read by screen readers.
   final String? semanticLabel;
+
+  /// The contour shape of the button. Defaults to [PayButtonShape.rounded].
+  final PayButtonShape shape;
 
   /// The visual layout variant of the button. Defaults to [PayButtonVariant.responsive].
   final PayButtonVariant variant;
@@ -105,9 +111,52 @@ abstract class PayButton extends StatelessWidget {
   /// Whether the button can currently be tapped.
   bool get isInteractive => enabled && !isLoading && onPressed != null;
 
-  /// Default corner radius defined by the specific brand implementation.
+  /// Corner radius applied when [shape] is [PayButtonShape.rounded].
+  ///
+  /// Subclasses can override this to reflect official brand guidelines
+  /// (e.g. 5.0 dp for Klarna, 6.0 dp for PayPal).
   @protected
-  double get defaultBorderRadius => 4.0;
+  double get roundedBorderRadius => 4.0;
+
+  /// Default corner radius resolved from [shape] and [height].
+  @protected
+  @visibleForTesting
+  double get defaultBorderRadius => switch (shape) {
+    PayButtonShape.pill => height / 2,
+    PayButtonShape.rounded => roundedBorderRadius,
+    PayButtonShape.rect => 0.0,
+  };
+
+  /// Horizontal spacing between the brand emblem/logo and the text label.
+  @protected
+  double get textGap => 8.0;
+
+  /// Default font weight for button label typography.
+  @protected
+  FontWeight get labelFontWeight => FontWeight.w600;
+
+  /// Default letter spacing for button label typography.
+  @protected
+  double get labelLetterSpacing => -0.1;
+
+  /// Standard font family fallback list for this brand.
+  @protected
+  List<String> get defaultFontFamilyFallback => const [];
+
+  /// Standard responsive font size scaling for button labels.
+  /// Scaled proportionally to button height (0.31x) and clamped to [13.0, 16.0]sp.
+  @protected
+  double get labelFontSize => (height * 0.31).clamp(13.0, 16.0);
+
+  /// Standard responsive logo height for standard medium variant.
+  /// Scaled to 0.44x button height and clamped to [18.0, 24.0]dp.
+  @protected
+  double get mediumLogoHeight => (height * 0.44).clamp(18.0, 24.0);
+
+  /// Standard responsive mark height for compact variant.
+  /// Scaled to 0.48x button height and clamped to [20.0, 26.0]dp.
+  @protected
+  double get compactMarkHeight => (height * 0.48).clamp(20.0, 26.0);
 
   /// Subclasses implement this method to render their branded content (logos, text, badges).
   @protected
@@ -148,7 +197,37 @@ abstract class PayButton extends StatelessWidget {
 
   /// Subclasses implement this to render the full variant combining text and brand logo.
   @protected
-  Widget buildFullContent(BuildContext context) => buildMediumContent(context);
+  Widget buildFullContent(BuildContext context) {
+    final medium = buildMediumContent(context);
+    if (text == null || text!.isEmpty) {
+      return medium;
+    }
+
+    final colors = resolveColors(context);
+    final effectiveTextStyle = resolveTextStyle(
+      textColor: colors.textColor,
+      fontSize: labelFontSize,
+      fontWeight: labelFontWeight,
+      letterSpacing: labelLetterSpacing,
+      defaultFontFamilyFallback: defaultFontFamilyFallback,
+    );
+
+    final textWidget = Flexible(
+      child: Text(
+        text!,
+        style: effectiveTextStyle,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: textPosition == PayButtonTextPosition.trailing
+          ? [medium, SizedBox(width: textGap), textWidget]
+          : [textWidget, SizedBox(width: textGap), medium],
+    );
+  }
 
   /// Subclasses implement this method to return the active color palette.
   @protected

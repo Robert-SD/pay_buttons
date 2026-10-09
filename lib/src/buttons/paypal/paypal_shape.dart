@@ -1,8 +1,4 @@
-/// Button contour shapes supported by PayPal brand guidelines.
-enum PayPalShape {
-  /// Signature PayPal pill shape with fully rounded circular ends.
-  pill,
+import '../../base/pay_button_shape.dart';
 
-  /// Subtle rounded rectangle (typically 4.0 - 6.0 dp corner radius).
-  rounded,
-}
+/// Supported corner contour shapes for PayPal buttons.
+typedef PayPalShape = PayButtonShape;

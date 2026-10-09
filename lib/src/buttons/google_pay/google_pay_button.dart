@@ -24,7 +24,7 @@ class GooglePayButton extends PayButton {
     required super.onPressed,
     this.type = GooglePayType.pay,
     this.color = GooglePayColor.black,
-    this.shape = GooglePayShape.pill,
+    super.shape = GooglePayShape.pill,
     this.paymentConfiguration,
     this.environment,
     super.width,
@@ -49,9 +49,6 @@ class GooglePayButton extends PayButton {
 
   /// The brand color palette for the button. Defaults to [GooglePayColor.black].
   final GooglePayColor color;
-
-  /// The contour shape of the button. Defaults to [GooglePayShape.pill].
-  final GooglePayShape shape;
 
   /// Optional payment configuration for native `package:pay` integration on Android.
   final pay.PaymentConfiguration? paymentConfiguration;
@@ -90,17 +87,6 @@ class GooglePayButton extends PayButton {
         : GooglePayEnvironment.test;
   }
 
-  @override
-  double get defaultBorderRadius {
-    switch (shape) {
-      case GooglePayShape.pill:
-        return height / 2;
-      case GooglePayShape.rounded:
-        return 4.0;
-      case GooglePayShape.rect:
-        return 0.0;
-    }
-  }
 
   @override
   String get semanticLabel =>
@@ -240,16 +226,5 @@ class GooglePayButton extends PayButton {
   /// Note: Google Pay buttons are rendered directly by platform controls
   /// (package:pay / Google Pay JS SDK) and do not use a custom Flutter canvas.
   @override
-  PayButtonColors resolveColors(BuildContext context) => switch (color) {
-    GooglePayColor.black => const PayButtonColors(
-      backgroundColor: Color(0xFF000000),
-      progressColor: Color(0xFFFFFFFF),
-    ),
-    GooglePayColor.white => const PayButtonColors(
-      backgroundColor: Color(0xFFFFFFFF),
-      progressColor: Color(0xFF3C4043),
-      borderColor: Color(0xFF747775),
-      borderWidth: 1.0,
-    ),
-  };
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 }

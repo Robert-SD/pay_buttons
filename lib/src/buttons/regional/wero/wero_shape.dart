@@ -1,8 +1,4 @@
-/// Contour shapes supported by Wero design guidelines.
-enum WeroShape {
-  /// Rounded rectangle with a subtle corner radius (6.0 dp).
-  rounded,
+import '../../../base/pay_button_shape.dart';
 
-  /// Stadium / pill shape with fully circular ends (radius = height / 2).
-  pill,
-}
+/// Supported corner contour shapes for Wero buttons.
+typedef WeroShape = PayButtonShape;

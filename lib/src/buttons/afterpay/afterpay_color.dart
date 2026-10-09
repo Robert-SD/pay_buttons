@@ -1,11 +1,39 @@
+import 'package:flutter/material.dart';
+
+import '../../base/pay_button_colors.dart';
+
 /// Supported color themes for Afterpay / Clearpay buttons.
 enum AfterpayColor {
   /// Signature Bondi Mint (`#B2FCE4`) with black text/badge.
-  mint,
+  mint(
+    PayButtonColors(
+      backgroundColor: Color(0xFFB2FCE4),
+      textColor: Color(0xFF000000),
+    ),
+  ),
 
   /// High-contrast Black (`#000000`) with Bondi Mint badge.
-  black,
+  black(
+    PayButtonColors(
+      backgroundColor: Color(0xFF000000),
+      textColor: Colors.white,
+      progressColor: Color(0xFFB2FCE4),
+    ),
+  ),
 
   /// Clean White (`#FFFFFF`) with subtle border (`#D1D5DB`).
-  white,
+  white(
+    PayButtonColors(
+      backgroundColor: Color(0xFFFFFFFF),
+      borderColor: Color(0xFFD1D5DB),
+      borderWidth: 1.0,
+      textColor: Color(0xFF000000),
+    ),
+  );
+
+  const AfterpayColor(this.palette);
+
+  /// The resolved color palette for this Afterpay theme.
+  final PayButtonColors palette;
 }
+

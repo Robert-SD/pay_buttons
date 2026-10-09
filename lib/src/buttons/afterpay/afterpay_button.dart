@@ -30,23 +30,25 @@ class AfterpayButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
+    super.shape = AfterpayShape.rounded,
     this.color = AfterpayColor.mint,
-    this.shape = AfterpayShape.rounded,
     this.brand = AfterpayBrand.afterpay,
   });
 
   /// The brand color palette for the button. Defaults to [AfterpayColor.mint].
   final AfterpayColor color;
 
-  /// The contour shape of the button. Defaults to [AfterpayShape.rounded] (6.0 dp).
-  final AfterpayShape shape;
-
   /// Regional branding variant (Afterpay vs Clearpay). Defaults to [AfterpayBrand.afterpay].
   final AfterpayBrand brand;
 
   @override
-  double get defaultBorderRadius =>
-      shape == AfterpayShape.pill ? (height / 2) : 6.0;
+  double get roundedBorderRadius => 6.0;
+
+  @override
+  double get textGap => 6.0;
+
+  @override
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.afterpay;
 
   @override
   String? get semanticLabel =>
@@ -56,43 +58,7 @@ class AfterpayButton extends PayButton {
           : 'Pay with Afterpay');
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case AfterpayColor.mint:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFB2FCE4),
-          progressColor: Color(0xFF000000),
-          splashColor: Color(0x1F000000),
-          highlightColor: Color(0x0F000000),
-        );
-      case AfterpayColor.black:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF000000),
-          progressColor: Color(0xFFB2FCE4),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case AfterpayColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFD1D5DB),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF000000),
-          splashColor: Color(0x1F000000),
-          highlightColor: Color(0x0F000000),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case AfterpayColor.mint:
-      case AfterpayColor.white:
-        return const Color(0xFF000000);
-      case AfterpayColor.black:
-        return Colors.white;
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -107,40 +73,6 @@ class AfterpayButton extends PayButton {
       brand: brand,
       color: color,
       height: lockupHeight,
-    );
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final brandLockup = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return brandLockup;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveLabelStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w600,
-      letterSpacing: -0.1,
-      defaultFontFamilyFallback: PayButtonFonts.afterpay,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveLabelStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [brandLockup, const SizedBox(width: 6), textWidget]
-          : [textWidget, const SizedBox(width: 6), brandLockup],
     );
   }
 }

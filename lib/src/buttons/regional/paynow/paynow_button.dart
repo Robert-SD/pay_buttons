@@ -28,61 +28,24 @@ class PayNowButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
+    super.shape = PayNowShape.rounded,
     this.color = PayNowColor.purple,
-    this.shape = PayNowShape.rounded,
   });
 
   /// The brand color palette for the button. Defaults to [PayNowColor.purple].
   final PayNowColor color;
 
-  /// The contour shape of the button. Defaults to [PayNowShape.rounded] (6.0 dp).
-  final PayNowShape shape;
+  @override
+  double get roundedBorderRadius => 6.0;
 
   @override
-  double get defaultBorderRadius =>
-      shape == PayNowShape.pill ? (height / 2) : 6.0;
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.paynow;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'PayNow';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case PayNowColor.purple:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF7D1978),
-          progressColor: Color(0xFFFFFFFF),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case PayNowColor.magenta:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFED0080),
-          progressColor: Color(0xFFFFFFFF),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-      case PayNowColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFE0E0E0),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF7D1978),
-          splashColor: Color(0x1F7D1978),
-          highlightColor: Color(0x0F7D1978),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case PayNowColor.purple:
-      case PayNowColor.magenta:
-        return Colors.white;
-      case PayNowColor.white:
-        return const Color(0xFF1A1A1A);
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -94,39 +57,5 @@ class PayNowButton extends PayButton {
   Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.46).clamp(18.0, 26.0);
     return PayNowAssets.logo(color: color, height: logoHeight);
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w600,
-      letterSpacing: -0.1,
-      defaultFontFamilyFallback: PayButtonFonts.paynow,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
-    );
   }
 }

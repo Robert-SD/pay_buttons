@@ -28,53 +28,24 @@ class BancontactButton extends PayButton {
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
+    super.shape = BancontactShape.rounded,
     this.color = BancontactColor.white,
-    this.shape = BancontactShape.rounded,
   });
 
   /// The brand color palette for the button. Defaults to [BancontactColor.white].
   final BancontactColor color;
 
-  /// The contour shape of the button. Defaults to [BancontactShape.rounded] (6.0 dp).
-  final BancontactShape shape;
+  @override
+  double get roundedBorderRadius => 6.0;
 
   @override
-  double get defaultBorderRadius =>
-      shape == BancontactShape.pill ? (height / 2) : 6.0;
+  List<String> get defaultFontFamilyFallback => PayButtonFonts.bancontact;
 
   @override
   String? get semanticLabel => super.semanticLabel ?? 'Bancontact';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) {
-    switch (color) {
-      case BancontactColor.white:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFFFFFFFF),
-          borderColor: Color(0xFFD1D5DB),
-          borderWidth: 1.0,
-          progressColor: Color(0xFF005AB9),
-          splashColor: Color(0x1F005AB9),
-          highlightColor: Color(0x0F005AB9),
-        );
-      case BancontactColor.blue:
-        return const PayButtonColors(
-          backgroundColor: Color(0xFF002D62),
-          progressColor: Color(0xFFFFD800),
-          splashColor: Color(0x1FFFFFFF),
-          highlightColor: Color(0x0FFFFFFF),
-        );
-    }
-  }
-
-  Color _resolveTextColor() {
-    switch (color) {
-      case BancontactColor.white:
-        return const Color(0xFF1E3764);
-      case BancontactColor.blue:
-        return Colors.white;
-    }
-  }
+  PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -86,39 +57,5 @@ class BancontactButton extends PayButton {
   Widget buildMediumContent(BuildContext context) {
     final logoHeight = (height * 0.52).clamp(20.0, 28.0);
     return BancontactAssets.logo(color: color, height: logoHeight);
-  }
-
-  @override
-  Widget buildFullContent(BuildContext context) {
-    final logoWidget = buildMediumContent(context);
-
-    if (text == null || text!.isEmpty) {
-      return logoWidget;
-    }
-
-    final textColor = _resolveTextColor();
-    final effectiveTextStyle = resolveTextStyle(
-      textColor: textColor,
-      fontSize: (height * 0.31).clamp(13.0, 16.0),
-      fontWeight: FontWeight.w600,
-      letterSpacing: -0.1,
-      defaultFontFamilyFallback: PayButtonFonts.bancontact,
-    );
-
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
-    );
   }
 }
