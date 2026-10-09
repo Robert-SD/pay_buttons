@@ -95,10 +95,10 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 ### 6. Alipay
 * **Trademark Owner / Governing Body**: Alipay.com Co., Ltd. / Ant Group Co., Ltd.
 * **Registered Trademarks / Marks**: "Alipay", "支付宝", "支" emblem badge, Alipay horizontal wordmark.
-* **Brand Guidelines & Reference**: [Alipay Brand Resources](https://global.alipay.com/)
-* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry based on Ant Group / Alipay merchant specifications.
+* **Brand Guidelines & Reference**: [Alipay Brand Resources](https://global.alipay.com/) & [File:Alipay logo (2020).svg](https://en.wikipedia.org/wiki/File:Alipay_logo_(2020).svg)
+* **Asset Implementation & Provenance**: Clean inlined SVG vector geometry based on official Ant Group specifications (`Alipay_logo_(2020).svg`).
 * **Permitted Customizations**:
-  * *Approved colors*: Alipay Blue (`#1677FF`), White (`#FFFFFF`). (Black is deprecated in accordance with Ant Group checkout guidelines).
+  * *Approved colors*: Alipay Blue (`#1677FF`), White (`#FFFFFF`), Black (`#000000`).
   * *Approved shapes*: Rounded Rectangle (`borderRadius: 6.0`) and Pill (`borderRadius: height / 2`).
   * *Brand rules*: Blue emblem background or blue fill must maintain exact official brand color; clear-space margins preserved.
 
@@ -237,14 +237,14 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 ---
 
 ### 18. Boleto Bancário
-* **Trademark Owner / Governing Body**: Federação Brasileira de Bancos (FEBRABAN)
-* **Registered Trademarks / Marks**: Official FEBRABAN Boleto barcode and typography emblem.
+* **Trademark Owner / Governing Body**: Federação Brasileira de Bancos (FEBRABAN) / Banco Central do Brasil (BCB)
+* **Registered Trademarks / Marks**: Boleto Bancário standardized banking payment order format.
 * **Brand Guidelines & Reference**: [FEBRABAN Standards Portal](https://portal.febraban.org.br/)
-* **Asset Implementation & Provenance**: Clean inlined SVG vectorized barcode and typography path data based on Brazilian checkout standard.
+* **Asset Implementation & Provenance**: Clean inlined SVG vector barcode emblem paired with native Flutter typography (`PayButtonFonts.boleto`). No proprietary vector font outlines are distributed.
 * **Permitted Customizations**:
   * *Approved colors*: White (`#FFFFFF`), Black (`#1A1A1A`), Light Gray (`#F5F5F7`).
   * *Approved shapes*: Rounded Rectangle (`borderRadius: 4.0 - 6.0`) and Pill (`borderRadius: height / 2`).
-  * *Brand rules*: Barcode line ratios and FEBRABAN regulatory formatting standards strictly maintained.
+  * *Brand rules*: Standardized barcode emblem and high contrast layout conforming to Brazilian checkout expectations.
 
 ---
 

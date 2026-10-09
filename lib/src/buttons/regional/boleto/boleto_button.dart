@@ -123,12 +123,16 @@ class BoletoButton extends PayButton {
       ),
     );
 
+    final markWidget = text!.toLowerCase().contains('boleto')
+        ? buildCompactContent(context)
+        : logoWidget;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: textPosition == PayButtonTextPosition.trailing
-          ? [logoWidget, const SizedBox(width: 8), textWidget]
-          : [textWidget, const SizedBox(width: 8), logoWidget],
+          ? [markWidget, const SizedBox(width: 8), textWidget]
+          : [textWidget, const SizedBox(width: 8), markWidget],
     );
   }
 }

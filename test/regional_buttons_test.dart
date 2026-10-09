@@ -556,7 +556,7 @@ void main() {
 
     group('BoletoButton', () {
       testWidgets(
-        'renders white rounded boleto button without text by default',
+        'renders white rounded boleto button with barcode and label by default',
         (tester) async {
           await tester.pumpWidget(
             MaterialApp(
@@ -566,7 +566,7 @@ void main() {
 
           expect(find.byType(BoletoButton), findsOneWidget);
           expect(find.byType(SvgPicture), findsOneWidget);
-          expect(find.byType(Text), findsNothing);
+          expect(find.text('Boleto'), findsOneWidget);
 
           final material = tester.widget<Material>(
             find.descendant(
