@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
@@ -5,6 +7,7 @@ import 'package:pay/pay.dart' as pay;
 import '../../base/pay_button.dart';
 import '../../base/pay_button_colors.dart';
 import 'google_pay_color.dart';
+import 'google_pay_environment.dart';
 import 'google_pay_shape.dart';
 import 'google_pay_web_stub.dart'
     if (dart.library.js_interop) 'google_pay_web.dart';
@@ -35,6 +38,7 @@ class GooglePayButton extends PayButton {
     this.color = GooglePayColor.black,
     this.shape = GooglePayShape.pill,
     this.paymentConfiguration,
+    this.environment,
     bool? logoFirst,
   }) : super(
          textPosition:
@@ -52,6 +56,40 @@ class GooglePayButton extends PayButton {
 
   /// Optional payment configuration for native `package:pay` integration on Android.
   final pay.PaymentConfiguration? paymentConfiguration;
+
+  /// The target Google Pay environment (`test` or `production`).
+  ///
+  /// When `null`, automatically resolves from [paymentConfiguration] if available,
+  /// or defaults to [GooglePayEnvironment.production] in release mode (`kReleaseMode`)
+  /// and [GooglePayEnvironment.test] in debug / profile mode.
+  final GooglePayEnvironment? environment;
+
+  /// Resolves the effective Google Pay environment.
+  GooglePayEnvironment get effectiveEnvironment {
+    if (environment != null) {
+      return environment!;
+    }
+    if (paymentConfiguration != null) {
+      try {
+        final raw = jsonDecode(paymentConfiguration!.rawConfigurationData());
+        if (raw is Map) {
+          final env =
+              (raw['environment'] ?? (raw['data'] as Map?)?['environment'])
+                  as String?;
+          if (env != null) {
+            if (env.toUpperCase() == 'PRODUCTION') {
+              return GooglePayEnvironment.production;
+            } else if (env.toUpperCase() == 'TEST') {
+              return GooglePayEnvironment.test;
+            }
+          }
+        }
+      } catch (_) {}
+    }
+    return kReleaseMode
+        ? GooglePayEnvironment.production
+        : GooglePayEnvironment.test;
+  }
 
   /// Whether the Google Pay mark appears before [text]. Defaults to `false`.
   bool get logoFirst => textPosition == PayButtonTextPosition.trailing;
@@ -95,6 +133,7 @@ class GooglePayButton extends PayButton {
         onPressed: isInteractive ? onPressed : null,
         theme: themeString,
         type: typeString,
+        environment: effectiveEnvironment.value,
         width: width ?? 200.0,
         height: height,
         borderRadius: borderRadius ?? defaultBorderRadius,

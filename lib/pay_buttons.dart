@@ -20,6 +20,7 @@ export 'src/buttons/apple_pay/apple_pay_type.dart';
 // Google Pay
 export 'src/buttons/google_pay/google_pay_button.dart';
 export 'src/buttons/google_pay/google_pay_color.dart';
+export 'src/buttons/google_pay/google_pay_environment.dart';
 export 'src/buttons/google_pay/google_pay_shape.dart';
 
 // PayPal
