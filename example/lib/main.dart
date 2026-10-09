@@ -123,6 +123,7 @@ class CatalogHomePage extends StatelessWidget {
                               _handlePayPress(context, 'Google Pay'),
                         ),
                         KlarnaButton(
+                          shape: KlarnaShape.pill,
                           onPressed: () => _handlePayPress(context, 'Klarna'),
                         ),
                         AfterpayButton(
@@ -191,6 +192,7 @@ class CatalogHomePage extends StatelessWidget {
                           onPressed: () => _handlePayPress(context, 'PayPal'),
                         ),
                         KlarnaButton(
+                          shape: KlarnaShape.pill,
                           onPressed: () => _handlePayPress(context, 'Klarna'),
                         ),
                         AfterpayButton(
