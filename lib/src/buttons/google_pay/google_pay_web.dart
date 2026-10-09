@@ -1,5 +1,6 @@
 import 'dart:js_interop';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 
@@ -11,19 +12,43 @@ extension type PaymentsClient._(JSObject _) implements JSObject {
   external web.HTMLElement createButton(JSObject options);
 }
 
-void _ensureGooglePayJsInjected() {
+/// Default Google Pay JS SDK endpoint.
+const String defaultGooglePayJsSdkUrl =
+    'https://pay.google.com/gp/p/js/pay.js';
+
+void _ensureGooglePayJsInjected({String sdkUrl = defaultGooglePayJsSdkUrl}) {
   if (_googlePayJsScriptInjected) return;
-  _googlePayJsScriptInjected = true;
 
   final existingScript = web.document.querySelector(
     'script[src*="pay.google.com/gp/p/js/pay.js"]',
   );
-  if (existingScript != null) return;
+  if (existingScript != null) {
+    _googlePayJsScriptInjected = true;
+    return;
+  }
+
+  final head = web.document.head;
+  if (head == null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
-  script.src = 'https://pay.google.com/gp/p/js/pay.js';
+  script.src = sdkUrl;
   script.async = true;
-  web.document.head?.appendChild(script);
+
+  script.addEventListener(
+    'error',
+    ((web.Event _) {
+      _googlePayJsScriptInjected = false;
+      script.remove();
+      if (kDebugMode) {
+        debugPrint(
+          'GooglePayButton: Failed to load Google Pay JS SDK script from $sdkUrl.',
+        );
+      }
+    }).toJS,
+  );
+
+  head.appendChild(script);
+  _googlePayJsScriptInjected = true;
 }
 
 /// Renders the official Google Pay JS SDK button container on Web.
@@ -85,6 +110,9 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
   /// the exact callback that was added.
   web.EventListener? _scriptLoadListener;
 
+  /// The `error` listener registered on [_script], kept so [dispose] can remove it.
+  web.EventListener? _scriptErrorListener;
+
   @override
   void initState() {
     super.initState();
@@ -134,16 +162,22 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
       button.style.width = '100%';
       button.style.height = '100%';
       container.appendChild(button);
-    } catch (_) {
-      // If JS SDK is still loading or unavailable, wait for it or retry on user interaction
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        debugPrint(
+          'GooglePayButton: Failed to initialize Google Pay JS client or create button: $e\n$stackTrace',
+        );
+      }
     }
   }
 
   @override
   void dispose() {
     _script?.removeEventListener('load', _scriptLoadListener);
+    _script?.removeEventListener('error', _scriptErrorListener);
     _script = null;
     _scriptLoadListener = null;
+    _scriptErrorListener = null;
     _container = null;
     super.dispose();
   }
@@ -176,7 +210,15 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
                 _recreateButton();
               }
             }).toJS;
+            _scriptErrorListener = ((web.Event _) {
+              if (kDebugMode) {
+                debugPrint(
+                  'GooglePayButton: Failed to load Google Pay JS SDK script.',
+                );
+              }
+            }).toJS;
             script.addEventListener('load', _scriptLoadListener);
+            script.addEventListener('error', _scriptErrorListener);
           }
         }
       },

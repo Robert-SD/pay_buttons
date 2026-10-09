@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pay_buttons/pay_buttons.dart';
@@ -185,6 +186,47 @@ void main() {
     test('effectiveEnvironment defaults to test in non-release mode', () {
       const button = GooglePayButton(onPressed: null);
       expect(button.effectiveEnvironment, GooglePayEnvironment.test);
+    });
+
+    testWidgets('renders Semantics widget in widget tree when active', (
+      tester,
+    ) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      try {
+        final config = PaymentConfiguration.fromJsonString('''{
+          "provider": "google_pay",
+          "data": {
+            "environment": "TEST",
+            "apiVersion": 2,
+            "apiVersionMinor": 0
+          }
+        }''');
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: GooglePayButton(
+                paymentConfiguration: config,
+                semanticLabel: 'Buy with Google Pay',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final semanticsFinder = find.descendant(
+          of: find.byType(GooglePayButton),
+          matching: find.byType(Semantics),
+        );
+        expect(semanticsFinder, findsWidgets);
+
+        final semanticsWidget = tester.widget<Semantics>(semanticsFinder.first);
+        expect(semanticsWidget.properties.label, 'Buy with Google Pay');
+        expect(semanticsWidget.properties.button, isTrue);
+        expect(semanticsWidget.properties.enabled, isTrue);
+      } finally {
+        debugDefaultTargetPlatformOverride = null;
+      }
     });
 
     testWidgets('resolveColors returns authentic palette matching GooglePayColor', (tester) async {

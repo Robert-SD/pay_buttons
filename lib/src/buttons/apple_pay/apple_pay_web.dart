@@ -1,5 +1,6 @@
 import 'dart:js_interop';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 
@@ -44,21 +45,45 @@ bool canMakeApplePayPayments() {
   }
 }
 
+/// Default Apple Pay JS SDK CDN endpoint recommended by Apple.
+const String defaultApplePayJsSdkUrl =
+    'https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js';
+
 /// Injects the Apple Pay JS SDK once per document, if not already present.
-void ensureApplePayJsInjected() {
+void ensureApplePayJsInjected({String sdkUrl = defaultApplePayJsSdkUrl}) {
   if (_applePayJsScriptInjected) return;
-  _applePayJsScriptInjected = true;
 
   final existingScript = web.document.querySelector(
     'script[src*="apple-pay-sdk.js"]',
   );
-  if (existingScript != null) return;
+  if (existingScript != null) {
+    _applePayJsScriptInjected = true;
+    return;
+  }
+
+  final head = web.document.head;
+  if (head == null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
-  script.src = 'https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js';
+  script.src = sdkUrl;
   script.crossOrigin = 'anonymous';
   script.async = true;
-  web.document.head?.appendChild(script);
+
+  script.addEventListener(
+    'error',
+    ((web.Event _) {
+      _applePayJsScriptInjected = false;
+      script.remove();
+      if (kDebugMode) {
+        debugPrint(
+          'ApplePayButton: Failed to load Apple Pay JS SDK from $sdkUrl.',
+        );
+      }
+    }).toJS,
+  );
+
+  head.appendChild(script);
+  _applePayJsScriptInjected = true;
 }
 
 /// Renders the official Apple Pay JS SDK `<apple-pay-button>` custom element.
@@ -126,6 +151,10 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
   /// the exact callback that was added.
   web.EventListener? _scriptLoadListener;
 
+  /// The `click` listener registered on [_element], retained so [dispose] can
+  /// detach it from the DOM element when unmounting.
+  web.EventListener? _clickListener;
+
   @override
   void initState() {
     super.initState();
@@ -156,6 +185,10 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
 
   @override
   void dispose() {
+    if (_element != null && _clickListener != null) {
+      _element!.removeEventListener('click', _clickListener);
+    }
+    _clickListener = null;
     _script?.removeEventListener('load', _scriptLoadListener);
     _script = null;
     _scriptLoadListener = null;
@@ -184,10 +217,8 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
           '${widget.borderRadius.toStringAsFixed(1)}px',
         );
 
-        button.addEventListener(
-          'click',
-          ((web.Event _) => _onPressed?.call()).toJS,
-        );
+        _clickListener = ((web.Event _) => _onPressed?.call()).toJS;
+        button.addEventListener('click', _clickListener);
 
         _element = button;
 
