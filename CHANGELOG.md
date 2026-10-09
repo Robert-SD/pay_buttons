@@ -1,8 +1,8 @@
 ## 0.1.0
 
 * Initial release of `pay_buttons`.
-* Included cross-platform payment buttons:
-  * Apple Pay (native `PKPaymentButton` on iOS and Web JS SDK)
+* Available pay buttons:
+  * Apple Pay (native iOS via `package:pay` and Web JS SDK)
   * Google Pay (native Android via `package:pay` and Web JS SDK)
   * PayPal & PayPal Pay Later
   * Klarna
