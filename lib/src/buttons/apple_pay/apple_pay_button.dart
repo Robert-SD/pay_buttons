@@ -193,11 +193,26 @@ class ApplePayButton extends PayButton {
   /// Width used when the caller does not specify one.
   static const double _defaultWidth = 200.0;
 
-  /// Unused: the button has no Flutter-rendered surface, so a Flutter color
-  /// palette does not apply.
+  /// Returns the color palette corresponding to [color] according to official
+  /// Apple Pay guidelines (e.g. solid black background with white mark for [ApplePayColor.black]).
+  ///
+  /// Note: Apple Pay buttons are rendered directly by platform controls
+  /// (PKPaymentButton / Apple Pay JS SDK) and do not use a custom Flutter canvas.
   @override
-  PayButtonColors resolveColors(BuildContext context) => throw UnsupportedError(
-    'ApplePayButton renders only native Apple Pay controls, which are styled '
-    'by Apple and cannot use a Flutter color palette.',
-  );
+  PayButtonColors resolveColors(BuildContext context) => switch (color) {
+    ApplePayColor.black => const PayButtonColors(
+      backgroundColor: Color(0xFF000000),
+      progressColor: Color(0xFFFFFFFF),
+    ),
+    ApplePayColor.white => const PayButtonColors(
+      backgroundColor: Color(0xFFFFFFFF),
+      progressColor: Color(0xFF000000),
+    ),
+    ApplePayColor.whiteOutline => const PayButtonColors(
+      backgroundColor: Color(0xFFFFFFFF),
+      progressColor: Color(0xFF000000),
+      borderColor: Color(0xFF000000),
+      borderWidth: 1.0,
+    ),
+  };
 }

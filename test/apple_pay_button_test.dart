@@ -191,18 +191,30 @@ void main() {
       }
     });
 
-    testWidgets('rejects a Flutter colour palette', (tester) async {
+    testWidgets('resolveColors returns authentic palette matching ApplePayColor', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(body: ApplePayButton(onPressed: () {})),
         ),
       );
 
-      final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
-      expect(
-        () => button.resolveColors(tester.element(find.byType(ApplePayButton))),
-        throwsUnsupportedError,
-      );
+      final element = tester.element(find.byType(ApplePayButton));
+
+      const blackButton = ApplePayButton(color: ApplePayColor.black, onPressed: null);
+      final blackColors = blackButton.resolveColors(element);
+      expect(blackColors.backgroundColor, const Color(0xFF000000));
+      expect(blackColors.progressColor, const Color(0xFFFFFFFF));
+
+      const whiteButton = ApplePayButton(color: ApplePayColor.white, onPressed: null);
+      final whiteColors = whiteButton.resolveColors(element);
+      expect(whiteColors.backgroundColor, const Color(0xFFFFFFFF));
+      expect(whiteColors.progressColor, const Color(0xFF000000));
+
+      const outlineButton = ApplePayButton(color: ApplePayColor.whiteOutline, onPressed: null);
+      final outlineColors = outlineButton.resolveColors(element);
+      expect(outlineColors.backgroundColor, const Color(0xFFFFFFFF));
+      expect(outlineColors.progressColor, const Color(0xFF000000));
+      expect(outlineColors.borderColor, const Color(0xFF000000));
     });
   });
 }
