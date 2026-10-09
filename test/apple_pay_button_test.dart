@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -163,6 +164,37 @@ void main() {
 
       final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
       expect(button.semanticLabel, 'Pay now');
+    });
+
+    testWidgets('renders Semantics widget in widget tree when active', (
+      tester,
+    ) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      try {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ApplePayButton(
+                semanticLabel: 'Pay with Apple Pay',
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final semanticsFinder = find.descendant(
+          of: find.byType(ApplePayButton),
+          matching: find.byType(Semantics),
+        );
+        expect(semanticsFinder, findsWidgets);
+
+        final semanticsWidget = tester.widget<Semantics>(semanticsFinder.first);
+        expect(semanticsWidget.properties.label, 'Pay with Apple Pay');
+        expect(semanticsWidget.properties.button, isTrue);
+        expect(semanticsWidget.properties.enabled, isTrue);
+      } finally {
+        debugDefaultTargetPlatformOverride = null;
+      }
     });
 
     testWidgets('accepts every intent without error', (tester) async {

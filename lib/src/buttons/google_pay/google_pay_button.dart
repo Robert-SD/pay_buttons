@@ -129,7 +129,7 @@ class GooglePayButton extends PayButton {
         _ => 'buy',
       };
 
-      return buildGooglePayJsButton(
+      final jsButton = buildGooglePayJsButton(
         onPressed: isInteractive ? onPressed : null,
         theme: themeString,
         type: typeString,
@@ -137,6 +137,13 @@ class GooglePayButton extends PayButton {
         width: width ?? 200.0,
         height: height,
         borderRadius: borderRadius ?? defaultBorderRadius,
+      );
+
+      return Semantics(
+        button: true,
+        enabled: isInteractive,
+        label: semanticLabel,
+        child: jsButton,
       );
     }
 
@@ -150,14 +157,19 @@ class GooglePayButton extends PayButton {
         GooglePayColor.monochromeWhite => pay.GooglePayButtonTheme.light,
       };
 
-      return SizedBox(
-        width: width,
-        height: height,
-        child: pay.RawGooglePayButton(
-          paymentConfiguration: paymentConfiguration!,
-          onPressed: isInteractive ? onPressed : null,
-          theme: theme,
-          type: pay.GooglePayButtonType.pay,
+      return Semantics(
+        button: true,
+        enabled: isInteractive,
+        label: semanticLabel,
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: pay.RawGooglePayButton(
+            paymentConfiguration: paymentConfiguration!,
+            onPressed: isInteractive ? onPressed : null,
+            theme: theme,
+            type: pay.GooglePayButtonType.pay,
+          ),
         ),
       );
     }
