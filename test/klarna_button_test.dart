@@ -159,7 +159,7 @@ void main() {
               child: KlarnaButton(
                 width: 250,
                 text: 'Continue with',
-                logoFirst: false,
+                textPosition: PayButtonTextPosition.leading,
                 onPressed: () {},
               ),
             ),

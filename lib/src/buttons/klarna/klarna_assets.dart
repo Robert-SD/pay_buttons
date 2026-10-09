@@ -11,25 +11,12 @@ class KlarnaAssets {
   static Widget wordmark({
     required KlarnaColor color,
     double height = 20.0,
-    Color? customColor,
   }) {
-    final String fillHex;
-
-    if (customColor != null) {
-      fillHex =
-          '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
-    } else {
-      switch (color) {
-        case KlarnaColor.pink:
-        case KlarnaColor.white:
-        case KlarnaColor.offWhite:
-          fillHex = '#0B051D';
-          break;
-        case KlarnaColor.black:
-          fillHex = '#FFFFFF';
-          break;
-      }
-    }
+    final String fillHex = switch (color) {
+      KlarnaColor.pink || KlarnaColor.white || KlarnaColor.offWhite =>
+        '#0B051D',
+      KlarnaColor.black => '#FFFFFF',
+    };
 
     return SvgPicture.string(
       _klarnaWordmarkSvg(fill: fillHex),
@@ -42,25 +29,12 @@ class KlarnaAssets {
   static Widget monogram({
     required KlarnaColor color,
     double height = 22.0,
-    Color? customColor,
   }) {
-    final String fillHex;
-
-    if (customColor != null) {
-      fillHex =
-          '#${customColor.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
-    } else {
-      switch (color) {
-        case KlarnaColor.pink:
-        case KlarnaColor.white:
-        case KlarnaColor.offWhite:
-          fillHex = '#0B051D';
-          break;
-        case KlarnaColor.black:
-          fillHex = '#FFA8CD';
-          break;
-      }
-    }
+    final String fillHex = switch (color) {
+      KlarnaColor.pink || KlarnaColor.white || KlarnaColor.offWhite =>
+        '#0B051D',
+      KlarnaColor.black => '#FFA8CD',
+    };
 
     return SvgPicture.string(
       _klarnaMonogramSvg(fill: fillHex),

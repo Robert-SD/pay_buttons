@@ -30,38 +30,36 @@ class ApplePayButton extends PayButton {
   const ApplePayButton({
     super.key,
     required super.onPressed,
-    super.text,
-    super.semanticLabel,
-    super.isLoading,
-    super.enabled,
+    this.type = ApplePayType.plain,
+    this.color = ApplePayColor.black,
+    this.shape = ApplePayShape.pill,
+    this.userCanPay = true,
     super.width,
     super.height = 48.0,
     super.borderRadius,
     super.margin,
-    this.color = ApplePayColor.black,
-    this.shape = ApplePayShape.pill,
-    this.type,
-    this.userCanPay = true,
+    super.elevation,
+    super.isLoading,
+    super.enabled,
+    super.semanticLabel,
   }) : super(
-         // `text` is never rendered: Apple's own controls own the button
-         // wording. It is still accepted so that callers which previously used
-         // it keep compiling, and it feeds [effectiveType] and the
-         // accessibility label.
+         text: null,
+         textStyle: null,
+         fontFamily: null,
+         fontFamilyFallback: null,
+         variant: PayButtonVariant.responsive,
          textPosition: PayButtonTextPosition.leading,
        );
+
+  /// The transaction intent, which determines the wording on the button.
+  /// Defaults to [ApplePayType.plain] (Apple Pay mark only).
+  final ApplePayType type;
 
   /// The brand color palette of the button. Defaults to [ApplePayColor.black].
   final ApplePayColor color;
 
   /// The contour shape of the button. Defaults to [ApplePayShape.pill].
   final ApplePayShape shape;
-
-  /// The transaction intent, which determines the wording on the button.
-  ///
-  /// When `null`, falls back to [ApplePayType.plain], which renders the mark
-  /// alone. Set this to control the wording Apple applies, for example
-  /// [ApplePayType.buy] for "Buy with Apple Pay".
-  final ApplePayType? type;
 
   /// Whether Apple Pay is expected to be usable in the current context.
   ///
@@ -70,13 +68,8 @@ class ApplePayButton extends PayButton {
   /// tree to settle.
   final bool userCanPay;
 
-  /// The transaction intent applied to the button.
-  ///
-  /// When [type] is `null`, falls back to inferring the intent from [text] for
-  /// backward compatibility (`text: 'Buy with'` yields [ApplePayType.buy]),
-  /// and finally to [ApplePayType.plain].
-  ApplePayType get effectiveType =>
-      type ?? ApplePayType.tryParseLabel(text) ?? ApplePayType.plain;
+  /// The effective transaction intent applied to the button.
+  ApplePayType get effectiveType => type;
 
   @override
   double get defaultBorderRadius {
@@ -92,7 +85,7 @@ class ApplePayButton extends PayButton {
 
   @override
   String get semanticLabel =>
-      super.semanticLabel ?? _semanticLabelFor(effectiveType);
+      super.semanticLabel ?? _semanticLabelFor(type);
 
   static String _semanticLabelFor(ApplePayType type) => switch (type) {
     ApplePayType.plain => 'Apple Pay',
@@ -118,6 +111,47 @@ class ApplePayButton extends PayButton {
     if (!userCanPay) return const SizedBox.shrink();
 
     final effectiveRadius = borderRadius ?? defaultBorderRadius;
+    final colors = resolveColors(context);
+
+    if (isLoading) {
+      Widget loadingBox = SizedBox(
+        width: width ?? _defaultWidth,
+        height: height,
+        child: Material(
+          color: colors.backgroundColor,
+          elevation: elevation,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(effectiveRadius),
+            side: colors.borderColor != null
+                ? BorderSide(color: colors.borderColor!, width: colors.borderWidth)
+                : BorderSide.none,
+          ),
+          child: Center(
+            child: SizedBox(
+              width: 22,
+              height: 22,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.5,
+                valueColor: AlwaysStoppedAnimation<Color>(colors.progressColor),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      if (margin != null) {
+        loadingBox = Padding(padding: margin!, child: loadingBox);
+      }
+
+      return Semantics(
+        button: true,
+        enabled: false,
+        label: semanticLabel,
+        child: loadingBox,
+      );
+    }
+
+    Widget? buttonWidget;
 
     if (kIsWeb) {
       final jsButton = buildApplePayJsButton(
@@ -127,7 +161,7 @@ class ApplePayButton extends PayButton {
           ApplePayColor.white => 'white',
           ApplePayColor.whiteOutline => 'white-outline',
         },
-        type: effectiveType.jsValue,
+        type: type.jsValue,
         width: width ?? _defaultWidth,
         height: height,
         borderRadius: effectiveRadius,
@@ -137,57 +171,67 @@ class ApplePayButton extends PayButton {
       // to pay. Apple's guidelines do not permit substituting a drawn button.
       if (jsButton == null) return const SizedBox.shrink();
 
-      return Semantics(
-        button: true,
-        enabled: isInteractive,
-        label: semanticLabel,
-        child: jsButton,
-      );
-    }
-
-    if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return Semantics(
-        button: true,
-        enabled: isInteractive,
-        label: semanticLabel,
-        child: SizedBox(
-          width: width ?? _defaultWidth,
-          height: height,
-          child: pay.RawApplePayButton(
-            onPressed: isInteractive ? onPressed : null,
-            cornerRadius: effectiveRadius,
-            style: switch (color) {
-              ApplePayColor.black => pay.ApplePayButtonStyle.black,
-              ApplePayColor.white => pay.ApplePayButtonStyle.white,
-              ApplePayColor.whiteOutline =>
-                pay.ApplePayButtonStyle.whiteOutline,
-            },
-            type: switch (effectiveType) {
-              ApplePayType.plain => pay.ApplePayButtonType.plain,
-              ApplePayType.buy => pay.ApplePayButtonType.buy,
-              ApplePayType.setUp => pay.ApplePayButtonType.setUp,
-              ApplePayType.inStore => pay.ApplePayButtonType.inStore,
-              ApplePayType.donate => pay.ApplePayButtonType.donate,
-              ApplePayType.checkout => pay.ApplePayButtonType.checkout,
-              ApplePayType.book => pay.ApplePayButtonType.book,
-              ApplePayType.subscribe => pay.ApplePayButtonType.subscribe,
-              ApplePayType.reload => pay.ApplePayButtonType.reload,
-              ApplePayType.addMoney => pay.ApplePayButtonType.addMoney,
-              ApplePayType.topUp => pay.ApplePayButtonType.topUp,
-              ApplePayType.order => pay.ApplePayButtonType.order,
-              ApplePayType.rent => pay.ApplePayButtonType.rent,
-              ApplePayType.support => pay.ApplePayButtonType.support,
-              ApplePayType.contribute => pay.ApplePayButtonType.contribute,
-              ApplePayType.tip => pay.ApplePayButtonType.tip,
-            },
-          ),
+      buttonWidget = jsButton;
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      buttonWidget = SizedBox(
+        width: width ?? _defaultWidth,
+        height: height,
+        child: pay.RawApplePayButton(
+          onPressed: isInteractive ? onPressed : null,
+          cornerRadius: effectiveRadius,
+          style: switch (color) {
+            ApplePayColor.black => pay.ApplePayButtonStyle.black,
+            ApplePayColor.white => pay.ApplePayButtonStyle.white,
+            ApplePayColor.whiteOutline =>
+              pay.ApplePayButtonStyle.whiteOutline,
+          },
+          type: switch (type) {
+            ApplePayType.plain => pay.ApplePayButtonType.plain,
+            ApplePayType.buy => pay.ApplePayButtonType.buy,
+            ApplePayType.setUp => pay.ApplePayButtonType.setUp,
+            ApplePayType.inStore => pay.ApplePayButtonType.inStore,
+            ApplePayType.donate => pay.ApplePayButtonType.donate,
+            ApplePayType.checkout => pay.ApplePayButtonType.checkout,
+            ApplePayType.book => pay.ApplePayButtonType.book,
+            ApplePayType.subscribe => pay.ApplePayButtonType.subscribe,
+            ApplePayType.reload => pay.ApplePayButtonType.reload,
+            ApplePayType.addMoney => pay.ApplePayButtonType.addMoney,
+            ApplePayType.topUp => pay.ApplePayButtonType.topUp,
+            ApplePayType.order => pay.ApplePayButtonType.order,
+            ApplePayType.rent => pay.ApplePayButtonType.rent,
+            ApplePayType.support => pay.ApplePayButtonType.support,
+            ApplePayType.contribute => pay.ApplePayButtonType.contribute,
+            ApplePayType.tip => pay.ApplePayButtonType.tip,
+          },
         ),
       );
     }
 
-    // Android, desktop, and any other target: no official Apple Pay control
-    // exists, and Apple's guidelines forbid drawing one.
-    return const SizedBox.shrink();
+    if (buttonWidget == null) {
+      return const SizedBox.shrink();
+    }
+
+    if (elevation > 0) {
+      buttonWidget = Material(
+        color: Colors.transparent,
+        elevation: elevation,
+        borderRadius: BorderRadius.circular(effectiveRadius),
+        child: buttonWidget,
+      );
+    }
+
+    Widget result = Semantics(
+      button: true,
+      enabled: isInteractive,
+      label: semanticLabel,
+      child: buttonWidget,
+    );
+
+    if (margin != null) {
+      result = Padding(padding: margin!, child: result);
+    }
+
+    return result;
   }
 
   /// Width used when the caller does not specify one.

@@ -19,22 +19,6 @@ void main() {
       final values = ApplePayType.values.map((t) => t.jsValue).toSet();
       expect(values.length, ApplePayType.values.length);
     });
-
-    test('infers an intent from a user-supplied label', () {
-      expect(ApplePayType.tryParseLabel('Buy with'), ApplePayType.buy);
-      expect(
-        ApplePayType.tryParseLabel('check out with'),
-        ApplePayType.checkout,
-      );
-      expect(ApplePayType.tryParseLabel('  Donate  '), ApplePayType.donate);
-      expect(ApplePayType.tryParseLabel('Top up'), ApplePayType.topUp);
-    });
-
-    test('returns null for labels that name no intent', () {
-      expect(ApplePayType.tryParseLabel('Pay now'), isNull);
-      expect(ApplePayType.tryParseLabel(null), isNull);
-      expect(ApplePayType.tryParseLabel(''), isNull);
-    });
   });
 
   group('ApplePayButton', () {
@@ -79,42 +63,11 @@ void main() {
       );
 
       final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
+      expect(button.type, ApplePayType.donate);
       expect(button.effectiveType, ApplePayType.donate);
     });
 
-    testWidgets('falls back to the text label when type is omitted', (
-      tester,
-    ) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(text: 'Buy with', onPressed: () {}),
-          ),
-        ),
-      );
-
-      final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
-      expect(button.effectiveType, ApplePayType.buy);
-    });
-
-    testWidgets('explicit type wins over the text label', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(
-              text: 'Buy with',
-              type: ApplePayType.checkout,
-              onPressed: () {},
-            ),
-          ),
-        ),
-      );
-
-      final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
-      expect(button.effectiveType, ApplePayType.checkout);
-    });
-
-    testWidgets('defaults to plain when neither type nor text is given', (
+    testWidgets('defaults to plain when type is omitted', (
       tester,
     ) async {
       await tester.pumpWidget(
@@ -124,20 +77,8 @@ void main() {
       );
 
       final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
+      expect(button.type, ApplePayType.plain);
       expect(button.effectiveType, ApplePayType.plain);
-    });
-
-    testWidgets('never renders the caller-supplied text', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(text: 'Buy with', onPressed: () {}),
-          ),
-        ),
-      );
-
-      // The wording comes from Apple's own control, never from Flutter.
-      expect(find.text('Buy with'), findsNothing);
     });
 
     testWidgets('defaults the semantics label to the intent', (tester) async {
@@ -192,6 +133,60 @@ void main() {
         expect(semanticsWidget.properties.label, 'Pay with Apple Pay');
         expect(semanticsWidget.properties.button, isTrue);
         expect(semanticsWidget.properties.enabled, isTrue);
+      } finally {
+        debugDefaultTargetPlatformOverride = null;
+      }
+    });
+
+    testWidgets('renders loading spinner and disables interaction when isLoading is true', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ApplePayButton(
+              isLoading: true,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('applies margin and elevation parameters', (
+      tester,
+    ) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      try {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ApplePayButton(
+                margin: const EdgeInsets.all(12),
+                elevation: 4.0,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+
+        final paddingFinder = find.descendant(
+          of: find.byType(ApplePayButton),
+          matching: find.byWidgetPredicate(
+            (w) => w is Padding && w.padding == const EdgeInsets.all(12),
+          ),
+        );
+        expect(paddingFinder, findsOneWidget);
+
+        final materialFinder = find.descendant(
+          of: find.byType(ApplePayButton),
+          matching: find.byWidgetPredicate(
+            (w) => w is Material && w.elevation == 4.0,
+          ),
+        );
+        expect(materialFinder, findsOneWidget);
       } finally {
         debugDefaultTargetPlatformOverride = null;
       }

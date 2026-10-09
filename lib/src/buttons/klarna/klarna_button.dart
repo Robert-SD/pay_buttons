@@ -33,26 +33,16 @@ class KlarnaButton extends PayButton {
     super.elevation,
     super.semanticLabel,
     super.variant = PayButtonVariant.responsive,
-    PayButtonTextPosition? textPosition,
+    super.textPosition = PayButtonTextPosition.trailing,
     this.color = KlarnaColor.pink,
     this.shape = KlarnaShape.rounded,
-    bool? logoFirst,
-  }) : super(
-         textPosition:
-             textPosition ??
-             (logoFirst == false
-                 ? PayButtonTextPosition.leading
-                 : PayButtonTextPosition.trailing),
-       );
+  });
 
   /// The brand color palette for the button. Defaults to [KlarnaColor.pink].
   final KlarnaColor color;
 
   /// The contour shape of the button. Defaults to [KlarnaShape.rounded] (5.0 dp).
   final KlarnaShape shape;
-
-  /// Whether the Klarna logo appears before [text]. Defaults to `true`.
-  bool get logoFirst => textPosition == PayButtonTextPosition.trailing;
 
   @override
   double get defaultBorderRadius {

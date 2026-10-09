@@ -10,11 +10,4 @@ enum GooglePayColor {
   ///
   /// Recommended on dark or colorful backgrounds.
   white,
-
-  /// Monochrome black background (`#000000`) with flat all-white logo and text.
-  monochromeBlack,
-
-  /// Monochrome white background (`#FFFFFF`) with flat all-black logo, text,
-  /// and subtle border outline (`#747775`).
-  monochromeWhite,
 }

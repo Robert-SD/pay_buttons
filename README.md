@@ -77,7 +77,7 @@ GooglePayButton(
   onPressed: () => handleGooglePay(),
   color: GooglePayColor.black,
   shape: GooglePayShape.pill,
-  text: 'Buy with', // maps to buy, checkout, donate, pay, order, etc.
+  type: GooglePayType.buy, // GooglePayType.pay, buy, checkout, donate, etc.
   paymentConfiguration: paymentConfig, // For native Android package:pay
 )
 ```
