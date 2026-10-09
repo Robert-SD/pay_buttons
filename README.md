@@ -1,7 +1,7 @@
 # pay_buttons
 
 [![pub package](https://img.shields.io/badge/pub-v0.1.0-blue.svg)](https://pub.dev)
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE)
+[![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE)
 [![Live Web Demo](https://img.shields.io/badge/demo-live%20web-blue?logo=googlechrome&style=flat-square)](https://robert-sd.github.io/pay_buttons/)
 
 A lightweight, cross-platform Flutter package providing beautiful, ready-to-use payment buttons for modern e-commerce checkouts.
@@ -282,9 +282,9 @@ UpiButton(
 
 ---
 
-## Typography & Custom Fonts (MIT Compliant)
+## Typography & Custom Fonts
 
-All payment buttons support custom typography out of the box while remaining **100% compliant with the MIT open-source license**.
+All payment buttons support custom typography out of the box while remaining **fully compatible with the Apache-2.0 license**.
 
 ### Examples
 

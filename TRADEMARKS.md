@@ -262,7 +262,7 @@ Payment providers intentionally publish and distribute merchant brand guidelines
 
 ## 3. Summary of Open Source Licenses Used
 
-* **Package Code**: Distributed under the [MIT License](LICENSE).
+* **Package Code**: Distributed under the [Apache License 2.0](LICENSE). Per Apache-2.0 §6, this license grants no rights to any third-party trade names, trademarks, or brand marks (see section 1 and `NOTICE`); it covers only the package code.
 * **Vector Path Data**:
   * [@paypal/sdk-logos](https://github.com/paypal/paypal-sdk-logos): **Apache License 2.0** (PayPal, PayPal Pay Later, see `LICENSES/Apache-2.0.txt`)
   * [afterpay/sdk-android](https://github.com/afterpay/sdk-android): **Apache License 2.0** (Afterpay, Clearpay, see `LICENSES/Apache-2.0.txt`)
