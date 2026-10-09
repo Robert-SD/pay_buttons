@@ -1,13 +1,18 @@
+// Notice under Apache License 2.0 Section 4(b):
+// Vector path geometries in this file are derived from @paypal/sdk-logos
+// (Copyright PayPal, Inc.), licensed under the Apache License, Version 2.0.
+// Modified by pay_buttons contributors to inline into Flutter SVG strings.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'paypal_color.dart';
 
-/// Vector asset generator for official PayPal branding.
+/// Vector asset generator for PayPal buttons.
 class PayPalAssets {
   PayPalAssets._();
 
-  /// Renders the official PayPal PP monogram vector icon.
+  /// Renders the PayPal PP monogram vector icon.
   static Widget monogram({required PayPalColor color, double height = 24.0}) {
     final String svgString;
 

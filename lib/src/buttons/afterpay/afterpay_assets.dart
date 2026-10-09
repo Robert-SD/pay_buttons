@@ -1,10 +1,15 @@
+// Notice under Apache License 2.0 Section 4(b):
+// Vector path geometries in this file are derived from afterpay/sdk-android
+// (Copyright Block, Inc. / Afterpay Pty Ltd), licensed under the Apache License, Version 2.0.
+// Modified by pay_buttons contributors to inline into Flutter SVG strings.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'afterpay_brand.dart';
 import 'afterpay_color.dart';
 
-/// Vector asset generator for official Afterpay / Clearpay branding.
+/// Vector asset generator for Afterpay / Clearpay branding.
 class AfterpayAssets {
   AfterpayAssets._();
 

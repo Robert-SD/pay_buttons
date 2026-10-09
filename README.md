@@ -323,6 +323,6 @@ This package is an independent open-source library and is **not affiliated with,
 All trademarks, logos, and service marks displayed in this package belong to their respective owners. They are used solely under the doctrine of **nominative fair use** to identify the payment services accepted by merchants and to assist developers in building recognizable checkout buttons.
 
 ### 3. Open Source Licensure
-The vector paths used to render logos are derived from open-source distributions including [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos) and [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android), published under the **Apache License, Version 2.0**. Braintree developer integration patterns are licensed under the **MIT License**.
+The vector paths used for PayPal and Afterpay/Clearpay are derived from open-source distributions including [`@paypal/sdk-logos`](https://github.com/paypal/paypal-sdk-logos) and [`afterpay/sdk-android`](https://github.com/afterpay/sdk-android), published under the **Apache License, Version 2.0** (see `LICENSES/Apache-2.0.txt`).
 
 See [**`LICENSE`**](https://github.com/Robert-SD/pay_buttons/blob/main/LICENSE) and [**`TRADEMARKS.md`**](https://github.com/Robert-SD/pay_buttons/blob/main/TRADEMARKS.md) for full terms.
