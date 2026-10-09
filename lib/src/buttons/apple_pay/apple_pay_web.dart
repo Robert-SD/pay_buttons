@@ -115,6 +115,17 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
   /// listener, which is registered only once per element.
   VoidCallback? _onPressed;
 
+  /// The SDK `<script>` element that was present when the platform view was
+  /// created, retained so its `load` listener can be detached in [dispose].
+  ///
+  /// The script element lives for the whole document, so a listener left on it
+  /// would retain this [State] for the lifetime of the page.
+  web.Element? _script;
+
+  /// The `load` listener registered on [_script], kept so [dispose] can remove
+  /// the exact callback that was added.
+  web.EventListener? _scriptLoadListener;
+
   @override
   void initState() {
     super.initState();
@@ -145,6 +156,9 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
 
   @override
   void dispose() {
+    _script?.removeEventListener('load', _scriptLoadListener);
+    _script = null;
+    _scriptLoadListener = null;
     _element = null;
     super.dispose();
   }
@@ -182,20 +196,19 @@ class _ApplePayJsButtonState extends State<_ApplePayJsButton> {
         final script = web.document.querySelector(
           'script[src*="apple-pay-sdk.js"]',
         );
-        if (script != null) {
-          script.addEventListener(
-            'load',
-            ((web.Event _) {
-              if (mounted && _element != null) {
-                _element!.setAttribute('buttonstyle', widget.style);
-                _element!.setAttribute('type', widget.type);
-                _element!.style.setProperty(
-                  '--apple-pay-button-border-radius',
-                  '${widget.borderRadius.toStringAsFixed(1)}px',
-                );
-              }
-            }).toJS,
-          );
+        if (script != null && _scriptLoadListener == null) {
+          _script = script;
+          _scriptLoadListener = ((web.Event _) {
+            if (mounted && _element != null) {
+              _element!.setAttribute('buttonstyle', widget.style);
+              _element!.setAttribute('type', widget.type);
+              _element!.style.setProperty(
+                '--apple-pay-button-border-radius',
+                '${widget.borderRadius.toStringAsFixed(1)}px',
+              );
+            }
+          }).toJS;
+          script.addEventListener('load', _scriptLoadListener);
         }
       },
     );

@@ -70,6 +70,17 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
   web.HTMLDivElement? _container;
   VoidCallback? _onPressed;
 
+  /// The SDK `<script>` element that was present when the platform view was
+  /// created, retained so its `load` listener can be detached in [dispose].
+  ///
+  /// The script element lives for the whole document, so a listener left on it
+  /// would retain this [State] for the lifetime of the page.
+  web.Element? _script;
+
+  /// The `load` listener registered on [_script], kept so [dispose] can remove
+  /// the exact callback that was added.
+  web.EventListener? _scriptLoadListener;
+
   @override
   void initState() {
     super.initState();
@@ -125,6 +136,9 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
 
   @override
   void dispose() {
+    _script?.removeEventListener('load', _scriptLoadListener);
+    _script = null;
+    _scriptLoadListener = null;
     _container = null;
     super.dispose();
   }
@@ -150,15 +164,14 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
           final script = web.document.querySelector(
             'script[src*="pay.google.com/gp/p/js/pay.js"]',
           );
-          if (script != null) {
-            script.addEventListener(
-              'load',
-              ((web.Event _) {
-                if (mounted && _container?.firstChild == null) {
-                  _recreateButton();
-                }
-              }).toJS,
-            );
+          if (script != null && _scriptLoadListener == null) {
+            _script = script;
+            _scriptLoadListener = ((web.Event _) {
+              if (mounted && _container?.firstChild == null) {
+                _recreateButton();
+              }
+            }).toJS;
+            script.addEventListener('load', _scriptLoadListener);
           }
         }
       },
