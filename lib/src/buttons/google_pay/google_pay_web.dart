@@ -31,6 +31,7 @@ Widget buildGooglePayJsButton({
   required VoidCallback? onPressed,
   required String theme,
   required String type,
+  required String environment,
   required double width,
   required double height,
   required double borderRadius,
@@ -44,6 +45,7 @@ Widget buildGooglePayJsButton({
       onPressed: onPressed,
       theme: theme,
       type: type,
+      environment: environment,
       borderRadius: borderRadius,
     ),
   );
@@ -54,12 +56,14 @@ class _GooglePayJsButton extends StatefulWidget {
     required this.onPressed,
     required this.theme,
     required this.type,
+    required this.environment,
     required this.borderRadius,
   });
 
   final VoidCallback? onPressed;
   final String theme;
   final String type;
+  final String environment;
   final double borderRadius;
 
   @override
@@ -94,6 +98,7 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
 
     if (oldWidget.theme != widget.theme ||
         oldWidget.type != widget.type ||
+        oldWidget.environment != widget.environment ||
         oldWidget.borderRadius != widget.borderRadius) {
       _recreateButton();
     }
@@ -110,7 +115,7 @@ class _GooglePayJsButtonState extends State<_GooglePayJsButton> {
 
     try {
       final paymentsClient = PaymentsClient(
-        {'environment': 'TEST'}.jsify() as JSObject,
+        {'environment': widget.environment}.jsify() as JSObject,
       );
 
       final buttonOptions =

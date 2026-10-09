@@ -120,5 +120,71 @@ void main() {
       );
       expect(buttonRect.defaultBorderRadius, 0.0);
     });
+
+    test('effectiveEnvironment resolves explicit environment', () {
+      const buttonProd = GooglePayButton(
+        environment: GooglePayEnvironment.production,
+        onPressed: null,
+      );
+      expect(buttonProd.effectiveEnvironment, GooglePayEnvironment.production);
+      expect(buttonProd.effectiveEnvironment.value, 'PRODUCTION');
+
+      const buttonTest = GooglePayButton(
+        environment: GooglePayEnvironment.test,
+        onPressed: null,
+      );
+      expect(buttonTest.effectiveEnvironment, GooglePayEnvironment.test);
+      expect(buttonTest.effectiveEnvironment.value, 'TEST');
+    });
+
+    test('effectiveEnvironment extracts environment from PaymentConfiguration', () {
+      final prodConfig = PaymentConfiguration.fromJsonString('''{
+        "provider": "google_pay",
+        "data": {
+          "environment": "PRODUCTION",
+          "apiVersion": 2,
+          "apiVersionMinor": 0
+        }
+      }''');
+      final buttonProd = GooglePayButton(
+        paymentConfiguration: prodConfig,
+        onPressed: null,
+      );
+      expect(buttonProd.effectiveEnvironment, GooglePayEnvironment.production);
+
+      final testConfig = PaymentConfiguration.fromJsonString('''{
+        "provider": "google_pay",
+        "data": {
+          "environment": "TEST",
+          "apiVersion": 2,
+          "apiVersionMinor": 0
+        }
+      }''');
+      final buttonTest = GooglePayButton(
+        paymentConfiguration: testConfig,
+        onPressed: null,
+      );
+      expect(buttonTest.effectiveEnvironment, GooglePayEnvironment.test);
+    });
+
+    test('explicit environment overrides PaymentConfiguration', () {
+      final testConfig = PaymentConfiguration.fromJsonString('''{
+        "provider": "google_pay",
+        "data": {
+          "environment": "TEST"
+        }
+      }''');
+      final button = GooglePayButton(
+        environment: GooglePayEnvironment.production,
+        paymentConfiguration: testConfig,
+        onPressed: null,
+      );
+      expect(button.effectiveEnvironment, GooglePayEnvironment.production);
+    });
+
+    test('effectiveEnvironment defaults to test in non-release mode', () {
+      const button = GooglePayButton(onPressed: null);
+      expect(button.effectiveEnvironment, GooglePayEnvironment.test);
+    });
   });
 }

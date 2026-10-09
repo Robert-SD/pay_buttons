@@ -5,6 +5,7 @@ Widget buildGooglePayJsButton({
   required VoidCallback? onPressed,
   required String theme,
   required String type,
+  required String environment,
   required double width,
   required double height,
   required double borderRadius,
