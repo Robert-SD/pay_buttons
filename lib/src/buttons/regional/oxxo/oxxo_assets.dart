@@ -18,22 +18,27 @@ class OxxoAssets {
 
   /// Renders the standalone OXXO 'O' mark.
   static Widget oMark({required OxxoColor color, double height = 24.0}) {
-    final String markColor = color == OxxoColor.red ? '#FFFFFF' : '#E70020';
+    final String svgString =
+        color == OxxoColor.red ? _oxxoOMarkWhiteSvg : _oxxoOMarkRedSvg;
 
     return SvgPicture.string(
-      _oxxoOMarkSvg(markColor: markColor),
+      svgString,
       height: height,
       fit: BoxFit.contain,
     );
   }
 
-  static String _oxxoOMarkSvg({required String markColor}) {
-    return '''
+  static const String _oxxoOMarkWhiteSvg = '''
 <svg viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 55,5 C 24.6,5 0,20.7 0,40 C 0,59.3 24.6,75 55,75 C 85.4,75 110,59.3 110,40 C 110,20.7 85.4,5 55,5 Z M 55,22 C 73.2,22 88,30.1 88,40 C 88,49.9 73.2,58 55,58 C 36.8,58 22,49.9 22,40 C 22,30.1 36.8,22 55,22 Z" fill="$markColor"/>
+  <path d="M 55,5 C 24.6,5 0,20.7 0,40 C 0,59.3 24.6,75 55,75 C 85.4,75 110,59.3 110,40 C 110,20.7 85.4,5 55,5 Z M 55,22 C 73.2,22 88,30.1 88,40 C 88,49.9 73.2,58 55,58 C 36.8,58 22,49.9 22,40 C 22,30.1 36.8,22 55,22 Z" fill="#FFFFFF"/>
 </svg>
 ''';
-  }
+
+  static const String _oxxoOMarkRedSvg = '''
+<svg viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 55,5 C 24.6,5 0,20.7 0,40 C 0,59.3 24.6,75 55,75 C 85.4,75 110,59.3 110,40 C 110,20.7 85.4,5 55,5 Z M 55,22 C 73.2,22 88,30.1 88,40 C 88,49.9 73.2,58 55,58 C 36.8,58 22,49.9 22,40 C 22,30.1 36.8,22 55,22 Z" fill="#E70020"/>
+</svg>
+''';
 
   static const String _oxxoFullBadgeSvg = '''
 <svg viewBox="35.43 35.45 885.83 448.9" xmlns="http://www.w3.org/2000/svg">
