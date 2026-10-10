@@ -212,20 +212,29 @@ abstract class PayButton extends StatelessWidget {
       defaultFontFamilyFallback: defaultFontFamilyFallback,
     );
 
-    final textWidget = Flexible(
-      child: Text(
-        text!,
-        style: effectiveTextStyle,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final textLabel = Text(
+          text!,
+          style: effectiveTextStyle,
+          overflow: TextOverflow.ellipsis,
+        );
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: textPosition == PayButtonTextPosition.trailing
-          ? [medium, SizedBox(width: textGap), textWidget]
-          : [textWidget, SizedBox(width: textGap), medium],
+        // When incoming width constraints are unbounded (e.g. inside a Row or
+        // horizontal scroll view), a flex child causes a RenderFlex assertion.
+        // In that scenario, render the text directly at its intrinsic size.
+        final Widget textWidget = constraints.hasBoundedWidth
+            ? Flexible(child: textLabel)
+            : textLabel;
+
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: textPosition == PayButtonTextPosition.trailing
+              ? [medium, SizedBox(width: textGap), textWidget]
+              : [textWidget, SizedBox(width: textGap), medium],
+        );
+      },
     );
   }
 
