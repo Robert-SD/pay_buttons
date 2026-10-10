@@ -40,6 +40,27 @@ void main() {
       expect(find.text('Checkout'), findsOneWidget);
     });
 
+    testWidgets(
+      'renders with text inside unbounded horizontal Row without RenderFlex crash',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Row(
+                children: [
+                  PayPalButton(text: 'Checkout with PayPal', onPressed: () {}),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        expect(find.byType(PayPalButton), findsOneWidget);
+        expect(find.text('Checkout with PayPal'), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
     testWidgets('renders all PayPalColor themes without error', (tester) async {
       for (final color in PayPalColor.values) {
         await tester.pumpWidget(

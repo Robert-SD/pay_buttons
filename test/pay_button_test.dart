@@ -44,6 +44,25 @@ class _TestPayButton extends PayButton {
   }
 }
 
+class _TestFullPayButton extends PayButton {
+  const _TestFullPayButton({
+    required super.onPressed,
+    super.text,
+    super.variant = PayButtonVariant.responsive,
+  });
+
+  @override
+  Widget buildMediumContent(BuildContext context) => const Icon(Icons.payment);
+
+  @override
+  PayButtonColors resolveColors(BuildContext context) {
+    return const PayButtonColors(
+      backgroundColor: Colors.blue,
+      progressColor: Colors.white,
+    );
+  }
+}
+
 void main() {
   group('PayButton Base Contract', () {
     testWidgets('renders content and responds to tap when enabled', (
@@ -172,5 +191,53 @@ void main() {
       expect(PayButtonFonts.bizum, contains('Omnes'));
       expect(PayButtonFonts.wero, contains('GT Walsheim'));
     });
+
+    testWidgets(
+      'buildFullContent renders inside unbounded Row without RenderFlex crash',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Row(
+                children: [
+                  _TestFullPayButton(text: 'Pay Now', onPressed: () {}),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay Now'), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      'buildFullContent with explicit variant full renders inside unbounded horizontal ListView',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SizedBox(
+                height: 100,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _TestFullPayButton(
+                      text: 'Pay With Card',
+                      variant: PayButtonVariant.full,
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Pay With Card'), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
   });
 }
