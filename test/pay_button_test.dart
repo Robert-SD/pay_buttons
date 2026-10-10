@@ -63,6 +63,24 @@ class _TestFullPayButton extends PayButton {
   }
 }
 
+class _TestCustomDisabledPayButton extends PayButton {
+  const _TestCustomDisabledPayButton({
+    required super.onPressed,
+    super.enabled,
+  });
+
+  @override
+  Widget buildButtonContent(BuildContext context) => const Text('Custom');
+
+  @override
+  PayButtonColors resolveColors(BuildContext context) {
+    return const PayButtonColors(
+      backgroundColor: Colors.blue,
+      disabledBackgroundColor: Color(0xFFE2E2E2),
+    );
+  }
+}
+
 void main() {
   group('PayButton Base Contract', () {
     testWidgets('renders content and responds to tap when enabled', (
@@ -330,6 +348,31 @@ void main() {
       expect(material.color, const Color(0xFF2C2C2E));
     });
 
+    testWidgets(
+      'explicit disabledBackgroundColor is not overridden in dark mode',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: ThemeData.dark(),
+            home: Scaffold(
+              body: _TestCustomDisabledPayButton(
+                onPressed: () {},
+                enabled: false,
+              ),
+            ),
+          ),
+        );
+
+        final material = tester.widget<Material>(
+          find.descendant(
+            of: find.byType(_TestCustomDisabledPayButton),
+            matching: find.byType(Material),
+          ),
+        );
+        expect(material.color, const Color(0xFFE2E2E2));
+      },
+    );
+
     test('PayButtonFonts contains no CSS-only names', () {
       final allFallbacks = [
         ...PayButtonFonts.paypal,
@@ -353,6 +396,70 @@ void main() {
 
       expect(allFallbacks.contains('-apple-system'), isFalse);
       expect(allFallbacks.contains('BlinkMacSystemFont'), isFalse);
+    });
+  });
+
+  group('PayButtonColors Brightness Resolution', () {
+    test('derives dark and light mode defaults when fields are null', () {
+      const colors = PayButtonColors(backgroundColor: Colors.blue);
+
+      expect(colors.disabledBackgroundColor, isNull);
+      expect(colors.disabledTextColor, isNull);
+      expect(colors.disabledProgressColor, isNull);
+
+      expect(
+        colors.effectiveDisabledBackgroundColor(Brightness.light),
+        const Color(0xFFE2E2E2),
+      );
+      expect(
+        colors.effectiveDisabledBackgroundColor(Brightness.dark),
+        const Color(0xFF2C2C2E),
+      );
+
+      expect(
+        colors.effectiveDisabledTextColor(Brightness.light),
+        const Color(0xFF757575),
+      );
+      expect(
+        colors.effectiveDisabledTextColor(Brightness.dark),
+        const Color(0xFF8E8E93),
+      );
+
+      expect(
+        colors.effectiveDisabledProgressColor(Brightness.light),
+        const Color(0xFF9E9E9E),
+      );
+      expect(
+        colors.effectiveDisabledProgressColor(Brightness.dark),
+        const Color(0xFF636366),
+      );
+    });
+
+    test('preserves explicit disabled colors regardless of brightness', () {
+      const colors = PayButtonColors(
+        backgroundColor: Colors.blue,
+        disabledBackgroundColor: Color(0xFFE2E2E2),
+        disabledTextColor: Color(0xFF112233),
+        disabledProgressColor: Color(0xFF445566),
+      );
+
+      expect(
+        colors.effectiveDisabledBackgroundColor(Brightness.dark),
+        const Color(0xFFE2E2E2),
+      );
+      expect(
+        colors.effectiveDisabledBackgroundColor(Brightness.light),
+        const Color(0xFFE2E2E2),
+      );
+
+      expect(
+        colors.effectiveDisabledTextColor(Brightness.dark),
+        const Color(0xFF112233),
+      );
+      expect(
+        colors.effectiveDisabledProgressColor(Brightness.dark),
+        const Color(0xFF445566),
+      );
     });
   });
 }

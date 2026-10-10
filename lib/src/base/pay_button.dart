@@ -204,8 +204,10 @@ abstract class PayButton extends StatelessWidget {
     }
 
     final colors = resolveColors(context);
-    final effectiveTextColor =
-        isInteractive ? colors.textColor : colors.disabledTextColor;
+    final brightness = Theme.of(context).brightness;
+    final effectiveTextColor = isInteractive
+        ? colors.textColor
+        : colors.effectiveDisabledTextColor(brightness);
     final effectiveTextStyle = resolveTextStyle(
       textColor: effectiveTextColor,
       fontSize: labelFontSize,
@@ -272,15 +274,10 @@ abstract class PayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colors = resolveColors(context);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    if (isDark && colors.disabledBackgroundColor == const Color(0xFFE2E2E2)) {
-      colors = colors.copyWith(
-        disabledBackgroundColor: const Color(0xFF2C2C2E),
-        disabledTextColor: const Color(0xFF8E8E93),
-        disabledProgressColor: const Color(0xFF636366),
-      );
-    }
+    final colors = resolveColors(context);
+    final brightness = Theme.of(context).brightness;
+    final disabledBg = colors.effectiveDisabledBackgroundColor(brightness);
+    final disabledProgress = colors.effectiveDisabledProgressColor(brightness);
 
     final effectiveRadius = BorderRadius.circular(
       borderRadius ?? defaultBorderRadius,
@@ -293,9 +290,7 @@ abstract class PayButton extends StatelessWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2.5,
               valueColor: AlwaysStoppedAnimation<Color>(
-                isInteractive
-                    ? colors.progressColor
-                    : colors.disabledProgressColor,
+                isInteractive ? colors.progressColor : disabledProgress,
               ),
             ),
           )
@@ -312,9 +307,7 @@ abstract class PayButton extends StatelessWidget {
       height: height,
       width: width,
       child: Material(
-        color: isInteractive
-            ? colors.backgroundColor
-            : colors.disabledBackgroundColor,
+        color: isInteractive ? colors.backgroundColor : disabledBg,
         elevation: elevation,
         shape: RoundedRectangleBorder(
           borderRadius: effectiveRadius,
