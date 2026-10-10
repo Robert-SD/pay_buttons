@@ -1,12 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_buttons/pay_buttons.dart';
 
 import 'pages/afterpay_showcase_page.dart';
-import 'pages/apple_pay_showcase_page.dart';
 import 'pages/asian_champions_showcase_page.dart';
 import 'pages/european_champions_showcase_page.dart';
-import 'pages/google_pay_showcase_page.dart';
 import 'pages/klarna_showcase_page.dart';
 import 'pages/latin_america_showcase_page.dart';
 import 'pages/paypal_showcase_page.dart';
@@ -82,10 +79,6 @@ class CatalogHomePage extends StatelessWidget {
                       final isTwoColumns = constraints.maxWidth >= 600;
 
                       final leftButtons = <Widget>[
-                        ApplePayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Apple Pay'),
-                        ),
                         PayPalButton(
                           onPressed: () => _handlePayPress(context, 'PayPal'),
                         ),
@@ -118,10 +111,6 @@ class CatalogHomePage extends StatelessWidget {
                       ];
 
                       final rightButtons = <Widget>[
-                        GooglePayButton(
-                          onPressed: () =>
-                              _handlePayPress(context, 'Google Pay'),
-                        ),
                         KlarnaButton(
                           shape: KlarnaShape.pill,
                           onPressed: () => _handlePayPress(context, 'Klarna'),
@@ -176,18 +165,6 @@ class CatalogHomePage extends StatelessWidget {
 
                       // Mobile: single column with harmonious color grouping
                       final mobileButtons = <Widget>[
-                        if (kIsWeb ||
-                            defaultTargetPlatform == TargetPlatform.iOS)
-                          ApplePayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Apple Pay'),
-                          ),
-                        if (kIsWeb ||
-                            defaultTargetPlatform == TargetPlatform.android)
-                          GooglePayButton(
-                            onPressed: () =>
-                                _handlePayPress(context, 'Google Pay'),
-                          ),
                         PayPalButton(
                           onPressed: () => _handlePayPress(context, 'PayPal'),
                         ),
@@ -273,104 +250,7 @@ class CatalogHomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
 
-                  // Apple Pay Card
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      leading: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF000000),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.apple,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                        ),
-                      ),
-                      title: const Text(
-                        'Apple Pay',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: const Text(
-                        'Black, White, Outline, HIG compliant buttons',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => const ApplePayShowcasePage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Google Pay Card
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      leading: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF000000),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'GPay',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ),
-                      title: const Text(
-                        'Google Pay',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: const Text(
-                        'Black, White, Monochrome, Pill/Rounded shapes',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => const GooglePayShowcasePage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // 3. PayPal Card
+                  // 1. PayPal Card
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 2,
