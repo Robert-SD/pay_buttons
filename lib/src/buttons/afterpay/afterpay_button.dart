@@ -31,15 +31,25 @@ class AfterpayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = AfterpayShape.rounded,
-    this.color = AfterpayColor.mint,
+    this.color,
     this.brand = AfterpayBrand.afterpay,
   });
 
-  /// The brand color palette for the button. Defaults to [AfterpayColor.mint].
-  final AfterpayColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [AfterpayColor.mint] in light mode, [AfterpayColor.black] in dark mode.
+  final AfterpayColor? color;
 
   /// Regional branding variant (Afterpay vs Clearpay). Defaults to [AfterpayBrand.afterpay].
   final AfterpayBrand brand;
+
+  /// Resolves the effective color scheme for the given [context].
+  AfterpayColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? AfterpayColor.black : AfterpayColor.mint;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -58,21 +68,25 @@ class AfterpayButton extends PayButton {
           : 'Pay with Afterpay');
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get mediumLogoHeight => (height * 0.40).clamp(16.0, 22.0);
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return AfterpayAssets.loopBadge(color: color, height: compactMarkHeight);
+    return AfterpayAssets.loopBadge(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
     return AfterpayAssets.lockup(
       brand: brand,
-      color: color,
+      color: effectiveColor(context),
       height: mediumLogoHeight,
     );
   }

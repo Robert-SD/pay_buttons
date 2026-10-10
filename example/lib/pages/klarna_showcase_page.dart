@@ -104,7 +104,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -120,8 +122,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 16),
               decoration: BoxDecoration(
-                color:
-                    (_color == KlarnaColor.white ||
+                color: (_color == KlarnaColor.white ||
                         _color == KlarnaColor.offWhite)
                     ? const Color(0xFF1E293B)
                     : const Color(0xFFF7F9FA),
@@ -297,7 +298,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       children: [
         Text(
           'Klarna Color Schemes (Rounded, Rect & Pill)',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -313,8 +316,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
             return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color:
-                    (color == KlarnaColor.white ||
+                color: (color == KlarnaColor.white ||
                         color == KlarnaColor.offWhite)
                     ? const Color(0xFF1E293B)
                     : Colors.white,
@@ -330,8 +332,7 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
-                      color:
-                          (color == KlarnaColor.white ||
+                      color: (color == KlarnaColor.white ||
                               color == KlarnaColor.offWhite)
                           ? Colors.white70
                           : Colors.black87,
@@ -373,7 +374,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       children: [
         Text(
           'Klarna Custom Text Examples',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -405,7 +408,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       children: [
         Text(
           'Sign in with Klarna (SIWK) & Responsive Breakpoints',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -534,7 +539,9 @@ class _KlarnaShowcasePageState extends State<KlarnaShowcasePage> {
       children: [
         Text(
           'Small & Medium Size Variants',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),

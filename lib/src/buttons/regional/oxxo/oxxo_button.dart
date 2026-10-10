@@ -29,11 +29,21 @@ class OxxoButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = OxxoShape.rounded,
-    this.color = OxxoColor.red,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [OxxoColor.red].
-  final OxxoColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [OxxoColor.red] in light mode, [OxxoColor.white] in dark mode.
+  final OxxoColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  OxxoColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? OxxoColor.white : OxxoColor.red;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -48,7 +58,8 @@ class OxxoButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'OXXO';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.44).clamp(18.0, 24.0);
@@ -58,11 +69,17 @@ class OxxoButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return OxxoAssets.oMark(color: color, height: compactMarkHeight);
+    return OxxoAssets.oMark(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return OxxoAssets.logo(color: color, height: mediumLogoHeight);
+    return OxxoAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

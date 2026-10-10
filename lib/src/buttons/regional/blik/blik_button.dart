@@ -29,11 +29,21 @@ class BlikButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = BlikShape.rounded,
-    this.color = BlikColor.black,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [BlikColor.black].
-  final BlikColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [BlikColor.black] in light mode, [BlikColor.white] in dark mode.
+  final BlikColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  BlikColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? BlikColor.white : BlikColor.black;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,15 +55,22 @@ class BlikButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'BLIK';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return BlikAssets.bMark(color: color, height: compactMarkHeight);
+    return BlikAssets.bMark(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return BlikAssets.logo(color: color, height: mediumLogoHeight);
+    return BlikAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

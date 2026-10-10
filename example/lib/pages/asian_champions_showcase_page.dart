@@ -127,9 +127,9 @@ class _AsianChampionsShowcasePageState
                 Text(
                   'Asian Market Leaders',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF900B22),
-                  ),
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF900B22),
+                      ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -183,7 +183,9 @@ class _AsianChampionsShowcasePageState
                 const SizedBox(width: 8),
                 Text(
                   '${_selectedChampion.title} Playground',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -595,7 +597,9 @@ class _AsianChampionsShowcasePageState
           children: [
             Text(
               'Asian Quick Checkout Stack',
-              style: Theme.of(context).textTheme.titleLarge
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),

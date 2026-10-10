@@ -29,11 +29,21 @@ class BizumButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = BizumShape.rounded,
-    this.color = BizumColor.white,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [BizumColor.white].
-  final BizumColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [BizumColor.white] in light mode, [BizumColor.teal] in dark mode.
+  final BizumColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  BizumColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? BizumColor.teal : BizumColor.white;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,15 +55,22 @@ class BizumButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'Bizum';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return BizumAssets.asterisk(color: color, height: compactMarkHeight);
+    return BizumAssets.asterisk(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return BizumAssets.logo(color: color, height: mediumLogoHeight);
+    return BizumAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

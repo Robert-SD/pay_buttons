@@ -9,9 +9,8 @@ class WeChatPayAssets {
 
   /// Renders the official full WeChat Pay logo (emblem + "WeChat Pay" wordmark).
   static Widget logo({required WeChatPayColor color, double height = 24.0}) {
-    final String emblemColor = color == WeChatPayColor.green
-        ? '#FFFFFF'
-        : '#07C160';
+    final String emblemColor =
+        color == WeChatPayColor.green ? '#FFFFFF' : '#07C160';
     final String wordmarkColor = color == WeChatPayColor.green
         ? '#FFFFFF'
         : (color == WeChatPayColor.white ? '#1A1A1A' : '#FFFFFF');
@@ -25,9 +24,8 @@ class WeChatPayAssets {
 
   /// Renders the standalone iconic WeChat chatting bubbles emblem.
   static Widget emblem({required WeChatPayColor color, double height = 24.0}) {
-    final String emblemColor = color == WeChatPayColor.green
-        ? '#FFFFFF'
-        : '#07C160';
+    final String emblemColor =
+        color == WeChatPayColor.green ? '#FFFFFF' : '#07C160';
 
     return SvgPicture.string(
       _weChatPayEmblemSvg(emblemColor: emblemColor),

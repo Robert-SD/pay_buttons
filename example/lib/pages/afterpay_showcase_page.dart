@@ -105,7 +105,9 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -311,7 +313,9 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Color Schemes (Rounded & Pill)',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -376,7 +380,9 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Regional Adaptations (Afterpay vs Clearpay)',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -419,7 +425,9 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Custom Action Verbs',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -451,7 +459,9 @@ class _AfterpayShowcasePageState extends State<AfterpayShowcasePage> {
       children: [
         Text(
           'Small & Medium Size Variants',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),

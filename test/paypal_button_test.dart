@@ -27,6 +27,25 @@ void main() {
       expect(material.color, const Color(0xFFFFC439));
     });
 
+    testWidgets('adapts automatically to dark theme when color is null', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: PayPalButton(onPressed: () {})),
+        ),
+      );
+
+      final material = tester.widget<Material>(
+        find.descendant(
+          of: find.byType(PayPalButton),
+          matching: find.byType(Material),
+        ),
+      );
+      expect(material.color, const Color(0xFF000000));
+    });
+
     testWidgets('renders custom text when provided', (tester) async {
       await tester.pumpWidget(
         MaterialApp(

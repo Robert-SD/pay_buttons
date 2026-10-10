@@ -29,11 +29,21 @@ class BancontactButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = BancontactShape.rounded,
-    this.color = BancontactColor.white,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [BancontactColor.white].
-  final BancontactColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [BancontactColor.white] in light mode, [BancontactColor.blue] in dark mode.
+  final BancontactColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  BancontactColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? BancontactColor.blue : BancontactColor.white;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,7 +55,8 @@ class BancontactButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'Bancontact';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.46).clamp(18.0, 24.0);
@@ -60,6 +71,9 @@ class BancontactButton extends PayButton {
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return BancontactAssets.logo(color: color, height: mediumLogoHeight);
+    return BancontactAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

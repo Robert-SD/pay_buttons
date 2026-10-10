@@ -97,7 +97,9 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   'Interactive Playground',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -288,7 +290,9 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
       children: [
         Text(
           'Brand Color Variants (Pill & Rounded)',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -353,7 +357,9 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
       children: [
         Text(
           'PayPal Pay Later Specialization',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -393,7 +399,9 @@ class _PayPalShowcasePageState extends State<PayPalShowcasePage> {
       children: [
         Text(
           'Small & Medium Size Variants',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),

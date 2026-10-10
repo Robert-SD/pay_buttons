@@ -12,7 +12,8 @@ class KlarnaAssets {
     final String fillHex = switch (color) {
       KlarnaColor.pink ||
       KlarnaColor.white ||
-      KlarnaColor.offWhite => '#0B051D',
+      KlarnaColor.offWhite =>
+        '#0B051D',
       KlarnaColor.black => '#FFFFFF',
     };
 
@@ -28,7 +29,8 @@ class KlarnaAssets {
     final String fillHex = switch (color) {
       KlarnaColor.pink ||
       KlarnaColor.white ||
-      KlarnaColor.offWhite => '#0B051D',
+      KlarnaColor.offWhite =>
+        '#0B051D',
       KlarnaColor.black => '#FFA8CD',
     };
 

@@ -18,6 +18,9 @@ enum AfterpayColor {
       backgroundColor: Color(0xFF000000),
       textColor: Colors.white,
       progressColor: Color(0xFFB2FCE4),
+      disabledBackgroundColor: Color(0xFF2C2C2E),
+      disabledTextColor: Color(0xFF8E8E93),
+      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 

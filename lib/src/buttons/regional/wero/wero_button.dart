@@ -29,11 +29,21 @@ class WeroButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = WeroShape.rounded,
-    this.color = WeroColor.yellow,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [WeroColor.yellow].
-  final WeroColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [WeroColor.yellow] in light mode, [WeroColor.black] in dark mode.
+  final WeroColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  WeroColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? WeroColor.black : WeroColor.yellow;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,7 +55,8 @@ class WeroButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'Wero';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.44).clamp(18.0, 24.0);
@@ -55,11 +66,17 @@ class WeroButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return WeroAssets.wMark(color: color, height: compactMarkHeight);
+    return WeroAssets.wMark(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return WeroAssets.logo(color: color, height: mediumLogoHeight);
+    return WeroAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

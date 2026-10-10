@@ -21,6 +21,9 @@ enum BancontactColor {
       backgroundColor: Color(0xFF002D62),
       textColor: Colors.white,
       progressColor: Color(0xFFFFD800),
+      disabledBackgroundColor: Color(0xFF2C2C2E),
+      disabledTextColor: Color(0xFF8E8E93),
+      disabledProgressColor: Color(0xFF636366),
     ),
   );
 

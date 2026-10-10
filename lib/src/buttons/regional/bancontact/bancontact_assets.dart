@@ -9,9 +9,8 @@ class BancontactAssets {
 
   /// Renders the official Bancontact logo.
   static Widget logo({required BancontactColor color, double height = 24.0}) {
-    final String textColor = color == BancontactColor.blue
-        ? '#FFFFFF'
-        : '#1E3764';
+    final String textColor =
+        color == BancontactColor.blue ? '#FFFFFF' : '#1E3764';
 
     return SvgPicture.string(
       _bancontactSvg(textColor: textColor),

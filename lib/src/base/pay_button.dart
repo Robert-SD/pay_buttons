@@ -12,7 +12,7 @@ export 'pay_button_variant.dart';
 /// Specific payment buttons (such as [PayPalButton], [KlarnaButton], etc.)
 /// inherit from this class to ensure consistent sizing, state handling,
 /// accessibility semantics, and Material splash interactions.
-abstract class PayButton extends StatelessWidget {
+abstract class PayButton extends StatefulWidget {
   const PayButton({
     super.key,
     required this.onPressed,
@@ -31,7 +31,13 @@ abstract class PayButton extends StatelessWidget {
     this.shape = PayButtonShape.rounded,
     this.variant = PayButtonVariant.responsive,
     this.textPosition = PayButtonTextPosition.leading,
+    this.debounceDuration = const Duration(milliseconds: 1000),
   });
+
+  /// The duration to debounce rapid consecutive taps. Defaults to 1000ms.
+  ///
+  /// Prevents double-taps on checkout CTAs from initiating duplicate transactions.
+  final Duration debounceDuration;
 
   /// Callback executed when the button is tapped.
   ///
@@ -122,10 +128,10 @@ abstract class PayButton extends StatelessWidget {
   @protected
   @visibleForTesting
   double get defaultBorderRadius => switch (shape) {
-    PayButtonShape.pill => height / 2,
-    PayButtonShape.rounded => roundedBorderRadius,
-    PayButtonShape.rect => 0.0,
-  };
+        PayButtonShape.pill => height / 2,
+        PayButtonShape.rounded => roundedBorderRadius,
+        PayButtonShape.rect => 0.0,
+      };
 
   /// Horizontal spacing between the brand emblem/logo and the text label.
   @protected
@@ -204,8 +210,10 @@ abstract class PayButton extends StatelessWidget {
     }
 
     final colors = resolveColors(context);
+    final effectiveTextColor =
+        isInteractive ? colors.textColor : colors.disabledTextColor;
     final effectiveTextStyle = resolveTextStyle(
-      textColor: colors.textColor,
+      textColor: effectiveTextColor,
       fontSize: labelFontSize,
       fontWeight: labelFontWeight,
       letterSpacing: labelLetterSpacing,
@@ -262,28 +270,76 @@ abstract class PayButton extends StatelessWidget {
       fontStyle: fontStyle,
       letterSpacing: letterSpacing,
       fontFamily: fontFamily,
-      fontFamilyFallback:
-          fontFamilyFallback ??
+      fontFamilyFallback: fontFamilyFallback ??
           (fontFamily == null ? defaultFontFamilyFallback : null),
     );
     return textStyle != null ? baseStyle.merge(textStyle) : baseStyle;
   }
 
   @override
+  State<PayButton> createState() => _PayButtonState();
+}
+
+class _PayButtonState extends State<PayButton> {
+  DateTime? _lastTapTime;
+
+  void _handleTap() {
+    if (!widget.isInteractive || widget.onPressed == null) return;
+    final now = DateTime.now();
+    if (_lastTapTime != null &&
+        now.difference(_lastTapTime!) < widget.debounceDuration) {
+      return;
+    }
+    _lastTapTime = now;
+    widget.onPressed!();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final colors = resolveColors(context);
+    var colors = widget.resolveColors(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    if (isDark && colors.disabledBackgroundColor == const Color(0xFFE2E2E2)) {
+      colors = colors.copyWith(
+        disabledBackgroundColor: const Color(0xFF2C2C2E),
+        disabledTextColor: const Color(0xFF8E8E93),
+        disabledProgressColor: const Color(0xFF636366),
+      );
+    }
+
     final effectiveRadius = BorderRadius.circular(
-      borderRadius ?? defaultBorderRadius,
+      widget.borderRadius ?? widget.defaultBorderRadius,
     );
 
+    Widget content = widget.isLoading
+        ? SizedBox(
+            width: 22,
+            height: 22,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.5,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                widget.isInteractive
+                    ? colors.progressColor
+                    : colors.disabledProgressColor,
+              ),
+            ),
+          )
+        : widget.buildButtonContent(context);
+
+    if (!widget.isInteractive && !widget.isLoading) {
+      content = Opacity(
+        opacity: 0.38,
+        child: content,
+      );
+    }
+
     Widget button = SizedBox(
-      height: height,
-      width: width,
+      height: widget.height,
+      width: widget.width,
       child: Material(
-        color: isInteractive
+        color: widget.isInteractive
             ? colors.backgroundColor
             : colors.disabledBackgroundColor,
-        elevation: elevation,
+        elevation: widget.elevation,
         shape: RoundedRectangleBorder(
           borderRadius: effectiveRadius,
           side: colors.borderColor != null
@@ -295,37 +351,23 @@ abstract class PayButton extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          onTap: isInteractive ? onPressed : null,
+          onTap: widget.isInteractive ? _handleTap : null,
           splashColor: colors.effectiveSplashColor,
           highlightColor: colors.effectiveHighlightColor,
-          child: Center(
-            child: isLoading
-                ? SizedBox(
-                    width: 22,
-                    height: 22,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.5,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        isInteractive
-                            ? colors.progressColor
-                            : colors.disabledProgressColor,
-                      ),
-                    ),
-                  )
-                : buildButtonContent(context),
-          ),
+          child: Center(child: content),
         ),
       ),
     );
 
-    if (margin != null) {
-      button = Padding(padding: margin!, child: button);
+    if (widget.margin != null) {
+      button = Padding(padding: widget.margin!, child: button);
     }
 
     return Semantics(
       button: true,
-      enabled: isInteractive,
-      label: semanticLabel,
+      enabled: widget.isInteractive,
+      label: widget.semanticLabel,
+      excludeSemantics: true,
       child: button,
     );
   }
