@@ -20,3 +20,6 @@
     * PromptPay
     * UPI
 * Responsive layouts, custom fonts, typography fallback support, and full accessibility semantics.
+* Precomputed static vector assets for zero runtime allocation and fast SVG cache key equality.
+* Automatic dark mode adaptation with dynamic brightness color resolution.
+* Screen reader accessibility semantics with duplicate announcement protection.
