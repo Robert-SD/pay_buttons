@@ -12,7 +12,7 @@ export 'pay_button_variant.dart';
 /// Specific payment buttons (such as [PayPalButton], [KlarnaButton], etc.)
 /// inherit from this class to ensure consistent sizing, state handling,
 /// accessibility semantics, and Material splash interactions.
-abstract class PayButton extends StatefulWidget {
+abstract class PayButton extends StatelessWidget {
   const PayButton({
     super.key,
     required this.onPressed,
@@ -31,13 +31,7 @@ abstract class PayButton extends StatefulWidget {
     this.shape = PayButtonShape.rounded,
     this.variant = PayButtonVariant.responsive,
     this.textPosition = PayButtonTextPosition.leading,
-    this.debounceDuration = const Duration(milliseconds: 1000),
   });
-
-  /// The duration to debounce rapid consecutive taps. Defaults to 1000ms.
-  ///
-  /// Prevents double-taps on checkout CTAs from initiating duplicate transactions.
-  final Duration debounceDuration;
 
   /// Callback executed when the button is tapped.
   ///
@@ -277,26 +271,8 @@ abstract class PayButton extends StatefulWidget {
   }
 
   @override
-  State<PayButton> createState() => _PayButtonState();
-}
-
-class _PayButtonState extends State<PayButton> {
-  DateTime? _lastTapTime;
-
-  void _handleTap() {
-    if (!widget.isInteractive || widget.onPressed == null) return;
-    final now = DateTime.now();
-    if (_lastTapTime != null &&
-        now.difference(_lastTapTime!) < widget.debounceDuration) {
-      return;
-    }
-    _lastTapTime = now;
-    widget.onPressed!();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var colors = widget.resolveColors(context);
+    var colors = resolveColors(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     if (isDark && colors.disabledBackgroundColor == const Color(0xFFE2E2E2)) {
       colors = colors.copyWith(
@@ -307,25 +283,25 @@ class _PayButtonState extends State<PayButton> {
     }
 
     final effectiveRadius = BorderRadius.circular(
-      widget.borderRadius ?? widget.defaultBorderRadius,
+      borderRadius ?? defaultBorderRadius,
     );
 
-    Widget content = widget.isLoading
+    Widget content = isLoading
         ? SizedBox(
             width: 22,
             height: 22,
             child: CircularProgressIndicator(
               strokeWidth: 2.5,
               valueColor: AlwaysStoppedAnimation<Color>(
-                widget.isInteractive
+                isInteractive
                     ? colors.progressColor
                     : colors.disabledProgressColor,
               ),
             ),
           )
-        : widget.buildButtonContent(context);
+        : buildButtonContent(context);
 
-    if (!widget.isInteractive && !widget.isLoading) {
+    if (!isInteractive && !isLoading) {
       content = Opacity(
         opacity: 0.38,
         child: content,
@@ -333,13 +309,13 @@ class _PayButtonState extends State<PayButton> {
     }
 
     Widget button = SizedBox(
-      height: widget.height,
-      width: widget.width,
+      height: height,
+      width: width,
       child: Material(
-        color: widget.isInteractive
+        color: isInteractive
             ? colors.backgroundColor
             : colors.disabledBackgroundColor,
-        elevation: widget.elevation,
+        elevation: elevation,
         shape: RoundedRectangleBorder(
           borderRadius: effectiveRadius,
           side: colors.borderColor != null
@@ -351,7 +327,7 @@ class _PayButtonState extends State<PayButton> {
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          onTap: widget.isInteractive ? _handleTap : null,
+          onTap: isInteractive ? onPressed : null,
           splashColor: colors.effectiveSplashColor,
           highlightColor: colors.effectiveHighlightColor,
           child: Center(child: content),
@@ -359,14 +335,14 @@ class _PayButtonState extends State<PayButton> {
       ),
     );
 
-    if (widget.margin != null) {
-      button = Padding(padding: widget.margin!, child: button);
+    if (margin != null) {
+      button = Padding(padding: margin!, child: button);
     }
 
     return Semantics(
       button: true,
-      enabled: widget.isInteractive,
-      label: widget.semanticLabel,
+      enabled: isInteractive,
+      label: semanticLabel,
       excludeSemantics: true,
       child: button,
     );
