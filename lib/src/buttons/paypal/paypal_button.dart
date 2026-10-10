@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../base/pay_button.dart';
-import '../../base/pay_button_colors.dart';
 import '../../base/pay_button_fonts.dart';
 import 'paypal_assets.dart';
 import 'paypal_color.dart';
@@ -11,7 +10,7 @@ import 'paypal_shape.dart';
 ///
 /// Designed following [PayPal Brand Guidelines](https://developer.paypal.com/docs/checkout/standard/customize/button-style/).
 /// Fully rendered in pure Flutter using vector graphics without any native SDK dependencies.
-class PayPalButton extends PayButton {
+class PayPalButton extends BrandPayButton<PayPalColor> {
   const PayPalButton({
     super.key,
     required super.onPressed,
@@ -30,21 +29,14 @@ class PayPalButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.trailing,
     super.shape = PayPalShape.pill,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically according to [Theme.of(context).brightness]:
-  /// [PayPalColor.gold] in light mode, [PayPalColor.black] in dark mode.
-  final PayPalColor? color;
+  @override
+  PayPalColor get defaultLightColor => PayPalColor.gold;
 
-  /// Resolves the effective color scheme for the given [context].
-  PayPalColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? PayPalColor.black : PayPalColor.gold;
-  }
+  @override
+  PayPalColor get defaultDarkColor => PayPalColor.black;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -59,11 +51,7 @@ class PayPalButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.paypal;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'PayPal';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'PayPal';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 28.0);

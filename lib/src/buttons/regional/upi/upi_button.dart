@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'upi_assets.dart';
 import 'upi_color.dart';
@@ -10,7 +9,7 @@ import 'upi_shape.dart';
 /// A UPI (India, Unified Payments Interface) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class UpiButton extends PayButton {
+class UpiButton extends BrandPayButton<UpiColor> {
   const UpiButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class UpiButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = UpiShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [UpiColor.white] in light mode, [UpiColor.navy] in dark mode.
-  final UpiColor? color;
+  @override
+  UpiColor get defaultLightColor => UpiColor.white;
 
-  /// Resolves the effective color scheme for the given [context].
-  UpiColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? UpiColor.navy : UpiColor.white;
-  }
+  @override
+  UpiColor get defaultDarkColor => UpiColor.navy;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class UpiButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.upi;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'UPI';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'UPI';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for European Wero payment buttons.
-enum WeroColor {
+enum WeroColor implements BrandColor {
   /// Signature Wero Yellow (`#FFF48D`) background with dark typography and logo.
   ///
   /// This is Wero's primary high-recognition brand palette.
@@ -19,9 +20,6 @@ enum WeroColor {
     PayButtonColors(
       backgroundColor: Color(0xFF1D1C1C),
       textColor: Colors.white,
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -38,5 +36,6 @@ enum WeroColor {
   const WeroColor(this.palette);
 
   /// The resolved color palette for this Wero theme.
+  @override
   final PayButtonColors palette;
 }

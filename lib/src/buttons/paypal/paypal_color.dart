@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../base/brand_color.dart';
 import '../../base/pay_button_colors.dart';
 
 /// Supported color themes for the PayPal button adhering to official guidelines.
-enum PayPalColor {
+enum PayPalColor implements BrandColor {
   /// Gold (`#FFC439`) - The standard, most recognizable PayPal brand color.
   gold(
     PayButtonColors(
@@ -17,9 +18,6 @@ enum PayPalColor {
     PayButtonColors(
       backgroundColor: Color(0xFF0070BA),
       textColor: Colors.white,
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -28,9 +26,6 @@ enum PayPalColor {
     PayButtonColors(
       backgroundColor: Color(0xFF000000),
       textColor: Colors.white,
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -57,5 +52,6 @@ enum PayPalColor {
   const PayPalColor(this.palette);
 
   /// The resolved color palette for this PayPal theme.
+  @override
   final PayButtonColors palette;
 }

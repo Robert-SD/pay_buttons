@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color schemes for Bizum buttons.
-enum BizumColor {
+enum BizumColor implements BrandColor {
   /// Clean White (`#FFFFFF`) with border (`#D1D5DB`) and teal logo.
   white(
     PayButtonColors(
@@ -20,14 +21,12 @@ enum BizumColor {
     PayButtonColors(
       backgroundColor: Color(0xFF00B4B6),
       textColor: Colors.white,
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   );
 
   const BizumColor(this.palette);
 
   /// The resolved color palette for this Bizum theme.
+  @override
   final PayButtonColors palette;
 }

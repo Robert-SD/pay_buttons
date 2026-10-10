@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for Dutch iDEAL / Wero transition buttons.
 ///
 /// Follows the official Currence iDEAL / EPI migration guidelines:
 /// https://ideal.nl/naar-wero
-enum IdealColor {
+enum IdealColor implements BrandColor {
   /// Signature Wero Yellow (`#FFF48D`) background with dark branding and typography.
   ///
   /// This is the primary transition palette recommended by Currence iDEAL / EPI.
@@ -23,9 +24,6 @@ enum IdealColor {
       backgroundColor: Color(0xFF1D1C1C),
       textColor: Colors.white,
       progressColor: Color(0xFFFFF48D),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -54,5 +52,6 @@ enum IdealColor {
   const IdealColor(this.palette);
 
   /// The resolved color palette for this iDEAL theme.
+  @override
   final PayButtonColors palette;
 }

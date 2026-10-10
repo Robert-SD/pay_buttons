@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color schemes for Bancontact buttons.
-enum BancontactColor {
+enum BancontactColor implements BrandColor {
   /// Clean White (`#FFFFFF`) with border (`#E0E0E0`) - Signature Bancontact presentation.
   white(
     PayButtonColors(
@@ -21,14 +22,12 @@ enum BancontactColor {
       backgroundColor: Color(0xFF002D62),
       textColor: Colors.white,
       progressColor: Color(0xFFFFD800),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   );
 
   const BancontactColor(this.palette);
 
   /// The resolved color palette for this Bancontact theme.
+  @override
   final PayButtonColors palette;
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for PayNow payment buttons adhering to ABS guidelines.
-enum PayNowColor {
+enum PayNowColor implements BrandColor {
   /// Signature PayNow Deep Purple (`#7D1978`) background with white typography and emblem.
   purple(
     PayButtonColors(
@@ -34,5 +35,6 @@ enum PayNowColor {
   const PayNowColor(this.palette);
 
   /// The resolved color palette for this PayNow theme.
+  @override
   final PayButtonColors palette;
 }

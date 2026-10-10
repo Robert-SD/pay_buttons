@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'blik_assets.dart';
 import 'blik_color.dart';
@@ -10,7 +9,7 @@ import 'blik_shape.dart';
 /// A BLIK (Poland) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class BlikButton extends PayButton {
+class BlikButton extends BrandPayButton<BlikColor> {
   const BlikButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class BlikButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = BlikShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [BlikColor.black] in light mode, [BlikColor.white] in dark mode.
-  final BlikColor? color;
+  @override
+  BlikColor get defaultLightColor => BlikColor.black;
 
-  /// Resolves the effective color scheme for the given [context].
-  BlikColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? BlikColor.white : BlikColor.black;
-  }
+  @override
+  BlikColor get defaultDarkColor => BlikColor.white;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class BlikButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.blik;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'BLIK';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'BLIK';
 
   @override
   Widget buildCompactContent(BuildContext context) {

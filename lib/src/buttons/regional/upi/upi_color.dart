@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for UPI payment buttons adhering to NPCI brand guidelines.
-enum UpiColor {
+enum UpiColor implements BrandColor {
   /// Clean White (`#FFFFFF`) card with subtle border, dark lettering, and official saffron/green arrows.
   white(
     PayButtonColors(
@@ -21,9 +22,6 @@ enum UpiColor {
       backgroundColor: Color(0xFF000000),
       textColor: Colors.white,
       progressColor: Color(0xFFF47920),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -41,14 +39,12 @@ enum UpiColor {
       backgroundColor: Color(0xFF0B2545),
       textColor: Colors.white,
       progressColor: Color(0xFFF47920),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   );
 
   const UpiColor(this.palette);
 
   /// The resolved color palette for this UPI theme.
+  @override
   final PayButtonColors palette;
 }

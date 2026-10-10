@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for PromptPay payment buttons adhering to Bank of Thailand guidelines.
-enum PromptPayColor {
+enum PromptPayColor implements BrandColor {
   /// Signature PromptPay Deep Blue (`#003D6B`) background with white typography and emblem.
   blue(
     PayButtonColors(
@@ -29,14 +30,12 @@ enum PromptPayColor {
       backgroundColor: Color(0xFF000000),
       textColor: Colors.white,
       progressColor: Color(0xFF003D6B),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   );
 
   const PromptPayColor(this.palette);
 
   /// The resolved color palette for this PromptPay theme.
+  @override
   final PayButtonColors palette;
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for Boleto Bancário payment buttons.
-enum BoletoColor {
+enum BoletoColor implements BrandColor {
   /// Clean White (`#FFFFFF`) with border (`#E0E0E0`) - standard e-commerce presentation.
   white(
     PayButtonColors(
@@ -19,9 +20,6 @@ enum BoletoColor {
     PayButtonColors(
       backgroundColor: Color(0xFF1A1A1A),
       textColor: Colors.white,
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -38,5 +36,6 @@ enum BoletoColor {
   const BoletoColor(this.palette);
 
   /// The resolved color palette for this Boleto theme.
+  @override
   final PayButtonColors palette;
 }
