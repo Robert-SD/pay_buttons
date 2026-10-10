@@ -60,8 +60,10 @@ class PayPalPayLaterButton extends PayPalButton {
 
     final logo = super.buildMediumContent(context);
     final colors = resolveColors(context);
-    final effectiveTextColor =
-        isInteractive ? colors.textColor : colors.disabledTextColor;
+    final brightness = Theme.of(context).brightness;
+    final effectiveTextColor = isInteractive
+        ? colors.textColor
+        : colors.effectiveDisabledTextColor(brightness);
     final effectiveTextStyle = resolveTextStyle(
       textColor: effectiveTextColor,
       fontSize: labelFontSize,
