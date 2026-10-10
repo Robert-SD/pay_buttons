@@ -53,4 +53,3 @@ enum PayPalColor {
   /// The resolved color palette for this PayPal theme.
   final PayButtonColors palette;
 }
-

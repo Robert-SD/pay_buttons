@@ -34,4 +34,3 @@ enum GooglePayColor {
   /// The resolved color palette for this Google Pay theme.
   final PayButtonColors palette;
 }
-

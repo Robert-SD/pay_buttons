@@ -49,13 +49,11 @@ class TwintButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    final beaconHeight = (height * 0.48).clamp(20.0, 26.0);
-    return TwintAssets.beacon(height: beaconHeight);
+    return TwintAssets.beacon(height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    return TwintAssets.logo(color: color, height: logoHeight);
+    return TwintAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

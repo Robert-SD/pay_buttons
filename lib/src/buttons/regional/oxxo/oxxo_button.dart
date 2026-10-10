@@ -51,14 +51,18 @@ class OxxoButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.44).clamp(18.0, 24.0);
+
+  @override
+  double get mediumLogoHeight => (height * 0.52).clamp(22.0, 30.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.44).clamp(18.0, 24.0);
-    return OxxoAssets.oMark(color: color, height: markHeight);
+    return OxxoAssets.oMark(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.52).clamp(22.0, 30.0);
-    return OxxoAssets.logo(color: color, height: logoHeight);
+    return OxxoAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

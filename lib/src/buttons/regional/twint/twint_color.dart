@@ -27,4 +27,3 @@ enum TwintColor {
   /// The resolved color palette for this TWINT theme.
   final PayButtonColors palette;
 }
-

@@ -64,12 +64,9 @@ void main() {
 
       final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
       expect(button.type, ApplePayType.donate);
-      expect(button.effectiveType, ApplePayType.donate);
     });
 
-    testWidgets('defaults to plain when type is omitted', (
-      tester,
-    ) async {
+    testWidgets('defaults to plain when type is omitted', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(body: ApplePayButton(onPressed: () {})),
@@ -78,7 +75,6 @@ void main() {
 
       final button = tester.widget<ApplePayButton>(find.byType(ApplePayButton));
       expect(button.type, ApplePayType.plain);
-      expect(button.effectiveType, ApplePayType.plain);
     });
 
     testWidgets('defaults the semantics label to the intent', (tester) async {
@@ -138,26 +134,22 @@ void main() {
       }
     });
 
-    testWidgets('renders loading spinner and disables interaction when isLoading is true', (
-      tester,
-    ) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ApplePayButton(
-              isLoading: true,
-              onPressed: () {},
+    testWidgets(
+      'renders loading spinner and disables interaction when isLoading is true',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ApplePayButton(isLoading: true, onPressed: () {}),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    });
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      },
+    );
 
-    testWidgets('applies margin and elevation parameters', (
-      tester,
-    ) async {
+    testWidgets('applies margin and elevation parameters', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
       try {
         await tester.pumpWidget(
@@ -218,30 +210,42 @@ void main() {
       }
     });
 
-    testWidgets('resolveColors returns authentic palette matching ApplePayColor', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(body: ApplePayButton(onPressed: () {})),
-        ),
-      );
+    testWidgets(
+      'resolveColors returns authentic palette matching ApplePayColor',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(body: ApplePayButton(onPressed: () {})),
+          ),
+        );
 
-      final element = tester.element(find.byType(ApplePayButton));
+        final element = tester.element(find.byType(ApplePayButton));
 
-      const blackButton = ApplePayButton(color: ApplePayColor.black, onPressed: null);
-      final blackColors = blackButton.resolveColors(element);
-      expect(blackColors.backgroundColor, const Color(0xFF000000));
-      expect(blackColors.progressColor, const Color(0xFFFFFFFF));
+        const blackButton = ApplePayButton(
+          color: ApplePayColor.black,
+          onPressed: null,
+        );
+        final blackColors = blackButton.resolveColors(element);
+        expect(blackColors.backgroundColor, const Color(0xFF000000));
+        expect(blackColors.progressColor, const Color(0xFFFFFFFF));
 
-      const whiteButton = ApplePayButton(color: ApplePayColor.white, onPressed: null);
-      final whiteColors = whiteButton.resolveColors(element);
-      expect(whiteColors.backgroundColor, const Color(0xFFFFFFFF));
-      expect(whiteColors.progressColor, const Color(0xFF000000));
+        const whiteButton = ApplePayButton(
+          color: ApplePayColor.white,
+          onPressed: null,
+        );
+        final whiteColors = whiteButton.resolveColors(element);
+        expect(whiteColors.backgroundColor, const Color(0xFFFFFFFF));
+        expect(whiteColors.progressColor, const Color(0xFF000000));
 
-      const outlineButton = ApplePayButton(color: ApplePayColor.whiteOutline, onPressed: null);
-      final outlineColors = outlineButton.resolveColors(element);
-      expect(outlineColors.backgroundColor, const Color(0xFFFFFFFF));
-      expect(outlineColors.progressColor, const Color(0xFF000000));
-      expect(outlineColors.borderColor, const Color(0xFF000000));
-    });
+        const outlineButton = ApplePayButton(
+          color: ApplePayColor.whiteOutline,
+          onPressed: null,
+        );
+        final outlineColors = outlineButton.resolveColors(element);
+        expect(outlineColors.backgroundColor, const Color(0xFFFFFFFF));
+        expect(outlineColors.progressColor, const Color(0xFF000000));
+        expect(outlineColors.borderColor, const Color(0xFF000000));
+      },
+    );
   });
 }

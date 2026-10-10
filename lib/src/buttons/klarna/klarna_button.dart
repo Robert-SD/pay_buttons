@@ -60,14 +60,18 @@ class KlarnaButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.45).clamp(18.0, 24.0);
+
+  @override
+  double get mediumLogoHeight => (height * 0.40).clamp(16.0, 22.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final monogramHeight = (height * 0.45).clamp(18.0, 24.0);
-    return KlarnaAssets.monogram(color: color, height: monogramHeight);
+    return KlarnaAssets.monogram(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.40).clamp(16.0, 22.0);
-    return KlarnaAssets.wordmark(color: color, height: logoHeight);
+    return KlarnaAssets.wordmark(color: color, height: mediumLogoHeight);
   }
 }

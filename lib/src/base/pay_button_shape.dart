@@ -7,5 +7,5 @@ enum PayButtonShape {
   rounded,
 
   /// Sharp rectangular contour without rounded corners (`borderRadius = 0.0`).
-  rect;
+  rect,
 }

@@ -87,10 +87,8 @@ class GooglePayButton extends PayButton {
         : GooglePayEnvironment.test;
   }
 
-
   @override
-  String get semanticLabel =>
-      super.semanticLabel ?? _semanticLabelFor(type);
+  String get semanticLabel => super.semanticLabel ?? _semanticLabelFor(type);
 
   static String _semanticLabelFor(GooglePayType type) => switch (type) {
     GooglePayType.plain => 'Google Pay',
@@ -110,7 +108,7 @@ class GooglePayButton extends PayButton {
 
     if (isLoading) {
       Widget loadingBox = SizedBox(
-        width: width ?? (kIsWeb ? 200.0 : null),
+        width: width ?? (kIsWeb ? PayButton.defaultNativeWidth : null),
         height: height,
         child: Material(
           color: colors.backgroundColor,
@@ -118,7 +116,10 @@ class GooglePayButton extends PayButton {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(effectiveRadius),
             side: colors.borderColor != null
-                ? BorderSide(color: colors.borderColor!, width: colors.borderWidth)
+                ? BorderSide(
+                    color: colors.borderColor!,
+                    width: colors.borderWidth,
+                  )
                 : BorderSide.none,
           ),
           child: Center(
@@ -159,7 +160,7 @@ class GooglePayButton extends PayButton {
         theme: themeString,
         type: type.jsValue,
         environment: effectiveEnvironment.value,
-        width: width ?? 200.0,
+        width: width ?? PayButton.defaultNativeWidth,
         height: height,
         borderRadius: effectiveRadius,
       );

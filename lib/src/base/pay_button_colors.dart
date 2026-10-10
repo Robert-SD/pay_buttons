@@ -10,14 +10,10 @@ class PayButtonColors {
     this.disabledProgressColor = const Color(0xFF9E9E9E),
     this.borderColor,
     this.borderWidth = 1.0,
-    Color? splashColor,
-    Color? highlightColor,
-  })  : textColor = textColor ?? progressColor ?? const Color(0xFF000000),
-        progressColor = progressColor ?? textColor ?? const Color(0xFF000000),
-        // ignore: prefer_initializing_formals
-        _splashColor = splashColor,
-        // ignore: prefer_initializing_formals
-        _highlightColor = highlightColor;
+    this.splashColor,
+    this.highlightColor,
+  }) : textColor = textColor ?? progressColor ?? const Color(0xFF000000),
+       progressColor = progressColor ?? textColor ?? const Color(0xFF000000);
 
   /// The primary fill color of the button in its enabled state.
   final Color backgroundColor;
@@ -40,18 +36,21 @@ class PayButtonColors {
   /// The width of the border outline if [borderColor] is set.
   final double borderWidth;
 
-  final Color? _splashColor;
-  final Color? _highlightColor;
+  /// Optional ink ripple splash override. Defaults to [textColor] at 12% opacity.
+  final Color? splashColor;
 
-  /// Ink ripple splash color on user tap.
-  ///
-  /// Automatically derived from [textColor] with 12% opacity (0x1F) if not explicitly set.
-  Color get splashColor =>
-      _splashColor ?? textColor.withValues(alpha: 0.12);
+  /// Optional press highlight override. Defaults to [textColor] at 6% opacity.
+  final Color? highlightColor;
 
-  /// Highlight color when the button is pressed down.
+  /// The ink ripple splash color on user tap.
   ///
-  /// Automatically derived from [textColor] with 6% opacity (0x0F) if not explicitly set.
-  Color get highlightColor =>
-      _highlightColor ?? textColor.withValues(alpha: 0.06);
+  /// Falls back to [textColor] at 12% opacity when no explicit override is set.
+  Color get effectiveSplashColor =>
+      splashColor ?? textColor.withValues(alpha: 0.12);
+
+  /// The highlight color shown while the button is pressed down.
+  ///
+  /// Falls back to [textColor] at 6% opacity when no explicit override is set.
+  Color get effectiveHighlightColor =>
+      highlightColor ?? textColor.withValues(alpha: 0.06);
 }

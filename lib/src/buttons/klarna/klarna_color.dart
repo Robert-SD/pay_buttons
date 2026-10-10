@@ -46,4 +46,3 @@ enum KlarnaColor {
   /// The resolved color palette for this Klarna theme.
   final PayButtonColors palette;
 }
-

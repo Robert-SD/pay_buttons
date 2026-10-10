@@ -43,4 +43,3 @@ enum WeChatPayColor {
   /// The resolved color palette for this WeChat Pay theme.
   final PayButtonColors palette;
 }
-

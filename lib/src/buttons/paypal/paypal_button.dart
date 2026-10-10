@@ -55,23 +55,28 @@ class PayPalButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.52).clamp(20.0, 28.0);
+
+  @override
+  double get mediumLogoHeight => (height * 0.46).clamp(18.0, 26.0);
+
+  /// Height of the "PayPal" wordmark paired with the monogram in the medium variant.
+  double get _wordmarkHeight => (height * 0.40).clamp(16.0, 22.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final monogramHeight = (height * 0.52).clamp(20.0, 28.0);
-    return PayPalAssets.monogram(color: color, height: monogramHeight);
+    return PayPalAssets.monogram(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.46).clamp(18.0, 26.0);
-    final wordmarkHeight = (height * 0.40).clamp(16.0, 22.0);
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        PayPalAssets.monogram(color: color, height: logoHeight),
+        PayPalAssets.monogram(color: color, height: mediumLogoHeight),
         const SizedBox(width: 5),
-        PayPalAssets.wordmark(color: color, height: wordmarkHeight),
+        PayPalAssets.wordmark(color: color, height: _wordmarkHeight),
       ],
     );
   }

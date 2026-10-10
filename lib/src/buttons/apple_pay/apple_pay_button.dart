@@ -65,13 +65,8 @@ class ApplePayButton extends PayButton {
   /// tree to settle.
   final bool userCanPay;
 
-  /// The effective transaction intent applied to the button.
-  ApplePayType get effectiveType => type;
-
-
   @override
-  String get semanticLabel =>
-      super.semanticLabel ?? _semanticLabelFor(type);
+  String get semanticLabel => super.semanticLabel ?? _semanticLabelFor(type);
 
   static String _semanticLabelFor(ApplePayType type) => switch (type) {
     ApplePayType.plain => 'Apple Pay',
@@ -101,7 +96,7 @@ class ApplePayButton extends PayButton {
 
     if (isLoading) {
       Widget loadingBox = SizedBox(
-        width: width ?? _defaultWidth,
+        width: width ?? PayButton.defaultNativeWidth,
         height: height,
         child: Material(
           color: colors.backgroundColor,
@@ -109,7 +104,10 @@ class ApplePayButton extends PayButton {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(effectiveRadius),
             side: colors.borderColor != null
-                ? BorderSide(color: colors.borderColor!, width: colors.borderWidth)
+                ? BorderSide(
+                    color: colors.borderColor!,
+                    width: colors.borderWidth,
+                  )
                 : BorderSide.none,
           ),
           child: Center(
@@ -148,7 +146,7 @@ class ApplePayButton extends PayButton {
           ApplePayColor.whiteOutline => 'white-outline',
         },
         type: type.jsValue,
-        width: width ?? _defaultWidth,
+        width: width ?? PayButton.defaultNativeWidth,
         height: height,
         borderRadius: effectiveRadius,
       );
@@ -160,7 +158,7 @@ class ApplePayButton extends PayButton {
       buttonWidget = jsButton;
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       buttonWidget = SizedBox(
-        width: width ?? _defaultWidth,
+        width: width ?? PayButton.defaultNativeWidth,
         height: height,
         child: pay.RawApplePayButton(
           onPressed: isInteractive ? onPressed : null,
@@ -168,8 +166,7 @@ class ApplePayButton extends PayButton {
           style: switch (color) {
             ApplePayColor.black => pay.ApplePayButtonStyle.black,
             ApplePayColor.white => pay.ApplePayButtonStyle.white,
-            ApplePayColor.whiteOutline =>
-              pay.ApplePayButtonStyle.whiteOutline,
+            ApplePayColor.whiteOutline => pay.ApplePayButtonStyle.whiteOutline,
           },
           type: switch (type) {
             ApplePayType.plain => pay.ApplePayButtonType.plain,
@@ -219,9 +216,6 @@ class ApplePayButton extends PayButton {
 
     return result;
   }
-
-  /// Width used when the caller does not specify one.
-  static const double _defaultWidth = 200.0;
 
   /// Returns the color palette corresponding to [color] according to official
   /// Apple Pay guidelines (e.g. solid black background with white mark for [ApplePayColor.black]).

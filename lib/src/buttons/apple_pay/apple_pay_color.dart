@@ -44,4 +44,3 @@ enum ApplePayColor {
   /// The resolved color palette for this Apple Pay theme.
   final PayButtonColors palette;
 }
-

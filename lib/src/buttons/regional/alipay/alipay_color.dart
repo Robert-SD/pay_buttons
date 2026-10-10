@@ -43,4 +43,3 @@ enum AlipayColor {
   /// The resolved color palette for this Alipay theme.
   final PayButtonColors palette;
 }
-
