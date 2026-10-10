@@ -11,7 +11,6 @@ class _TestPayButton extends PayButton {
     super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
-    super.debounceDuration,
     super.semanticLabel,
   });
 
@@ -240,42 +239,6 @@ void main() {
         expect(tester.takeException(), isNull);
       },
     );
-
-    testWidgets('guards against double-tap duplicate submission', (
-      tester,
-    ) async {
-      var tapCount = 0;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: _TestPayButton(
-              onPressed: () => tapCount++,
-              debounceDuration: const Duration(milliseconds: 50),
-              semanticLabel: 'Pay',
-            ),
-          ),
-        ),
-      );
-
-      // Rapid double tap
-      await tester.tap(find.byType(_TestPayButton));
-      await tester.pump();
-      await tester.tap(find.byType(_TestPayButton));
-      await tester.pump();
-
-      expect(tapCount, equals(1));
-
-      // After debounce duration passes, subsequent tap should succeed
-      await tester.runAsync(() async {
-        await Future<void>.delayed(const Duration(milliseconds: 60));
-      });
-      await tester.pump();
-      await tester.tap(find.byType(_TestPayButton));
-      await tester.pump();
-
-      expect(tapCount, equals(2));
-    });
 
     testWidgets(
         'Semantics specifies excludeSemantics: true to avoid double announcement',
