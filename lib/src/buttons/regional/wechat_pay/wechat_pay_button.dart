@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'wechat_pay_assets.dart';
 import 'wechat_pay_color.dart';
@@ -10,7 +9,7 @@ import 'wechat_pay_shape.dart';
 /// A WeChat Pay payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class WeChatPayButton extends PayButton {
+class WeChatPayButton extends BrandPayButton<WeChatPayColor> {
   const WeChatPayButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class WeChatPayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = WeChatPayShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [WeChatPayColor.green] in light mode, [WeChatPayColor.white] in dark mode.
-  final WeChatPayColor? color;
+  @override
+  WeChatPayColor get defaultLightColor => WeChatPayColor.green;
 
-  /// Resolves the effective color scheme for the given [context].
-  WeChatPayColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? WeChatPayColor.white : WeChatPayColor.green;
-  }
+  @override
+  WeChatPayColor get defaultDarkColor => WeChatPayColor.white;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class WeChatPayButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.wechatPay;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'WeChat Pay';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'WeChat Pay';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);

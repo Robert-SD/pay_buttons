@@ -3,6 +3,8 @@
 library;
 
 // Base framework
+export 'src/base/brand_color.dart';
+export 'src/base/brand_pay_button.dart';
 export 'src/base/pay_button.dart';
 export 'src/base/pay_button_colors.dart';
 export 'src/base/pay_button_fonts.dart';

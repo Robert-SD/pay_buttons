@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'promptpay_assets.dart';
 import 'promptpay_color.dart';
@@ -10,7 +9,7 @@ import 'promptpay_shape.dart';
 /// A PromptPay (Thailand) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class PromptPayButton extends PayButton {
+class PromptPayButton extends BrandPayButton<PromptPayColor> {
   const PromptPayButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class PromptPayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = PromptPayShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [PromptPayColor.blue] in light mode, [PromptPayColor.black] in dark mode.
-  final PromptPayColor? color;
+  @override
+  PromptPayColor get defaultLightColor => PromptPayColor.blue;
 
-  /// Resolves the effective color scheme for the given [context].
-  PromptPayColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? PromptPayColor.black : PromptPayColor.blue;
-  }
+  @override
+  PromptPayColor get defaultDarkColor => PromptPayColor.black;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class PromptPayButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.promptpay;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'PromptPay';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'PromptPay';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);

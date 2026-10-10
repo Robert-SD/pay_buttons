@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../base/pay_button.dart';
-import '../../base/pay_button_colors.dart';
 import '../../base/pay_button_fonts.dart';
 import 'klarna_assets.dart';
 import 'klarna_color.dart';
@@ -16,7 +15,7 @@ import 'klarna_shape.dart';
 /// - **Width > 200px**: Displays full text label + Klarna logo (or text only if configured).
 /// - **84px ≤ Width ≤ 200px**: Displays the full "Klarna." wordmark only.
 /// - **Width < 84px**: Displays the compact "K." monogram with dot.
-class KlarnaButton extends PayButton {
+class KlarnaButton extends BrandPayButton<KlarnaColor> {
   const KlarnaButton({
     super.key,
     required super.onPressed,
@@ -35,21 +34,14 @@ class KlarnaButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.trailing,
     super.shape = KlarnaShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [KlarnaColor.pink] in light mode, [KlarnaColor.black] in dark mode.
-  final KlarnaColor? color;
+  @override
+  KlarnaColor get defaultLightColor => KlarnaColor.pink;
 
-  /// Resolves the effective color scheme for the given [context].
-  KlarnaColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? KlarnaColor.black : KlarnaColor.pink;
-  }
+  @override
+  KlarnaColor get defaultDarkColor => KlarnaColor.black;
 
   @override
   double get roundedBorderRadius => 5.0;
@@ -64,11 +56,7 @@ class KlarnaButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.klarna;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'Klarna';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'Klarna';
 
   @override
   double get compactMarkHeight => (height * 0.45).clamp(18.0, 24.0);

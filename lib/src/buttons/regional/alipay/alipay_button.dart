@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'alipay_assets.dart';
 import 'alipay_color.dart';
@@ -10,7 +9,7 @@ import 'alipay_shape.dart';
 /// An Alipay payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class AlipayButton extends PayButton {
+class AlipayButton extends BrandPayButton<AlipayColor> {
   const AlipayButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class AlipayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = AlipayShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [AlipayColor.blue] in light mode, [AlipayColor.white] in dark mode.
-  final AlipayColor? color;
+  @override
+  AlipayColor get defaultLightColor => AlipayColor.blue;
 
-  /// Resolves the effective color scheme for the given [context].
-  AlipayColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? AlipayColor.white : AlipayColor.blue;
-  }
+  @override
+  AlipayColor get defaultDarkColor => AlipayColor.white;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class AlipayButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.alipay;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'Alipay';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'Alipay';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);

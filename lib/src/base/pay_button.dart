@@ -4,6 +4,8 @@ import 'pay_button_colors.dart';
 import 'pay_button_shape.dart';
 import 'pay_button_variant.dart';
 
+export 'brand_color.dart';
+export 'brand_pay_button.dart';
 export 'pay_button_shape.dart';
 export 'pay_button_variant.dart';
 
@@ -27,11 +29,11 @@ abstract class PayButton extends StatelessWidget {
     this.borderRadius,
     this.margin,
     this.elevation = 0.0,
-    this.semanticLabel,
+    String? semanticLabel,
     this.shape = PayButtonShape.rounded,
     this.variant = PayButtonVariant.responsive,
     this.textPosition = PayButtonTextPosition.leading,
-  });
+  }) : _semanticLabel = semanticLabel;
 
   /// Callback executed when the button is tapped.
   ///
@@ -88,8 +90,18 @@ abstract class PayButton extends StatelessWidget {
   /// Elevation of the button. Defaults to `0.0` (flat) per modern payment design guidelines.
   final double elevation;
 
+  final String? _semanticLabel;
+
+  /// Default accessibility label for this button if [semanticLabel] is not provided.
+  @protected
+  String get defaultSemanticLabel => '';
+
   /// Accessibility label read by screen readers.
-  final String? semanticLabel;
+  ///
+  /// Falls back to [defaultSemanticLabel] if no custom label was supplied.
+  String? get semanticLabel =>
+      _semanticLabel ??
+      (defaultSemanticLabel.isNotEmpty ? defaultSemanticLabel : null);
 
   /// The contour shape of the button. Defaults to [PayButtonShape.rounded].
   final PayButtonShape shape;

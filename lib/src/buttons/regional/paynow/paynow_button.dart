@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'paynow_assets.dart';
 import 'paynow_color.dart';
@@ -10,7 +9,7 @@ import 'paynow_shape.dart';
 /// A PayNow (Singapore) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class PayNowButton extends PayButton {
+class PayNowButton extends BrandPayButton<PayNowColor> {
   const PayNowButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class PayNowButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = PayNowShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [PayNowColor.purple] in light mode, [PayNowColor.white] in dark mode.
-  final PayNowColor? color;
+  @override
+  PayNowColor get defaultLightColor => PayNowColor.purple;
 
-  /// Resolves the effective color scheme for the given [context].
-  PayNowColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? PayNowColor.white : PayNowColor.purple;
-  }
+  @override
+  PayNowColor get defaultDarkColor => PayNowColor.white;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class PayNowButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.paynow;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'PayNow';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'PayNow';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);

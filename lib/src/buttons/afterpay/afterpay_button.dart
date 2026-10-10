@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../base/pay_button.dart';
-import '../../base/pay_button_colors.dart';
 import '../../base/pay_button_fonts.dart';
 import 'afterpay_assets.dart';
 import 'afterpay_brand.dart';
@@ -12,7 +11,7 @@ import 'afterpay_shape.dart';
 ///
 /// Designed following Afterpay/Clearpay brand guidelines.
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class AfterpayButton extends PayButton {
+class AfterpayButton extends BrandPayButton<AfterpayColor> {
   const AfterpayButton({
     super.key,
     required super.onPressed,
@@ -31,25 +30,18 @@ class AfterpayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = AfterpayShape.rounded,
-    this.color,
+    super.color,
     this.brand = AfterpayBrand.afterpay,
   });
-
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [AfterpayColor.mint] in light mode, [AfterpayColor.black] in dark mode.
-  final AfterpayColor? color;
 
   /// Regional branding variant (Afterpay vs Clearpay). Defaults to [AfterpayBrand.afterpay].
   final AfterpayBrand brand;
 
-  /// Resolves the effective color scheme for the given [context].
-  AfterpayColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? AfterpayColor.black : AfterpayColor.mint;
-  }
+  @override
+  AfterpayColor get defaultLightColor => AfterpayColor.mint;
+
+  @override
+  AfterpayColor get defaultDarkColor => AfterpayColor.black;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -61,15 +53,9 @@ class AfterpayButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.afterpay;
 
   @override
-  String? get semanticLabel =>
-      super.semanticLabel ??
-      (brand == AfterpayBrand.clearpay
-          ? 'Pay with Clearpay'
-          : 'Pay with Afterpay');
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => brand == AfterpayBrand.clearpay
+      ? 'Pay with Clearpay'
+      : 'Pay with Afterpay';
 
   @override
   double get mediumLogoHeight => (height * 0.40).clamp(16.0, 22.0);

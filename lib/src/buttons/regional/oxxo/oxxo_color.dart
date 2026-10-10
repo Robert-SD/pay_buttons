@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color themes for OXXO payment buttons adhering to official FEMSA / OXXO guidelines.
-enum OxxoColor {
+enum OxxoColor implements BrandColor {
   /// Signature OXXO Red (`#E70020`) with white border / emblem.
   red(
     PayButtonColors(
       backgroundColor: Color(0xFFE70020),
       textColor: Colors.white,
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -38,5 +36,6 @@ enum OxxoColor {
   const OxxoColor(this.palette);
 
   /// The resolved color palette for this OXXO theme.
+  @override
   final PayButtonColors palette;
 }

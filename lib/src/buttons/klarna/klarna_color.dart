@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../base/brand_color.dart';
 import '../../base/pay_button_colors.dart';
 
 /// Supported color themes for Klarna buttons adhering to official guidelines.
-enum KlarnaColor {
+enum KlarnaColor implements BrandColor {
   /// Iconic Klarna Pink (`#FFA8CD`) with deep charcoal text/logo (`#0B051D`).
   pink(
     PayButtonColors(
@@ -18,9 +19,6 @@ enum KlarnaColor {
       backgroundColor: Color(0xFF0B051D),
       textColor: Colors.white,
       progressColor: Color(0xFFFFA8CD),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -47,5 +45,6 @@ enum KlarnaColor {
   const KlarnaColor(this.palette);
 
   /// The resolved color palette for this Klarna theme.
+  @override
   final PayButtonColors palette;
 }

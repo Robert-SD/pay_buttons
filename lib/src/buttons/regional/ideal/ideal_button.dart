@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'ideal_assets.dart';
 import 'ideal_color.dart';
@@ -14,7 +13,7 @@ import 'ideal_shape.dart';
 /// https://ideal.nl/naar-wero
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class IdealButton extends PayButton {
+class IdealButton extends BrandPayButton<IdealColor> {
   const IdealButton({
     super.key,
     required super.onPressed,
@@ -33,21 +32,14 @@ class IdealButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = IdealShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [IdealColor.yellow] in light mode, [IdealColor.black] in dark mode.
-  final IdealColor? color;
+  @override
+  IdealColor get defaultLightColor => IdealColor.yellow;
 
-  /// Resolves the effective color scheme for the given [context].
-  IdealColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? IdealColor.black : IdealColor.yellow;
-  }
+  @override
+  IdealColor get defaultDarkColor => IdealColor.black;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -56,11 +48,7 @@ class IdealButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.ideal;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'iDEAL | Wero';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'iDEAL | Wero';
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 28.0);

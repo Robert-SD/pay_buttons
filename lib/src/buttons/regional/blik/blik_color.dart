@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/brand_color.dart';
 import '../../../base/pay_button_colors.dart';
 
 /// Supported color schemes for BLIK buttons.
-enum BlikColor {
+enum BlikColor implements BrandColor {
   /// Dark / Black (`#000000`) background - BLIK's high-contrast theme.
   black(
     PayButtonColors(
       backgroundColor: Color(0xFF000000),
       textColor: Colors.white,
       progressColor: Color(0xFFE52F08),
-      disabledBackgroundColor: Color(0xFF2C2C2E),
-      disabledTextColor: Color(0xFF8E8E93),
-      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 
@@ -29,6 +27,6 @@ enum BlikColor {
 
   const BlikColor(this.palette);
 
-  /// The resolved color palette for this BLIK theme.
+  @override
   final PayButtonColors palette;
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'pix_assets.dart';
 import 'pix_color.dart';
@@ -10,7 +9,7 @@ import 'pix_shape.dart';
 /// A Pix (Banco Central do Brasil) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class PixButton extends PayButton {
+class PixButton extends BrandPayButton<PixColor> {
   const PixButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class PixButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = PixShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [PixColor.teal] in light mode, [PixColor.black] in dark mode.
-  final PixColor? color;
+  @override
+  PixColor get defaultLightColor => PixColor.teal;
 
-  /// Resolves the effective color scheme for the given [context].
-  PixColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? PixColor.black : PixColor.teal;
-  }
+  @override
+  PixColor get defaultDarkColor => PixColor.black;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class PixButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.pix;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'Pix';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'Pix';
 
   @override
   double get compactMarkHeight => (height * 0.50).clamp(20.0, 28.0);

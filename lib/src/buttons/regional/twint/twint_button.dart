@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'twint_assets.dart';
 import 'twint_color.dart';
@@ -10,7 +9,7 @@ import 'twint_shape.dart';
 /// A TWINT (Switzerland) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class TwintButton extends PayButton {
+class TwintButton extends BrandPayButton<TwintColor> {
   const TwintButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class TwintButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = TwintShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [TwintColor.black] in light mode, [TwintColor.white] in dark mode.
-  final TwintColor? color;
+  @override
+  TwintColor get defaultLightColor => TwintColor.black;
 
-  /// Resolves the effective color scheme for the given [context].
-  TwintColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? TwintColor.white : TwintColor.black;
-  }
+  @override
+  TwintColor get defaultDarkColor => TwintColor.white;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class TwintButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.twint;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'TWINT';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'TWINT';
 
   @override
   Widget buildCompactContent(BuildContext context) {

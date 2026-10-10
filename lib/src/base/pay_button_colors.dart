@@ -67,6 +67,24 @@ class PayButtonColors {
   Color get effectiveHighlightColor =>
       highlightColor ?? textColor.withValues(alpha: 0.06);
 
+  /// Standard disabled background color for dark themes (`#2C2C2E`).
+  static const Color darkDisabledBackgroundColor = Color(0xFF2C2C2E);
+
+  /// Standard disabled text color for dark themes (`#8E8E93`).
+  static const Color darkDisabledTextColor = Color(0xFF8E8E93);
+
+  /// Standard disabled progress indicator color for dark themes (`#636366`).
+  static const Color darkDisabledProgressColor = Color(0xFF636366);
+
+  /// Standard disabled background color for light themes (`#E2E2E2`).
+  static const Color lightDisabledBackgroundColor = Color(0xFFE2E2E2);
+
+  /// Standard disabled text color for light themes (`#757575`).
+  static const Color lightDisabledTextColor = Color(0xFF757575);
+
+  /// Standard disabled progress indicator color for light themes (`#9E9E9E`).
+  static const Color lightDisabledProgressColor = Color(0xFF9E9E9E);
+
   /// Resolves the effective disabled background color for the given [brightness].
   ///
   /// If [disabledBackgroundColor] is explicitly specified, it is returned.
@@ -74,8 +92,8 @@ class PayButtonColors {
   Color effectiveDisabledBackgroundColor(Brightness brightness) =>
       disabledBackgroundColor ??
       (brightness == Brightness.dark
-          ? const Color(0xFF2C2C2E)
-          : const Color(0xFFE2E2E2));
+          ? darkDisabledBackgroundColor
+          : lightDisabledBackgroundColor);
 
   /// Resolves the effective disabled text color for the given [brightness].
   ///
@@ -84,8 +102,8 @@ class PayButtonColors {
   Color effectiveDisabledTextColor(Brightness brightness) =>
       disabledTextColor ??
       (brightness == Brightness.dark
-          ? const Color(0xFF8E8E93)
-          : const Color(0xFF757575));
+          ? darkDisabledTextColor
+          : lightDisabledTextColor);
 
   /// Resolves the effective disabled progress indicator color for the given [brightness].
   ///
@@ -94,8 +112,8 @@ class PayButtonColors {
   Color effectiveDisabledProgressColor(Brightness brightness) =>
       disabledProgressColor ??
       (brightness == Brightness.dark
-          ? const Color(0xFF636366)
-          : const Color(0xFF9E9E9E));
+          ? darkDisabledProgressColor
+          : lightDisabledProgressColor);
 
   /// Creates a copy of this palette with the given fields replaced.
   PayButtonColors copyWith({

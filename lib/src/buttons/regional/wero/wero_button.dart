@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'wero_assets.dart';
 import 'wero_color.dart';
@@ -10,7 +9,7 @@ import 'wero_shape.dart';
 /// A Wero (European Payments Initiative) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class WeroButton extends PayButton {
+class WeroButton extends BrandPayButton<WeroColor> {
   const WeroButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class WeroButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = WeroShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [WeroColor.yellow] in light mode, [WeroColor.black] in dark mode.
-  final WeroColor? color;
+  @override
+  WeroColor get defaultLightColor => WeroColor.yellow;
 
-  /// Resolves the effective color scheme for the given [context].
-  WeroColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? WeroColor.black : WeroColor.yellow;
-  }
+  @override
+  WeroColor get defaultDarkColor => WeroColor.black;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class WeroButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.wero;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'Wero';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'Wero';
 
   @override
   double get compactMarkHeight => (height * 0.44).clamp(18.0, 24.0);

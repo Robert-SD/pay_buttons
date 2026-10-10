@@ -81,6 +81,38 @@ class _TestCustomDisabledPayButton extends PayButton {
   }
 }
 
+enum _TestBrandColor implements BrandColor {
+  light(
+      PayButtonColors(backgroundColor: Colors.white, textColor: Colors.black)),
+  dark(PayButtonColors(backgroundColor: Colors.black, textColor: Colors.white));
+
+  const _TestBrandColor(this.palette);
+
+  @override
+  final PayButtonColors palette;
+}
+
+class _TestBrandPayButton extends BrandPayButton<_TestBrandColor> {
+  const _TestBrandPayButton({
+    required super.onPressed,
+    super.color,
+    super.semanticLabel,
+  });
+
+  @override
+  _TestBrandColor get defaultLightColor => _TestBrandColor.light;
+
+  @override
+  _TestBrandColor get defaultDarkColor => _TestBrandColor.dark;
+
+  @override
+  String get defaultSemanticLabel => 'Test Brand';
+
+  @override
+  Widget buildButtonContent(BuildContext context) =>
+      const Text('Test Brand Content');
+}
+
 void main() {
   group('PayButton Base Contract', () {
     testWidgets('renders content and responds to tap when enabled', (
@@ -460,6 +492,106 @@ void main() {
         colors.effectiveDisabledProgressColor(Brightness.dark),
         const Color(0xFF445566),
       );
+    });
+  });
+
+  group('BrandPayButton & BrandColor Contract', () {
+    testWidgets('resolves defaultLightColor in light theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.light(),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                final btn = _TestBrandPayButton(onPressed: () {});
+                expect(btn.effectiveColor(context), _TestBrandColor.light);
+                expect(
+                    btn.resolveColors(context).backgroundColor, Colors.white);
+                return btn;
+              },
+            ),
+          ),
+        ),
+      );
+    });
+
+    testWidgets('resolves defaultDarkColor in dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                final btn = _TestBrandPayButton(onPressed: () {});
+                expect(btn.effectiveColor(context), _TestBrandColor.dark);
+                expect(
+                    btn.resolveColors(context).backgroundColor, Colors.black);
+                return btn;
+              },
+            ),
+          ),
+        ),
+      );
+    });
+
+    testWidgets('respects explicit color in both themes', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                final btn = _TestBrandPayButton(
+                  onPressed: () {},
+                  color: _TestBrandColor.light,
+                );
+                expect(btn.effectiveColor(context), _TestBrandColor.light);
+                return btn;
+              },
+            ),
+          ),
+        ),
+      );
+    });
+
+    test('falls back to defaultSemanticLabel when semanticLabel is not set',
+        () {
+      final btn = _TestBrandPayButton(onPressed: () {});
+      expect(btn.semanticLabel, 'Test Brand');
+    });
+
+    test('prefers custom semanticLabel over defaultSemanticLabel', () {
+      final btn = _TestBrandPayButton(
+        onPressed: () {},
+        semanticLabel: 'Custom Pay',
+      );
+      expect(btn.semanticLabel, 'Custom Pay');
+    });
+
+    test('all 17 brand color enums implement BrandColor', () {
+      final brandColors = <BrandColor>[
+        PayPalColor.gold,
+        KlarnaColor.pink,
+        AfterpayColor.mint,
+        BlikColor.black,
+        TwintColor.black,
+        WeroColor.yellow,
+        IdealColor.yellow,
+        BancontactColor.white,
+        BizumColor.white,
+        PixColor.teal,
+        BoletoColor.white,
+        OxxoColor.red,
+        AlipayColor.blue,
+        WeChatPayColor.green,
+        PayNowColor.purple,
+        PromptPayColor.blue,
+        UpiColor.white,
+      ];
+      expect(brandColors.length, 17);
+      for (final color in brandColors) {
+        expect(color.palette, isA<PayButtonColors>());
+      }
     });
   });
 }

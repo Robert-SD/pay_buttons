@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'bancontact_assets.dart';
 import 'bancontact_color.dart';
@@ -10,7 +9,7 @@ import 'bancontact_shape.dart';
 /// A Bancontact (Belgium) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class BancontactButton extends PayButton {
+class BancontactButton extends BrandPayButton<BancontactColor> {
   const BancontactButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class BancontactButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = BancontactShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [BancontactColor.white] in light mode, [BancontactColor.blue] in dark mode.
-  final BancontactColor? color;
+  @override
+  BancontactColor get defaultLightColor => BancontactColor.white;
 
-  /// Resolves the effective color scheme for the given [context].
-  BancontactColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? BancontactColor.blue : BancontactColor.white;
-  }
+  @override
+  BancontactColor get defaultDarkColor => BancontactColor.blue;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class BancontactButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.bancontact;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'Bancontact';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'Bancontact';
 
   @override
   double get compactMarkHeight => (height * 0.46).clamp(18.0, 24.0);

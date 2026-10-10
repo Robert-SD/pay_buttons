@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'bizum_assets.dart';
 import 'bizum_color.dart';
@@ -10,7 +9,7 @@ import 'bizum_shape.dart';
 /// A Bizum (Spain) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class BizumButton extends PayButton {
+class BizumButton extends BrandPayButton<BizumColor> {
   const BizumButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class BizumButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = BizumShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [BizumColor.white] in light mode, [BizumColor.teal] in dark mode.
-  final BizumColor? color;
+  @override
+  BizumColor get defaultLightColor => BizumColor.white;
 
-  /// Resolves the effective color scheme for the given [context].
-  BizumColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? BizumColor.teal : BizumColor.white;
-  }
+  @override
+  BizumColor get defaultDarkColor => BizumColor.teal;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,11 +44,7 @@ class BizumButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.bizum;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'Bizum';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'Bizum';
 
   @override
   Widget buildCompactContent(BuildContext context) {

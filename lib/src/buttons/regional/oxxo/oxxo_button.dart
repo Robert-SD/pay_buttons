@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../base/pay_button.dart';
-import '../../../base/pay_button_colors.dart';
 import '../../../base/pay_button_fonts.dart';
 import 'oxxo_assets.dart';
 import 'oxxo_color.dart';
@@ -10,7 +9,7 @@ import 'oxxo_shape.dart';
 /// An OXXO (Mexico) payment button.
 ///
 /// Rendered in pure Flutter using vector graphics with full accessibility semantics.
-class OxxoButton extends PayButton {
+class OxxoButton extends BrandPayButton<OxxoColor> {
   const OxxoButton({
     super.key,
     required super.onPressed,
@@ -29,21 +28,14 @@ class OxxoButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = OxxoShape.rounded,
-    this.color,
+    super.color,
   });
 
-  /// The brand color palette for the button.
-  ///
-  /// When null, resolves automatically based on [Theme.of(context).brightness]:
-  /// [OxxoColor.red] in light mode, [OxxoColor.white] in dark mode.
-  final OxxoColor? color;
+  @override
+  OxxoColor get defaultLightColor => OxxoColor.red;
 
-  /// Resolves the effective color scheme for the given [context].
-  OxxoColor effectiveColor(BuildContext context) {
-    if (color != null) return color!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? OxxoColor.white : OxxoColor.red;
-  }
+  @override
+  OxxoColor get defaultDarkColor => OxxoColor.white;
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -55,11 +47,7 @@ class OxxoButton extends PayButton {
   List<String> get defaultFontFamilyFallback => PayButtonFonts.oxxo;
 
   @override
-  String? get semanticLabel => super.semanticLabel ?? 'OXXO';
-
-  @override
-  PayButtonColors resolveColors(BuildContext context) =>
-      effectiveColor(context).palette;
+  String get defaultSemanticLabel => 'OXXO';
 
   @override
   double get compactMarkHeight => (height * 0.44).clamp(18.0, 24.0);
