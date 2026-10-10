@@ -1,6 +1,6 @@
 /// Centralized typographic fallback chains for supported payment buttons.
 ///
-/// In strict compliance with the **MIT License** and third-party copyright laws,
+/// In strict compliance with the **Apache License, Version 2.0** and third-party copyright laws,
 /// this package does not bundle proprietary font binary assets (`.ttf`/`.otf`).
 ///
 /// Instead, these font fallback lists define the font family resolution order:
@@ -164,35 +164,6 @@ abstract final class PayButtonFonts {
     'BlinkMacSystemFont',
     'Segoe UI',
     'Helvetica Neue',
-    'Arial',
-    'sans-serif',
-  ];
-
-  /// Font fallback chain for Google Pay buttons.
-  ///
-  /// References Google Sans / Product Sans with ubiquitous Android/system fallbacks.
-  static const List<String> googlePay = [
-    'Google Sans',
-    'Product Sans',
-    'Roboto',
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Helvetica Neue',
-    'Arial',
-    'sans-serif',
-  ];
-
-  /// Font fallback chain for Apple Pay buttons.
-  ///
-  /// References Apple San Francisco typography with clean system fallbacks.
-  static const List<String> applePay = [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'SF Pro Text',
-    'SF Pro Display',
-    'Helvetica Neue',
-    'Helvetica',
     'Arial',
     'sans-serif',
   ];
