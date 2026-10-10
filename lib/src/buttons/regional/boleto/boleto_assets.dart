@@ -35,28 +35,42 @@ class BoletoAssets {
 
   /// Renders the standalone barcode icon mark.
   static Widget barcode({required BoletoColor color, double height = 24.0}) {
-    final String barColor = color == BoletoColor.black ? '#FFFFFF' : '#1A1A1A';
+    final String svgString = color == BoletoColor.black
+        ? _boletoBarcodeWhiteSvg
+        : _boletoBarcodeDarkSvg;
 
     return SvgPicture.string(
-      _boletoBarcodeSvg(barColor: barColor),
+      svgString,
       height: height,
       fit: BoxFit.contain,
     );
   }
 
-  static String _boletoBarcodeSvg({required String barColor}) {
-    return '''
+  static const String _boletoBarcodeWhiteSvg = '''
 <svg viewBox="0 0 46 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="3" width="3" height="26" rx="1" fill="$barColor"/>
-  <rect x="7" y="3" width="2" height="26" rx="1" fill="$barColor"/>
-  <rect x="11" y="3" width="4" height="26" rx="1" fill="$barColor"/>
-  <rect x="17" y="3" width="2" height="26" rx="1" fill="$barColor"/>
-  <rect x="21" y="3" width="5" height="26" rx="1" fill="$barColor"/>
-  <rect x="28" y="3" width="2" height="26" rx="1" fill="$barColor"/>
-  <rect x="32" y="3" width="4" height="26" rx="1" fill="$barColor"/>
-  <rect x="38" y="3" width="2" height="26" rx="1" fill="$barColor"/>
-  <rect x="42" y="3" width="3" height="26" rx="1" fill="$barColor"/>
+  <rect x="2" y="3" width="3" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="7" y="3" width="2" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="11" y="3" width="4" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="17" y="3" width="2" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="21" y="3" width="5" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="28" y="3" width="2" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="32" y="3" width="4" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="38" y="3" width="2" height="26" rx="1" fill="#FFFFFF"/>
+  <rect x="42" y="3" width="3" height="26" rx="1" fill="#FFFFFF"/>
 </svg>
 ''';
-  }
+
+  static const String _boletoBarcodeDarkSvg = '''
+<svg viewBox="0 0 46 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="3" width="3" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="7" y="3" width="2" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="11" y="3" width="4" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="17" y="3" width="2" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="21" y="3" width="5" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="28" y="3" width="2" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="32" y="3" width="4" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="38" y="3" width="2" height="26" rx="1" fill="#1A1A1A"/>
+  <rect x="42" y="3" width="3" height="26" rx="1" fill="#1A1A1A"/>
+</svg>
+''';
 }
