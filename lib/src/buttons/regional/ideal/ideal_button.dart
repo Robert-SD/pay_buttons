@@ -33,11 +33,21 @@ class IdealButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = IdealShape.rounded,
-    this.color = IdealColor.yellow,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [IdealColor.yellow].
-  final IdealColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [IdealColor.yellow] in light mode, [IdealColor.black] in dark mode.
+  final IdealColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  IdealColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? IdealColor.black : IdealColor.yellow;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -49,7 +59,8 @@ class IdealButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'iDEAL | Wero';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 28.0);
@@ -59,11 +70,17 @@ class IdealButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return IdealAssets.emblem(color: color, height: compactMarkHeight);
+    return IdealAssets.emblem(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return IdealAssets.logo(color: color, height: mediumLogoHeight);
+    return IdealAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

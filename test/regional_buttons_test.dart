@@ -1050,4 +1050,202 @@ void main() {
       });
     });
   });
+
+  group('Regional Buttons Theme Adaptation', () {
+    testWidgets('TwintButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: TwintButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(TwintButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('BlikButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: BlikButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(BlikButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('WeroButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: WeroButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(WeroButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF1D1C1C));
+    });
+
+    testWidgets('IdealButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: IdealButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(IdealButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF1D1C1C));
+    });
+
+    testWidgets('BancontactButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: BancontactButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(BancontactButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF002D62));
+    });
+
+    testWidgets('BizumButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: BizumButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(BizumButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF00B4B6));
+    });
+
+    testWidgets('PixButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: PixButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(PixButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF000000));
+    });
+
+    testWidgets('BoletoButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: BoletoButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(BoletoButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF1A1A1A));
+    });
+
+    testWidgets('OxxoButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: OxxoButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(OxxoButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('AlipayButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: AlipayButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(AlipayButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('WeChatPayButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: WeChatPayButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(WeChatPayButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('PayNowButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: PayNowButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(PayNowButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('PromptPayButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: PromptPayButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(PromptPayButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF000000));
+    });
+
+    testWidgets('UpiButton adapts to dark theme', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(body: UpiButton(onPressed: () {})),
+        ),
+      );
+      final material = tester.widget<Material>(
+        find.descendant(
+            of: find.byType(UpiButton), matching: find.byType(Material)),
+      );
+      expect(material.color, const Color(0xFF0B2545));
+    });
+  });
 }

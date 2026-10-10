@@ -29,11 +29,21 @@ class AlipayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = AlipayShape.rounded,
-    this.color = AlipayColor.blue,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [AlipayColor.blue].
-  final AlipayColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [AlipayColor.blue] in light mode, [AlipayColor.white] in dark mode.
+  final AlipayColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  AlipayColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? AlipayColor.white : AlipayColor.blue;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,7 +55,8 @@ class AlipayButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'Alipay';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);
@@ -55,11 +66,17 @@ class AlipayButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return AlipayAssets.emblem(color: color, height: compactMarkHeight);
+    return AlipayAssets.emblem(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return AlipayAssets.logo(color: color, height: mediumLogoHeight);
+    return AlipayAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

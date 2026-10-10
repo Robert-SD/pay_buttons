@@ -30,11 +30,21 @@ class PayPalButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.trailing,
     super.shape = PayPalShape.pill,
-    this.color = PayPalColor.gold,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [PayPalColor.gold].
-  final PayPalColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically according to [Theme.of(context).brightness]:
+  /// [PayPalColor.gold] in light mode, [PayPalColor.black] in dark mode.
+  final PayPalColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  PayPalColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? PayPalColor.black : PayPalColor.gold;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -52,7 +62,8 @@ class PayPalButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'PayPal';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 28.0);
@@ -65,18 +76,20 @@ class PayPalButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return PayPalAssets.monogram(color: color, height: compactMarkHeight);
+    final effective = effectiveColor(context);
+    return PayPalAssets.monogram(color: effective, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
+    final effective = effectiveColor(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        PayPalAssets.monogram(color: color, height: mediumLogoHeight),
+        PayPalAssets.monogram(color: effective, height: mediumLogoHeight),
         const SizedBox(width: 5),
-        PayPalAssets.wordmark(color: color, height: _wordmarkHeight),
+        PayPalAssets.wordmark(color: effective, height: _wordmarkHeight),
       ],
     );
   }

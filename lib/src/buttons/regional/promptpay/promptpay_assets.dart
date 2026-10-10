@@ -22,12 +22,10 @@ class PromptPayAssets {
 
   /// Renders the standalone PromptPay chevron arrow emblem.
   static Widget emblem({required PromptPayColor color, double height = 24.0}) {
-    final String badgeBg = color == PromptPayColor.white
-        ? '#003D6B'
-        : '#FFFFFF';
-    final String arrowColor = color == PromptPayColor.white
-        ? '#FFFFFF'
-        : '#003D6B';
+    final String badgeBg =
+        color == PromptPayColor.white ? '#003D6B' : '#FFFFFF';
+    final String arrowColor =
+        color == PromptPayColor.white ? '#FFFFFF' : '#003D6B';
     final String accentColor = '#1BA997';
 
     return SvgPicture.string(

@@ -29,11 +29,21 @@ class PixButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = PixShape.rounded,
-    this.color = PixColor.teal,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [PixColor.teal].
-  final PixColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [PixColor.teal] in light mode, [PixColor.black] in dark mode.
+  final PixColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  PixColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? PixColor.black : PixColor.teal;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,18 +55,25 @@ class PixButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'Pix';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.50).clamp(20.0, 28.0);
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return PixAssets.emblem(color: color, height: compactMarkHeight);
+    return PixAssets.emblem(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return PixAssets.logo(color: color, height: mediumLogoHeight);
+    return PixAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

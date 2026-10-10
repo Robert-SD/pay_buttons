@@ -29,11 +29,21 @@ class WeChatPayButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = WeChatPayShape.rounded,
-    this.color = WeChatPayColor.green,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [WeChatPayColor.green].
-  final WeChatPayColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [WeChatPayColor.green] in light mode, [WeChatPayColor.white] in dark mode.
+  final WeChatPayColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  WeChatPayColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? WeChatPayColor.white : WeChatPayColor.green;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,18 +55,25 @@ class WeChatPayButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'WeChat Pay';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return WeChatPayAssets.emblem(color: color, height: compactMarkHeight);
+    return WeChatPayAssets.emblem(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return WeChatPayAssets.logo(color: color, height: mediumLogoHeight);
+    return WeChatPayAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

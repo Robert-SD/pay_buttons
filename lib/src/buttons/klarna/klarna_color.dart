@@ -18,6 +18,9 @@ enum KlarnaColor {
       backgroundColor: Color(0xFF0B051D),
       textColor: Colors.white,
       progressColor: Color(0xFFFFA8CD),
+      disabledBackgroundColor: Color(0xFF2C2C2E),
+      disabledTextColor: Color(0xFF8E8E93),
+      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 

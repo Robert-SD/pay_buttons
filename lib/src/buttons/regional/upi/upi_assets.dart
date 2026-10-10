@@ -26,9 +26,10 @@ class UpiAssets {
   /// Renders the standalone UPI dual directional arrows emblem.
   static Widget emblem({required UpiColor color, double height = 24.0}) {
     final (saffron, green) = switch (color) {
-      UpiColor.white ||
-      UpiColor.black ||
-      UpiColor.navy => ('#F47920', '#028C45'),
+      UpiColor.white || UpiColor.black || UpiColor.navy => (
+          '#F47920',
+          '#028C45'
+        ),
       UpiColor.orange => ('#FFFFFF', '#0B2545'),
     };
 

@@ -114,9 +114,9 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
                 Text(
                   'Latin American Market Leaders',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF00753E),
-                  ),
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF00753E),
+                      ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -170,7 +170,9 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
                 const SizedBox(width: 8),
                 Text(
                   '${_selectedChampion.title} Playground',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -451,7 +453,6 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
                 if (val != null) setState(() => _boletoShape = val);
               },
             ),
-
             const SizedBox(height: 12),
             TextFormField(
               initialValue: _boletoText,
@@ -477,7 +478,9 @@ class _LatinAmericaShowcasePageState extends State<LatinAmericaShowcasePage> {
           children: [
             Text(
               'Latin American Quick Checkout Stack',
-              style: Theme.of(context).textTheme.titleLarge
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),

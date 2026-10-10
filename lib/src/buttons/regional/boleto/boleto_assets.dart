@@ -10,9 +10,8 @@ class BoletoAssets {
 
   /// Renders the barcode mark + "Boleto" typography.
   static Widget logo({required BoletoColor color, double height = 24.0}) {
-    final Color textColor = color == BoletoColor.black
-        ? Colors.white
-        : const Color(0xFF1A1A1A);
+    final Color textColor =
+        color == BoletoColor.black ? Colors.white : const Color(0xFF1A1A1A);
 
     return Row(
       mainAxisSize: MainAxisSize.min,

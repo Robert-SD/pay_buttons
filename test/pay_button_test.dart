@@ -11,6 +11,7 @@ class _TestPayButton extends PayButton {
     super.fontFamilyFallback,
     super.isLoading,
     super.enabled,
+    super.debounceDuration,
     super.semanticLabel,
   });
 
@@ -239,5 +240,156 @@ void main() {
         expect(tester.takeException(), isNull);
       },
     );
+
+    testWidgets('guards against double-tap duplicate submission', (
+      tester,
+    ) async {
+      var tapCount = 0;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: _TestPayButton(
+              onPressed: () => tapCount++,
+              debounceDuration: const Duration(milliseconds: 50),
+              semanticLabel: 'Pay',
+            ),
+          ),
+        ),
+      );
+
+      // Rapid double tap
+      await tester.tap(find.byType(_TestPayButton));
+      await tester.pump();
+      await tester.tap(find.byType(_TestPayButton));
+      await tester.pump();
+
+      expect(tapCount, equals(1));
+
+      // After debounce duration passes, subsequent tap should succeed
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 60));
+      });
+      await tester.pump();
+      await tester.tap(find.byType(_TestPayButton));
+      await tester.pump();
+
+      expect(tapCount, equals(2));
+    });
+
+    testWidgets(
+        'Semantics specifies excludeSemantics: true to avoid double announcement',
+        (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: _TestPayButton(
+              onPressed: () {},
+              semanticLabel: 'Pay with Test',
+            ),
+          ),
+        ),
+      );
+
+      final semanticsFinder = find.descendant(
+        of: find.byType(_TestPayButton),
+        matching: find.byType(Semantics),
+      );
+      expect(semanticsFinder, findsWidgets);
+
+      final outerSemantics = tester.widget<Semantics>(semanticsFinder.first);
+      expect(outerSemantics.properties.label, 'Pay with Test');
+      expect(outerSemantics.properties.button, isTrue);
+      expect(outerSemantics.properties.enabled, isTrue);
+      expect(outerSemantics.excludeSemantics, isTrue);
+    });
+
+    testWidgets(
+        'disabled button wraps content in 0.38 opacity and uses disabled colors',
+        (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.light(),
+          home: Scaffold(
+            body: _TestPayButton(
+              onPressed: () {},
+              enabled: false,
+            ),
+          ),
+        ),
+      );
+
+      // Verify Opacity widget with 0.38
+      final opacityFinder = find.descendant(
+        of: find.byType(_TestPayButton),
+        matching: find.byType(Opacity),
+      );
+      expect(opacityFinder, findsOneWidget);
+      final opacityWidget = tester.widget<Opacity>(opacityFinder);
+      expect(opacityWidget.opacity, 0.38);
+
+      // Verify Material disabled background color in light mode
+      final material = tester.widget<Material>(
+        find.descendant(
+          of: find.byType(_TestPayButton),
+          matching: find.byType(Material),
+        ),
+      );
+      expect(material.color, const Color(0xFFE2E2E2));
+    });
+
+    testWidgets(
+        'disabled button uses dark disabled background color in dark theme', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData.dark(),
+          home: Scaffold(
+            body: _TestPayButton(
+              onPressed: () {},
+              enabled: false,
+            ),
+          ),
+        ),
+      );
+
+      final material = tester.widget<Material>(
+        find.descendant(
+          of: find.byType(_TestPayButton),
+          matching: find.byType(Material),
+        ),
+      );
+      expect(material.color, const Color(0xFF2C2C2E));
+    });
+
+    test('PayButtonFonts contains no CSS-only names', () {
+      final allFallbacks = [
+        ...PayButtonFonts.paypal,
+        ...PayButtonFonts.klarna,
+        ...PayButtonFonts.afterpay,
+        ...PayButtonFonts.twint,
+        ...PayButtonFonts.ideal,
+        ...PayButtonFonts.blik,
+        ...PayButtonFonts.bancontact,
+        ...PayButtonFonts.bizum,
+        ...PayButtonFonts.pix,
+        ...PayButtonFonts.boleto,
+        ...PayButtonFonts.oxxo,
+        ...PayButtonFonts.alipay,
+        ...PayButtonFonts.wechatPay,
+        ...PayButtonFonts.paynow,
+        ...PayButtonFonts.promptpay,
+        ...PayButtonFonts.upi,
+        ...PayButtonFonts.wero,
+      ];
+
+      expect(allFallbacks.contains('-apple-system'), isFalse);
+      expect(allFallbacks.contains('BlinkMacSystemFont'), isFalse);
+    });
   });
 }

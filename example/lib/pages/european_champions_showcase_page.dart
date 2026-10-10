@@ -151,7 +151,9 @@ class _EuropeanChampionsShowcasePageState
                 const SizedBox(width: 8),
                 Text(
                   'Top European Payment Methods',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -236,7 +238,9 @@ class _EuropeanChampionsShowcasePageState
                 const SizedBox(width: 8),
                 Text(
                   '${_selectedChampion.title} Playground',
-                  style: Theme.of(context).textTheme.titleLarge
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -270,7 +274,9 @@ class _EuropeanChampionsShowcasePageState
             // Common Controls
             Text(
               'Common Controls',
-              style: Theme.of(context).textTheme.titleMedium
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
@@ -656,7 +662,9 @@ class _EuropeanChampionsShowcasePageState
       children: [
         Text(
           '${_selectedChampion.title} Gallery',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -753,7 +761,9 @@ class _EuropeanChampionsShowcasePageState
       children: [
         Text(
           'Small & Medium Size Variants',
-          style: Theme.of(context).textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),

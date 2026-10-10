@@ -19,6 +19,9 @@ enum BoletoColor {
     PayButtonColors(
       backgroundColor: Color(0xFF1A1A1A),
       textColor: Colors.white,
+      disabledBackgroundColor: Color(0xFF2C2C2E),
+      disabledTextColor: Color(0xFF8E8E93),
+      disabledProgressColor: Color(0xFF636366),
     ),
   ),
 

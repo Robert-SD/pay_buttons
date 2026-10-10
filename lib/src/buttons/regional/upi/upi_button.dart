@@ -29,11 +29,21 @@ class UpiButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = UpiShape.rounded,
-    this.color = UpiColor.white,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [UpiColor.white].
-  final UpiColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [UpiColor.white] in light mode, [UpiColor.navy] in dark mode.
+  final UpiColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  UpiColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? UpiColor.navy : UpiColor.white;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,7 +55,8 @@ class UpiButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'UPI';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);
@@ -55,11 +66,17 @@ class UpiButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return UpiAssets.emblem(color: color, height: compactMarkHeight);
+    return UpiAssets.emblem(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return UpiAssets.logo(color: color, height: mediumLogoHeight);
+    return UpiAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

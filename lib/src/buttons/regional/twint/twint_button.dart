@@ -29,11 +29,21 @@ class TwintButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.leading,
     super.shape = TwintShape.rounded,
-    this.color = TwintColor.black,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [TwintColor.black].
-  final TwintColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [TwintColor.black] in light mode, [TwintColor.white] in dark mode.
+  final TwintColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  TwintColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? TwintColor.white : TwintColor.black;
+  }
 
   @override
   double get roundedBorderRadius => 6.0;
@@ -45,7 +55,8 @@ class TwintButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'TWINT';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   Widget buildCompactContent(BuildContext context) {
@@ -54,6 +65,9 @@ class TwintButton extends PayButton {
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return TwintAssets.logo(color: color, height: mediumLogoHeight);
+    return TwintAssets.logo(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }

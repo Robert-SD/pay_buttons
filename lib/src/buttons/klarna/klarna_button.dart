@@ -35,11 +35,21 @@ class KlarnaButton extends PayButton {
     super.variant = PayButtonVariant.responsive,
     super.textPosition = PayButtonTextPosition.trailing,
     super.shape = KlarnaShape.rounded,
-    this.color = KlarnaColor.pink,
+    this.color,
   });
 
-  /// The brand color palette for the button. Defaults to [KlarnaColor.pink].
-  final KlarnaColor color;
+  /// The brand color palette for the button.
+  ///
+  /// When null, resolves automatically based on [Theme.of(context).brightness]:
+  /// [KlarnaColor.pink] in light mode, [KlarnaColor.black] in dark mode.
+  final KlarnaColor? color;
+
+  /// Resolves the effective color scheme for the given [context].
+  KlarnaColor effectiveColor(BuildContext context) {
+    if (color != null) return color!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark ? KlarnaColor.black : KlarnaColor.pink;
+  }
 
   @override
   double get roundedBorderRadius => 5.0;
@@ -57,7 +67,8 @@ class KlarnaButton extends PayButton {
   String? get semanticLabel => super.semanticLabel ?? 'Klarna';
 
   @override
-  PayButtonColors resolveColors(BuildContext context) => color.palette;
+  PayButtonColors resolveColors(BuildContext context) =>
+      effectiveColor(context).palette;
 
   @override
   double get compactMarkHeight => (height * 0.45).clamp(18.0, 24.0);
@@ -67,11 +78,17 @@ class KlarnaButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    return KlarnaAssets.monogram(color: color, height: compactMarkHeight);
+    return KlarnaAssets.monogram(
+      color: effectiveColor(context),
+      height: compactMarkHeight,
+    );
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    return KlarnaAssets.wordmark(color: color, height: mediumLogoHeight);
+    return KlarnaAssets.wordmark(
+      color: effectiveColor(context),
+      height: mediumLogoHeight,
+    );
   }
 }
