@@ -82,7 +82,8 @@ class _TestCustomDisabledPayButton extends PayButton {
 }
 
 enum _TestBrandColor implements BrandColor {
-  light(PayButtonColors(backgroundColor: Colors.white, textColor: Colors.black)),
+  light(
+      PayButtonColors(backgroundColor: Colors.white, textColor: Colors.black)),
   dark(PayButtonColors(backgroundColor: Colors.black, textColor: Colors.white));
 
   const _TestBrandColor(this.palette);
@@ -93,7 +94,6 @@ enum _TestBrandColor implements BrandColor {
 
 class _TestBrandPayButton extends BrandPayButton<_TestBrandColor> {
   const _TestBrandPayButton({
-    super.key,
     required super.onPressed,
     super.color,
     super.semanticLabel,
@@ -505,7 +505,8 @@ void main() {
               builder: (context) {
                 final btn = _TestBrandPayButton(onPressed: () {});
                 expect(btn.effectiveColor(context), _TestBrandColor.light);
-                expect(btn.resolveColors(context).backgroundColor, Colors.white);
+                expect(
+                    btn.resolveColors(context).backgroundColor, Colors.white);
                 return btn;
               },
             ),
@@ -523,7 +524,8 @@ void main() {
               builder: (context) {
                 final btn = _TestBrandPayButton(onPressed: () {});
                 expect(btn.effectiveColor(context), _TestBrandColor.dark);
-                expect(btn.resolveColors(context).backgroundColor, Colors.black);
+                expect(
+                    btn.resolveColors(context).backgroundColor, Colors.black);
                 return btn;
               },
             ),
@@ -552,7 +554,8 @@ void main() {
       );
     });
 
-    test('falls back to defaultSemanticLabel when semanticLabel is not set', () {
+    test('falls back to defaultSemanticLabel when semanticLabel is not set',
+        () {
       final btn = _TestBrandPayButton(onPressed: () {});
       expect(btn.semanticLabel, 'Test Brand');
     });
@@ -566,23 +569,29 @@ void main() {
     });
 
     test('all 17 brand color enums implement BrandColor', () {
-      expect(PayPalColor.gold is BrandColor, isTrue);
-      expect(KlarnaColor.pink is BrandColor, isTrue);
-      expect(AfterpayColor.mint is BrandColor, isTrue);
-      expect(BlikColor.black is BrandColor, isTrue);
-      expect(TwintColor.black is BrandColor, isTrue);
-      expect(WeroColor.yellow is BrandColor, isTrue);
-      expect(IdealColor.yellow is BrandColor, isTrue);
-      expect(BancontactColor.white is BrandColor, isTrue);
-      expect(BizumColor.white is BrandColor, isTrue);
-      expect(PixColor.teal is BrandColor, isTrue);
-      expect(BoletoColor.white is BrandColor, isTrue);
-      expect(OxxoColor.red is BrandColor, isTrue);
-      expect(AlipayColor.blue is BrandColor, isTrue);
-      expect(WeChatPayColor.green is BrandColor, isTrue);
-      expect(PayNowColor.purple is BrandColor, isTrue);
-      expect(PromptPayColor.blue is BrandColor, isTrue);
-      expect(UpiColor.white is BrandColor, isTrue);
+      final brandColors = <BrandColor>[
+        PayPalColor.gold,
+        KlarnaColor.pink,
+        AfterpayColor.mint,
+        BlikColor.black,
+        TwintColor.black,
+        WeroColor.yellow,
+        IdealColor.yellow,
+        BancontactColor.white,
+        BizumColor.white,
+        PixColor.teal,
+        BoletoColor.white,
+        OxxoColor.red,
+        AlipayColor.blue,
+        WeChatPayColor.green,
+        PayNowColor.purple,
+        PromptPayColor.blue,
+        UpiColor.white,
+      ];
+      expect(brandColors.length, 17);
+      for (final color in brandColors) {
+        expect(color.palette, isA<PayButtonColors>());
+      }
     });
   });
 }
