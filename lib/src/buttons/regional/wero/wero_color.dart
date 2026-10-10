@@ -37,4 +37,3 @@ enum WeroColor {
   /// The resolved color palette for this Wero theme.
   final PayButtonColors palette;
 }
-

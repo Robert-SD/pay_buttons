@@ -36,4 +36,3 @@ enum PayNowColor {
   /// The resolved color palette for this PayNow theme.
   final PayButtonColors palette;
 }
-

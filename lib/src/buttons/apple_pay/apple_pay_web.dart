@@ -50,7 +50,7 @@ const String defaultApplePayJsSdkUrl =
     'https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js';
 
 /// Injects the Apple Pay JS SDK once per document, if not already present.
-void ensureApplePayJsInjected({String sdkUrl = defaultApplePayJsSdkUrl}) {
+void ensureApplePayJsInjected() {
   if (_applePayJsScriptInjected) return;
 
   final existingScript = web.document.querySelector(
@@ -65,7 +65,7 @@ void ensureApplePayJsInjected({String sdkUrl = defaultApplePayJsSdkUrl}) {
   if (head == null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
-  script.src = sdkUrl;
+  script.src = defaultApplePayJsSdkUrl;
   script.crossOrigin = 'anonymous';
   script.async = true;
 
@@ -76,7 +76,8 @@ void ensureApplePayJsInjected({String sdkUrl = defaultApplePayJsSdkUrl}) {
       script.remove();
       if (kDebugMode) {
         debugPrint(
-          'ApplePayButton: Failed to load Apple Pay JS SDK from $sdkUrl.',
+          'ApplePayButton: Failed to load Apple Pay JS SDK from '
+          '$defaultApplePayJsSdkUrl.',
         );
       }
     }).toJS,
@@ -87,7 +88,12 @@ void ensureApplePayJsInjected({String sdkUrl = defaultApplePayJsSdkUrl}) {
 }
 
 /// Renders the official Apple Pay JS SDK `<apple-pay-button>` custom element.
-Widget buildApplePayJsButton({
+///
+/// Returns `null` when the SDK is loaded and reports that the device cannot
+/// make Apple Pay payments, so callers can render nothing. Before the SDK has
+/// loaded the availability probe cannot answer, so the element is rendered
+/// optimistically and defined by the SDK once it arrives.
+Widget? buildApplePayJsButton({
   required VoidCallback? onPressed,
   required String style,
   required String type,
@@ -96,6 +102,10 @@ Widget buildApplePayJsButton({
   required double borderRadius,
 }) {
   ensureApplePayJsInjected();
+
+  if (isApplePayJsAvailable() && !canMakeApplePayPayments()) {
+    return null;
+  }
 
   return SizedBox(
     width: width,

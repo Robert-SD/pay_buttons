@@ -48,14 +48,18 @@ class WeroButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.44).clamp(18.0, 24.0);
+
+  @override
+  double get mediumLogoHeight => (height * 0.44).clamp(18.0, 26.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.44).clamp(18.0, 24.0);
-    return WeroAssets.wMark(color: color, height: markHeight);
+    return WeroAssets.wMark(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.44).clamp(18.0, 26.0);
-    return WeroAssets.logo(color: color, height: logoHeight);
+    return WeroAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

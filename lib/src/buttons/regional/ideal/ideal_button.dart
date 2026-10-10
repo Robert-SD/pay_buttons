@@ -52,14 +52,18 @@ class IdealButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.52).clamp(20.0, 28.0);
+
+  @override
+  double get mediumLogoHeight => (height * 0.44).clamp(18.0, 26.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.52).clamp(20.0, 28.0);
-    return IdealAssets.emblem(color: color, height: markHeight);
+    return IdealAssets.emblem(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.44).clamp(18.0, 26.0);
-    return IdealAssets.logo(color: color, height: logoHeight);
+    return IdealAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

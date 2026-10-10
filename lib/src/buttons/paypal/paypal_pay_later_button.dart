@@ -26,21 +26,23 @@ class PayPalPayLaterButton extends PayPalButton {
     super.textStyle,
     super.fontFamily,
     super.fontFamilyFallback,
-  }) : super(
-         semanticLabel: semanticLabel ?? 'PayPal Pay Later',
-       );
+  }) : super(semanticLabel: semanticLabel ?? 'PayPal Pay Later');
+
+  /// Height of the standalone "Pay Later" mark when no label text is shown.
+  double get _payLaterMarkHeight => (height * 0.50).clamp(20.0, 28.0);
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.52).clamp(20.0, 28.0);
-    return PayPalAssets.payLaterMark(color: color, height: markHeight);
+    return PayPalAssets.payLaterMark(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
     if (text == null || text!.isEmpty) {
-      final markHeight = (height * 0.50).clamp(20.0, 28.0);
-      return PayPalAssets.payLaterMark(color: color, height: markHeight);
+      return PayPalAssets.payLaterMark(
+        color: color,
+        height: _payLaterMarkHeight,
+      );
     }
     return super.buildMediumContent(context);
   }

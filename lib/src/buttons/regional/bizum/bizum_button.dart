@@ -49,13 +49,11 @@ class BizumButton extends PayButton {
 
   @override
   Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.48).clamp(20.0, 26.0);
-    return BizumAssets.asterisk(color: color, height: markHeight);
+    return BizumAssets.asterisk(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    return BizumAssets.logo(color: color, height: logoHeight);
+    return BizumAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

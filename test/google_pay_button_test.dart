@@ -156,8 +156,10 @@ void main() {
       expect(buttonTest.effectiveEnvironment.value, 'TEST');
     });
 
-    test('effectiveEnvironment extracts environment from PaymentConfiguration', () {
-      final prodConfig = PaymentConfiguration.fromJsonString('''{
+    test(
+      'effectiveEnvironment extracts environment from PaymentConfiguration',
+      () {
+        final prodConfig = PaymentConfiguration.fromJsonString('''{
         "provider": "google_pay",
         "data": {
           "environment": "PRODUCTION",
@@ -165,13 +167,16 @@ void main() {
           "apiVersionMinor": 0
         }
       }''');
-      final buttonProd = GooglePayButton(
-        paymentConfiguration: prodConfig,
-        onPressed: null,
-      );
-      expect(buttonProd.effectiveEnvironment, GooglePayEnvironment.production);
+        final buttonProd = GooglePayButton(
+          paymentConfiguration: prodConfig,
+          onPressed: null,
+        );
+        expect(
+          buttonProd.effectiveEnvironment,
+          GooglePayEnvironment.production,
+        );
 
-      final testConfig = PaymentConfiguration.fromJsonString('''{
+        final testConfig = PaymentConfiguration.fromJsonString('''{
         "provider": "google_pay",
         "data": {
           "environment": "TEST",
@@ -179,12 +184,13 @@ void main() {
           "apiVersionMinor": 0
         }
       }''');
-      final buttonTest = GooglePayButton(
-        paymentConfiguration: testConfig,
-        onPressed: null,
-      );
-      expect(buttonTest.effectiveEnvironment, GooglePayEnvironment.test);
-    });
+        final buttonTest = GooglePayButton(
+          paymentConfiguration: testConfig,
+          onPressed: null,
+        );
+        expect(buttonTest.effectiveEnvironment, GooglePayEnvironment.test);
+      },
+    );
 
     test('explicit environment overrides PaymentConfiguration', () {
       final testConfig = PaymentConfiguration.fromJsonString('''{
@@ -247,26 +253,22 @@ void main() {
       }
     });
 
-    testWidgets('renders loading spinner and disables interaction when isLoading is true', (
-      tester,
-    ) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: GooglePayButton(
-              isLoading: true,
-              onPressed: () {},
+    testWidgets(
+      'renders loading spinner and disables interaction when isLoading is true',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: GooglePayButton(isLoading: true, onPressed: () {}),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    });
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      },
+    );
 
-    testWidgets('applies margin and elevation parameters', (
-      tester,
-    ) async {
+    testWidgets('applies margin and elevation parameters', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
       try {
         final config = PaymentConfiguration.fromJsonString('''{
@@ -311,25 +313,34 @@ void main() {
       }
     });
 
-    testWidgets('resolveColors returns authentic palette matching GooglePayColor', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(body: GooglePayButton(onPressed: () {})),
-        ),
-      );
+    testWidgets(
+      'resolveColors returns authentic palette matching GooglePayColor',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(body: GooglePayButton(onPressed: () {})),
+          ),
+        );
 
-      final element = tester.element(find.byType(GooglePayButton));
+        final element = tester.element(find.byType(GooglePayButton));
 
-      const blackButton = GooglePayButton(color: GooglePayColor.black, onPressed: null);
-      final blackColors = blackButton.resolveColors(element);
-      expect(blackColors.backgroundColor, const Color(0xFF000000));
-      expect(blackColors.progressColor, const Color(0xFFFFFFFF));
+        const blackButton = GooglePayButton(
+          color: GooglePayColor.black,
+          onPressed: null,
+        );
+        final blackColors = blackButton.resolveColors(element);
+        expect(blackColors.backgroundColor, const Color(0xFF000000));
+        expect(blackColors.progressColor, const Color(0xFFFFFFFF));
 
-      const whiteButton = GooglePayButton(color: GooglePayColor.white, onPressed: null);
-      final whiteColors = whiteButton.resolveColors(element);
-      expect(whiteColors.backgroundColor, const Color(0xFFFFFFFF));
-      expect(whiteColors.progressColor, const Color(0xFF3C4043));
-      expect(whiteColors.borderColor, const Color(0xFF747775));
-    });
+        const whiteButton = GooglePayButton(
+          color: GooglePayColor.white,
+          onPressed: null,
+        );
+        final whiteColors = whiteButton.resolveColors(element);
+        expect(whiteColors.backgroundColor, const Color(0xFFFFFFFF));
+        expect(whiteColors.progressColor, const Color(0xFF3C4043));
+        expect(whiteColors.borderColor, const Color(0xFF747775));
+      },
+    );
   });
 }

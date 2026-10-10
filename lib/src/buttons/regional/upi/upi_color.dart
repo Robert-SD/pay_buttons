@@ -46,4 +46,3 @@ enum UpiColor {
   /// The resolved color palette for this UPI theme.
   final PayButtonColors palette;
 }
-

@@ -53,4 +53,3 @@ enum IdealColor {
   /// The resolved color palette for this iDEAL theme.
   final PayButtonColors palette;
 }
-

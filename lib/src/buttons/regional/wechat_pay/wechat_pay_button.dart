@@ -48,14 +48,15 @@ class WeChatPayButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.52).clamp(20.0, 30.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final markHeight = (height * 0.52).clamp(20.0, 30.0);
-    return WeChatPayAssets.emblem(color: color, height: markHeight);
+    return WeChatPayAssets.emblem(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.44).clamp(18.0, 24.0);
-    return WeChatPayAssets.logo(color: color, height: logoHeight);
+    return WeChatPayAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

@@ -48,14 +48,18 @@ class BancontactButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get compactMarkHeight => (height * 0.46).clamp(18.0, 24.0);
+
+  @override
+  double get mediumLogoHeight => (height * 0.52).clamp(20.0, 28.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final wingsHeight = (height * 0.46).clamp(18.0, 24.0);
-    return BancontactAssets.wings(height: wingsHeight);
+    return BancontactAssets.wings(height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final logoHeight = (height * 0.52).clamp(20.0, 28.0);
-    return BancontactAssets.logo(color: color, height: logoHeight);
+    return BancontactAssets.logo(color: color, height: mediumLogoHeight);
   }
 }

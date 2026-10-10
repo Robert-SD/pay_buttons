@@ -8,13 +8,11 @@ class KlarnaAssets {
   KlarnaAssets._();
 
   /// Renders the official Klarna wordmark ("Klarna.") vector.
-  static Widget wordmark({
-    required KlarnaColor color,
-    double height = 20.0,
-  }) {
+  static Widget wordmark({required KlarnaColor color, double height = 20.0}) {
     final String fillHex = switch (color) {
-      KlarnaColor.pink || KlarnaColor.white || KlarnaColor.offWhite =>
-        '#0B051D',
+      KlarnaColor.pink ||
+      KlarnaColor.white ||
+      KlarnaColor.offWhite => '#0B051D',
       KlarnaColor.black => '#FFFFFF',
     };
 
@@ -26,13 +24,11 @@ class KlarnaAssets {
   }
 
   /// Renders the official Klarna K monogram with dot vector.
-  static Widget monogram({
-    required KlarnaColor color,
-    double height = 22.0,
-  }) {
+  static Widget monogram({required KlarnaColor color, double height = 22.0}) {
     final String fillHex = switch (color) {
-      KlarnaColor.pink || KlarnaColor.white || KlarnaColor.offWhite =>
-        '#0B051D',
+      KlarnaColor.pink ||
+      KlarnaColor.white ||
+      KlarnaColor.offWhite => '#0B051D',
       KlarnaColor.black => '#FFA8CD',
     };
 

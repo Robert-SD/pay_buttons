@@ -61,18 +61,19 @@ class AfterpayButton extends PayButton {
   PayButtonColors resolveColors(BuildContext context) => color.palette;
 
   @override
+  double get mediumLogoHeight => (height * 0.40).clamp(16.0, 22.0);
+
+  @override
   Widget buildCompactContent(BuildContext context) {
-    final badgeHeight = (height * 0.48).clamp(20.0, 26.0);
-    return AfterpayAssets.loopBadge(color: color, height: badgeHeight);
+    return AfterpayAssets.loopBadge(color: color, height: compactMarkHeight);
   }
 
   @override
   Widget buildMediumContent(BuildContext context) {
-    final lockupHeight = (height * 0.40).clamp(16.0, 22.0);
     return AfterpayAssets.lockup(
       brand: brand,
       color: color,
-      height: lockupHeight,
+      height: mediumLogoHeight,
     );
   }
 }

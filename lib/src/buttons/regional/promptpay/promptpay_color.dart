@@ -37,4 +37,3 @@ enum PromptPayColor {
   /// The resolved color palette for this PromptPay theme.
   final PayButtonColors palette;
 }
-

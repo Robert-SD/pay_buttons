@@ -29,4 +29,3 @@ enum BlikColor {
   /// The resolved color palette for this BLIK theme.
   final PayButtonColors palette;
 }
-

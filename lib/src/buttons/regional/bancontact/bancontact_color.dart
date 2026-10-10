@@ -29,4 +29,3 @@ enum BancontactColor {
   /// The resolved color palette for this Bancontact theme.
   final PayButtonColors palette;
 }
-

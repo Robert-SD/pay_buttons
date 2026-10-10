@@ -36,4 +36,3 @@ enum AfterpayColor {
   /// The resolved color palette for this Afterpay theme.
   final PayButtonColors palette;
 }
-

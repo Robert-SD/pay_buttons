@@ -13,10 +13,9 @@ extension type PaymentsClient._(JSObject _) implements JSObject {
 }
 
 /// Default Google Pay JS SDK endpoint.
-const String defaultGooglePayJsSdkUrl =
-    'https://pay.google.com/gp/p/js/pay.js';
+const String defaultGooglePayJsSdkUrl = 'https://pay.google.com/gp/p/js/pay.js';
 
-void _ensureGooglePayJsInjected({String sdkUrl = defaultGooglePayJsSdkUrl}) {
+void _ensureGooglePayJsInjected() {
   if (_googlePayJsScriptInjected) return;
 
   final existingScript = web.document.querySelector(
@@ -31,7 +30,7 @@ void _ensureGooglePayJsInjected({String sdkUrl = defaultGooglePayJsSdkUrl}) {
   if (head == null) return;
 
   final script = web.document.createElement('script') as web.HTMLScriptElement;
-  script.src = sdkUrl;
+  script.src = defaultGooglePayJsSdkUrl;
   script.async = true;
 
   script.addEventListener(
@@ -41,7 +40,8 @@ void _ensureGooglePayJsInjected({String sdkUrl = defaultGooglePayJsSdkUrl}) {
       script.remove();
       if (kDebugMode) {
         debugPrint(
-          'GooglePayButton: Failed to load Google Pay JS SDK script from $sdkUrl.',
+          'GooglePayButton: Failed to load Google Pay JS SDK script from '
+          '$defaultGooglePayJsSdkUrl.',
         );
       }
     }).toJS,

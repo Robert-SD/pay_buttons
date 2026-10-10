@@ -37,4 +37,3 @@ enum PixColor {
   /// The resolved color palette for this Pix theme.
   final PayButtonColors palette;
 }
-

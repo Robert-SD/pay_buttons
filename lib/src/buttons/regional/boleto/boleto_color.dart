@@ -37,4 +37,3 @@ enum BoletoColor {
   /// The resolved color palette for this Boleto theme.
   final PayButtonColors palette;
 }
-

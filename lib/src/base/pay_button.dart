@@ -158,6 +158,11 @@ abstract class PayButton extends StatelessWidget {
   @protected
   double get compactMarkHeight => (height * 0.48).clamp(20.0, 26.0);
 
+  /// Default width used by platform-native buttons (Apple Pay / Google Pay)
+  /// when the caller does not provide an explicit [width].
+  @protected
+  static const double defaultNativeWidth = 200.0;
+
   /// Subclasses implement this method to render their branded content (logos, text, badges).
   @protected
   Widget buildButtonContent(BuildContext context) {
@@ -287,8 +292,8 @@ abstract class PayButton extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: isInteractive ? onPressed : null,
-          splashColor: colors.splashColor,
-          highlightColor: colors.highlightColor,
+          splashColor: colors.effectiveSplashColor,
+          highlightColor: colors.effectiveHighlightColor,
           child: Center(
             child: isLoading
                 ? SizedBox(
