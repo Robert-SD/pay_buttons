@@ -303,7 +303,7 @@ PayPalButton(
 
 ### 1. Non-Affiliation
 
-This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed by PayPal, Inc.**, Klarna Bank AB, Apple Inc., Google LLC, or any other payment provider.
+This package is an independent open-source library and is **not affiliated with, authorized, maintained, sponsored, or endorsed** by any payment provider.
 
 ### 2. Nominative Fair Use
 
